@@ -1,0 +1,70 @@
+%!TEX root = main.tex
+\documentclass[a4paper, twoside]{report}
+
+%%% Danish %%%
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[danish]{babel}
+\addto\captionsdanish{
+	\renewcommand{\contentsname}{Indholdsfortegnelse}
+}
+
+%%% Allows vector-fonts %%%
+%\usepackage{lmodern}
+
+%%% Comments %%%
+\usepackage[colorinlistoftodos]{todonotes}
+
+%%% Math %%%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[amssymb]{SIunits}
+\usepackage[version=3]{mhchem}
+\usepackage{bm}
+\usepackage{units}
+
+%%% Tables %%%
+\usepackage{rotating}
+\newcommand*\rot{\rotatebox{90}}
+
+%%% Lists %%%
+\usepackage{enumitem}
+
+%%% Graphics %%%
+\usepackage{graphicx}
+\graphicspath{{graphics/}}
+\usepackage{epstopdf}
+
+%%% Code %%%
+\usepackage{listings}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage[htt]{hyphenat}
+
+%%% Bibliography %%%
+\usepackage[numbers]{natbib}
+\bibliographystyle{vancouver}
+\usepackage{url}
+\usepackage{hyperref}
+\hypersetup{colorlinks, allcolors=black}
+
+%%% Header & footer %%%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot{}
+\fancyfoot[R]{\thepage}
+\fancyfoot[L]{DAT2A422}
+
+%%% Commands for resetting page numbering %%%
+\makeatletter
+\newcommand\frontmatter{%
+  \pagenumbering{Roman}}
+
+\newcommand\mainmatter{%
+  \cleardoublepage
+  \pagenumbering{arabic}}
+\makeatother
+
+%%% Command letting allowing input of proper looking "C#" %%%
+\newcommand{\CSharp}{\texttt{C\#}}
