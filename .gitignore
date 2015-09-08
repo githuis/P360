@@ -194,3 +194,11 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+Rapport/main.aux
+Rapport/main.bbl
+Rapport/main.blg
+Rapport/main.out
+Rapport/main.pdf
+Rapport/main.synctex.gz
+Rapport/main.toc
+Rapport/preample.aux
