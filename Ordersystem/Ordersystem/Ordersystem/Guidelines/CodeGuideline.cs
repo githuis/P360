@@ -52,5 +52,10 @@ namespace Ordersystem
              *               .StuffC();
              */
         }
+
+        private class _privateClass //_privateClasses
+        {
+
+        }
     }
 }
