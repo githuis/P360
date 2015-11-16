@@ -21,11 +21,6 @@ namespace Model
         public Dish Dish2 { get; set; }
         public Dish SideDish { get; set; }
 
-        public List<Dish> ReadDayMenu()
-        {
-            return new List<Dish> {Dish1, Dish2, SideDish};
-        }
-
         // TODO: Integrer med databaser.
     }
 }
