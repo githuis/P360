@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Model
+﻿namespace Ordersystem.Model
 {
     public class Serving
     {
@@ -12,6 +6,7 @@ namespace Model
         {
             Dish = dish;
         }
+
         public Dish Dish { get; private set; }
     }
 }
