@@ -14,5 +14,9 @@ namespace Model
         {
             Servings.Add(new Serving(dish));
         }
+        public void RemoveServing(Dish dish)
+        {
+            Servings.Remove(Servings.First((serving) => serving.Dish == dish));
+        }
     }
 }
