@@ -1,19 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Model
+namespace Ordersystem.Model
 {
     public class Order
     {
-        public List<Serving> Servings;
+        public Order()
+        {
+            Servings = new List<Serving>();
+        }
+
+        public List<Serving> Servings { get; private set; }
 
         public void AddServing(Dish dish)
         {
             Servings.Add(new Serving(dish));
         }
+
         public void RemoveServing(Dish dish)
         {
             Servings.Remove(Servings.First((serving) => serving.Dish == dish));
