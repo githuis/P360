@@ -10,7 +10,7 @@
 }
 
 %%% Allows vector-fonts %%%
-%\usepackage{lmodern}
+\usepackage{lmodern}
 
 %%% Comments %%%
 \usepackage[colorinlistoftodos]{todonotes}
@@ -33,7 +33,6 @@
 
 %%% Graphics %%%
 \usepackage{graphicx}
-\graphicspath{{graphics/}}
 \usepackage{epstopdf}
 
 %%% Code %%%
@@ -54,7 +53,7 @@
 \pagestyle{fancy}
 \fancyfoot{}
 \fancyfoot[R]{\thepage}
-\fancyfoot[L]{DAT2A422}
+\fancyfoot[L]{DS304E15}
 
 %%% Commands for resetting page numbering %%%
 \makeatletter
@@ -63,7 +62,8 @@
 
 \newcommand\mainmatter{%
   \cleardoublepage
-  \pagenumbering{arabic}}
+  \pagenumbering{arabic}
+  \pagestyle{fancyplain}}
 \makeatother
 
 %%% Command letting allowing input of proper looking "C#" %%%

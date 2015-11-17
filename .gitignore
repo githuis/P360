@@ -392,6 +392,14 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+Rapport/main.aux
+Rapport/main.bbl
+Rapport/main.blg
+Rapport/main.out
+Rapport/main.pdf
+Rapport/main.synctex.gz
+Rapport/main.toc
+Rapport/preample.aux
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
@@ -529,7 +537,11 @@ sympy-plots-for-*.tex/
 # WinEdt
 *.bak
 *.sav
+<<<<<<< HEAD
+Rapport/CleanUp.bat
+=======
 <<<<<<< Updated upstream
 =======
 >>>>>>> origin/master
 >>>>>>> Stashed changes
+>>>>>>> master
