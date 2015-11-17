@@ -34,7 +34,7 @@
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\DayMenu.cs" />
     <Compile Include="Model\Dish.cs" />
-    <Content Include="Guidelines\CodeGuideline.txt" />
+    <None Include="Guidelines\CodeGuideline.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Orderlist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
