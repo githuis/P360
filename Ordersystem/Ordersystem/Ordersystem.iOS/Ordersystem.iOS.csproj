@@ -69,7 +69,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Ordersystem\Ordersystem.csproj">
       <Name>Ordersystem</Name>
-      <Project>{A1BCC633-10E4-4FD4-B1F2-4CCDE660B304}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
