@@ -41,4 +41,7 @@
     <Compile Include="Model\Serving.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Functions\" />
+  </ItemGroup>
 </Project>
