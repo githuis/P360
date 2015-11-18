@@ -28,6 +28,11 @@ namespace Ordersystem.Model
             DayMenus.Remove(dayMenu);
         }
 
+        public DayMenu GetDayMenuByID(int id)
+        {
+            return DayMenus[id];
+        }
+
         // TODO: Integrer med databaser.
     }
 }

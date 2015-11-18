@@ -31,6 +31,7 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Functions\CommunicationManager.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\DayMenu.cs" />
     <Compile Include="Model\Dish.cs" />
@@ -41,7 +42,5 @@
     <Compile Include="Model\Serving.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Functions\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
