@@ -2,13 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 using System.Threading.Tasks;
+using SQLite;
 using Ordersystem.Model;
 
 namespace Ordersystem.Functions
 {
-    class CommunicationManager
+    public class CommunicationManager
     {
+        public CommunicationManager(Customer customer, Orderlist orderlist)
+        {
+            _customer = customer;
+            _orderlist = orderlist;
+            _localStorage =
+        }
+        private Customer _customer;
+        private Orderlist _orderlist;
+        private SQLiteConnection _localStorage;
+
         /// <summary>
         /// Checks whether the social security is valid
         /// </summary>
@@ -58,7 +70,8 @@ namespace Ordersystem.Functions
 
         public void StoreSession()
         {
-            throw new NotImplementedException();
+
+
         }
 
         public void CloseSession()
