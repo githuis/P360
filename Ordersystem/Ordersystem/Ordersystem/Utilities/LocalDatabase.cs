@@ -102,9 +102,9 @@ namespace Ordersystem.Utilities
         /// <param name="order">The Order to be saved in the database.</param>
         /// <param name="orderlist">The Orderlist related to the Order.</param>
         /// <param name="customer">The Customer, whose personNumber is used as reference in the database.</param>
-        public void SaveOrder(Order order, Orderlist orderlist, Customer customer)
+        public void SaveOrder(Orderlist orderlist, Customer customer)
         {
-            _database.Insert(new SQLItem(customer.PersonNumber, order, orderlist));
+            _database.Insert(new SQLItem(customer.PersonNumber, customer.Order, orderlist));
         }
 
         /// <summary>

@@ -6,20 +6,20 @@ using System.Xml.Serialization;
 using System.Threading.Tasks;
 using SQLite;
 using Ordersystem.Model;
+using Ordersystem.Utilities;
 
 namespace Ordersystem.Functions
 {
     public class CommunicationManager
     {
-        public CommunicationManager(Customer customer, Orderlist orderlist)
+        public CommunicationManager()
         {
-            _customer = customer;
-            _orderlist = orderlist;
-            _localStorage =
+            _localDatabase = new LocalDatabase();
         }
+
         private Customer _customer;
         private Orderlist _orderlist;
-        private SQLiteConnection _localStorage;
+        private LocalDatabase _localDatabase;
 
         /// <summary>
         /// Checks whether the social security is valid
@@ -58,20 +58,46 @@ namespace Ordersystem.Functions
             throw new NotImplementedException();
         }
 
-        public Order CheckForSession()
+        /// <summary>
+        /// Gets the session matching the Customer from the database and resumes it.
+        /// If no such session is found, creates a new session, and fetches required data from Master Cater System.
+        /// </summary>
+        public void GetSession()
+        {
+            Order order = _localDatabase.GetOrder(x => x.PersonNumber == _customer.PersonNumber);
+            if (order != null)
+            {
+                ResumeSession(order);
+            }
+            else
+            {
+                NewSession();
+            }
+        }
+
+        private void NewSession()
+        {
+            _customer.Order = new Order();
+            _orderlist = RequestOrderlist();
+        }
+
+        private void ResumeSession(Order order)
+        {
+            _customer.Order = order;
+            _orderlist = _localDatabase.GetOrderlist(x => x.PersonNumber == _customer.PersonNumber);
+        }
+
+        private Orderlist RequestOrderlist()
         {
             throw new NotImplementedException();
         }
 
-        public Orderlist RequestOrderlist()
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Stores the current session in the database.
+        /// </summary>
         public void StoreSession()
         {
-
-
+            _localDatabase.SaveOrder(_orderlist, _customer);
         }
 
         public void CloseSession()
