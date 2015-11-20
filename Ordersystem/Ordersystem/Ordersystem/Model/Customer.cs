@@ -14,7 +14,7 @@
         
         public int PersonNumber { get; private set; }
         public string Name { get; private set; }
-        public Order Order { get; private set; }
+        public Order Order { get; set; }
         public Diet Diet { get; private set; }
     }
 }
