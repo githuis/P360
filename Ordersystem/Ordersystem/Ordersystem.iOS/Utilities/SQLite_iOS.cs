@@ -11,9 +11,9 @@ namespace Ordersystem.iOS.Utilities
     
     public class SQLite_iOS : ISQLite 
     {
-        public SQLite.SQLiteConnection GetConnection()
+        public SQLite.SQLiteConnection GetConnection(string filename)
         {
-            const string sqliteFilename = "LocalDatabase.db3";
+            string sqliteFilename = filename + ".db3";
             string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // Documents folder
             string libraryPath = Path.Combine(documentsPath, "..", "Library"); // Library folder
             var path = Path.Combine(libraryPath, sqliteFilename);

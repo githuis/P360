@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace OrdersystemTests
+namespace OrdersystemTests.ModelTests
 {
     [TestClass]
-    public class UnitTest1
+    public class ServingTests
     {
         [TestMethod]
         public void TestMethod1()

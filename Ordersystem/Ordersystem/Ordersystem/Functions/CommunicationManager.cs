@@ -14,7 +14,7 @@ namespace Ordersystem.Functions
     {
         public CommunicationManager()
         {
-            _localDatabase = new LocalDatabase();
+            _localDatabase = new LocalDatabase("LocalDatabase");
         }
 
         private Customer _customer;

@@ -17,9 +17,9 @@ namespace Ordersystem.Utilities
         /// <summary>
         /// Gets the connection and creates the table.
         /// </summary>
-        public LocalDatabase()
+        public LocalDatabase(string filename)
         {
-            _database = DependencyService.Get<ISQLite>().GetConnection();
+            _database = DependencyService.Get<ISQLite>().GetConnection(filename);
             _database.CreateTable<SQLItem>();
         }
 
