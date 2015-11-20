@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Linq;
 using UIKit;
 
 namespace Ordersystem.iOS
@@ -14,6 +14,9 @@ namespace Ordersystem.iOS
 		{
 			base.ViewDidLoad ();
 			// Perform any additional setup after loading the view, typically from a nib.
+			btn_Log_In.TouchDown += delegate {
+				Ordersystem.
+			};
 		}
 
 		public override void DidReceiveMemoryWarning ()
