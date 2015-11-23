@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="1"
+    tools:gridSpec="1|8|#0093eeff|K:#ee8700ff:16,l:72,l:16,r|S:#83ee00ff:16,0,l:16,56,l:16,0,r">
+    <TableRow
+        android:visibility="visible"
+        android:id="@+id/row1"
+        tools:visibility="visible">
+        <TextView
+            android:layout_column="1"
+            android:text="day1"
+            android:id="@+id/row_name1" />
+        <Button
+            android:text="Ctrl-S"
+            android:gravity="right" />
+    </TableRow>
+    <TableRow
+        android:visibility="visible"
+        android:id="@+id/row2"
+        tools:visibility="visible">
+        <TextView
+            android:layout_column="1"
+            android:text="day1"
+            android:id="@+id/row_name2" />
+        <Button
+            android:text="Ctrl-S"
+            android:gravity="right" />
+    </TableRow>
+    <TableRow
+        android:visibility="visible"
+        android:id="@+id/row3"
+        tools:visibility="visible">
+        <TextView
+            android:layout_column="1"
+            android:text="day1"
+            android:id="@+id/row_name3" />
+        <Button
+            android:text="Ctrl-S"
+            android:gravity="right" />
+    </TableRow>
+    <TableRow
+        android:visibility="visible"
+        android:id="@+id/row4"
+        tools:visibility="visible">
+        <TextView
+            android:layout_column="1"
+            android:text="day1"
+            android:id="@+id/row_name4" />
+        <Button
+            android:text="Ctrl-S"
+            android:gravity="right" />
+    </TableRow>
+    <TableRow
+        android:visibility="visible"
+        android:id="@+id/row5"
+        tools:visibility="visible">
+        <TextView
+            android:layout_column="1"
+            android:text="day1"
+            android:id="@+id/row_name5" />
+        <Button
+            android:text="Ctrl-S"
+            android:gravity="right" />
+    </TableRow>
+    <TableRow
+        android:visibility="visible"
+        android:id="@+id/row6"
+        tools:visibility="visible">
+        <TextView
+            android:layout_column="1"
+            android:text="day1"
+            android:id="@+id/row_name6" />
+        <Button
+            android:text="Ctrl-S"
+            android:gravity="right" />
+    </TableRow>
+</TableLayout>
