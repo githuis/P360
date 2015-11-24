@@ -15,7 +15,6 @@ namespace Ordersystem.iOS
 			base.ViewDidLoad ();
 			// Perform any additional setup after loading the view, typically from a nib.
 			btn_Log_In.TouchDown += delegate {
-				Ordersystem.
 			};
 		}
 
