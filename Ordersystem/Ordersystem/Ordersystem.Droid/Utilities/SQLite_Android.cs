@@ -6,9 +6,9 @@ namespace Ordersystem.Droid.Utilities
 {
     class SQLite_Android : ISQLite
     {
-        public SQLiteConnection GetConnection()
+        public SQLiteConnection GetConnection(string filename)
         {
-            const string sqliteFilename = "LocalDatabase.db3";
+            string sqliteFilename = filename + ".db3";
             string documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal); // Documents folder
             var path = Path.Combine(documentsPath, sqliteFilename);
             // Create the connection

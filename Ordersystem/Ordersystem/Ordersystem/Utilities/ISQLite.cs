@@ -7,6 +7,6 @@ namespace Ordersystem.Utilities
     /// </summary>
     public interface ISQLite
     {
-        SQLiteConnection GetConnection();
+        SQLiteConnection GetConnection(string filename);
     }
 }
