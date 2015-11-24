@@ -60,8 +60,14 @@ namespace Ordersystem.Droid
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f050002
+			public const int editText1 = 2131034114;
+			
+			// aapt resource value: 0x7f050001
+			public const int myButton = 2131034113;
+			
 			// aapt resource value: 0x7f050000
-			public const int myButton = 2131034112;
+			public const int titelText = 2131034112;
 			
 			static Id()
 			{
