@@ -36,6 +36,7 @@
     <Compile Include="Functions\CommunicationManager.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\DayMenu.cs" />
+    <Compile Include="Model\DayMenuSelection.cs" />
     <Compile Include="Model\Dish.cs" />
     <Compile Include="Utilities\ISQLite.cs" />
     <Compile Include="Utilities\LocalDatabase.cs" />
