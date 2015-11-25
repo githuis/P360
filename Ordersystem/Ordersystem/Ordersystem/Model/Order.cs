@@ -7,9 +7,9 @@ namespace Ordersystem.Model
     {
         public Order()
         {
-            Servings = new List<Serving>();
+            //Servings = new List<Serving>();
         }
-
+        /*
         public List<Serving> Servings { get; private set; }
 
         public void AddServing(Dish dish)
@@ -21,5 +21,6 @@ namespace Ordersystem.Model
         {
             Servings.Remove(Servings.First((serving) => serving.Dish == dish));
         }
+        */
     }
 }
