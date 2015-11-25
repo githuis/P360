@@ -27,27 +27,28 @@ namespace Ordersystem.Droid
 			// and attach an event to it
 			Button button = FindViewById<Button> (Resource.Id.myButton);
 			EditText editText = FindViewById<EditText> (Resource.Id.editText1);
+			TextView errorMsg = FindViewById<TextView> (Resource.Id.errorMsg); 
 
-			LogIn(button,editText);
+			LogIn(button,editText,errorMsg);
 		}
 
-		public void LogIn(Button button,EditText editText)
+		public void LogIn(Button button,EditText editText, TextView errorMsg)
 		{
 			button.Click += delegate 
 			{
 				if(cm.ValidSocialSecurityNumber(editText.Text))
 				{
 					SetContentView (Resource.Layout.Main_Window);
-					CreateMainWindow ();
+					//CreateMainWindow ();
 				}
 				else
 				{
-					editText.Text = "Ikke et gyldigt log in, din so";	
+					errorMsg.Visibility = ViewStates.Visible;	
 				}
 			};
 		}
 
-		public void CreateMainWindow()
+		/*public void CreateMainWindow()
 		{
 			MainPage = new ContentPage {
 				Content = new TableView {
@@ -77,12 +78,12 @@ namespace Ordersystem.Droid
 					}
 				}
 			}; 
-		}
+		}*/
 
-		/*public void CreateMainWindow()
+		public void CreateMainWindow()
 		{
 			//TableLayout Table1 = FindViewById<TableLayout> (Resource.Id.table);
-			//int i;
+			int i;
 
 			TableRow tablerow1 = FindViewById<TableRow> (Resource.Id.row1);
 			TableRow tablerow2 = FindViewById<TableRow> (Resource.Id.row2);
@@ -126,7 +127,7 @@ namespace Ordersystem.Droid
 			Button table_button1 = FindViewById<Button> (Resource.Id.row_button1);
 			tablerow1.Visibility = ViewStates.Visible;
 			table_text1.Text = "test";	
-		}*/
+		}
 	}
 }
 
