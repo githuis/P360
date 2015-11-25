@@ -14,17 +14,17 @@ namespace Ordersystem.Droid
 	[Activity (Label = "Ordersystem.Droid", MainLauncher = true, Icon = "@drawable/icon")]
 	public class MainActivity : Activity
 	{
+		//Made a communicationManager object
 		CommunicationManager cm = new CommunicationManager();
 
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
-			// Set our view from the "main" layout resource
+			// Set our view to the Log_In
 			SetContentView (Resource.Layout.Log_In);
 
-			// Get our widgets from the layout resource,
-			// and attach an event to it
+			//Finding the different widgets ID, so i can use them
 			Button button = FindViewById<Button> (Resource.Id.myButton);
 			EditText editText = FindViewById<EditText> (Resource.Id.editText1);
 			TextView errorMsg = FindViewById<TextView> (Resource.Id.errorMsg); 
@@ -48,38 +48,9 @@ namespace Ordersystem.Droid
 			};
 		}
 
-		/*public void CreateMainWindow()
-		{
-			MainPage = new ContentPage {
-				Content = new TableView {
-					Intent = TableIntent.Form,
-					Root = new TableRoot ("Table Title") {
-						new TableSection ("Section 1 Title") {
-							new TextCell {
-								Text = "TextCell Text",
-								Detail = "TextCell Detail"
-							},
-							new EntryCell {
-								Label = "EntryCell:",
-								Placeholder = "default keyboard",
-								Keyboard = Keyboard.Default
-							}
-						},
-						new TableSection ("Section 2 Title") {
-							new EntryCell {
-								Label = "Another EntryCell:",
-								Placeholder = "phone keyboard",
-								Keyboard = Keyboard.Telephone
-							},
-							new SwitchCell {
-								Text = "SwitchCell:"
-							}
-						}
-					}
-				}
-			}; 
-		}*/
 
+		/* A try at making the row system, where all the rows already are made, and you need to set them to visable or invisable. And change the buttons and text to them hard code style
+		 * Its shit.
 		public void CreateMainWindow()
 		{
 			//TableLayout Table1 = FindViewById<TableLayout> (Resource.Id.table);
@@ -127,7 +98,7 @@ namespace Ordersystem.Droid
 			Button table_button1 = FindViewById<Button> (Resource.Id.row_button1);
 			tablerow1.Visibility = ViewStates.Visible;
 			table_text1.Text = "test";	
-		}
+		}*/
 	}
 }
 
