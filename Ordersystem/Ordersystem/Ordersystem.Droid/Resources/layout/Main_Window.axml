@@ -1,381 +1,389 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:stretchColumns="1"
-    tools:gridSpec="1|8|#0093eeff|K:#ee8700ff:16,l:72,l:16,r|S:#83ee00ff:16,0,l:16,56,l:16,0,r"
-    android:id="@+id/table">
-    <TableRow
-        android:visibility="invisible"
-        android:id="@+id/row1">
-        <TextView
-            android:layout_column="1"
-            android:text="day1"
-            android:id="@+id/row_name1" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button1" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row2">
-        <TextView
-            android:layout_column="1"
-            android:text="day2"
-            android:id="@+id/row_name2" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button2" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row3">
-        <TextView
-            android:layout_column="1"
-            android:text="day3"
-            android:id="@+id/row_name3" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button3" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row4">
-        <TextView
-            android:layout_column="1"
-            android:text="day4"
-            android:id="@+id/row_name4" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button4" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row5">
-        <TextView
-            android:layout_column="1"
-            android:text="day5"
-            android:id="@+id/row_name5" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button5" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row6">
-        <TextView
-            android:layout_column="1"
-            android:text="day6"
-            android:id="@+id/row_name6" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button6" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row7">
-        <TextView
-            android:layout_column="1"
-            android:text="day7"
-            android:id="@+id/row_name7" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button7" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row8">
-        <TextView
-            android:layout_column="1"
-            android:text="day8"
-            android:id="@+id/row_name8" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button8" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row9">
-        <TextView
-            android:layout_column="1"
-            android:text="day9"
-            android:id="@+id/row_name9" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button9" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row10">
-        <TextView
-            android:layout_column="1"
-            android:text="day10"
-            android:id="@+id/row_name10" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button10" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row11">
-        <TextView
-            android:layout_column="1"
-            android:text="day11"
-            android:id="@+id/row_name11" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button11" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row12">
-        <TextView
-            android:layout_column="1"
-            android:text="day12"
-            android:id="@+id/row_name12" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button12" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row13">
-        <TextView
-            android:layout_column="1"
-            android:text="day13"
-            android:id="@+id/row_name13" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button13" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row14">
-        <TextView
-            android:layout_column="1"
-            android:text="day14"
-            android:id="@+id/row_name14" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button14" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row15">
-        <TextView
-            android:layout_column="1"
-            android:text="day15"
-            android:id="@+id/row_name15" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button15" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row16">
-        <TextView
-            android:layout_column="1"
-            android:text="day16"
-            android:id="@+id/row_name16" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button16" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row17">
-        <TextView
-            android:layout_column="1"
-            android:text="day17"
-            android:id="@+id/row_name17" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button17" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row18">
-        <TextView
-            android:layout_column="1"
-            android:text="day18"
-            android:id="@+id/row_name18" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button18" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row19">
-        <TextView
-            android:layout_column="1"
-            android:text="day19"
-            android:id="@+id/row_name19" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button19" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row20">
-        <TextView
-            android:layout_column="1"
-            android:text="day20"
-            android:id="@+id/row_name20" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button20" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row21">
-        <TextView
-            android:layout_column="1"
-            android:text="day21"
-            android:id="@+id/row_name21" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button21" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row22">
-        <TextView
-            android:layout_column="1"
-            android:text="day22"
-            android:id="@+id/row_name22" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button22" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row23">
-        <TextView
-            android:layout_column="1"
-            android:text="day23"
-            android:id="@+id/row_name23" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button23" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row24">
-        <TextView
-            android:layout_column="1"
-            android:text="day24"
-            android:id="@+id/row_name24" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button24" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row25">
-        <TextView
-            android:layout_column="1"
-            android:text="day25"
-            android:id="@+id/row_name25" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button25" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row26">
-        <TextView
-            android:layout_column="1"
-            android:text="day26"
-            android:id="@+id/row_name26" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button26" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row27">
-        <TextView
-            android:layout_column="1"
-            android:text="day27"
-            android:id="@+id/row_name27" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button27" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row28">
-        <TextView
-            android:layout_column="1"
-            android:text="day28"
-            android:id="@+id/row_name28" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button28" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row29">
-        <TextView
-            android:layout_column="1"
-            android:text="day29"
-            android:id="@+id/row_name29" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button29" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row30">
-        <TextView
-            android:layout_column="1"
-            android:text="day30"
-            android:id="@+id/row_name30" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button30" />
-    </TableRow>
-    <TableRow
-        android:visibility="visible"
-        android:id="@+id/row31">
-        <TextView
-            android:layout_column="1"
-            android:text="day31"
-            android:id="@+id/row_name31" />
-        <Button
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:id="@+id/row_button31" />
-    </TableRow>
-</TableLayout>
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/scrollView1">
+    <TableLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="1"
+        android:id="@+id/tableLayout1">
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row1">
+            <TextView
+                android:layout_column="1"
+                android:text="day1"
+                android:id="@+id/row_name1" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button1" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row2">
+            <TextView
+                android:layout_column="1"
+                android:text="day2"
+                android:id="@+id/row_name2" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button2" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row3">
+            <TextView
+                android:layout_column="1"
+                android:text="day3"
+                android:id="@+id/row_name3" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button3" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row4">
+            <TextView
+                android:layout_column="1"
+                android:text="day4"
+                android:id="@+id/row_name4" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button4" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row5">
+            <TextView
+                android:layout_column="1"
+                android:text="day5"
+                android:id="@+id/row_name5" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button5" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row6">
+            <TextView
+                android:layout_column="1"
+                android:text="day1"
+                android:id="@+id/row_name6" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button6" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row7">
+            <TextView
+                android:layout_column="1"
+                android:text="day7"
+                android:id="@+id/row_name7" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button7" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row8">
+            <TextView
+                android:layout_column="1"
+                android:text="day8"
+                android:id="@+id/row_name8" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button8" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row9">
+            <TextView
+                android:layout_column="1"
+                android:text="day9"
+                android:id="@+id/row_name9" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button9" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row10">
+            <TextView
+                android:layout_column="1"
+                android:text="day10"
+                android:id="@+id/row_name10" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button10" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row11">
+            <TextView
+                android:layout_column="1"
+                android:text="day11"
+                android:id="@+id/row_name11" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button11" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row12">
+            <TextView
+                android:layout_column="1"
+                android:text="day12"
+                android:id="@+id/row_name12" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button12" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row13">
+            <TextView
+                android:layout_column="1"
+                android:text="day13"
+                android:id="@+id/row_name13" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button13" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row14">
+            <TextView
+                android:layout_column="1"
+                android:text="day14"
+                android:id="@+id/row_name14" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button14" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row15">
+            <TextView
+                android:layout_column="1"
+                android:text="day15"
+                android:id="@+id/row_name15" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button15" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row16">
+            <TextView
+                android:layout_column="1"
+                android:text="day16"
+                android:id="@+id/row_name16" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button16" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row17">
+            <TextView
+                android:layout_column="1"
+                android:text="day17"
+                android:id="@+id/row_name17" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button17" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row18">
+            <TextView
+                android:layout_column="1"
+                android:text="day18"
+                android:id="@+id/row_name18" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button18" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row19">
+            <TextView
+                android:layout_column="1"
+                android:text="day19"
+                android:id="@+id/row_name19" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button19" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row20">
+            <TextView
+                android:layout_column="1"
+                android:text="day20"
+                android:id="@+id/row_name20" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button20" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row21">
+            <TextView
+                android:layout_column="1"
+                android:text="day21"
+                android:id="@+id/row_name21" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button21" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row22">
+            <TextView
+                android:layout_column="1"
+                android:text="day22"
+                android:id="@+id/row_name22" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button22" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row23">
+            <TextView
+                android:layout_column="1"
+                android:text="day23"
+                android:id="@+id/row_name23" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button23" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row24">
+            <TextView
+                android:layout_column="1"
+                android:text="day24"
+                android:id="@+id/row_name24" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button24" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row25">
+            <TextView
+                android:layout_column="1"
+                android:text="day25"
+                android:id="@+id/row_name25" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button25" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row26">
+            <TextView
+                android:layout_column="1"
+                android:text="day26"
+                android:id="@+id/row_name26" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button26" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row27">
+            <TextView
+                android:layout_column="1"
+                android:text="day27"
+                android:id="@+id/row_name27" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button27" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row28">
+            <TextView
+                android:layout_column="1"
+                android:text="day28"
+                android:id="@+id/row_name28" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button28" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row29">
+            <TextView
+                android:layout_column="1"
+                android:text="day29"
+                android:id="@+id/row_name29" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button29" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row30">
+            <TextView
+                android:layout_column="1"
+                android:text="day30"
+                android:id="@+id/row_name30" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button30" />
+        </TableRow>
+        <TableRow
+            android:visibility="visible"
+            android:id="@+id/row31">
+            <TextView
+                android:layout_column="1"
+                android:text="day31"
+                android:id="@+id/row_name31" />
+            <Button
+                android:text="Knap"
+                android:gravity="right"
+                android:id="@+id/row_button31" />
+        </TableRow>
+    </TableLayout>
+</ScrollView>

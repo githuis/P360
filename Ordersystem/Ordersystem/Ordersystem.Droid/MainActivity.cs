@@ -49,8 +49,8 @@ namespace Ordersystem.Droid
 		}
 
 
-		/* A try at making the row system, where all the rows already are made, and you need to set them to visable or invisable. And change the buttons and text to them hard code style
-		 * Its shit.
+		 //A try at making the row system, where all the rows already are made, and you need to set them to visable or invisable. And change the buttons and text to them hard code style
+		 //Its shit.
 		public void CreateMainWindow()
 		{
 			//TableLayout Table1 = FindViewById<TableLayout> (Resource.Id.table);
@@ -88,17 +88,12 @@ namespace Ordersystem.Droid
 			TableRow tablerow30 = FindViewById<TableRow> (Resource.Id.row30);
 			TableRow tablerow31 = FindViewById<TableRow> (Resource.Id.row31);
 
-		
-			for(i=1; i<=31;i++)
-			{
-			}
-
 
 			TextView table_text1 = FindViewById<TextView> (Resource.Id.row_name1);
 			Button table_button1 = FindViewById<Button> (Resource.Id.row_button1);
 			tablerow1.Visibility = ViewStates.Visible;
 			table_text1.Text = "test";	
-		}*/
+		}
 	}
 }
 
