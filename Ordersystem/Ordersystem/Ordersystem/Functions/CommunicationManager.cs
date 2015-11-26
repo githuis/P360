@@ -19,7 +19,7 @@ namespace Ordersystem.Functions
 
         private Customer _customer;
         private Orderlist _orderlist;
-        private readonly LocalDatabase _localDatabase;
+        private LocalDatabase _localDatabase;
 
         /// <summary>
         /// Checks whether the social security is valid
