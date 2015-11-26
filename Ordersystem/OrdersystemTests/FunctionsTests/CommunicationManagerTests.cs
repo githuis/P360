@@ -12,7 +12,7 @@ namespace OrdersystemTests.FunctionsTests
         {
             CommunicationManager comMan = new CommunicationManager();
 
-            Assert.IsTrue(comMan.ValidSocialSecurityNumber(0706950435));
+            Assert.IsTrue(comMan.ValidSocialSecurityNumber("0706950435"));
         }
 
         [TestMethod]
@@ -20,7 +20,7 @@ namespace OrdersystemTests.FunctionsTests
         {
             CommunicationManager comMan = new CommunicationManager();
 
-            Assert.IsTrue(comMan.ValidSocialSecurityNumber(3112999999));
+            Assert.IsTrue(comMan.ValidSocialSecurityNumber("3112999999"));
         }
 
         [TestMethod]
@@ -28,7 +28,7 @@ namespace OrdersystemTests.FunctionsTests
         {
             CommunicationManager comMan = new CommunicationManager();
 
-            Assert.IsFalse(comMan.ValidSocialSecurityNumber(3212999999));
+            Assert.IsFalse(comMan.ValidSocialSecurityNumber("3212999999"));
         }
 
         [TestMethod]
@@ -36,7 +36,7 @@ namespace OrdersystemTests.FunctionsTests
         {
             CommunicationManager comMan = new CommunicationManager();
 
-            Assert.IsFalse(comMan.ValidSocialSecurityNumber(3113999999));
+            Assert.IsFalse(comMan.ValidSocialSecurityNumber("3113999999"));
         }
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace OrdersystemTests.FunctionsTests
         {
             CommunicationManager comMan = new CommunicationManager();
 
-            Assert.IsFalse(comMan.ValidSocialSecurityNumber(9999999999));
+            Assert.IsFalse(comMan.ValidSocialSecurityNumber("9999999999"));
         }
 
         [TestMethod]
@@ -52,7 +52,7 @@ namespace OrdersystemTests.FunctionsTests
         {
             CommunicationManager comMan = new CommunicationManager();
 
-            Assert.IsFalse(comMan.ValidSocialSecurityNumber(0000000000));
+            Assert.IsFalse(comMan.ValidSocialSecurityNumber("0000000000"));
         }
     }
 }
