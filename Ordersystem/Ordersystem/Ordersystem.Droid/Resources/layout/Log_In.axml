@@ -8,14 +8,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Bestil Mad, din fucking so" />
-    <Button
-        android:id="@+id/myButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello" />
     <EditText
         android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editText1" />
+    <Button
+        android:id="@+id/myButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="sup motherfucker" />
+    <TextView
+        android:text="Ikke gyldigt personnummer, se om det er rigtigt, og prøv igen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/errorMsg"
+        android:visibility="invisible"
+        android:textColor="#ffd50000" />
 </LinearLayout>
