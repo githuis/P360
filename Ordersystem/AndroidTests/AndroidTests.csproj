@@ -55,11 +55,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestSample.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\AndroidManifest.xml">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
