@@ -25,7 +25,7 @@ namespace Ordersystem.Functions
         /// Checks whether the social security is valid
         /// </summary>
         /// <param name="socialSecurityNumber"></param>
-        public bool ValidSocialSecurityNumber(int socialSecurityNumber)
+        public bool ValidSocialSecurityNumber(long socialSecurityNumber)
         {
             bool length, day, month;
             char[] numChar = new char[10];
