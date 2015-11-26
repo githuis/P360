@@ -60,6 +60,16 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ordersystem\Ordersystem.Droid\Ordersystem.Droid.csproj">
+      <Project>{9f5b4b6b-3db5-4fbd-a135-5bea691567b8}</Project>
+      <Name>Ordersystem.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ordersystem\Ordersystem\Ordersystem.csproj">
+      <Project>{a1bcc633-10e4-4fd4-b1f2-4ccde660b304}</Project>
+      <Name>Ordersystem</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
