@@ -7,19 +7,21 @@ namespace Ordersystem.Model
     {
         public Order()
         {
-            Servings = new List<Serving>();
+            DayMenuSelections = new List<DayMenuSelection>();
         }
+        
+        public List<DayMenuSelection> DayMenuSelections { get; private set; }
 
-        public List<Serving> Servings { get; private set; }
-
-        public void AddServing(Dish dish)
+        public void AddDayMenuSelection(DayMenu dayMenu)
         {
-            Servings.Add(new Serving(dish));
+            DayMenuSelections.Add(new DayMenuSelection(dayMenu));
         }
 
-        public void RemoveServing(Dish dish)
+        public void ChangeDayMenuSelection(DayMenu dayMenu, DayMenuChoice dishChoice, bool sideDishChoice)
         {
-            Servings.Remove(Servings.First((serving) => serving.Dish == dish));
+            DayMenuSelections.First((DayMenuSelection) => DayMenuSelection.DayMenu == dayMenu).Choice = dishChoice;
+            DayMenuSelections.First((DayMenuSelection) => DayMenuSelection.DayMenu == dayMenu).SideDish = sideDishChoice;
         }
+        
     }
 }
