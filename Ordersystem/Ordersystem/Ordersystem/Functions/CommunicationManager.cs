@@ -25,23 +25,25 @@ namespace Ordersystem.Functions
         /// Checks whether the social security is valid
         /// </summary>
         /// <param name="socialSecurityNumber"></param>
-        public bool ValidSocialSecurityNumber(int socialSecurityNumber)
+        public bool ValidSocialSecurityNumber(string socialSecurityNumber)
         {
-            bool length, day, month;
+            bool length, day, month, isNumbers;
             char[] numChar = new char[10];
 
-            length = socialSecurityNumber.ToString().Length == 10; //Check if it is exactly 10 numbers long
+            isNumbers = IsDigitsOnly(socialSecurityNumber);
+
+            length = socialSecurityNumber.Length == 10; //Check if it is exactly 10 numbers long
 
             //If the number is not exactly 10 long, return false already, to prevent further errors.
             if (!length)
                 return false;
 
-            numChar = socialSecurityNumber.ToString().ToCharArray();
+            numChar = socialSecurityNumber.ToCharArray();
 
-            day = IsBetween(socialSecurityNumber.ToString().Substring(0, 2), 1, 31); //Check the first two numbers to be a valid day. The day must be 1 - 31.
-            month = IsBetween(socialSecurityNumber.ToString().Substring(1, 2), 1, 12); //Check the 2nd and 3rd numbers to be a valid month. The month should be 1 - 12.
+            day = IsBetween(socialSecurityNumber.Substring(0, 2), 01, 31); //Check the first two numbers to be a valid day. The day must be 1 - 31.
+            month = IsBetween(socialSecurityNumber.Substring(2, 2), 01, 12); //Check the 2nd and 3rd numbers to be a valid month. The month should be 1 - 12.
 
-            return length && day && month;
+            return length && day && month && isNumbers;
         }
 
         private bool IsBetween(string num, int min, int max)
@@ -51,6 +53,17 @@ namespace Ordersystem.Functions
                 return (number >= min && number <= max);
             else
                 return false;
+        }
+
+        private bool IsDigitsOnly(string str)
+        {
+            foreach (char c in str)
+            {
+                if (c < '0' || c > '9')
+                    return false;
+            }
+
+            return true;
         }
 
         public Customer RequestUserData()

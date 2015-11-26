@@ -70,6 +70,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="FunctionsTests\CommunicationManagerTests.cs" />
     <Compile Include="ModelTests\CustomerTests.cs" />
     <Compile Include="ModelTests\DayMenuTests.cs" />
     <Compile Include="ModelTests\DishTests.cs" />
@@ -88,9 +89,7 @@
       <Name>Ordersystem</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="FunctionsTests\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
