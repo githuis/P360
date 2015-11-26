@@ -70,12 +70,6 @@
     <Compile Include="LocalDatabaseTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="Properties\AndroidManifest.xml">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Ordersystem\Ordersystem.Droid\Ordersystem.Droid.csproj">
       <Project>{9f5b4b6b-3db5-4fbd-a135-5bea691567b8}</Project>
       <Name>Ordersystem.Droid</Name>
