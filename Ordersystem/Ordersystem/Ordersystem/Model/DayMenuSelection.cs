@@ -9,30 +9,27 @@ namespace Ordersystem.Model
     public enum DayMenuChoice { Dish1, Dish2, NoDish }
     public class DayMenuSelection
     {
-        public DayMenuSelection(DayMenu dayMenu)
+        private bool _sideDish;
+
+        public DayMenuSelection(DayMenu dayMenu, DayMenuChoice choice, bool sideDish)
         {
-            dayMenu = DayMenu;
+            DayMenu = dayMenu;
+            Choice = choice;
+            SideDish = sideDish;
         }
 
         public DayMenu DayMenu {get; private set;}
         public DayMenuChoice Choice {get; set;}
         public bool SideDish
         {
-            get{ return SideDish; }
-            set
-            {
-                if (Choice != DayMenuChoice.NoDish)
-                    SideDish = true;
-            }
+            get { return _sideDish; }
+            set { _sideDish = Choice != DayMenuChoice.NoDish && value; }
         }
+        public DateTime Date {get {return DayMenu.Date;} }
 
         public List<Dish> GetDishes()
         {
-            List<Dish> Dishes = new List<Dish>();
-            Dishes.Add(DayMenu.Dish1);
-            Dishes.Add(DayMenu.Dish2);
-            Dishes.Add(DayMenu.SideDish);
-            return Dishes;
+            return new List<Dish> {DayMenu.Dish1, DayMenu.Dish2, DayMenu.SideDish};
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Ordersystem.Model
@@ -12,15 +13,37 @@ namespace Ordersystem.Model
         
         public List<DayMenuSelection> DayMenuSelections { get; private set; }
 
-        public void AddDayMenuSelection(DayMenu dayMenu)
+        public DayMenuSelection GetDayMenuSelection(DayMenu dayMenu)
         {
-            DayMenuSelections.Add(new DayMenuSelection(dayMenu));
+            DayMenuSelection dayMenuSelection = DayMenuSelections.FirstOrDefault(dms => dms.DayMenu == dayMenu);
+
+            if (dayMenuSelection == null) throw new NullReferenceException("No selection for given dayMenu found.");
+
+            return dayMenuSelection;
+        }
+
+        public void AddDayMenuSelection(DayMenu dayMenu, DayMenuChoice choice, bool sideDish)
+        {
+            DayMenuSelections.Add(new DayMenuSelection(dayMenu, choice, sideDish));
+        }
+
+        public void RemoveDayMenuSelection(DayMenu dayMenu)
+        {
+            DayMenuSelection selectionToRemove = DayMenuSelections.FirstOrDefault(dms => dms.DayMenu == dayMenu);
+
+            if(selectionToRemove == null) throw new NullReferenceException("No selection for given dayMenu found.");
+
+            DayMenuSelections.Remove(selectionToRemove);
         }
 
         public void ChangeDayMenuSelection(DayMenu dayMenu, DayMenuChoice dishChoice, bool sideDishChoice)
         {
-            DayMenuSelections.First((DayMenuSelection) => DayMenuSelection.DayMenu == dayMenu).Choice = dishChoice;
-            DayMenuSelections.First((DayMenuSelection) => DayMenuSelection.DayMenu == dayMenu).SideDish = sideDishChoice;
+            DayMenuSelection dayMenuSelection = DayMenuSelections.FirstOrDefault(dms => dms.DayMenu == dayMenu);
+
+            if (dayMenuSelection == null) throw new NullReferenceException("No selection for given dayMenu found.");
+
+            dayMenuSelection.Choice = dishChoice;
+            dayMenuSelection.SideDish = sideDishChoice;
         }
         
     }
