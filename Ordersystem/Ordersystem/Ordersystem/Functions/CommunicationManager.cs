@@ -120,7 +120,7 @@ namespace Ordersystem.Functions
 
         public bool IsOrderValid()
         {
-            throw new NotImplementedException();
+            return _customer.Order.DayMenuSelections.All(selection => selection.Choice != DayMenuChoice.NoChoice);
         }
 
         public void SendOrder()
