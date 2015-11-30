@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 
 namespace Ordersystem.Model
@@ -10,14 +11,14 @@ namespace Ordersystem.Model
         {
             DayMenuSelections = new List<DayMenuSelection>();
         }
-        
+
         public List<DayMenuSelection> DayMenuSelections { get; private set; }
 
         public void AddDayMenuSelection(DayMenu dayMenu, DayMenuChoice choice, bool sideDish)
         {
             DayMenuSelections.Add(new DayMenuSelection(dayMenu, choice, sideDish));
 
-            DayMenuSelections.Sort();
+            DayMenuSelections.Sort((x, y) => x.Date.CompareTo(y.Date));
         }
 
         public void ChangeDayMenuSelection(DayMenu dayMenu, DayMenuChoice dishChoice, bool sideDishChoice)
@@ -29,7 +30,7 @@ namespace Ordersystem.Model
             dayMenuSelection.Choice = dishChoice;
             dayMenuSelection.SideDish = sideDishChoice;
 
-            DayMenuSelections.Sort();
+            DayMenuSelections.Sort((x, y) => x.Date.CompareTo(y.Date));
         }
         
     }
