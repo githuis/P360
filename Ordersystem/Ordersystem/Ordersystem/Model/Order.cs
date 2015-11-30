@@ -17,14 +17,14 @@ namespace Ordersystem.Model
         public List<DayMenuSelection> DayMenuSelections { get; private set; }
         public bool Sent { get; set; }
 
-        public void AddDayMenuSelection(DayMenu dayMenu, DayMenuChoice choice, bool sideDish)
+        public void AddDayMenuSelection(DayMenu dayMenu, DayMenuChoice choice, bool sideDish = false)
         {
             DayMenuSelections.Add(new DayMenuSelection(dayMenu, choice, sideDish));
 
             DayMenuSelections.Sort((x, y) => x.Date.CompareTo(y.Date));
         }
 
-        public void ChangeDayMenuSelection(DayMenu dayMenu, DayMenuChoice dishChoice, bool sideDishChoice)
+        public void ChangeDayMenuSelection(DayMenu dayMenu, DayMenuChoice dishChoice, bool sideDishChoice = false)
         {
             DayMenuSelection dayMenuSelection = DayMenuSelections.FirstOrDefault(dms => dms.DayMenu == dayMenu);
 
