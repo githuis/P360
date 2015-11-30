@@ -13,7 +13,7 @@ namespace Ordersystem.Functions
 {
     public class LocalManager
     {
-        /*public CommunicationManager()
+        /*public LocalManager()
         {
             _localDatabase = new LocalDatabase("LocalDatabase");
         }*/
@@ -59,11 +59,6 @@ namespace Ordersystem.Functions
             return str.ToCharArray().All(c => c >= '0' && c <= '9');
         }
 
-        public Customer RequestUserData()
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Gets the session matching the Customer from the database and resumes it.
         /// If no such session is found, creates a new session, and fetches required data from Master Cater System.
@@ -93,11 +88,6 @@ namespace Ordersystem.Functions
             _orderlist = _localDatabase.GetOrderlist(x => x.PersonNumber == _customer.PersonNumber);
         }*/
 
-        private Orderlist RequestOrderlist()
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Stores the current session in the database.
         /// </summary>
@@ -115,11 +105,5 @@ namespace Ordersystem.Functions
         {
             return _customer.Order.DayMenuSelections.All(selection => selection.Choice != DayMenuChoice.NoChoice);
         }
-
-        public void SendOrder()
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

@@ -6,7 +6,24 @@ using System.Threading.Tasks;
 
 namespace Ordersystem.Functions
 {
-    class MCSManager
+    public class MCSManager
     {
+        private Customer _customer;
+        private Orderlist _orderlist;
+
+        public Customer RequestUserData()
+        {
+            throw new NotImplementedException();
+        }
+
+        private Orderlist RequestOrderlist()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SendOrder()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
