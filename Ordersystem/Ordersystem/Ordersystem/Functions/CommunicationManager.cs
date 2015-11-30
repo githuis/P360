@@ -28,9 +28,8 @@ namespace Ordersystem.Functions
         public bool ValidSocialSecurityNumber(string socialSecurityNumber)
         {
             bool length, day, month, isNumbers;
-            char[] numChar = new char[10];
 
-            isNumbers = IsDigitsOnly(socialSecurityNumber);
+            isNumbers = IsStringDigitsOnly(socialSecurityNumber);
 
             length = socialSecurityNumber.Length == 10; //Check if it is exactly 10 numbers long
 
@@ -38,32 +37,25 @@ namespace Ordersystem.Functions
             if (!length)
                 return false;
 
-            numChar = socialSecurityNumber.ToCharArray();
+            day = IsNumberBetween(socialSecurityNumber.Substring(0, 2), 01, 31); //Check the first two numbers to be a valid day. The day must be 1 - 31.
+            month = IsNumberBetween(socialSecurityNumber.Substring(2, 2), 01, 12); //Check the 2nd and 3rd numbers to be a valid month. The month should be 1 - 12.
 
-            day = IsBetween(socialSecurityNumber.Substring(0, 2), 01, 31); //Check the first two numbers to be a valid day. The day must be 1 - 31.
-            month = IsBetween(socialSecurityNumber.Substring(2, 2), 01, 12); //Check the 2nd and 3rd numbers to be a valid month. The month should be 1 - 12.
-
-            return length && day && month && isNumbers;
+            return day && month && isNumbers;
         }
 
-        private bool IsBetween(string num, int min, int max)
+        private bool IsNumberBetween(string num, int min, int max)
         {
             int number;
             if (int.TryParse(num, out number))
+            {
                 return (number >= min && number <= max);
-            else
-                return false;
+            }
+            return false;
         }
 
-        private bool IsDigitsOnly(string str)
+        private bool IsStringDigitsOnly(string str)
         {
-            foreach (char c in str)
-            {
-                if (c < '0' || c > '9')
-                    return false;
-            }
-
-            return true;
+            return str.ToCharArray().All(c => c >= '0' && c <= '9');
         }
 
         public Customer RequestUserData()
