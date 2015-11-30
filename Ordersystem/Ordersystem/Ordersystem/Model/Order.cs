@@ -56,6 +56,5 @@ namespace Ordersystem.Model
 
             DayMenuSelections.Sort((x, y) => x.Date.CompareTo(y.Date));
         }
-        
     }
 }
