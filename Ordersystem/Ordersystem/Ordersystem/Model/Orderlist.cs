@@ -24,16 +24,16 @@ namespace Ordersystem.Model
             DayMenus.Add(dayMenu);
         }
 
-        public void RemoveDayMenu(DayMenu dayMenu)
+        public DayMenu GetDayMenuByDate(DateTime date)
         {
-            DayMenus.Remove(dayMenu);
-        }
+            DayMenu dayMenu = DayMenus.FirstOrDefault(d => d.Date == date);
 
-        public DayMenu GetDayMenuByID(int id)
-        {
-            return DayMenus[id];
-        }
+            if (dayMenu == null)
+            {
+                throw new NullReferenceException("No DayMenu with that date was found.");
+            }
 
-        // TODO: Integrer med databaser.
+            return dayMenu;
+        }
     }
 }
