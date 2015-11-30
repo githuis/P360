@@ -10,7 +10,7 @@ namespace Ordersystem.Model
         /// <param name="personNumber">The social security number of the customer.</param>
         /// <param name="name">The name of the customer.</param>
         /// <param name="diet">The diet, the customer is getting.</param>
-        public Customer(int personNumber, string name, Diet diet)
+        public Customer(string personNumber, string name, Diet diet)
         {
             PersonNumber = personNumber;
             Name = name;
@@ -21,7 +21,7 @@ namespace Ordersystem.Model
         /// <summary>
         /// The social security number of the customer.
         /// </summary>
-        public int PersonNumber { get; private set; }
+        public string PersonNumber { get; private set; }
 
         /// <summary>
         /// The name of the customer.
