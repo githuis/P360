@@ -11,9 +11,11 @@ namespace Ordersystem.Model
         public Order()
         {
             DayMenuSelections = new List<DayMenuSelection>();
+            Sent = false;
         }
 
         public List<DayMenuSelection> DayMenuSelections { get; private set; }
+        public bool Sent { get; set; }
 
         public void AddDayMenuSelection(DayMenu dayMenu, DayMenuChoice choice, bool sideDish)
         {
