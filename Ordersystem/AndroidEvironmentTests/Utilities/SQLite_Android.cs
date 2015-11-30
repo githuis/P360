@@ -1,10 +1,12 @@
+//Copy from Ordersystem.Droid (Test considered different platform by Xamarin.Forms.DependecyService)
+
 using System.IO;
 using Ordersystem.Utilities;
 using SQLite;
-using Ordersystem.Droid.Utilities;
+using AndroidEvironmentTests.Utilities;
 
 [assembly: Xamarin.Forms.Dependency(typeof(SQLite_Android))]
-namespace Ordersystem.Droid.Utilities
+namespace AndroidEvironmentTests.Utilities
 {
     public class SQLite_Android : ISQLite
     {
