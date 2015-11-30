@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Ordersystem.Enums;
 
 namespace Ordersystem.Model
 {

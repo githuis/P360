@@ -1,7 +1,7 @@
-﻿namespace Ordersystem.Model
+﻿using Ordersystem.Enums;
+
+namespace Ordersystem.Model
 {
-    public enum Diet { Full, LowFat, EnergyDense, SoftFoodsWPotatoes, SoftFoodsWMash } // Danish translation: Fuldkost, Hjertesund, Energitæt, Blødkost m/kartofler, Blødkost m/kartoffelmos
-    
     public class Customer
     {
         public Customer(int personNumber, string name, Diet diet)

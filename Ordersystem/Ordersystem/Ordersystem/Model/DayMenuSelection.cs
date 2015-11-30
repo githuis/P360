@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ordersystem.Enums;
 
 namespace Ordersystem.Model
 {
-    public enum DayMenuChoice { Dish1, Dish2, NoDish }
     public class DayMenuSelection
     {
         private bool _sideDish;
