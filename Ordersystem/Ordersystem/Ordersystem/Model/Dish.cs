@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Xamarin.Forms;
 
 namespace Ordersystem.Model
 {
@@ -9,10 +10,12 @@ namespace Ordersystem.Model
         /// </summary>
         /// <param name="name">The name of the dish.</param>
         /// <param name="description">A description of the dish.</param>
-        public Dish(string name, string description)
+        /// <param name="imageSource">The source path for the image.</param>
+        public Dish(string name, string description, string imageSource)
         {
             Name = name;
             Description = description;
+            Image = new Image { Source = imageSource };
         }
 
         /// <summary>
@@ -25,7 +28,9 @@ namespace Ordersystem.Model
         /// </summary>
         public string Description { get; private set; }
 
-        //public Image image { get; set; }
-        // TODO: Find ud af hvordan vi inkluderer billedet.
+        /// <summary>
+        /// An image of the dish.
+        /// </summary>
+        public Image Image { get; private set; }
     }
 }
