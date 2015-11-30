@@ -23,7 +23,7 @@ namespace Ordersystem.Model
         public bool SideDish
         {
             get { return _sideDish; }
-            set { _sideDish = Choice != DayMenuChoice.NoDish && value; }
+            set { _sideDish = (Choice != DayMenuChoice.NoDish && Choice != DayMenuChoice.NoChoice) && value; }
         }
         public DateTime Date {get {return DayMenu.Date;} }
 

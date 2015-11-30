@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using System.Threading.Tasks;
+using Ordersystem.Enums;
 using SQLite;
 using Ordersystem.Model;
 using Ordersystem.Utilities;
@@ -112,7 +113,7 @@ namespace Ordersystem.Functions
 
         public bool IsOrderValid()
         {
-            throw new NotImplementedException();
+            return _customer.Order.DayMenuSelections.All(selection => selection.Choice != DayMenuChoice.NoChoice);
         }
 
         public void SendOrder()
