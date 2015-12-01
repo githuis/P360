@@ -20,7 +20,7 @@ namespace Ordersystem.Functions
             throw new NotImplementedException();
         }
 
-        public Orderlist RequestOrderlist()
+        private Orderlist RequestOrderlist()
         {
             throw new NotImplementedException();
         }
