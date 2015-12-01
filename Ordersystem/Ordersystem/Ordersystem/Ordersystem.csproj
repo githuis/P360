@@ -34,9 +34,7 @@
   <ItemGroup>
     <Compile Include="Enums\Enumerations.cs" />
     <Compile Include="Exceptions\ItemNotFoundException.cs" />
-    <Compile Include="Functions\LocalManager.cs" />
-    <Compile Include="Functions\MCSManager.cs" />
-    <Compile Include="Functions\SuperManager.cs" />
+    <Compile Include="Functions\CommunicationManager.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\DayMenu.cs" />
     <Compile Include="Model\DayMenuSelection.cs" />
