@@ -41,6 +41,25 @@ namespace Ordersystem.Droid
 			}
 		}
 		
+		public partial class Color
+		{
+			
+			// aapt resource value: 0x7f050000
+			public const int theme_custom_background = 2131034112;
+			
+			// aapt resource value: 0x7f050001
+			public const int theme_devicedefault_background = 2131034113;
+			
+			static Color()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Color()
+			{
+			}
+		}
+		
 		public partial class Drawable
 		{
 			
@@ -60,302 +79,302 @@ namespace Ordersystem.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050001
-			public const int editText1 = 2131034113;
+			// aapt resource value: 0x7f070001
+			public const int editText1 = 2131165185;
 			
-			// aapt resource value: 0x7f050003
-			public const int errorMsg = 2131034115;
+			// aapt resource value: 0x7f070003
+			public const int errorMsg = 2131165187;
 			
-			// aapt resource value: 0x7f050002
-			public const int myButton = 2131034114;
+			// aapt resource value: 0x7f070002
+			public const int myButton = 2131165186;
 			
-			// aapt resource value: 0x7f050006
-			public const int row1 = 2131034118;
+			// aapt resource value: 0x7f070006
+			public const int row1 = 2131165190;
 			
-			// aapt resource value: 0x7f050021
-			public const int row10 = 2131034145;
+			// aapt resource value: 0x7f070021
+			public const int row10 = 2131165217;
 			
-			// aapt resource value: 0x7f050024
-			public const int row11 = 2131034148;
+			// aapt resource value: 0x7f070024
+			public const int row11 = 2131165220;
 			
-			// aapt resource value: 0x7f050027
-			public const int row12 = 2131034151;
+			// aapt resource value: 0x7f070027
+			public const int row12 = 2131165223;
 			
-			// aapt resource value: 0x7f05002a
-			public const int row13 = 2131034154;
+			// aapt resource value: 0x7f07002a
+			public const int row13 = 2131165226;
 			
-			// aapt resource value: 0x7f05002d
-			public const int row14 = 2131034157;
+			// aapt resource value: 0x7f07002d
+			public const int row14 = 2131165229;
 			
-			// aapt resource value: 0x7f050030
-			public const int row15 = 2131034160;
+			// aapt resource value: 0x7f070030
+			public const int row15 = 2131165232;
 			
-			// aapt resource value: 0x7f050033
-			public const int row16 = 2131034163;
+			// aapt resource value: 0x7f070033
+			public const int row16 = 2131165235;
 			
-			// aapt resource value: 0x7f050036
-			public const int row17 = 2131034166;
+			// aapt resource value: 0x7f070036
+			public const int row17 = 2131165238;
 			
-			// aapt resource value: 0x7f050039
-			public const int row18 = 2131034169;
+			// aapt resource value: 0x7f070039
+			public const int row18 = 2131165241;
 			
-			// aapt resource value: 0x7f05003c
-			public const int row19 = 2131034172;
+			// aapt resource value: 0x7f07003c
+			public const int row19 = 2131165244;
 			
-			// aapt resource value: 0x7f050009
-			public const int row2 = 2131034121;
+			// aapt resource value: 0x7f070009
+			public const int row2 = 2131165193;
 			
-			// aapt resource value: 0x7f05003f
-			public const int row20 = 2131034175;
+			// aapt resource value: 0x7f07003f
+			public const int row20 = 2131165247;
 			
-			// aapt resource value: 0x7f050042
-			public const int row21 = 2131034178;
+			// aapt resource value: 0x7f070042
+			public const int row21 = 2131165250;
 			
-			// aapt resource value: 0x7f050045
-			public const int row22 = 2131034181;
+			// aapt resource value: 0x7f070045
+			public const int row22 = 2131165253;
 			
-			// aapt resource value: 0x7f050048
-			public const int row23 = 2131034184;
+			// aapt resource value: 0x7f070048
+			public const int row23 = 2131165256;
 			
-			// aapt resource value: 0x7f05004b
-			public const int row24 = 2131034187;
+			// aapt resource value: 0x7f07004b
+			public const int row24 = 2131165259;
 			
-			// aapt resource value: 0x7f05004e
-			public const int row25 = 2131034190;
+			// aapt resource value: 0x7f07004e
+			public const int row25 = 2131165262;
 			
-			// aapt resource value: 0x7f050051
-			public const int row26 = 2131034193;
+			// aapt resource value: 0x7f070051
+			public const int row26 = 2131165265;
 			
-			// aapt resource value: 0x7f050054
-			public const int row27 = 2131034196;
+			// aapt resource value: 0x7f070054
+			public const int row27 = 2131165268;
 			
-			// aapt resource value: 0x7f050057
-			public const int row28 = 2131034199;
+			// aapt resource value: 0x7f070057
+			public const int row28 = 2131165271;
 			
-			// aapt resource value: 0x7f05005a
-			public const int row29 = 2131034202;
+			// aapt resource value: 0x7f07005a
+			public const int row29 = 2131165274;
 			
-			// aapt resource value: 0x7f05000c
-			public const int row3 = 2131034124;
+			// aapt resource value: 0x7f07000c
+			public const int row3 = 2131165196;
 			
-			// aapt resource value: 0x7f05005d
-			public const int row30 = 2131034205;
+			// aapt resource value: 0x7f07005d
+			public const int row30 = 2131165277;
 			
-			// aapt resource value: 0x7f050060
-			public const int row31 = 2131034208;
+			// aapt resource value: 0x7f070060
+			public const int row31 = 2131165280;
 			
-			// aapt resource value: 0x7f05000f
-			public const int row4 = 2131034127;
+			// aapt resource value: 0x7f07000f
+			public const int row4 = 2131165199;
 			
-			// aapt resource value: 0x7f050012
-			public const int row5 = 2131034130;
+			// aapt resource value: 0x7f070012
+			public const int row5 = 2131165202;
 			
-			// aapt resource value: 0x7f050015
-			public const int row6 = 2131034133;
+			// aapt resource value: 0x7f070015
+			public const int row6 = 2131165205;
 			
-			// aapt resource value: 0x7f050018
-			public const int row7 = 2131034136;
+			// aapt resource value: 0x7f070018
+			public const int row7 = 2131165208;
 			
-			// aapt resource value: 0x7f05001b
-			public const int row8 = 2131034139;
+			// aapt resource value: 0x7f07001b
+			public const int row8 = 2131165211;
 			
-			// aapt resource value: 0x7f05001e
-			public const int row9 = 2131034142;
+			// aapt resource value: 0x7f07001e
+			public const int row9 = 2131165214;
 			
-			// aapt resource value: 0x7f050008
-			public const int row_button1 = 2131034120;
+			// aapt resource value: 0x7f070008
+			public const int row_button1 = 2131165192;
 			
-			// aapt resource value: 0x7f050023
-			public const int row_button10 = 2131034147;
+			// aapt resource value: 0x7f070023
+			public const int row_button10 = 2131165219;
 			
-			// aapt resource value: 0x7f050026
-			public const int row_button11 = 2131034150;
+			// aapt resource value: 0x7f070026
+			public const int row_button11 = 2131165222;
 			
-			// aapt resource value: 0x7f050029
-			public const int row_button12 = 2131034153;
+			// aapt resource value: 0x7f070029
+			public const int row_button12 = 2131165225;
 			
-			// aapt resource value: 0x7f05002c
-			public const int row_button13 = 2131034156;
+			// aapt resource value: 0x7f07002c
+			public const int row_button13 = 2131165228;
 			
-			// aapt resource value: 0x7f05002f
-			public const int row_button14 = 2131034159;
+			// aapt resource value: 0x7f07002f
+			public const int row_button14 = 2131165231;
 			
-			// aapt resource value: 0x7f050032
-			public const int row_button15 = 2131034162;
+			// aapt resource value: 0x7f070032
+			public const int row_button15 = 2131165234;
 			
-			// aapt resource value: 0x7f050035
-			public const int row_button16 = 2131034165;
+			// aapt resource value: 0x7f070035
+			public const int row_button16 = 2131165237;
 			
-			// aapt resource value: 0x7f050038
-			public const int row_button17 = 2131034168;
+			// aapt resource value: 0x7f070038
+			public const int row_button17 = 2131165240;
 			
-			// aapt resource value: 0x7f05003b
-			public const int row_button18 = 2131034171;
+			// aapt resource value: 0x7f07003b
+			public const int row_button18 = 2131165243;
 			
-			// aapt resource value: 0x7f05003e
-			public const int row_button19 = 2131034174;
+			// aapt resource value: 0x7f07003e
+			public const int row_button19 = 2131165246;
 			
-			// aapt resource value: 0x7f05000b
-			public const int row_button2 = 2131034123;
+			// aapt resource value: 0x7f07000b
+			public const int row_button2 = 2131165195;
 			
-			// aapt resource value: 0x7f050041
-			public const int row_button20 = 2131034177;
+			// aapt resource value: 0x7f070041
+			public const int row_button20 = 2131165249;
 			
-			// aapt resource value: 0x7f050044
-			public const int row_button21 = 2131034180;
+			// aapt resource value: 0x7f070044
+			public const int row_button21 = 2131165252;
 			
-			// aapt resource value: 0x7f050047
-			public const int row_button22 = 2131034183;
+			// aapt resource value: 0x7f070047
+			public const int row_button22 = 2131165255;
 			
-			// aapt resource value: 0x7f05004a
-			public const int row_button23 = 2131034186;
+			// aapt resource value: 0x7f07004a
+			public const int row_button23 = 2131165258;
 			
-			// aapt resource value: 0x7f05004d
-			public const int row_button24 = 2131034189;
+			// aapt resource value: 0x7f07004d
+			public const int row_button24 = 2131165261;
 			
-			// aapt resource value: 0x7f050050
-			public const int row_button25 = 2131034192;
+			// aapt resource value: 0x7f070050
+			public const int row_button25 = 2131165264;
 			
-			// aapt resource value: 0x7f050053
-			public const int row_button26 = 2131034195;
+			// aapt resource value: 0x7f070053
+			public const int row_button26 = 2131165267;
 			
-			// aapt resource value: 0x7f050056
-			public const int row_button27 = 2131034198;
+			// aapt resource value: 0x7f070056
+			public const int row_button27 = 2131165270;
 			
-			// aapt resource value: 0x7f050059
-			public const int row_button28 = 2131034201;
+			// aapt resource value: 0x7f070059
+			public const int row_button28 = 2131165273;
 			
-			// aapt resource value: 0x7f05005c
-			public const int row_button29 = 2131034204;
+			// aapt resource value: 0x7f07005c
+			public const int row_button29 = 2131165276;
 			
-			// aapt resource value: 0x7f05000e
-			public const int row_button3 = 2131034126;
+			// aapt resource value: 0x7f07000e
+			public const int row_button3 = 2131165198;
 			
-			// aapt resource value: 0x7f05005f
-			public const int row_button30 = 2131034207;
+			// aapt resource value: 0x7f07005f
+			public const int row_button30 = 2131165279;
 			
-			// aapt resource value: 0x7f050062
-			public const int row_button31 = 2131034210;
+			// aapt resource value: 0x7f070062
+			public const int row_button31 = 2131165282;
 			
-			// aapt resource value: 0x7f050011
-			public const int row_button4 = 2131034129;
+			// aapt resource value: 0x7f070011
+			public const int row_button4 = 2131165201;
 			
-			// aapt resource value: 0x7f050014
-			public const int row_button5 = 2131034132;
+			// aapt resource value: 0x7f070014
+			public const int row_button5 = 2131165204;
 			
-			// aapt resource value: 0x7f050017
-			public const int row_button6 = 2131034135;
+			// aapt resource value: 0x7f070017
+			public const int row_button6 = 2131165207;
 			
-			// aapt resource value: 0x7f05001a
-			public const int row_button7 = 2131034138;
+			// aapt resource value: 0x7f07001a
+			public const int row_button7 = 2131165210;
 			
-			// aapt resource value: 0x7f05001d
-			public const int row_button8 = 2131034141;
+			// aapt resource value: 0x7f07001d
+			public const int row_button8 = 2131165213;
 			
-			// aapt resource value: 0x7f050020
-			public const int row_button9 = 2131034144;
+			// aapt resource value: 0x7f070020
+			public const int row_button9 = 2131165216;
 			
-			// aapt resource value: 0x7f050007
-			public const int row_name1 = 2131034119;
+			// aapt resource value: 0x7f070007
+			public const int row_name1 = 2131165191;
 			
-			// aapt resource value: 0x7f050022
-			public const int row_name10 = 2131034146;
+			// aapt resource value: 0x7f070022
+			public const int row_name10 = 2131165218;
 			
-			// aapt resource value: 0x7f050025
-			public const int row_name11 = 2131034149;
+			// aapt resource value: 0x7f070025
+			public const int row_name11 = 2131165221;
 			
-			// aapt resource value: 0x7f050028
-			public const int row_name12 = 2131034152;
+			// aapt resource value: 0x7f070028
+			public const int row_name12 = 2131165224;
 			
-			// aapt resource value: 0x7f05002b
-			public const int row_name13 = 2131034155;
+			// aapt resource value: 0x7f07002b
+			public const int row_name13 = 2131165227;
 			
-			// aapt resource value: 0x7f05002e
-			public const int row_name14 = 2131034158;
+			// aapt resource value: 0x7f07002e
+			public const int row_name14 = 2131165230;
 			
-			// aapt resource value: 0x7f050031
-			public const int row_name15 = 2131034161;
+			// aapt resource value: 0x7f070031
+			public const int row_name15 = 2131165233;
 			
-			// aapt resource value: 0x7f050034
-			public const int row_name16 = 2131034164;
+			// aapt resource value: 0x7f070034
+			public const int row_name16 = 2131165236;
 			
-			// aapt resource value: 0x7f050037
-			public const int row_name17 = 2131034167;
+			// aapt resource value: 0x7f070037
+			public const int row_name17 = 2131165239;
 			
-			// aapt resource value: 0x7f05003a
-			public const int row_name18 = 2131034170;
+			// aapt resource value: 0x7f07003a
+			public const int row_name18 = 2131165242;
 			
-			// aapt resource value: 0x7f05003d
-			public const int row_name19 = 2131034173;
+			// aapt resource value: 0x7f07003d
+			public const int row_name19 = 2131165245;
 			
-			// aapt resource value: 0x7f05000a
-			public const int row_name2 = 2131034122;
+			// aapt resource value: 0x7f07000a
+			public const int row_name2 = 2131165194;
 			
-			// aapt resource value: 0x7f050040
-			public const int row_name20 = 2131034176;
+			// aapt resource value: 0x7f070040
+			public const int row_name20 = 2131165248;
 			
-			// aapt resource value: 0x7f050043
-			public const int row_name21 = 2131034179;
+			// aapt resource value: 0x7f070043
+			public const int row_name21 = 2131165251;
 			
-			// aapt resource value: 0x7f050046
-			public const int row_name22 = 2131034182;
+			// aapt resource value: 0x7f070046
+			public const int row_name22 = 2131165254;
 			
-			// aapt resource value: 0x7f050049
-			public const int row_name23 = 2131034185;
+			// aapt resource value: 0x7f070049
+			public const int row_name23 = 2131165257;
 			
-			// aapt resource value: 0x7f05004c
-			public const int row_name24 = 2131034188;
+			// aapt resource value: 0x7f07004c
+			public const int row_name24 = 2131165260;
 			
-			// aapt resource value: 0x7f05004f
-			public const int row_name25 = 2131034191;
+			// aapt resource value: 0x7f07004f
+			public const int row_name25 = 2131165263;
 			
-			// aapt resource value: 0x7f050052
-			public const int row_name26 = 2131034194;
+			// aapt resource value: 0x7f070052
+			public const int row_name26 = 2131165266;
 			
-			// aapt resource value: 0x7f050055
-			public const int row_name27 = 2131034197;
+			// aapt resource value: 0x7f070055
+			public const int row_name27 = 2131165269;
 			
-			// aapt resource value: 0x7f050058
-			public const int row_name28 = 2131034200;
+			// aapt resource value: 0x7f070058
+			public const int row_name28 = 2131165272;
 			
-			// aapt resource value: 0x7f05005b
-			public const int row_name29 = 2131034203;
+			// aapt resource value: 0x7f07005b
+			public const int row_name29 = 2131165275;
 			
-			// aapt resource value: 0x7f05000d
-			public const int row_name3 = 2131034125;
+			// aapt resource value: 0x7f07000d
+			public const int row_name3 = 2131165197;
 			
-			// aapt resource value: 0x7f05005e
-			public const int row_name30 = 2131034206;
+			// aapt resource value: 0x7f07005e
+			public const int row_name30 = 2131165278;
 			
-			// aapt resource value: 0x7f050061
-			public const int row_name31 = 2131034209;
+			// aapt resource value: 0x7f070061
+			public const int row_name31 = 2131165281;
 			
-			// aapt resource value: 0x7f050010
-			public const int row_name4 = 2131034128;
+			// aapt resource value: 0x7f070010
+			public const int row_name4 = 2131165200;
 			
-			// aapt resource value: 0x7f050013
-			public const int row_name5 = 2131034131;
+			// aapt resource value: 0x7f070013
+			public const int row_name5 = 2131165203;
 			
-			// aapt resource value: 0x7f050016
-			public const int row_name6 = 2131034134;
+			// aapt resource value: 0x7f070016
+			public const int row_name6 = 2131165206;
 			
-			// aapt resource value: 0x7f050019
-			public const int row_name7 = 2131034137;
+			// aapt resource value: 0x7f070019
+			public const int row_name7 = 2131165209;
 			
-			// aapt resource value: 0x7f05001c
-			public const int row_name8 = 2131034140;
+			// aapt resource value: 0x7f07001c
+			public const int row_name8 = 2131165212;
 			
-			// aapt resource value: 0x7f05001f
-			public const int row_name9 = 2131034143;
+			// aapt resource value: 0x7f07001f
+			public const int row_name9 = 2131165215;
 			
-			// aapt resource value: 0x7f050004
-			public const int scrollView1 = 2131034116;
+			// aapt resource value: 0x7f070004
+			public const int scrollView1 = 2131165188;
 			
-			// aapt resource value: 0x7f050005
-			public const int tableLayout1 = 2131034117;
+			// aapt resource value: 0x7f070005
+			public const int tableLayout1 = 2131165189;
 			
-			// aapt resource value: 0x7f050000
-			public const int titelText = 2131034112;
+			// aapt resource value: 0x7f070000
+			public const int titelText = 2131165184;
 			
 			static Id()
 			{
@@ -401,6 +420,22 @@ namespace Ordersystem.Droid
 			}
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Style
+		{
+			
+			// aapt resource value: 0x7f060000
+			public const int Theme_Custom = 2131099648;
+			
+			static Style()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Style()
 			{
 			}
 		}
