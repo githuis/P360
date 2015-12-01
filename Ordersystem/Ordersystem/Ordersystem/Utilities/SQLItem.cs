@@ -23,7 +23,7 @@ namespace Ordersystem.Utilities
         /// <param name="personNumber">The personNumber of the customer whom the order belongs to.</param>
         /// <param name="order">The Order in the database.</param>
         /// <param name="orderlist">The Orderlist relevant to the database.</param>
-        public SQLItem(int personNumber, Order order, Orderlist orderlist)
+        public SQLItem(string personNumber, Order order, Orderlist orderlist)
         {
             PersonNumber = personNumber;
             Order = order;
@@ -33,7 +33,7 @@ namespace Ordersystem.Utilities
         /// <summary>
         /// The personNumber of the customer whom the order belongs to.
         /// </summary>
-        public int PersonNumber { get; private set; }
+        public string PersonNumber { get; private set; }
 
         /// <summary>
         /// The Order in the database.
