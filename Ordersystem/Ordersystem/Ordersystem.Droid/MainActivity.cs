@@ -64,19 +64,14 @@ namespace Ordersystem.Droid
 				}
 			};
 		}
-
-
-		 //A try at making the row system, where all the rows already are made, and you need to set them to visable or invisable. And change the buttons and text to them hard code style
-		 //Its shit.
+			
 		public void CreateMainWindow()
 		{
 			//TableLayout Table1 = FindViewById<TableLayout> (Resource.Id.table);
 
 			AddRowsToList ((TableLayout)FindViewById (Resource.Id.tableLayout1));
 			AddListnersToList(rows);
-
-			TextView table_text1 = FindViewById<TextView> (Resource.Id.row_name1);
-
+			InitializeRows ();
 		}
 
 		private void AddRowsToList(TableLayout table)
@@ -98,8 +93,17 @@ namespace Ordersystem.Droid
 			foreach (var row in rows) 
 			{
 				row.Click += (object sender, EventArgs e) => {
-					lh.ResizeTableRow(rows, (TableRow) sender);
+					lh.ResizeTableRow(rows, (TableRow) sender, this);
 				};
+			}
+		}
+
+		private void InitializeRows()
+		{
+			foreach (var row in rows)
+			{
+				TextView v = (TextView) row.GetChildAt(0);
+				v.SetTextSize (Android.Util.ComplexUnitType.Px, 36);
 			}
 		}
 	}
