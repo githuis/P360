@@ -21,10 +21,10 @@
                 android:layout_column="1"
                 android:text="day1"
                 android:id="@+id/row_name1" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button1" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView1" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -33,10 +33,10 @@
                 android:layout_column="1"
                 android:text="day2"
                 android:id="@+id/row_name2" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button2" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView2" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -45,10 +45,10 @@
                 android:layout_column="1"
                 android:text="day3"
                 android:id="@+id/row_name3" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button3" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView31" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -57,10 +57,10 @@
                 android:layout_column="1"
                 android:text="day4"
                 android:id="@+id/row_name4" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button4" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView30" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -69,10 +69,10 @@
                 android:layout_column="1"
                 android:text="day5"
                 android:id="@+id/row_name5" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button5" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView29" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -81,10 +81,10 @@
                 android:layout_column="1"
                 android:text="day6"
                 android:id="@+id/row_name6" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button6" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView28" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -93,10 +93,10 @@
                 android:layout_column="1"
                 android:text="day7"
                 android:id="@+id/row_name7" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button7" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView27" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -105,10 +105,10 @@
                 android:layout_column="1"
                 android:text="day8"
                 android:id="@+id/row_name8" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button8" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView26" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -117,10 +117,10 @@
                 android:layout_column="1"
                 android:text="day9"
                 android:id="@+id/row_name9" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button9" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView25" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -129,10 +129,10 @@
                 android:layout_column="1"
                 android:text="day10"
                 android:id="@+id/row_name10" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button10" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView24" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -141,10 +141,10 @@
                 android:layout_column="1"
                 android:text="day11"
                 android:id="@+id/row_name11" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button11" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView23" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -153,10 +153,10 @@
                 android:layout_column="1"
                 android:text="day12"
                 android:id="@+id/row_name12" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button12" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView22" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -165,10 +165,10 @@
                 android:layout_column="1"
                 android:text="day13"
                 android:id="@+id/row_name13" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button13" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView21" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -177,10 +177,10 @@
                 android:layout_column="1"
                 android:text="day14"
                 android:id="@+id/row_name14" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button14" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView20" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -189,10 +189,10 @@
                 android:layout_column="1"
                 android:text="day15"
                 android:id="@+id/row_name15" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button15" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView19" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -201,10 +201,10 @@
                 android:layout_column="1"
                 android:text="day16"
                 android:id="@+id/row_name16" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button16" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView18" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -213,10 +213,10 @@
                 android:layout_column="1"
                 android:text="day17"
                 android:id="@+id/row_name17" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button17" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView17" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -225,10 +225,10 @@
                 android:layout_column="1"
                 android:text="day18"
                 android:id="@+id/row_name18" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button18" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView16" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -237,10 +237,10 @@
                 android:layout_column="1"
                 android:text="day19"
                 android:id="@+id/row_name19" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button19" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView15" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -249,10 +249,10 @@
                 android:layout_column="1"
                 android:text="day20"
                 android:id="@+id/row_name20" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button20" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView14" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -261,10 +261,10 @@
                 android:layout_column="1"
                 android:text="day21"
                 android:id="@+id/row_name21" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button21" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView13" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -273,10 +273,10 @@
                 android:layout_column="1"
                 android:text="day22"
                 android:id="@+id/row_name22" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button22" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView12" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -285,10 +285,10 @@
                 android:layout_column="1"
                 android:text="day23"
                 android:id="@+id/row_name23" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button23" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView11" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -297,10 +297,10 @@
                 android:layout_column="1"
                 android:text="day24"
                 android:id="@+id/row_name24" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button24" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView10" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -309,10 +309,10 @@
                 android:layout_column="1"
                 android:text="day25"
                 android:id="@+id/row_name25" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button25" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView9" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -321,10 +321,10 @@
                 android:layout_column="1"
                 android:text="day26"
                 android:id="@+id/row_name26" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button26" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView8" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -333,10 +333,10 @@
                 android:layout_column="1"
                 android:text="day27"
                 android:id="@+id/row_name27" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button27" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView7" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -345,10 +345,10 @@
                 android:layout_column="1"
                 android:text="day28"
                 android:id="@+id/row_name28" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button28" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView6" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -357,10 +357,10 @@
                 android:layout_column="1"
                 android:text="day29"
                 android:id="@+id/row_name29" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button29" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView5" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -369,10 +369,10 @@
                 android:layout_column="1"
                 android:text="day30"
                 android:id="@+id/row_name30" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button30" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView4" />
         </TableRow>
         <TableRow
             android:visibility="visible"
@@ -381,10 +381,10 @@
                 android:layout_column="1"
                 android:text="day31"
                 android:id="@+id/row_name31" />
-            <Button
-                android:text="Knap"
-                android:gravity="right"
-                android:id="@+id/row_button31" />
+            <ImageView
+                android:src="@drawable/forward"
+                android:layout_column="2"
+                android:id="@+id/imageView3" />
         </TableRow>
     </TableLayout>
 </ScrollView>

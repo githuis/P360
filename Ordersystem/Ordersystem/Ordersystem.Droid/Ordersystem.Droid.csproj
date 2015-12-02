@@ -47,12 +47,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ordersystem\Ordersystem.csproj">
-      <Name>Ordersystem</Name>
-      <Project>{A1BCC633-10E4-4FD4-B1F2-4CCDE660B304}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,7 +71,23 @@
     <AndroidResource Include="Resources\layout\Main_Window.axml" />
     <AndroidResource Include="Resources\layout\Log_In.axml" />
     <AndroidResource Include="Resources\values\theme.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\Forward.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\Forward.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Forward.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\Forward.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\Forward.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ExpandArrow.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ExpandArrow.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ExpandArrow.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ExpandArrow.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ExpandArrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\SQLitePCL.raw_basic.0.8.3\build\MonoAndroid\SQLitePCL.raw_basic.targets" Condition="Exists('..\..\packages\SQLitePCL.raw_basic.0.8.3\build\MonoAndroid\SQLitePCL.raw_basic.targets')" />
+  <ItemGroup>
+    <ProjectReference Include="..\Ordersystem\Ordersystem.csproj">
+      <Project>{A1BCC633-10E4-4FD4-B1F2-4CCDE660B304}</Project>
+      <Name>Ordersystem</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

@@ -64,7 +64,13 @@ namespace Ordersystem.Droid
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int Icon = 2130837504;
+			public const int ExpandArrow = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int Forward = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int Icon = 2130837506;
 			
 			static Drawable()
 			{
@@ -84,6 +90,99 @@ namespace Ordersystem.Droid
 			
 			// aapt resource value: 0x7f070003
 			public const int errorMsg = 2131165187;
+			
+			// aapt resource value: 0x7f070008
+			public const int imageView1 = 2131165192;
+			
+			// aapt resource value: 0x7f07004d
+			public const int imageView10 = 2131165261;
+			
+			// aapt resource value: 0x7f07004a
+			public const int imageView11 = 2131165258;
+			
+			// aapt resource value: 0x7f070047
+			public const int imageView12 = 2131165255;
+			
+			// aapt resource value: 0x7f070044
+			public const int imageView13 = 2131165252;
+			
+			// aapt resource value: 0x7f070041
+			public const int imageView14 = 2131165249;
+			
+			// aapt resource value: 0x7f07003e
+			public const int imageView15 = 2131165246;
+			
+			// aapt resource value: 0x7f07003b
+			public const int imageView16 = 2131165243;
+			
+			// aapt resource value: 0x7f070038
+			public const int imageView17 = 2131165240;
+			
+			// aapt resource value: 0x7f070035
+			public const int imageView18 = 2131165237;
+			
+			// aapt resource value: 0x7f070032
+			public const int imageView19 = 2131165234;
+			
+			// aapt resource value: 0x7f07000b
+			public const int imageView2 = 2131165195;
+			
+			// aapt resource value: 0x7f07002f
+			public const int imageView20 = 2131165231;
+			
+			// aapt resource value: 0x7f07002c
+			public const int imageView21 = 2131165228;
+			
+			// aapt resource value: 0x7f070029
+			public const int imageView22 = 2131165225;
+			
+			// aapt resource value: 0x7f070026
+			public const int imageView23 = 2131165222;
+			
+			// aapt resource value: 0x7f070023
+			public const int imageView24 = 2131165219;
+			
+			// aapt resource value: 0x7f070020
+			public const int imageView25 = 2131165216;
+			
+			// aapt resource value: 0x7f07001d
+			public const int imageView26 = 2131165213;
+			
+			// aapt resource value: 0x7f07001a
+			public const int imageView27 = 2131165210;
+			
+			// aapt resource value: 0x7f070017
+			public const int imageView28 = 2131165207;
+			
+			// aapt resource value: 0x7f070014
+			public const int imageView29 = 2131165204;
+			
+			// aapt resource value: 0x7f070062
+			public const int imageView3 = 2131165282;
+			
+			// aapt resource value: 0x7f070011
+			public const int imageView30 = 2131165201;
+			
+			// aapt resource value: 0x7f07000e
+			public const int imageView31 = 2131165198;
+			
+			// aapt resource value: 0x7f07005f
+			public const int imageView4 = 2131165279;
+			
+			// aapt resource value: 0x7f07005c
+			public const int imageView5 = 2131165276;
+			
+			// aapt resource value: 0x7f070059
+			public const int imageView6 = 2131165273;
+			
+			// aapt resource value: 0x7f070056
+			public const int imageView7 = 2131165270;
+			
+			// aapt resource value: 0x7f070053
+			public const int imageView8 = 2131165267;
+			
+			// aapt resource value: 0x7f070050
+			public const int imageView9 = 2131165264;
 			
 			// aapt resource value: 0x7f070002
 			public const int myButton = 2131165186;
@@ -180,99 +279,6 @@ namespace Ordersystem.Droid
 			
 			// aapt resource value: 0x7f07001e
 			public const int row9 = 2131165214;
-			
-			// aapt resource value: 0x7f070008
-			public const int row_button1 = 2131165192;
-			
-			// aapt resource value: 0x7f070023
-			public const int row_button10 = 2131165219;
-			
-			// aapt resource value: 0x7f070026
-			public const int row_button11 = 2131165222;
-			
-			// aapt resource value: 0x7f070029
-			public const int row_button12 = 2131165225;
-			
-			// aapt resource value: 0x7f07002c
-			public const int row_button13 = 2131165228;
-			
-			// aapt resource value: 0x7f07002f
-			public const int row_button14 = 2131165231;
-			
-			// aapt resource value: 0x7f070032
-			public const int row_button15 = 2131165234;
-			
-			// aapt resource value: 0x7f070035
-			public const int row_button16 = 2131165237;
-			
-			// aapt resource value: 0x7f070038
-			public const int row_button17 = 2131165240;
-			
-			// aapt resource value: 0x7f07003b
-			public const int row_button18 = 2131165243;
-			
-			// aapt resource value: 0x7f07003e
-			public const int row_button19 = 2131165246;
-			
-			// aapt resource value: 0x7f07000b
-			public const int row_button2 = 2131165195;
-			
-			// aapt resource value: 0x7f070041
-			public const int row_button20 = 2131165249;
-			
-			// aapt resource value: 0x7f070044
-			public const int row_button21 = 2131165252;
-			
-			// aapt resource value: 0x7f070047
-			public const int row_button22 = 2131165255;
-			
-			// aapt resource value: 0x7f07004a
-			public const int row_button23 = 2131165258;
-			
-			// aapt resource value: 0x7f07004d
-			public const int row_button24 = 2131165261;
-			
-			// aapt resource value: 0x7f070050
-			public const int row_button25 = 2131165264;
-			
-			// aapt resource value: 0x7f070053
-			public const int row_button26 = 2131165267;
-			
-			// aapt resource value: 0x7f070056
-			public const int row_button27 = 2131165270;
-			
-			// aapt resource value: 0x7f070059
-			public const int row_button28 = 2131165273;
-			
-			// aapt resource value: 0x7f07005c
-			public const int row_button29 = 2131165276;
-			
-			// aapt resource value: 0x7f07000e
-			public const int row_button3 = 2131165198;
-			
-			// aapt resource value: 0x7f07005f
-			public const int row_button30 = 2131165279;
-			
-			// aapt resource value: 0x7f070062
-			public const int row_button31 = 2131165282;
-			
-			// aapt resource value: 0x7f070011
-			public const int row_button4 = 2131165201;
-			
-			// aapt resource value: 0x7f070014
-			public const int row_button5 = 2131165204;
-			
-			// aapt resource value: 0x7f070017
-			public const int row_button6 = 2131165207;
-			
-			// aapt resource value: 0x7f07001a
-			public const int row_button7 = 2131165210;
-			
-			// aapt resource value: 0x7f07001d
-			public const int row_button8 = 2131165213;
-			
-			// aapt resource value: 0x7f070020
-			public const int row_button9 = 2131165216;
 			
 			// aapt resource value: 0x7f070007
 			public const int row_name1 = 2131165191;

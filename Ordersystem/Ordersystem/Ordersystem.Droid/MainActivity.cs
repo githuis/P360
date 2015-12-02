@@ -40,6 +40,7 @@ namespace Ordersystem.Droid
 			//
 			rows = new List<TableRow>();
 
+
 			LogIn(button,editText,errorMsg);
 		}
 
@@ -75,7 +76,6 @@ namespace Ordersystem.Droid
 			AddListnersToList(rows);
 
 			TextView table_text1 = FindViewById<TextView> (Resource.Id.row_name1);
-			Button table_button1 = FindViewById<Button> (Resource.Id.row_button1);
 
 		}
 
