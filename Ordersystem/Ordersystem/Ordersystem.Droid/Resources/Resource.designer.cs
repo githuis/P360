@@ -88,12 +88,6 @@ namespace Ordersystem.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f070001
-			public const int editText1 = 2131165185;
-			
-			// aapt resource value: 0x7f070003
-			public const int errorMsg = 2131165187;
-			
 			// aapt resource value: 0x7f070008
 			public const int gridLayout1 = 2131165192;
 			
@@ -284,7 +278,16 @@ namespace Ordersystem.Droid
 			public const int line1 = 2131165194;
 			
 			// aapt resource value: 0x7f070002
-			public const int myButton = 2131165186;
+			public const int loginButton = 2131165186;
+			
+			// aapt resource value: 0x7f070003
+			public const int loginErrorMessageText = 2131165187;
+			
+			// aapt resource value: 0x7f070001
+			public const int loginInputBar = 2131165185;
+			
+			// aapt resource value: 0x7f070000
+			public const int loginTitleText = 2131165184;
 			
 			// aapt resource value: 0x7f070006
 			public const int row1 = 2131165190;
@@ -477,9 +480,6 @@ namespace Ordersystem.Droid
 			
 			// aapt resource value: 0x7f070005
 			public const int tableLayout1 = 2131165189;
-			
-			// aapt resource value: 0x7f070000
-			public const int titelText = 2131165184;
 			
 			static Id()
 			{

@@ -12,37 +12,35 @@ using Android.Graphics;
 
 namespace Ordersystem.Droid
 {
-	[Activity (Label = "Ordersystem", MainLauncher = true, Icon = "@drawable/icon")]
+	// OLD = [Activity (Label = "Ordersystem", MainLauncher = true, Icon = "@drawable/icon")]
+	//Test too see if this forces landscape mode in the main screen.
+	[Activity (Label = "Ordersystem", MainLauncher = true, Icon = "@drawable/icon", ScreenOrientation = Android.Content.PM.ScreenOrientation.Landscape)]
 	public class MainActivity : Activity
 	{
-		//Made a communicationManager object
-		CommunicationManager cm;
-		LayoutHandler lh;
+		CommunicationManager communicationManager;
+		LayoutHandler layoutHandler;
 		List<TableRow> rows;
 
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
-
 			// Set our view to the Log_In
 			SetContentView (Resource.Layout.Log_In);
 
-			//Finding the different widgets ID, so i can use them
-			Button button = FindViewById<Button> (Resource.Id.myButton);
-			EditText editText = FindViewById<EditText> (Resource.Id.editText1);
-			TextView errorMsg = FindViewById<TextView> (Resource.Id.errorMsg); 
+			//Finding the different widgets ID, to use in the LogIn method a few lines below.
+			Button button = FindViewById<Button> (Resource.Id.loginButton);
+			EditText editText = FindViewById<EditText> (Resource.Id.loginInputBar);
+			TextView errorMsg = FindViewById<TextView> (Resource.Id.loginErrorMessageText); 
 
 			//Initialize managers
-			cm = new CommunicationManager();
-			lh = new LayoutHandler(this);
+			communicationManager = new CommunicationManager();
+			layoutHandler = new LayoutHandler(this);
 
-
-
-			//
+			//Initialize list for TableRows.
 			rows = new List<TableRow>();
 
-
+			//Checks  the users login info
 			LogIn(button,editText,errorMsg);
 		}
 
@@ -50,12 +48,12 @@ namespace Ordersystem.Droid
 		{
 			button.Click += delegate 
 			{
-				if(editText.Text == "") // START DEBUG ONLY
+				if(editText.Text == "") // START DEBUG ONLY -- MUST BE REMOVED BEFORE SHIPPING -- CRITICAL
 				{
 					SetContentView (Resource.Layout.Main_Window);
 					CreateMainWindow ();
 				} // END DEBUG ONLY
-				else if(cm.ValidSocialSecurityNumber(editText.Text))
+				else if(communicationManager.ValidSocialSecurityNumber(editText.Text))
 				{
 					SetContentView (Resource.Layout.Main_Window);
 					CreateMainWindow ();
@@ -92,10 +90,10 @@ namespace Ordersystem.Droid
 			{
 				TextView v = (TextView) row.GetChildAt(0);
 				v.SetTextSize (Android.Util.ComplexUnitType.Px, 36);
-				row.SetBackgroundColor(Color.ParseColor("#F9F9F9"));
+				row.SetBackgroundColor(layoutHandler.RowBackgroundColor);
 
 				row.Click += (object sender, EventArgs e) => {
-					lh.ResizeTableRow(rows, (TableRow) sender, (TableLayout)FindViewById (Resource.Id.tableLayout1));
+					layoutHandler.ResizeTableRow(rows, (TableRow) sender, (TableLayout)FindViewById (Resource.Id.tableLayout1));
 				};
 			}
 		}

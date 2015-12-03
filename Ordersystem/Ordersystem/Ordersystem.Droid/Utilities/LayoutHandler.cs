@@ -9,17 +9,26 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Graphics;
 
 namespace Ordersystem.Droid
 {
 	public class LayoutHandler
 	{
+		//Numbers describing the looks of the main scren interface
 		private int minRowHeight = 40;
-		private int maxRowHeight = 180;
-		private Activity activity;
 		private int textSizeLarge = 31;
 		private int textSizeMed = 23;
-		DayMenu testMenu;
+
+		//'Globals' for inside LayoutHandler
+		private Activity activity;
+		private DayMenu testMenu;
+
+
+		//The Colors to be used throughout the whole UI.
+		public Color RowBackgroundColor = Color.ParseColor("#F9F9F9");
+		public Color RowCompletedColor = Color.ParseColor("#00FF00"); // Skal vælges rigtigt
+		public Color HeaderColor = Color.ParseColor("#00FFFF"); // Skal vælges rigtigt
 
 		public LayoutHandler (Activity activity)
 		{
@@ -32,61 +41,64 @@ namespace Ordersystem.Droid
 
 		public void CreateDayMenuDisplay(DayMenu dayMenu, TableRow row, TableLayout parent)
 		{
+			int childId = parent.IndexOfChild (row);
+
 			TableRow newRow = new TableRow (activity);
-			newRow.AddView (LinearBuilder (row, dayMenu.Dish1.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.Dish1.Description), 0);
-			newRow.AddView (LinearBuilder (row, dayMenu.Dish2.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.Dish2.Description), 1);
-			newRow.AddView (LinearBuilder (row, dayMenu.SideDish.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.SideDish.Description), 2);
+			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish1.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.Dish1.Description), 0);
+			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish2.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.Dish2.Description), 1);
+			newRow.AddView (LinearBuilder (parent, row, dayMenu.SideDish.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.SideDish.Description), 2);
 			newRow.AddView(LinearNoFood(), 3);
 
-			parent.AddView (newRow, 1 /* Idet af 'row', ikke 1*/);
-			newRow.SetBackgroundColor(Android.Graphics.Color.ParseColor("#F9F9F9"));
+
+			newRow.SetBackgroundColor(RowBackgroundColor);
+			newRow.SetMinimumHeight (minRowHeight);
+			parent.AddView(newRow, childId);
 		}
 			
 		public void ResizeTableRow(List<TableRow> rows, TableRow rowToChange, TableLayout parent)
 		{
 			foreach (TableRow row in rows) {
-				CloseRow (row);
+				CloseRow (parent, row);
 			}
 			if (IsOpen (rowToChange))
-				CloseRow (rowToChange);
+				CloseRow (parent, rowToChange);
 			else
 				OpenRow (rowToChange, parent);
 		}
 
 		private void OpenRow(TableRow row, TableLayout tl)
 		{
-			row.SetMinimumHeight (maxRowHeight);
+			//row.SetMinimumHeight (maxRowHeight);
 
-			//Gets the image-view component of the row, and sets the arrow the the expand arrow
-			for (int i = 0; i < row.ChildCount; i++) {
-				var child = row.GetChildAt (i);
-				if (child is ImageView) {
-					ImageView iv = (ImageView)child;
-					iv.SetImageResource (Resource.Drawable.ExpandArrow);
-					break;
-				}
-			}
+
+			ChangeArrowTo(row, Resource.Drawable.ExpandArrow);
 
 			CreateDayMenuDisplay(testMenu, row, tl);
 		}
 
-		private void CloseRow(TableRow row)
+		private void CloseRow(TableLayout table, TableRow row)
 		{
-			row.SetMinimumHeight (minRowHeight);
+			//Sub-menu's first child (0) is a linearlayout, others are TextView. If is submenu, remove row.
+			if (row.GetChildAt (0) is LinearLayout)
+				table.RemoveViewAt (table.IndexOfChild (row));
+			else
+				ChangeArrowTo (row, Resource.Drawable.Forward);
+		}
 
-			//Gets the image-view component of the row, and sets the arrow to the forward arrow
-			for (int i = 0; i < row.ChildCount; i++)
-			{
+		/// <summary>
+		/// Gets the image-view component of the row, and sets the arrow the specified arrow.
+		/// Call with Resource.Drawable.'Specific'Arrow
+		/// </summary>
+		/// <param name="row">Row.</param>
+		/// <param name="arrow">Arrow.</param>
+		private void ChangeArrowTo(TableRow row, int arrow)
+		{
+			for (int i = 0; i < row.ChildCount; i++) {
 				var child = row.GetChildAt (i);
-				if (child != null && child is ImageView) {
+				if (child is ImageView) {
 					ImageView iv = (ImageView)child;
-					iv.SetImageResource (Resource.Drawable.Forward);
-				} else if (child != null && child is GridLayout) {
-					row.RemoveView (child);
-					i--;
-				} else if (child != null && child is LinearLayout) {
-					row.RemoveView (child);
-					i--;
+					iv.SetImageResource (arrow);
+					break;
 				}
 			}
 		}
@@ -95,127 +107,35 @@ namespace Ordersystem.Droid
 		{
 				return row.Height == maxRowHeight;
 		}
-
-		/*private GridView GridMaker(Activity activity)
-		{
-			GridView view = new GridView (activity);
-			view.SetColumnWidth(200);
-			view.NumColumns = 4;
-			view.Id = 69;
-			view.SetVerticalSpacing(10);
-			view.SetHorizontalSpacing(10);
-			view.SetGravity(GravityFlags.Center);
-			view.StretchMode = StretchMode.StretchColumnWidth;
-			view.seta
 			
 
-			return view;
-		}*/
-
-	/*	private GridLayout GridMaker(Activity activity, TableRow row)
-		{			
-			GridLayout gridLayout = new GridLayout(activity);
-
-			for (int i = 0; i < row.ChildCount; i++)
-			{
-				var child = row.GetChildAt (i);
-				if (child != null && child is GridLayout)
-				{
-					gridLayout = (GridLayout)child;
-				}
-			}
-
-			gridLayout.RemoveAllViews();
-
-			int total = 6;
-			int column = 3;
-			int rows = total / column;
-
-			 
-			gridLayout.SetBackgroundColor (Android.Graphics.Color.Red);
-			gridLayout.AddView(new TextView (activity)
-				{
-					Text = "Ret 1",
-					TextSize = 30
-				});
-
-			ImageView ret1img = new ImageView(activity);
-			ret1img.SetImageResource(Resource.Drawable.Icon);
-			GridLayout.LayoutParams param1 =new GridLayout.LayoutParams();
-			param1.Height = WindowManagerLayoutParams.WrapContent;
-			param1.Width = WindowManagerLayoutParams.WrapContent;
-			param1.RightMargin = 5;
-			param1.TopMargin = 5;
-			param1.SetGravity (GravityFlags.Left);
-			ret1img.LayoutParameters = param1;
-			gridLayout.AddView(ret1img);
-
-			gridLayout.AddView(new TextView (activity)
-				{
-					Text = "Ret 2",
-					TextSize = 30
-				});
-
-			ImageView ret2img = new ImageView(activity);
-			ret2img.SetImageResource(Resource.Drawable.Icon);
-			GridLayout.LayoutParams param2 =new GridLayout.LayoutParams();
-			param2.Height = WindowManagerLayoutParams.WrapContent;
-			param2.Width = WindowManagerLayoutParams.WrapContent;
-			param2.RightMargin = 5;
-			param2.TopMargin = 5;
-			param2.SetGravity (GravityFlags.Left);
-			ret2img.LayoutParameters = param2;
-			gridLayout.AddView(ret2img);
-
-			gridLayout.AddView(new TextView (activity)
-				{
-					Text = "Biret",
-					TextSize = 30
-				});
-
-			ImageView biretimg = new ImageView(activity);
-			biretimg.SetImageResource(Resource.Drawable.Icon);
-			GridLayout.LayoutParams parambi =new GridLayout.LayoutParams();
-			parambi.Height = WindowManagerLayoutParams.WrapContent;
-			parambi.Width = WindowManagerLayoutParams.WrapContent;
-			parambi.RightMargin = 5;
-			parambi.TopMargin = 5;
-			parambi.SetGravity (GravityFlags.Left);
-			biretimg.LayoutParameters = parambi;
-			gridLayout.AddView(biretimg);
-
-
-
-
-			return gridLayout ;
-		}*/
-
-		private LinearLayout LinearBuilder(TableRow row, string title, string imgURI, string desc)
+		private LinearLayout LinearBuilder(TableLayout table, TableRow row, string title, string imgURI, string description)
 		{
 			LinearLayout linearLayout = new LinearLayout (activity);
 			linearLayout.Orientation = Orientation.Vertical;
 			//linearLayout.SetPadding (0, 10, 0, 10);
 
-			linearLayout.AddView(new TextView (activity)
-				{
-					Text = title,
-					TextSize = textSizeLarge
-				});
-			
-			ImageView retimg = new ImageView (activity);
-			//retimg.SetImageResource (Resource.Drawable.Untitled);
-			retimg.SetImageURI (Android.Net.Uri.Parse (imgURI));
-			linearLayout.AddView (retimg);
+			TextView titleView = new TextView (activity);
+			ImageView imageView = new ImageView (activity);
+			TextView descriptionView = new TextView (activity);
 
-			linearLayout.AddView(new TextView (activity)
-				{
-					Text = desc,
-					TextSize = textSizeMed
-				});
+			titleView.Text = title;
+			titleView.TextSize = textSizeLarge;
 
-			linearLayout.Click += delegate {
-				CloseRow(row);
-			};
+			imageView.SetImageURI (Android.Net.Uri.Parse(imgURI));
+
+			descriptionView.Text = description;
+			descriptionView.TextSize = textSizeMed;
+
+			linearLayout.AddView (titleView);
+			linearLayout.AddView (imageView);
+			linearLayout.AddView (descriptionView);
+
+			/*
+			 * Does not need a on click atm.
+			 * linearLayout.Click += delegate {
+				CloseRow(table, row);
+			};*/
 
 			return linearLayout;
 		}
@@ -233,7 +153,7 @@ namespace Ordersystem.Droid
 			linearLayout.AddView(new TextView (activity)
 				{
 					Text = "Ingen mad denne dag",
-					TextSize = 30
+					TextSize = textSizeLarge
 				});
 
 			ImageView retimg = new ImageView (activity);
