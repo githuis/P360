@@ -35,7 +35,7 @@ namespace Ordersystem.Droid
 
 			//Initialize managers
 			cm = new CommunicationManager();
-			lh = new LayoutHandler();
+			lh = new LayoutHandler(this);
 
 			//
 			rows = new List<TableRow>();
@@ -67,10 +67,7 @@ namespace Ordersystem.Droid
 			
 		public void CreateMainWindow()
 		{
-			//TableLayout Table1 = FindViewById<TableLayout> (Resource.Id.table);
-
 			AddRowsToList ((TableLayout)FindViewById (Resource.Id.tableLayout1));
-			AddListnersToList(rows);
 			InitializeRows ();
 		}
 
@@ -87,16 +84,6 @@ namespace Ordersystem.Droid
 			}
 		}
 
-		private void AddListnersToList(List<TableRow> rows)
-		{
-			foreach (var row in rows) 
-			{
-				row.Click += (object sender, EventArgs e) => {
-					lh.ResizeTableRow(rows, (TableRow) sender, this);
-				};
-			}
-		}
-
 		private void InitializeRows()
 		{
 			foreach (var row in rows)
@@ -104,6 +91,10 @@ namespace Ordersystem.Droid
 				TextView v = (TextView) row.GetChildAt(0);
 				v.SetTextSize (Android.Util.ComplexUnitType.Px, 36);
 				row.SetBackgroundColor(Color.ParseColor("#F9F9F9"));
+
+				row.Click += (object sender, EventArgs e) => {
+					lh.ResizeTableRow(rows, (TableRow) sender);
+				};
 			}
 		}
 	}

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Ordersystem.Model;
+
 using Android.App;
 using Android.Content;
 using Android.Runtime;
@@ -14,14 +16,19 @@ namespace Ordersystem.Droid
 	{
 		private int minRowHeight = 40;
 		private int maxRowHeight = 180;
+		private Activity activity;
 
-		public LayoutHandler ()
+		public LayoutHandler (Activity activity)
 		{
+			this.activity = activity;
+		}
 
-
+		public void CreateDayMenuDisplay(DayMenu dayMenu)
+		{
+			
 		}
 			
-		public void ResizeTableRow(List<TableRow> rows, TableRow rowToChange, Activity activity)
+		public void ResizeTableRow(List<TableRow> rows, TableRow rowToChange)
 		{
 			foreach (TableRow row in rows) {
 				CloseRow (row);
@@ -29,10 +36,10 @@ namespace Ordersystem.Droid
 			if (isOpen (rowToChange))
 				CloseRow (rowToChange);
 			else
-				OpenRow (rowToChange, activity);
+				OpenRow (rowToChange);
 		}
 
-		private void OpenRow(TableRow row, Activity activity)
+		private void OpenRow(TableRow row)
 		{
 			row.SetMinimumHeight (maxRowHeight);
 
@@ -47,9 +54,9 @@ namespace Ordersystem.Droid
 			}
 
 			//row.AddView (GridMaker(activity, row), 1);
-			row.AddView(LinearBuilder(activity, row), 1);
-			row.AddView(LinearBuilder(activity, row), 2);
-			row.AddView(LinearBuilder(activity, row), 3);
+			row.AddView(LinearBuilder(row), 1);
+			row.AddView(LinearBuilder(row), 2);
+			row.AddView(LinearBuilder(row), 3);
 			row.AddView(LinearNoFood(activity), 4);
 
 		}
@@ -174,7 +181,7 @@ namespace Ordersystem.Droid
 			return gridLayout ;
 		}*/
 
-		private LinearLayout LinearBuilder(Activity activity, TableRow row)
+		private LinearLayout LinearBuilder(TableRow row, string title)
 		{
 			LinearLayout linearLayout = new LinearLayout (activity);
 			linearLayout.Orientation = Orientation.Vertical;
@@ -203,7 +210,7 @@ namespace Ordersystem.Droid
 			return linearLayout;
 		}
 
-		private LinearLayout LinearNoFood(Activity activity)
+		private LinearLayout LinearNoFood()
 		{
 			LinearLayout linearLayout = new LinearLayout (activity);
 			linearLayout.Orientation = Orientation.Vertical;
