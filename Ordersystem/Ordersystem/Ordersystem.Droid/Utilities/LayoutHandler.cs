@@ -17,18 +17,32 @@ namespace Ordersystem.Droid
 		private int minRowHeight = 40;
 		private int maxRowHeight = 180;
 		private Activity activity;
+		private int textSizeLarge = 31;
+		private int textSizeMed = 23;
+		DayMenu testMenu;
 
 		public LayoutHandler (Activity activity)
 		{
 			this.activity = activity;
+			testMenu = new DayMenu (
+				new Dish ("Kartofler m. Sovs", "Kartofler med brun sovs og millionbøf"),
+				new Dish ("Rød grød med fløde", "Rød grød med fløde til."),
+				new Dish ("Jordbær grød m. mælk", "Jordbærgrød"));
 		}
 
-		public void CreateDayMenuDisplay(DayMenu dayMenu)
+		public void CreateDayMenuDisplay(DayMenu dayMenu, TableRow row, TableLayout parent)
 		{
-			
+			TableRow newRow = new TableRow (activity);
+
+			newRow.AddView (LinearBuilder (row, dayMenu.Dish1.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.Dish1.Description), 0);
+			newRow.AddView (LinearBuilder (row, dayMenu.Dish2.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.Dish2.Description), 1);
+			newRow.AddView (LinearBuilder (row, dayMenu.SideDish.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.SideDish.Description), 2);
+			newRow.AddView(LinearNoFood(), 3);
+
+			parent.AddView (newRow, 1 /* Idet af 'row', ikke 1*/);
 		}
 			
-		public void ResizeTableRow(List<TableRow> rows, TableRow rowToChange)
+		public void ResizeTableRow(List<TableRow> rows, TableRow rowToChange, TableLayout parent)
 		{
 			foreach (TableRow row in rows) {
 				CloseRow (row);
@@ -36,10 +50,10 @@ namespace Ordersystem.Droid
 			if (isOpen (rowToChange))
 				CloseRow (rowToChange);
 			else
-				OpenRow (rowToChange);
+				OpenRow (rowToChange, parent);
 		}
 
-		private void OpenRow(TableRow row)
+		private void OpenRow(TableRow row, TableLayout tl)
 		{
 			row.SetMinimumHeight (maxRowHeight);
 
@@ -53,12 +67,7 @@ namespace Ordersystem.Droid
 				}
 			}
 
-			//row.AddView (GridMaker(activity, row), 1);
-			row.AddView(LinearBuilder(row), 1);
-			row.AddView(LinearBuilder(row), 2);
-			row.AddView(LinearBuilder(row), 3);
-			row.AddView(LinearNoFood(activity), 4);
-
+			CreateDayMenuDisplay(testMenu, row, tl);
 		}
 
 		private void CloseRow(TableRow row)
@@ -181,7 +190,7 @@ namespace Ordersystem.Droid
 			return gridLayout ;
 		}*/
 
-		private LinearLayout LinearBuilder(TableRow row, string title)
+		private LinearLayout LinearBuilder(TableRow row, string title, string imgURI, string desc)
 		{
 			LinearLayout linearLayout = new LinearLayout (activity);
 			linearLayout.Orientation = Orientation.Vertical;
@@ -189,18 +198,19 @@ namespace Ordersystem.Droid
 
 			linearLayout.AddView(new TextView (activity)
 				{
-					Text = "Biret",
-					TextSize = 30
+					Text = title,
+					TextSize = textSizeLarge
 				});
 			
 			ImageView retimg = new ImageView (activity);
-			retimg.SetImageResource (Resource.Drawable.Untitled);
+			//retimg.SetImageResource (Resource.Drawable.Untitled);
+			retimg.SetImageURI (Android.Net.Uri.Parse (imgURI));
 			linearLayout.AddView (retimg);
 
 			linearLayout.AddView(new TextView (activity)
 				{
-					Text = "Ret information",
-					TextSize = 22
+					Text = desc,
+					TextSize = textSizeMed
 				});
 
 			linearLayout.Click += delegate {

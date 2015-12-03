@@ -37,6 +37,8 @@ namespace Ordersystem.Droid
 			cm = new CommunicationManager();
 			lh = new LayoutHandler(this);
 
+
+
 			//
 			rows = new List<TableRow>();
 
@@ -93,7 +95,7 @@ namespace Ordersystem.Droid
 				row.SetBackgroundColor(Color.ParseColor("#F9F9F9"));
 
 				row.Click += (object sender, EventArgs e) => {
-					lh.ResizeTableRow(rows, (TableRow) sender);
+					lh.ResizeTableRow(rows, (TableRow) sender, (TableLayout)FindViewById (Resource.Id.tableLayout1));
 				};
 			}
 		}
