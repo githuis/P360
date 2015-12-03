@@ -33,13 +33,13 @@ namespace Ordersystem.Droid
 		public void CreateDayMenuDisplay(DayMenu dayMenu, TableRow row, TableLayout parent)
 		{
 			TableRow newRow = new TableRow (activity);
-
 			newRow.AddView (LinearBuilder (row, dayMenu.Dish1.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.Dish1.Description), 0);
 			newRow.AddView (LinearBuilder (row, dayMenu.Dish2.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.Dish2.Description), 1);
 			newRow.AddView (LinearBuilder (row, dayMenu.SideDish.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.SideDish.Description), 2);
 			newRow.AddView(LinearNoFood(), 3);
 
 			parent.AddView (newRow, 1 /* Idet af 'row', ikke 1*/);
+			newRow.SetBackgroundColor(Android.Graphics.Color.ParseColor("#F9F9F9"));
 		}
 			
 		public void ResizeTableRow(List<TableRow> rows, TableRow rowToChange, TableLayout parent)
@@ -47,7 +47,7 @@ namespace Ordersystem.Droid
 			foreach (TableRow row in rows) {
 				CloseRow (row);
 			}
-			if (isOpen (rowToChange))
+			if (IsOpen (rowToChange))
 				CloseRow (rowToChange);
 			else
 				OpenRow (rowToChange, parent);
@@ -91,7 +91,7 @@ namespace Ordersystem.Droid
 			}
 		}
 
-		private bool isOpen(TableRow row)
+		private bool IsOpen(TableRow row)
 		{
 				return row.Height == maxRowHeight;
 		}
