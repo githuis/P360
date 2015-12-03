@@ -96,7 +96,7 @@ namespace Ordersystem.Droid
 			return view;
 		}*/
 
-		private GridLayout GridMaker(Activity activity, TableRow row)
+	/*	private GridLayout GridMaker(Activity activity, TableRow row)
 		{			
 			GridLayout gridLayout = new GridLayout(activity);
 
@@ -172,13 +172,13 @@ namespace Ordersystem.Droid
 
 
 			return gridLayout ;
-		}
+		}*/
 
 		private LinearLayout LinearBuilder(Activity activity, TableRow row)
 		{
 			LinearLayout linearLayout = new LinearLayout (activity);
 			linearLayout.Orientation = Orientation.Vertical;
-			linearLayout.SetPadding (0, 10, 20, 10);
+			//linearLayout.SetPadding (0, 10, 0, 10);
 
 			linearLayout.AddView(new TextView (activity)
 				{
@@ -208,6 +208,10 @@ namespace Ordersystem.Droid
 			LinearLayout linearLayout = new LinearLayout (activity);
 			linearLayout.Orientation = Orientation.Vertical;
 			linearLayout.SetPadding(0, 10, 10, 10);
+			linearLayout.LayoutParameters = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.WrapContent,
+				LinearLayout.LayoutParams.WrapContent);
+
 
 			linearLayout.AddView(new TextView (activity)
 				{

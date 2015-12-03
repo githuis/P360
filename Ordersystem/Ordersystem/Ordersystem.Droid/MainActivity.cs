@@ -82,7 +82,6 @@ namespace Ordersystem.Droid
 				if (view is TableRow) 
 				{
 					TableRow row = (TableRow)view;
-					row.SetBackgroundColor(Color.ParseColor("#F9F9F9"));
 					rows.Add (row);
 				}
 			}
@@ -104,6 +103,7 @@ namespace Ordersystem.Droid
 			{
 				TextView v = (TextView) row.GetChildAt(0);
 				v.SetTextSize (Android.Util.ComplexUnitType.Px, 36);
+				row.SetBackgroundColor(Color.ParseColor("#F9F9F9"));
 			}
 		}
 	}

@@ -88,7 +88,7 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\Untitled.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <Import Project="..\..\packages\SQLitePCL.raw_basic.0.8.3\build\MonoAndroid\SQLitePCL.raw_basic.targets" Condition="Exists('..\..\packages\SQLitePCL.raw_basic.0.8.3\build\MonoAndroid\SQLitePCL.raw_basic.targets')" />
+  <Import Project="..\..\packages\SQLitePCL.raw_basic.0.8.4\build\MonoAndroid\SQLitePCL.raw_basic.targets" Condition="Exists('..\..\packages\SQLitePCL.raw_basic.0.8.4\build\MonoAndroid\SQLitePCL.raw_basic.targets')" />
   <ItemGroup>
     <ProjectReference Include="..\Ordersystem\Ordersystem.csproj">
       <Project>{A1BCC633-10E4-4FD4-B1F2-4CCDE660B304}</Project>
