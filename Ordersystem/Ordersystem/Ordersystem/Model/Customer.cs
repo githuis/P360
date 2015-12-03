@@ -1,4 +1,5 @@
-﻿using Ordersystem.Enums;
+﻿using System;
+using Ordersystem.Enums;
 
 namespace Ordersystem.Model
 {
@@ -12,6 +13,16 @@ namespace Ordersystem.Model
         /// <param name="diet">The diet, the customer is getting.</param>
         public Customer(string personNumber, string name, Diet diet)
         {
+            if (String.IsNullOrWhiteSpace(personNumber))
+            {
+                throw new ArgumentNullException("personNumber", "No Social Security Number found.");
+            }
+
+            if (String.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentNullException("name", "No name found.");
+            }
+
             PersonNumber = personNumber;
             Name = name;
             Order = new Order();
