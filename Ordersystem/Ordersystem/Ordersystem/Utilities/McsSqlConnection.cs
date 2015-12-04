@@ -1,24 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data;
+using System.Data.SqlClient;
 
 namespace Ordersystem.Utilities
 {
     public class McsSqlConnection
     {
-        MySql.Data.MySqlClient.MySqlConnection conn;
-        string myConnectionString = "server=188.166.27.155;uid=root;pwd=dankmeme;database=Mcs;";
+        private SqlConnection _connection;
 
-        /*public McsSqlConnection()
+        public string ReturnCustomersConnection()
         {
-            conn = new MySql.Data.MySqlClient.MySqlConnection();
-            conn.ConnectionString = myConnectionString;
-            conn.Open();
+            using (_connection = new SqlConnection("server=188.166.27.155;uid=root;pwd=dankmeme;database=Mcs;"))
+            {
+                var command = new SqlCommand();
+                SqlDataReader reader;
 
-            // I have no idea, sorry. Den påstår at Open kan kaste en System.Data.Common.DbException, men System.Data findes ikke i den nyeste version af .NET frameworket.
-        }*/
+                command.CommandText = "SELECT * FROM Customers";
+                command.CommandType = CommandType.Text;
+                command.Connection = _connection;
+
+                _connection.Open();
+
+                reader = command.ExecuteReader();
+
+                _connection.Close();
+
+                return "potato";
+            }
+        }
+        
     }
 }
