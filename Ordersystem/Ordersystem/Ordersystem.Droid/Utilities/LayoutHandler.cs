@@ -16,15 +16,20 @@ namespace Ordersystem.Droid
 	public class LayoutHandler
 	{
 		//Numbers describing the looks of the main scren interface
-		private int minRowHeight = 40;
-		private int maxRowHeight = 80;
-		private int textSizeLarge = 31;
-		private int textSizeMed = 23;
+		private int minRowHeight = 100;
+		private int maxRowHeight = 200;
+		private int textSizeLarge = 20;
+		private int textSizeMed = 15;
 
 		//'Globals' for inside LayoutHandler
 		private Activity activity;
 		private DayMenu testMenu;
 		private int infoRowId;
+		private Point displaySize;
+
+		//10px per container per side. 50px for the arrow.
+		private int paddingTotal = 8 * 10;
+		private int arrowSize = 50;
 
 
 		//The Colors to be used throughout the whole UI.
@@ -41,6 +46,7 @@ namespace Ordersystem.Droid
 				new Dish ("Jordbær grød m. mælk", "Jordbærgrød"));
 
 			infoRowId = int.MaxValue;
+
 		}
 
 		public void CreateDayMenuDisplay(DayMenu dayMenu, TableRow row, TableLayout parent)
@@ -49,6 +55,7 @@ namespace Ordersystem.Droid
 
 			TableRow newRow = new TableRow (activity);
 			newRow.AddView (new TextView (activity) { Text = "" }, 0);
+
 			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish1.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.Dish1.Description), 1);
 			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish2.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.Dish2.Description), 2);
 			newRow.AddView (LinearBuilder (parent, row, dayMenu.SideDish.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.SideDish.Description), 3);
@@ -56,7 +63,7 @@ namespace Ordersystem.Droid
 
 
 			newRow.SetBackgroundColor(RowBackgroundColor);
-			newRow.SetMinimumHeight (minRowHeight);
+			newRow.SetMinimumHeight (maxRowHeight);
 			parent.AddView(newRow, childId+1);
 			infoRowId = (childId + 1);
 		}
@@ -83,6 +90,16 @@ namespace Ordersystem.Droid
 			else
 				OpenRow (rowToChange, parent);
 
+		}
+
+		public int GetMinimumHeight()
+		{
+			return minRowHeight;
+		}
+
+		public void SetDisplaySize(Point size)
+		{
+			displaySize = size;
 		}
 
 		private void OpenRow(TableRow row, TableLayout tl)
@@ -134,8 +151,8 @@ namespace Ordersystem.Droid
 		{
 			LinearLayout linearLayout = new LinearLayout (activity);
 			linearLayout.Orientation = Orientation.Vertical;
-
-			//linearLayout.SetPadding (0, 10, 0, 10);
+			linearLayout.SetMinimumWidth ( (displaySize.X / 4) - paddingTotal / 4);
+			linearLayout.SetPadding (10, 10, 10, 10);
 
 			TextView titleView = new TextView (activity);
 			ImageView imageView = new ImageView (activity);
@@ -166,10 +183,10 @@ namespace Ordersystem.Droid
 		{
 			LinearLayout linearLayout = new LinearLayout (activity);
 			linearLayout.Orientation = Orientation.Vertical;
-			linearLayout.SetPadding(0, 10, 10, 10);
-			linearLayout.LayoutParameters = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.WrapContent,
-				LinearLayout.LayoutParams.WrapContent);
+			linearLayout.SetMinimumWidth ( (displaySize.X / 4) - arrowSize - paddingTotal);
+			linearLayout.SetPadding(5, 10, 5, 10);
+
+
 
 
 			linearLayout.AddView(new TextView (activity)
@@ -179,7 +196,7 @@ namespace Ordersystem.Droid
 				});
 
 			ImageView retimg = new ImageView (activity);
-			retimg.SetImageResource (Resource.Drawable.Untitled);
+			retimg.SetImageURI (Android.Net.Uri.Parse("https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png"));
 
 			linearLayout.AddView (retimg);
 

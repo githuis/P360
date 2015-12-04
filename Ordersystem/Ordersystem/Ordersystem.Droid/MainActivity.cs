@@ -40,6 +40,11 @@ namespace Ordersystem.Droid
 			//Initialize list for TableRows.
 			rows = new List<TableRow>();
 
+			//Set screensize
+			Point p = new Point(0,0);
+			WindowManager.DefaultDisplay.GetSize(p);
+			layoutHandler.SetDisplaySize (p);
+
 			//Checks  the users login info
 			LogIn(button,editText,errorMsg);
 		}
@@ -89,8 +94,9 @@ namespace Ordersystem.Droid
 			foreach (var row in rows)
 			{
 				TextView v = (TextView) row.GetChildAt(0);
-				v.SetTextSize (Android.Util.ComplexUnitType.Px, 36);
+				v.SetTextSize (Android.Util.ComplexUnitType.Px, 32);
 				row.SetBackgroundColor(layoutHandler.RowBackgroundColor);
+				row.SetMinimumHeight (layoutHandler.GetMinimumHeight ());
 
 				row.Click += (object sender, EventArgs e) => {
 					layoutHandler.ResizeTableRow(rows, (TableRow) sender, (TableLayout)FindViewById (Resource.Id.tableLayout1));
