@@ -41,6 +41,7 @@
     <Compile Include="Model\Dish.cs" />
     <Compile Include="Utilities\ISQLite.cs" />
     <Compile Include="Utilities\LocalDatabase.cs" />
+    <Compile Include="Utilities\McsSqlConnection.cs" />
     <Compile Include="Utilities\SQLItem.cs" />
     <None Include="app.config" />
     <None Include="Guidelines\CodeGuideline.cs" />
