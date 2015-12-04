@@ -149,6 +149,7 @@ namespace Ordersystem.Droid
 
 		private LinearLayout LinearBuilder(TableLayout table, TableRow row, string title, string imgURI, string description)
 		{
+			bool openDish = false;
 			LinearLayout linearLayout = new LinearLayout (activity);
 			linearLayout.Orientation = Orientation.Vertical;
 			linearLayout.SetMinimumWidth ( (displaySize.X / 4) - paddingTotal / 4);
@@ -169,6 +170,10 @@ namespace Ordersystem.Droid
 			linearLayout.AddView (titleView);
 			linearLayout.AddView (imageView);
 			linearLayout.AddView (descriptionView);
+
+			linearLayout.Click += (object sender, EventArgs e) => {
+				linearLayout.SetBackgroundColor(RowCompletedColor);
+			};
 
 			/*
 			 * Does not need a on click atm.
