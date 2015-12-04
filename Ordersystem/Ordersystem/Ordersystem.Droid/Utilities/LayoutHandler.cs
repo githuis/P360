@@ -17,12 +17,14 @@ namespace Ordersystem.Droid
 	{
 		//Numbers describing the looks of the main scren interface
 		private int minRowHeight = 40;
+		private int maxRowHeight = 80;
 		private int textSizeLarge = 31;
 		private int textSizeMed = 23;
 
 		//'Globals' for inside LayoutHandler
 		private Activity activity;
 		private DayMenu testMenu;
+		private int infoRowId;
 
 
 		//The Colors to be used throughout the whole UI.
@@ -37,6 +39,8 @@ namespace Ordersystem.Droid
 				new Dish ("Kartofler m. Sovs", "Kartofler med brun sovs og millionbøf"),
 				new Dish ("Rød grød med fløde", "Rød grød med fløde til."),
 				new Dish ("Jordbær grød m. mælk", "Jordbærgrød"));
+
+			infoRowId = int.MaxValue;
 		}
 
 		public void CreateDayMenuDisplay(DayMenu dayMenu, TableRow row, TableLayout parent)
@@ -44,45 +48,62 @@ namespace Ordersystem.Droid
 			int childId = parent.IndexOfChild (row);
 
 			TableRow newRow = new TableRow (activity);
-			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish1.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.Dish1.Description), 0);
-			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish2.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.Dish2.Description), 1);
-			newRow.AddView (LinearBuilder (parent, row, dayMenu.SideDish.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.SideDish.Description), 2);
-			newRow.AddView(LinearNoFood(), 3);
+			newRow.AddView (new TextView (activity) { Text = "" }, 0);
+			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish1.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.Dish1.Description), 1);
+			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish2.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.Dish2.Description), 2);
+			newRow.AddView (LinearBuilder (parent, row, dayMenu.SideDish.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.SideDish.Description), 3);
+			newRow.AddView(LinearNoFood(), 4);
 
 
 			newRow.SetBackgroundColor(RowBackgroundColor);
 			newRow.SetMinimumHeight (minRowHeight);
-			parent.AddView(newRow, childId);
+			parent.AddView(newRow, childId+1);
+			infoRowId = (childId + 1);
 		}
 			
 		public void ResizeTableRow(List<TableRow> rows, TableRow rowToChange, TableLayout parent)
 		{
-			foreach (TableRow row in rows) {
+			bool open;
+			open = IsOpen (rowToChange);
+			Console.WriteLine (open.ToString ());
+			try 
+			{
+				parent.RemoveViewAt (infoRowId);	
+			} 
+			catch (Exception e) 
+			{
+				
+			}
+			foreach (TableRow row in rows)
+			{
 				CloseRow (parent, row);
 			}
-			if (IsOpen (rowToChange))
+			if (open)
 				CloseRow (parent, rowToChange);
 			else
 				OpenRow (rowToChange, parent);
+			
 		}
 
 		private void OpenRow(TableRow row, TableLayout tl)
 		{
-			//row.SetMinimumHeight (maxRowHeight);
-
-
+			row.SetMinimumHeight (maxRowHeight);
 			ChangeArrowTo(row, Resource.Drawable.ExpandArrow);
-
 			CreateDayMenuDisplay(testMenu, row, tl);
 		}
 
 		private void CloseRow(TableLayout table, TableRow row)
 		{
+			row.SetMinimumHeight (minRowHeight);
+
 			//Sub-menu's first child (0) is a linearlayout, others are TextView. If is submenu, remove row.
-			if (row.GetChildAt (0) is LinearLayout)
-				table.RemoveViewAt (table.IndexOfChild (row));
+			var child = row.GetChildAt(0);
+			if (child is LinearLayout)
+				table.RemoveViewAt (table.IndexOfChild(row) +1);
 			else
 				ChangeArrowTo (row, Resource.Drawable.Forward);
+			infoRowId = int.MaxValue;
+
 		}
 
 		/// <summary>
@@ -113,6 +134,7 @@ namespace Ordersystem.Droid
 		{
 			LinearLayout linearLayout = new LinearLayout (activity);
 			linearLayout.Orientation = Orientation.Vertical;
+
 			//linearLayout.SetPadding (0, 10, 0, 10);
 
 			TextView titleView = new TextView (activity);
