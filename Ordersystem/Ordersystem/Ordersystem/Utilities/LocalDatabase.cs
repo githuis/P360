@@ -12,7 +12,7 @@ namespace Ordersystem.Utilities
     /// </summary>
     public class LocalDatabase
     {
-        private readonly SQLiteConnection _database;
+        private SQLiteConnection _database;
 
         /// <summary>
         /// Gets the connection and creates the table.
