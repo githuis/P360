@@ -9,7 +9,7 @@ namespace Ordersystem.Utilities
 {
     public class McsSqlConnection
     {
-        private const string ConnectionString = "server=188.166.27.155;port=22;uid=root;pwd=dankmeme;database=Mcs;";
+		private const string ConnectionString = "server=eu-cdbr-azure-north-d.cloudapp.net;port=3306;user id=ba3af1f8d328b9;pwd=650e758f;database=P360;allowuservariables=True;";
 
         public string ReturnCustomersConnection()
         {
@@ -17,7 +17,7 @@ namespace Ordersystem.Utilities
             {
                 connection.Open();
 
-                string query = "SELECT * FROM Customer";
+                string query = "SELECT * FROM kunder";
 
                 MySqlCommand Command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = Command.ExecuteReader();
