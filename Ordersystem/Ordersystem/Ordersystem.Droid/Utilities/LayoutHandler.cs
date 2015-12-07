@@ -174,7 +174,9 @@ namespace Ordersystem.Droid
 
 			if (!isSideDish) {
 				linearLayout.Click += (object sender, EventArgs e) => {
-					Dish.SelectedDishes [table.IndexOfChild (row)] = dish;
+					int index = table.IndexOfChild(row);
+					index /= 2;
+					Dish.SelectedDishes [index] = dish;
 					SelectDish (((TableRow)table.GetChildAt (table.IndexOfChild (row) + 1)), table, (LinearLayout)sender);
 				};
 			} else 
@@ -207,14 +209,13 @@ namespace Ordersystem.Droid
 
 			ImageView retimg = new ImageView (activity);
 			retimg.SetImageURI (Android.Net.Uri.Parse("https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png"));
-			URL url = new URL("http://image10.bizrate-images.com/resize?sq=60&uid=2216744464");
-			Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-			imageView.setImageBitmap(bmp);
 
 			linearLayout.AddView (retimg);
 
 			linearLayout.Click += (object sender, EventArgs e) => {
-				Dish.SelectedDishes[table.IndexOfChild(row)] = null;
+				int index = table.IndexOfChild(row);
+				index /= 2;
+				Dish.SelectedDishes[index] = null;
 				SelectDish( ((TableRow)table.GetChildAt(table.IndexOfChild(row) + 1)) ,table,(LinearLayout)sender);
 			};
 

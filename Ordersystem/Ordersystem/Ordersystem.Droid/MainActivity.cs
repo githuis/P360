@@ -75,7 +75,7 @@ namespace Ordersystem.Droid
 		{
 			AddRowsToList ((TableLayout)FindViewById (Resource.Id.tableLayout1));
 			InitializeRows ();
-			Dish.SelectedDishes = new Dish[31];
+			Dish.SelectedDishes = new Dish[33];
 			
 		}
 
