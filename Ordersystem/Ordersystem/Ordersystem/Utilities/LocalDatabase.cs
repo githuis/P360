@@ -4,6 +4,8 @@ using Ordersystem.Exceptions;
 using Xamarin.Forms;
 using SQLite;
 using Ordersystem.Model;
+using System.Xml.Serialization;
+using System.Runtime.Serialization;
 
 namespace Ordersystem.Utilities
 {
@@ -13,6 +15,7 @@ namespace Ordersystem.Utilities
     public class LocalDatabase
     {
         private readonly SQLiteConnection _database;
+        private XmlSerializer _sessionSerializer;
 
         /// <summary>
         /// Gets the connection and creates the table.
@@ -20,7 +23,8 @@ namespace Ordersystem.Utilities
         public LocalDatabase(string filename)
         {
             _database = DependencyService.Get<ISQLite>().GetConnection(filename);
-            _database.CreateTable<SQLItem>();
+            _sessionSerializer = new XmlSerializer(typeof(Session));
+            _database.CreateTable<Session>();
         }
 
         /* Predicate methods */
@@ -29,9 +33,9 @@ namespace Ordersystem.Utilities
         /// </summary>
         /// <param name="predicate">The predicate used to fetch the Order.</param>
         /// <returns>The Order if found, else it returns null.</returns>
-        public Order GetOrder(Func<SQLItem, bool> predicate)
+        public Order GetOrder(Func<Session, bool> predicate)
         {
-            return _database.Table<SQLItem>().FirstOrDefault(predicate).Order;
+            return _database.Table<Session>().FirstOrDefault(predicate).Order;
         }
 
         /// <summary>
@@ -39,9 +43,9 @@ namespace Ordersystem.Utilities
         /// </summary>
         /// <param name="predicate">The predicate used to fetch the Orderlsit.</param>
         /// <returns>The Orderlist if found, else returns null.</returns>
-        public Orderlist GetOrderlist(Func<SQLItem, bool> predicate)
+        public Orderlist GetOrderlist(Func<Session, bool> predicate)
         {
-            return _database.Table<SQLItem>().FirstOrDefault(predicate).Orderlist;
+            return _database.Table<Session>().FirstOrDefault(predicate).Orderlist;
         }
 
         /// <summary>
@@ -49,14 +53,14 @@ namespace Ordersystem.Utilities
         /// Throws an ItemNotFoundException if an entry is not found.
         /// </summary>
         /// <param name="predicate">The predicate used to delete the entry.</param>
-        public void DeleteOrder(Func<SQLItem, bool> predicate)
+        public void DeleteOrder(Func<Session, bool> predicate)
         {
-            SQLItem item = _database.Table<SQLItem>().FirstOrDefault(predicate);
+            Session item = _database.Table<Session>().FirstOrDefault(predicate);
             if (item == null)
             {
                 throw new ItemNotFoundException("item", "Saved session not found");
             }
-            _database.Delete<SQLItem>(item.ID);
+            _database.Delete<Session>(item.ID);
         }
 
         /* Regular methods */
@@ -67,7 +71,7 @@ namespace Ordersystem.Utilities
         /// <returns>The Order if found, else returns null.</returns>
         public Order GetOrder(string personNumber)
         {
-            return _database.Table<SQLItem>().FirstOrDefault(x => x.PersonNumber == personNumber).Order;
+            return _database.Table<Session>().FirstOrDefault(x => x.PersonNumber == personNumber).Order;
         }
 
         /// <summary>
@@ -77,7 +81,7 @@ namespace Ordersystem.Utilities
         /// <returns>The Orderlist if found, else returns null.</returns>
         public Orderlist GetOrderlist(string personNumber)
         {
-            return _database.Table<SQLItem>().FirstOrDefault(x => x.PersonNumber == personNumber).Orderlist;
+            return _database.Table<Session>().FirstOrDefault(x => x.PersonNumber == personNumber).Orderlist;
         }
 
         /// <summary>
@@ -87,12 +91,12 @@ namespace Ordersystem.Utilities
         /// <param name="personNumber">The personNumber used to find the entry.</param>
         public void DeleteOrder(string personNumber)
         {
-            SQLItem item = _database.Table<SQLItem>().FirstOrDefault(x => x.PersonNumber == personNumber);
+            Session item = _database.Table<Session>().FirstOrDefault(x => x.PersonNumber == personNumber);
             if (item == null)
             {
                 throw new ItemNotFoundException("item", "Saved session not found");
             }
-            _database.Delete<SQLItem>(item.ID);
+            _database.Delete<Session>(item.ID);
         }
 
         /* Other methods */
@@ -104,7 +108,7 @@ namespace Ordersystem.Utilities
         /// <param name="customer">The Customer, whose personNumber is used as reference in the database.</param>
         public void SaveOrder(Orderlist orderlist, Customer customer)
         {
-            _database.Insert(new SQLItem(customer.PersonNumber, customer.Order, orderlist));
+            _database.Insert(new Session(customer.PersonNumber, customer.Order, orderlist));
         }
 
         /// <summary>
@@ -112,7 +116,7 @@ namespace Ordersystem.Utilities
         /// </summary>
         public void ClearDatabase()
         {
-            _database.DeleteAll<SQLItem>();
+            _database.DeleteAll<Session>();
         }
     }
 }

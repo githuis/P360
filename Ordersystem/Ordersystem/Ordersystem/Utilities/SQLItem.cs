@@ -7,12 +7,12 @@ namespace Ordersystem.Utilities
     /// Concatination of the information in the database.
     /// Includes primary key property.
     /// </summary>
-    public class SQLItem
+    public class Session
     {
         /// <summary>
         /// Empty constructor, needed for SQLite.
         /// </summary>
-        public SQLItem()
+        public Session()
         {
             
         }
@@ -23,7 +23,7 @@ namespace Ordersystem.Utilities
         /// <param name="personNumber">The personNumber of the customer whom the order belongs to.</param>
         /// <param name="order">The Order in the database.</param>
         /// <param name="orderlist">The Orderlist relevant to the database.</param>
-        public SQLItem(string personNumber, Order order, Orderlist orderlist)
+        public Session(string personNumber, Order order, Orderlist orderlist)
         {
             PersonNumber = personNumber;
             Order = order;

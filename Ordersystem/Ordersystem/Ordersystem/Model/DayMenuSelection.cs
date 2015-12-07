@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Ordersystem.Enums;
+using System.Runtime.Serialization;
 
 namespace Ordersystem.Model
 {
+    [DataContract()]
     public class DayMenuSelection
     {
         private bool _sideDish;
