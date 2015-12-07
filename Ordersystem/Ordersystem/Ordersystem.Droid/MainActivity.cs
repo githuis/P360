@@ -8,6 +8,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Ordersystem.Utilities;
 
 namespace Ordersystem.Droid
 {
@@ -34,9 +35,13 @@ namespace Ordersystem.Droid
 
 		public void LogIn(Button button,EditText editText, TextView errorMsg)
 		{
-			button.Click += delegate 
+			button.Click += delegate
 			{
-				if(cm.ValidSocialSecurityNumber(editText.Text))
+			    var connection = new McsSqlConnection();
+
+			    connection.ReturnCustomersConnection();
+
+			    /*if(cm.ValidSocialSecurityNumber(editText.Text))
 				{
 					SetContentView (Resource.Layout.Main_Window);
 					//CreateMainWindow ();
@@ -44,7 +49,7 @@ namespace Ordersystem.Droid
 				else
 				{
 					errorMsg.Visibility = ViewStates.Visible;	
-				}
+				}*/
 			};
 		}
 

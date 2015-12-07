@@ -1,37 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace Ordersystem.Utilities
 {
     public class McsSqlConnection
     {
-        private SqlConnection _connection;
+        private const string ConnectionString = "server=188.166.27.155;port=22;uid=root;pwd=dankmeme;database=Mcs;";
 
         public string ReturnCustomersConnection()
         {
-            using (_connection = new SqlConnection("server=188.166.27.155;uid=root;pwd=dankmeme;database=Mcs;"))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
-                var command = new SqlCommand();
-                SqlDataReader reader;
+                connection.Open();
 
-                command.CommandText = "SELECT * FROM Customers";
-                command.CommandType = CommandType.Text;
-                command.Connection = _connection;
+                string query = "SELECT * FROM Customer";
 
-                _connection.Open();
+                MySqlCommand Command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = Command.ExecuteReader();
+                var result = reader.Read() ? reader.GetString(0) : "not found";
 
-                reader = command.ExecuteReader();
+                connection.Close();
 
-                _connection.Close();
-
-                return "potato";
+                return result;
             }
-        }
-        
+        }  
     }
 }
