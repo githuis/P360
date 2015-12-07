@@ -14,7 +14,7 @@ namespace Ordersystem.Utilities
     /// </summary>
     public class LocalDatabase
     {
-        private readonly SQLiteConnection _database;
+        private SQLiteConnection _database;
         private XmlSerializer _sessionSerializer;
 
         /// <summary>
