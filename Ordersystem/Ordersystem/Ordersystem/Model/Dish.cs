@@ -12,6 +12,8 @@ namespace Ordersystem.Model
 
         public string Name { get; private set; }
         public string Description { get; private set; }
+
+		public static Dish[] SelectedDishes;
         //public Image image { get; set; }
         // TODO: Find ud af hvordan vi inkluderer billedet.
 

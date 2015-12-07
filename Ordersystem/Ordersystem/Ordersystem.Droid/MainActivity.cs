@@ -1,6 +1,7 @@
 ﻿using System;
 using Ordersystem.Functions;
 using System.Collections.Generic;
+using Ordersystem.Model;
 
 using Android.App;
 using Android.Content;
@@ -74,6 +75,8 @@ namespace Ordersystem.Droid
 		{
 			AddRowsToList ((TableLayout)FindViewById (Resource.Id.tableLayout1));
 			InitializeRows ();
+			Dish.SelectedDishes = new Dish[31];
+			
 		}
 
 		private void AddRowsToList(TableLayout table)

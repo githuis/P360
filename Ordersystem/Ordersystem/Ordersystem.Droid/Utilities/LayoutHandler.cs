@@ -56,10 +56,10 @@ namespace Ordersystem.Droid
 			TableRow newRow = new TableRow (activity);
 			newRow.AddView (new TextView (activity) { Text = "" }, 0);
 
-			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish1.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.Dish1.Description), 1);
-			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish2.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.Dish2.Description), 2);
-			newRow.AddView (LinearBuilder (parent, row, dayMenu.SideDish.Name, "https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png", dayMenu.SideDish.Description), 3);
-			newRow.AddView(LinearNoFood(), 4);
+			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish1,false), 1);
+			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish2,false), 2);
+			newRow.AddView (LinearBuilder (parent, row, dayMenu.SideDish,true), 3);
+			newRow.AddView(LinearNoFood(parent,row), 4);
 
 
 			newRow.SetBackgroundColor(RowBackgroundColor);
@@ -147,44 +147,49 @@ namespace Ordersystem.Droid
 		}
 
 
-		private LinearLayout LinearBuilder(TableLayout table, TableRow row, string title, string imgURI, string description)
+		private LinearLayout LinearBuilder (TableLayout table, TableRow row, Dish dish,bool isSideDish)
 		{
-			bool openDish = false;
 			LinearLayout linearLayout = new LinearLayout (activity);
 			linearLayout.Orientation = Orientation.Vertical;
 			linearLayout.SetMinimumWidth ( (displaySize.X / 4) - paddingTotal / 4);
 			linearLayout.SetPadding (10, 10, 10, 10);
+			linearLayout.SetBackgroundColor (RowBackgroundColor);
 
 			TextView titleView = new TextView (activity);
 			ImageView imageView = new ImageView (activity);
 			TextView descriptionView = new TextView (activity);
 
-			titleView.Text = title;
+			titleView.Text = dish.Name;
 			titleView.TextSize = textSizeLarge;
 
-			imageView.SetImageURI (Android.Net.Uri.Parse(imgURI));
+			imageView.SetImageURI (Android.Net.Uri.Parse("http://www.kesanacats.dk/wp-content/uploads/killroy-lille-billed-fra-sølvkatten.png"));
 
-			descriptionView.Text = description;
+			descriptionView.Text = dish.Description;
 			descriptionView.TextSize = textSizeMed;
 
 			linearLayout.AddView (titleView);
 			linearLayout.AddView (imageView);
 			linearLayout.AddView (descriptionView);
 
-			linearLayout.Click += (object sender, EventArgs e) => {
-				linearLayout.SetBackgroundColor(RowCompletedColor);
-			};
 
-			/*
-			 * Does not need a on click atm.
-			 * linearLayout.Click += delegate {
-				CloseRow(table, row);
-			};*/
+			if (!isSideDish) {
+				linearLayout.Click += (object sender, EventArgs e) => {
+					Dish.SelectedDishes [table.IndexOfChild (row)] = dish;
+					SelectDish (((TableRow)table.GetChildAt (table.IndexOfChild (row) + 1)), table, (LinearLayout)sender);
+				};
+			} else 
+			{
+				linearLayout.Click += (object sender, EventArgs e) => {
+					SelectSideDish(((TableRow)table.GetChildAt (table.IndexOfChild (row) + 1)), table, (LinearLayout)sender);
+				};
+			}
+
+
 
 			return linearLayout;
 		}
 
-		private LinearLayout LinearNoFood()
+		private LinearLayout LinearNoFood(TableLayout table, TableRow row)
 		{
 			LinearLayout linearLayout = new LinearLayout (activity);
 			linearLayout.Orientation = Orientation.Vertical;
@@ -202,10 +207,41 @@ namespace Ordersystem.Droid
 
 			ImageView retimg = new ImageView (activity);
 			retimg.SetImageURI (Android.Net.Uri.Parse("https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png"));
+			URL url = new URL("http://image10.bizrate-images.com/resize?sq=60&uid=2216744464");
+			Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+			imageView.setImageBitmap(bmp);
 
 			linearLayout.AddView (retimg);
 
+			linearLayout.Click += (object sender, EventArgs e) => {
+				Dish.SelectedDishes[table.IndexOfChild(row)] = null;
+				SelectDish( ((TableRow)table.GetChildAt(table.IndexOfChild(row) + 1)) ,table,(LinearLayout)sender);
+			};
+
 			return linearLayout;
+		}
+
+		public void SelectDish(TableRow row, TableLayout table, LinearLayout layout)
+		{
+			row.GetChildAt (1).SetBackgroundColor (RowBackgroundColor);
+			row.GetChildAt (2).SetBackgroundColor (RowBackgroundColor);
+			row.GetChildAt (4).SetBackgroundColor (RowBackgroundColor);
+
+			layout.SetBackgroundColor (RowCompletedColor);
+		}
+
+		public void SelectSideDish(TableRow row, TableLayout table, LinearLayout layout)
+		{
+			var background = layout.Background;
+			if (background is Android.Graphics.Drawables.ColorDrawable)
+			{
+				if ((background as Android.Graphics.Drawables.ColorDrawable).Color == RowBackgroundColor) {
+					layout.SetBackgroundColor (RowCompletedColor);
+				} else 
+				{
+					layout.SetBackgroundColor (RowBackgroundColor);
+				}
+			}
 		}
 
 	}
