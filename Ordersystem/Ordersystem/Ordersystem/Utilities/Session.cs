@@ -38,11 +38,13 @@ namespace Ordersystem.Utilities
         /// <summary>
         /// The Order in the database.
         /// </summary>
+        [Ignore]
         public Order Order { get; private set; }
 
         /// <summary>
         /// The Orderlist relevant to the database.
         /// </summary>
+        [Ignore]
         public Orderlist Orderlist { get; private set; }
 
         /// <summary>

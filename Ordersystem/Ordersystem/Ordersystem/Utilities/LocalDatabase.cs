@@ -4,8 +4,6 @@ using Ordersystem.Exceptions;
 using Xamarin.Forms;
 using SQLite;
 using Ordersystem.Model;
-using System.Xml.Serialization;
-using System.Runtime.Serialization;
 
 namespace Ordersystem.Utilities
 {
@@ -15,7 +13,6 @@ namespace Ordersystem.Utilities
     public class LocalDatabase
     {
         private SQLiteConnection _database;
-        private XmlSerializer _sessionSerializer;
 
         /// <summary>
         /// Gets the connection and creates the table.
@@ -23,7 +20,6 @@ namespace Ordersystem.Utilities
         public LocalDatabase(string filename)
         {
             _database = DependencyService.Get<ISQLite>().GetConnection(filename);
-            _sessionSerializer = new XmlSerializer(typeof(Session));
             _database.CreateTable<Session>();
         }
 
@@ -53,14 +49,14 @@ namespace Ordersystem.Utilities
         /// Throws an ItemNotFoundException if an entry is not found.
         /// </summary>
         /// <param name="predicate">The predicate used to delete the entry.</param>
-        public void DeleteOrder(Func<Session, bool> predicate)
+        public void DeleteSession(Func<Session, bool> predicate)
         {
-            Session item = _database.Table<Session>().FirstOrDefault(predicate);
-            if (item == null)
+            Session session = _database.Table<Session>().FirstOrDefault(predicate);
+            if (session == null)
             {
                 throw new ItemNotFoundException("item", "Saved session not found");
             }
-            _database.Delete<Session>(item.ID);
+            _database.Delete<Session>(session.ID);
         }
 
         /* Regular methods */
@@ -85,28 +81,27 @@ namespace Ordersystem.Utilities
         }
 
         /// <summary>
-        /// Deletes the first entry in the database matching the personNumber.
+        /// Deletes the first session in the database matching the personNumber.
         /// Throws an ItemNotFoundException if an entry is not found.
         /// </summary>
         /// <param name="personNumber">The personNumber used to find the entry.</param>
-        public void DeleteOrder(string personNumber)
+        public void DeleteSession(string personNumber)
         {
-            Session item = _database.Table<Session>().FirstOrDefault(x => x.PersonNumber == personNumber);
-            if (item == null)
+            Session session = _database.Table<Session>().FirstOrDefault(x => x.PersonNumber == personNumber);
+            if (session == null)
             {
                 throw new ItemNotFoundException("item", "Saved session not found");
             }
-            _database.Delete<Session>(item.ID);
+            _database.Delete<Session>(session.ID);
         }
 
         /* Other methods */
         /// <summary>
-        /// Saves an order and relevant information to the database.
+        /// Saves a session and relevant information to the database.
         /// </summary>
-        /// <param name="order">The Order to be saved in the database.</param>
         /// <param name="orderlist">The Orderlist related to the Order.</param>
         /// <param name="customer">The Customer, whose personNumber is used as reference in the database.</param>
-        public void SaveOrder(Orderlist orderlist, Customer customer)
+        public void SaveSession(Orderlist orderlist, Customer customer)
         {
             _database.Insert(new Session(customer.PersonNumber, customer.Order, orderlist));
         }

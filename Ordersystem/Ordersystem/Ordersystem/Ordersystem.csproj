@@ -41,7 +41,7 @@
     <Compile Include="Model\Dish.cs" />
     <Compile Include="Utilities\ISQLite.cs" />
     <Compile Include="Utilities\LocalDatabase.cs" />
-    <Compile Include="Utilities\SQLItem.cs" />
+    <Compile Include="Utilities\Session.cs" />
     <None Include="Guidelines\CodeGuideline.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Orderlist.cs" />
