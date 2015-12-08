@@ -73,8 +73,10 @@ namespace Ordersystem.Droid
 			
 		public void CreateMainWindow()
 		{
+			
 			AddRowsToList ((TableLayout)FindViewById (Resource.Id.tableLayout1));
 			InitializeRows ();
+			InitializeTutorial ();
 			Dish.SelectedDishes = new Dish[33];
 			
 		}
@@ -105,6 +107,20 @@ namespace Ordersystem.Droid
 					layoutHandler.ResizeTableRow(rows, (TableRow) sender, (TableLayout)FindViewById (Resource.Id.tableLayout1));
 				};
 			}
+		}
+
+		private void InitializeTutorial()
+		{
+			FindViewById (Resource.Id.tutorialPane).SetBackgroundColor (layoutHandler.TutorialColor);
+			(FindViewById (Resource.Id.tutorialTitle) as TextView).SetTextColor (layoutHandler.TutorialText);
+			(FindViewById (Resource.Id.tutorialText) as TextView).SetTextColor (layoutHandler.TutorialText);
+			ImageView btn = (ImageView) FindViewById (Resource.Id.tutorialExit);
+			btn.SetImageResource(Resource.Drawable.Delete);
+			btn.Click += (object sender, EventArgs e) => {
+				TableLayout tl = (TableLayout) FindViewById(Resource.Id.tableLayout1);
+				tl.RemoveView(FindViewById(Resource.Id.tutorialPane));
+			};
+
 		}
 	}
 }

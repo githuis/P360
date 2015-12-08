@@ -34,19 +34,21 @@ namespace Ordersystem.Droid
 
 		//The Colors to be used throughout the whole UI.
 		public Color RowBackgroundColor = Color.ParseColor("#F9F9F9");
-		public Color RowCompletedColor = Color.ParseColor("#00FF00"); // Skal vælges rigtigt
+		public Color RowCompletedColor = Color.ParseColor("#75EA94");
 		public Color HeaderColor = Color.ParseColor("#00FFFF"); // Skal vælges rigtigt
+		public Color TutorialColor = Color.ParseColor("#F2F3EB");
+		public Color TutorialText = Color.ParseColor("#212121");
 
 		public LayoutHandler (Activity activity)
 		{
 			this.activity = activity;
+
 			testMenu = new DayMenu (
 				new Dish ("Kartofler m. Sovs", "Kartofler med brun sovs og millionbøf"),
 				new Dish ("Rød grød med fløde", "Rød grød med fløde til."),
 				new Dish ("Jordbær grød m. mælk", "Jordbærgrød"));
 
 			infoRowId = int.MaxValue;
-
 		}
 
 		public void CreateDayMenuDisplay(DayMenu dayMenu, TableRow row, TableLayout parent)
@@ -79,8 +81,9 @@ namespace Ordersystem.Droid
 			} 
 			catch (Exception e) 
 			{
-
+				Console.WriteLine (e.Message);
 			}
+
 			foreach (TableRow row in rows)
 			{
 				CloseRow (parent, row);
@@ -151,7 +154,7 @@ namespace Ordersystem.Droid
 		{
 			LinearLayout linearLayout = new LinearLayout (activity);
 			linearLayout.Orientation = Orientation.Vertical;
-			linearLayout.SetMinimumWidth ( (displaySize.X / 4) - paddingTotal / 4);
+			linearLayout.SetMinimumWidth ( (displaySize.X / 4) - (paddingTotal / 2));
 			linearLayout.SetPadding (10, 10, 10, 10);
 			linearLayout.SetBackgroundColor (RowBackgroundColor);
 

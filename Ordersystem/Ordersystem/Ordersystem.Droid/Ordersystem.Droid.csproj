@@ -86,6 +86,11 @@
     <AndroidResource Include="Resources\drawable-xhdpi\Untitled.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\Untitled.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\Untitled.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Delete.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\Delete.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Delete.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\Delete.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\Delete.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\SQLitePCL.raw_basic.0.8.4\build\MonoAndroid\SQLitePCL.raw_basic.targets" Condition="Exists('..\..\packages\SQLitePCL.raw_basic.0.8.4\build\MonoAndroid\SQLitePCL.raw_basic.targets')" />
