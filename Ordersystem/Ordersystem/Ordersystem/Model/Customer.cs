@@ -24,19 +24,19 @@ namespace Ordersystem.Model
 
 		}
 			
-		private Diet ParseDietFromString(string diet)
+		static private Diet ParseDietFromString(string diet)
 		{
 			switch(diet)
 			{
-			case "Full":
+			case "v-full":
 				return Diet.Full;
-			case "LowFat":
+			case "v-lowFat":
 				return Diet.LowFat;
-			case "EnergyDense":
+			case "v-energyDense":
 				return Diet.EnergyDense;
-			case "SoftFoodsWPotatoes":
+			case "v-softFoodsWPotatoes":
 				return Diet.SoftFoodsWPotatoes;
-			case "SoftFoodsWMash":
+			case "v-softFoodsWMash":
 				return Diet.SoftFoodsWMash;
 			default:
 				throw new ArgumentException ("Invalid diet type");

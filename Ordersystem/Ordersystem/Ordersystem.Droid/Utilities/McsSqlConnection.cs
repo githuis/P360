@@ -18,7 +18,7 @@ namespace Ordersystem.Utilities
             {
                 connection.Open();
 
-				string query = "SELECT TOP 1 * FROM customers WHERE PersonNumber = " + personNumber;
+				string query = "SELECT * FROM customers WHERE customers.PersonNumber = " + personNumber;
 
                 MySqlCommand Command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = Command.ExecuteReader();
@@ -31,7 +31,7 @@ namespace Ordersystem.Utilities
 
 					if(!reader.IsDBNull(reader.GetOrdinal("Name")) && !reader.IsDBNull(reader.GetOrdinal("Diet")))
 					{
-						customer = new Customer (reader.GetString(reader.GetOrdinal("PersonNumber")), 
+						customer = new Customer (reader.GetInt32(reader.GetOrdinal("PersonNumber")).ToString("D10"), 
 												 reader.GetString(reader.GetOrdinal("Name")), 
 												 reader.GetString(reader.GetOrdinal("Diet")));
 					}
@@ -57,24 +57,22 @@ namespace Ordersystem.Utilities
 			{
 				connection.Open();
 
-				string query = "SELECT * FROM ordelists_daymenus oldm " +
-				               "JOIN ordelists ol ON ol.OrderlistKey=oldm.orderlistKey " +
-				               "JOIN daymenus dm " +
-				               "(JOIN dishes d1 ON dm.Dish1=d1.DishKey" +
-				               " JOIN dishes d2 ON dm.Dish2=d2.DishKey" +
-				               " JOIN dishes sd ON dm.SideDish=sd.DishKey) " +
-				               "ON dm.DayMenuKey=oldm.daymenuKey " +
-				               "WHERE orderlistsDiet = " + diet;
+				string query = "SELECT * FROM orderlists_daymenus oldm " +
+				               "JOIN orderlists ol ON ol.OrderlistKey=oldm.orderlistKey " +
+				               "JOIN daymenus dm ON dm.DayMenuKey=oldm.DayMenuKey " +
+				               "JOIN dishes d1 ON d1.DishKey=dm.Dish1 " +
+				               "JOIN dishes d2 ON d2.DishKey=dm.Dish2 " +
+				               "JOIN dishes sd ON sd.DishKey=dm.SideDish " +
+				               "WHERE ol.Diet = '" + diet + "'";
 
 				MySqlCommand Command = new MySqlCommand(query, connection);
 				MySqlDataReader reader = Command.ExecuteReader();
 
-				Orderlist Orderlist;
+				Orderlist orderlist;
 				DateTime StartDate, EndDate;
 				string Diet;
 				int count;
 				List<DayMenu> DayMenus = new List<DayMenu>();
-				List<int> DayMenuKeys;
 
 				if (reader.HasRows)
 				{
@@ -95,19 +93,58 @@ namespace Ordersystem.Utilities
 						throw new NullReferenceException ("Database contains null values.");
 					}
 
-					DayMenuKeys = GetDayMenuKeys (reader, count);
+					DayMenus.Add (ReadDayMenu (reader));
+					for (int i = 2; i <= count; i++)
+					{
+						reader.Read ();
+						DayMenus.Add (ReadDayMenu (reader));
+					}
+
 				}
 				else
 				{
 					throw new ArgumentException ("No Ordelist for the given Diet found.");
 				}
 
-				DayMenus = GetDayMenusFromKeys (DayMenuKeys);
-
 				connection.Close();
-
-				return customer;
+				orderlist = new Orderlist (DayMenus, StartDate, EndDate, Diet);
+				return orderlist;
 			}
+		}
+
+		private DayMenu ReadDayMenu(MySqlDataReader reader)
+		{
+			List<int> KeyOrdinals = new List<int>();
+			KeyOrdinals.Add (reader.GetOrdinal ("SideDish") + 1);
+			KeyOrdinals.Add (reader.GetOrdinal ("SideDish") + 5);
+			KeyOrdinals.Add (reader.GetOrdinal ("SideDish") + 9);
+
+			List<Dish> Dishes = new List<Dish>();
+			foreach (int ordinal in KeyOrdinals)
+			{
+				if (!reader.IsDBNull (ordinal + 1) && !reader.IsDBNull (ordinal + 2))
+				{
+					Dishes.Add (new Dish (reader.GetString (ordinal + 1),
+						reader.GetString (ordinal + 2),
+						reader.IsDBNull (ordinal + 3) ? "" : reader.GetString (ordinal + 3)));
+				}
+				else
+				{
+					throw new NullReferenceException ("Database contains illegal null values.");
+				}
+			}
+
+			DateTime Date;
+			if (!reader.IsDBNull (reader.GetOrdinal ("Date")))
+			{
+				Date = reader.GetDateTime (reader.GetOrdinal ("Date"));
+			}
+			else
+			{
+				throw new NullReferenceException ("Database contains illegal null values.");
+			}
+
+			return new DayMenu (Dishes [0], Dishes [1], Dishes [2], Date);
 		}
     }
 }
