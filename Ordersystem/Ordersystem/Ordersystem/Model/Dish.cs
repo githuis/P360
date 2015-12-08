@@ -1,5 +1,4 @@
 ﻿using System;
-using Xamarin.Forms;
 
 namespace Ordersystem.Model
 {
@@ -23,14 +22,14 @@ namespace Ordersystem.Model
                 throw new ArgumentNullException("description", "No description found.");
             }
 
-            if (String.IsNullOrWhiteSpace(imageSource))
+            if (imageSource == null)
             {
                 throw new ArgumentNullException("imageSource", "No image source found.");
             }
 
             Name = name;
             Description = description;
-            Image = new Image { Source = imageSource };
+            ImageSource = imageSource;
         }
 
         /// <summary>
@@ -46,6 +45,6 @@ namespace Ordersystem.Model
         /// <summary>
         /// An image of the dish.
         /// </summary>
-        public Image Image { get; private set; }
+        public string ImageSource { get; private set; }
     }
 }
