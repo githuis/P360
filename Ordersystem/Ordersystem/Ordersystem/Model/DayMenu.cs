@@ -5,6 +5,14 @@ namespace Ordersystem.Model
     public class DayMenu
     {
         /// <summary>
+        /// Default constructor for serialization.
+        /// </summary>
+        public DayMenu()
+        {
+
+        }
+
+        /// <summary>
         /// The menu of a single day on an orderlist.
         /// </summary>
         /// <param name="dish1">The primary dish.</param>

@@ -1,13 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using Ordersystem.Enums;
-using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 namespace Ordersystem.Model
 {
     public class DayMenuSelection
     {
         private bool _sideDish;
+
+        /// <summary>
+        /// Default constructor for serialization.
+        /// </summary>
+        public DayMenuSelection()
+        {
+
+        }
 
         /// <summary>
         /// The selection from a DayMenu to be added to an order.
@@ -25,6 +33,7 @@ namespace Ordersystem.Model
         /// <summary>
         /// The DayMenu this is a selection from.
         /// </summary>
+        [XmlIgnore]
         public DayMenu DayMenu {get; private set;}
 
         /// <summary>

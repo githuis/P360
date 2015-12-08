@@ -16,8 +16,6 @@ namespace Ordersystem.Utilities
         }
 
         private XmlSerializer _serializer;
-        private StringWriter _writer;
-        private StringReader _reader;
 
         public string Serialize(T client)
         {
