@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 
 namespace Ordersystem.Model
 {
-    [DataContract()]
     public class DayMenuSelection
     {
         private bool _sideDish;

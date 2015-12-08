@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ordersystem.Enums;
+using SQLite;
 
 namespace Ordersystem.Model
 {
     public class Order
     {
+
         /// <summary>
         /// An order for Master Cater System.
         /// </summary>

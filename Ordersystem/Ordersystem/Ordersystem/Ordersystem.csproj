@@ -42,6 +42,7 @@
     <Compile Include="Utilities\ISQLite.cs" />
     <Compile Include="Utilities\LocalDatabase.cs" />
     <Compile Include="Utilities\Session.cs" />
+    <Compile Include="Utilities\XmlStringSerializer.cs" />
     <None Include="Guidelines\CodeGuideline.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Orderlist.cs" />

@@ -24,7 +24,6 @@ namespace AndroidEnvironmentTests
             _localDatabase.ClearDatabase();
         }
 
-
         [TearDown]
         public void TearDown()
         {
@@ -36,14 +35,18 @@ namespace AndroidEnvironmentTests
         {
             _localDatabase.SaveSession(_dummyOrderlist, _dummyCustomer);
             var loadedOrderlist = _localDatabase.GetOrderlist(_dummyCustomer.PersonNumber);
+
             Assert.True(loadedOrderlist.StartDate == new DateTime(1995, 3, 13));
         }
+
         [Test]
         public void SaveNDelete_dummyInput_NoExceptionsIsThrown()
         {
             _localDatabase.SaveSession(_dummyOrderlist, _dummyCustomer);
+
             Assert.DoesNotThrow(() => _localDatabase.DeleteSession(_dummyCustomer.PersonNumber));
         }
+
         [Test]
         public void DeleteNotFound_dummyInput_ItemNotFoundExceptionIsThrown()
         {
