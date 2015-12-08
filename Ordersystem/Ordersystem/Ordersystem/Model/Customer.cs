@@ -1,4 +1,5 @@
 ﻿using Ordersystem.Enums;
+using System;
 
 namespace Ordersystem.Model
 {
@@ -17,6 +18,30 @@ namespace Ordersystem.Model
             Order = new Order();
             Diet = diet;
         }
+
+		public Customer(string personNumber, string name, string diet) : this(personNumber, name, ParseDietFromString(diet))
+		{
+
+		}
+			
+		static private Diet ParseDietFromString(string diet)
+		{
+			switch(diet)
+			{
+			case "v-full":
+				return Diet.Full;
+			case "v-lowFat":
+				return Diet.LowFat;
+			case "v-energyDense":
+				return Diet.EnergyDense;
+			case "v-softFoodsWPotatoes":
+				return Diet.SoftFoodsWPotatoes;
+			case "v-softFoodsWMash":
+				return Diet.SoftFoodsWMash;
+			default:
+				throw new ArgumentException ("Invalid diet type");
+			}
+		}
         
         /// <summary>
         /// The social security number of the customer.

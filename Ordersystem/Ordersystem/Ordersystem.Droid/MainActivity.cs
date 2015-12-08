@@ -37,11 +37,7 @@ namespace Ordersystem.Droid
 		{
 			button.Click += delegate
 			{
-			    var connection = new McsSqlConnection();
-
-			    connection.ReturnCustomersConnection();
-
-			    /*if(cm.ValidSocialSecurityNumber(editText.Text))
+			    if(cm.ValidSocialSecurityNumber(editText.Text))
 				{
 					SetContentView (Resource.Layout.Main_Window);
 					//CreateMainWindow ();
@@ -49,7 +45,7 @@ namespace Ordersystem.Droid
 				else
 				{
 					errorMsg.Visibility = ViewStates.Visible;	
-				}*/
+				}
 			};
 		}
 
