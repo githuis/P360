@@ -22,6 +22,36 @@ namespace Ordersystem.Model
             Diet = diet;
         }
 
+		/// <summary>
+		/// The Orderlist recieved from the Master Cater System.
+		/// </summary>
+		/// <param name="dayMenus">The list containing all the DayMenus.</param>
+		/// <param name="startDate">The starting date of the Orderlist.</param>
+		/// <param name="endDate">The end date of the Orderlist.</param>
+		/// <param name="diet">The diet of the Orderlist.</param>
+		public Orderlist(List<DayMenu> dayMenus, DateTime startDate, DateTime endDate, string diet) : this(dayMenus, startDate, endDate, ParseDietFromString(diet))
+		{
+		}
+
+		private Diet ParseDietFromString(string diet)
+		{
+			switch(diet)
+			{
+			case "Full":
+				return Diet.Full;
+			case "LowFat":
+				return Diet.LowFat;
+			case "EnergyDense":
+				return Diet.EnergyDense;
+			case "SoftFoodsWPotatoes":
+				return Diet.SoftFoodsWPotatoes;
+			case "SoftFoodsWMash":
+				return Diet.SoftFoodsWMash;
+			default:
+				throw new ArgumentException ("Invalid diet type");
+			}
+		}
+
         /// <summary>
         /// The list containing all the DayMenus.
         /// </summary>
