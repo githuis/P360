@@ -5,12 +5,57 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using Ordersystem.Model;
+using Ordersystem.Enums;
 
 namespace Ordersystem.Utilities
 {
     public class McsSqlConnection
     {
 		private const string ConnectionString = "server=eu-cdbr-azure-north-d.cloudapp.net;port=3306;user id=ba3af1f8d328b9;pwd=650e758f;database=P360;allowuservariables=True;";
+
+		public void SendOrder(Order order, string personNumber)
+		{
+			using (MySqlConnection connection = new MySqlConnection (ConnectionString))
+			{
+				connection.Open ();
+
+				string orderQuery = "INSERT INTO orders (CustomerPersonNumber)" +
+				                    "VALUES (" + personNumber + ")";
+
+				MySqlCommand orderCommand = new MySqlCommand (orderQuery, connection);
+				orderCommand.ExecuteNonQuery ();
+
+				List<Tuple<Dish,Dish>> dishes = GetDishesFromOrder (order);
+
+				string Query;
+				foreach (Tuple<Dish,Dish> dishTuple in dishes)
+				{
+					if (dishTuple.Item2 != null) {
+						Query = "INSERT INTO orderdays (DishKey, SideDishKey, OrderKey) " +
+						"SELECT d1.DishKey, d2.DishKey, o.OrderKey " +
+						"FROM dishes d1 " +
+						"JOIN dishes d2 " +
+						"JOIN orders o " +
+						"WHERE d1.Name = '" + dishTuple.Item1.Name + "' " +
+						"AND d1.Description = '" + dishTuple.Item1.Description + "' " +
+						"AND d2.Name = '" + dishTuple.Item2.Name + "' " +
+						"AND d2.Description = '" + dishTuple.Item1.Description + "' " +
+						"AND o.CustomerPersonNumber = " + personNumber;
+					} else {
+						Query = "INSERT INTO orderdays (DishKey, OrderKey) " +
+						"SELECT d1.DishKey, o.OrderKey " +
+						"FROM dishes d1 " +
+						"JOIN orders o " +
+						"WHERE d1.Name = '" + dishTuple.Item1.Name + "' " +
+						"AND d1.Description = '" + dishTuple.Item1.Description + "' " +
+						"AND o.CustomerPersonNumber = " + personNumber;
+					}
+
+					MySqlCommand command = new MySqlCommand (Query, connection);
+					command.ExecuteNonQuery ();
+				}
+			}
+		}
 
 		public Customer GetCustomerByPersonNumber(string personNumber)
         {
@@ -145,6 +190,27 @@ namespace Ordersystem.Utilities
 			}
 
 			return new DayMenu (Dishes [0], Dishes [1], Dishes [2], Date);
+		}
+
+		private List<Tuple<Dish,Dish>> GetDishesFromOrder(Order order)
+		{
+			var dishes = new List<Tuple<Dish,Dish>> ();
+
+			foreach (DayMenuSelection selection in order.DayMenuSelections)
+			{
+				var selectionDishes = selection.GetDishes ();
+
+				if (selection.Choice == DayMenuChoice.Dish1)
+				{
+					dishes.Add (new Tuple<Dish,Dish> (selectionDishes [0], selection.SideDish ? selectionDishes [2] : null));
+				}
+				else if(selection.Choice == DayMenuChoice.Dish2)
+				{
+					dishes.Add (new Tuple<Dish,Dish> (selectionDishes [1], selection.SideDish ? selectionDishes [2] : null));
+				}
+			}
+
+			return dishes;
 		}
     }
 }
