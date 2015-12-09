@@ -202,8 +202,6 @@ namespace Ordersystem.Droid
 			linearLayout.SetPadding(5, 10, 5, 10);
 
 
-
-
 			linearLayout.AddView(new TextView (activity)
 				{
 					Text = "Ingen mad denne dag",
@@ -219,7 +217,7 @@ namespace Ordersystem.Droid
 				int index = table.IndexOfChild(row);
 				index /= 2;
 				Dish.SelectedDishes[index] = null;
-				SelectDish( ((TableRow)table.GetChildAt(table.IndexOfChild(row) + 1)) ,table,(LinearLayout)sender);
+				SelectNoDish( ((TableRow)table.GetChildAt(table.IndexOfChild(row) + 1)) ,table,(LinearLayout)sender);
 			};
 
 			return linearLayout;
@@ -237,6 +235,8 @@ namespace Ordersystem.Droid
 		public void SelectSideDish(TableRow row, TableLayout table, LinearLayout layout)
 		{
 			var background = layout.Background;
+
+			row.GetChildAt (4).SetBackgroundColor (RowBackgroundColor);
 			if (background is Android.Graphics.Drawables.ColorDrawable)
 			{
 				if ((background as Android.Graphics.Drawables.ColorDrawable).Color == RowBackgroundColor) {
@@ -246,6 +246,15 @@ namespace Ordersystem.Droid
 					layout.SetBackgroundColor (RowBackgroundColor);
 				}
 			}
+		}
+
+		public void SelectNoDish(TableRow row, TableLayout table, LinearLayout layout)
+		{
+			row.GetChildAt (1).SetBackgroundColor (RowBackgroundColor);
+			row.GetChildAt (2).SetBackgroundColor (RowBackgroundColor);
+			row.GetChildAt (3).SetBackgroundColor (RowBackgroundColor);
+
+			layout.SetBackgroundColor (RowCompletedColor);
 		}
 
 	}
