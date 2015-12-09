@@ -27,9 +27,9 @@ namespace Ordersystem.Utilities
 
 				List<Tuple<Dish,Dish>> dishes = GetDishesFromOrder (order);
 
-				string Query;
 				foreach (Tuple<Dish,Dish> dishTuple in dishes)
 				{
+					string Query;
 					if (dishTuple.Item2 != null) {
 						Query = "INSERT INTO orderdays (DishKey, SideDishKey, OrderKey) " +
 						"SELECT d1.DishKey, d2.DishKey, o.OrderKey " +
@@ -54,6 +54,8 @@ namespace Ordersystem.Utilities
 					MySqlCommand command = new MySqlCommand (Query, connection);
 					command.ExecuteNonQuery ();
 				}
+
+				connection.Close ();
 			}
 		}
 
