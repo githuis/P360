@@ -18,7 +18,8 @@
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center_vertical">
             <ImageView
                 android:id="@+id/headerLogOut"
                 android:layout_width="wrap_content"
@@ -28,10 +29,10 @@
                 android:id="@+id/headerUserName"
                 android:text="Jens Jensen"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="24dp"
-                android:layout_marginTop="12.0dp"
-                android:layout_gravity="left" />
+                android:layout_height="match_parent"
+                android:textSize="40dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/tutorialPane"

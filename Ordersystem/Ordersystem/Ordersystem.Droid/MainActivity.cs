@@ -26,28 +26,7 @@ namespace Ordersystem.Droid
 		{
 			base.OnCreate (bundle);
 
-			// Set our view to the Log_In
-			SetContentView (Resource.Layout.Log_In);
-
-			//Finding the different widgets ID, to use in the LogIn method a few lines below.
-			Button button = FindViewById<Button> (Resource.Id.loginButton);
-			EditText editText = FindViewById<EditText> (Resource.Id.loginInputBar);
-			TextView errorMsg = FindViewById<TextView> (Resource.Id.loginErrorMessageText); 
-
-			//Initialize managers
-			communicationManager = new CommunicationManager();
-			layoutHandler = new LayoutHandler(this);
-
-			//Initialize list for TableRows.
-			rows = new List<TableRow>();
-
-			//Set screensize
-			Point p = new Point(0,0);
-			WindowManager.DefaultDisplay.GetSize(p);
-			layoutHandler.SetDisplaySize (p);
-
-			//Checks  the users login info
-			LogIn(button,editText,errorMsg);
+			InitializeLogInScreen ();
 		}
 
 		public void LogIn(Button button,EditText editText, TextView errorMsg)
@@ -77,8 +56,9 @@ namespace Ordersystem.Droid
 			AddRowsToList ((TableLayout)FindViewById (Resource.Id.tableLayout1));
 			InitializeRows ();
 			InitializeTutorial ();
+			InitializeHeader ();
 			Dish.SelectedDishes = new Dish[33];
-			
+			Dish.SelectedSideDishes = new Dish[33];
 		}
 
 		private void AddRowsToList(TableLayout table)
@@ -118,9 +98,55 @@ namespace Ordersystem.Droid
 			btn.SetImageResource(Resource.Drawable.Delete);
 			btn.Click += (object sender, EventArgs e) => {
 				TableLayout tl = (TableLayout) FindViewById(Resource.Id.tableLayout1);
-				tl.RemoveView(FindViewById(Resource.Id.tutorialPane));
+				//tl.RemoveView(FindViewById(Resource.Id.tutorialPane));
+				FindViewById(Resource.Id.tutorialPane).Visibility = ViewStates.Gone;
 			};
 
+		}
+
+		private void InitializeHeader()
+		{
+			LinearLayout header = (LinearLayout)FindViewById (Resource.Id.header);
+			ImageView btn = (ImageView)FindViewById (Resource.Id.headerLogOut);
+			TextView headerUserName = (TextView)FindViewById (Resource.Id.headerUserName);
+
+			header.SetBackgroundColor (layoutHandler.HeaderColor);
+			header.SetMinimumHeight (layoutHandler.GetMinimumHeight ());
+
+			//headerUserName = Model.Customer.name;
+			//Mangler logUd knap.
+			btn.SetImageResource (Resource.Drawable.Delete);
+			btn.Click += (object sender, EventArgs e) => {
+				SetContentView(Resource.Layout.Log_In);
+				InitializeLogInScreen();
+			};
+				
+		}
+
+		private void InitializeLogInScreen()
+		{
+			// Set our view to the Log_In
+			SetContentView (Resource.Layout.Log_In);
+
+			//Finding the different widgets ID, to use in the LogIn method a few lines below.
+			Button button = FindViewById<Button> (Resource.Id.loginButton);
+			EditText editText = FindViewById<EditText> (Resource.Id.loginInputBar);
+			TextView errorMsg = FindViewById<TextView> (Resource.Id.loginErrorMessageText); 
+
+			//Initialize managers
+			communicationManager = new CommunicationManager();
+			layoutHandler = new LayoutHandler(this);
+
+			//Initialize list for TableRows.
+			rows = new List<TableRow>();
+
+			//Set screensize
+			Point p = new Point(0,0);
+			WindowManager.DefaultDisplay.GetSize(p);
+			layoutHandler.SetDisplaySize (p);
+
+			//Checks  the users login info
+			LogIn(button,editText,errorMsg);
 		}
 	}
 }
