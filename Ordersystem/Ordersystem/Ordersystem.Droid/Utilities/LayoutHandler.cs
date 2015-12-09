@@ -43,12 +43,15 @@ namespace Ordersystem.Droid
 		{
 			this.activity = activity;
 
-			testMenu = new DayMenu (
-				new Dish ("Kartofler m. Sovs", "Kartofler med brun sovs og millionbøf"),
-				new Dish ("Rød grød med fløde", "Rød grød med fløde til."),
-				new Dish ("Jordbær grød m. mælk", "Jordbærgrød"));
+            Dish dish1 = new Dish("Blomkål", "Smager godt");
+            Dish dish2 = new Dish("Thor", "Jensen");
+            Dish dish3 = new Dish("Random navn", "Random desc");
+            dish1.Number = 1;
+			dish2.Number = 2;
+			dish3.Number = 3;
+            testMenu = new DayMenu(dish1, dish2, dish3);
 
-			infoRowId = int.MaxValue;
+            infoRowId = int.MaxValue;
 		}
 
 		public void CreateDayMenuDisplay(DayMenu dayMenu, TableRow row, TableLayout parent)
@@ -165,7 +168,7 @@ namespace Ordersystem.Droid
 			titleView.Text = dish.Name;
 			titleView.TextSize = textSizeLarge;
 
-			imageView.SetImageURI (Android.Net.Uri.Parse("http://www.kesanacats.dk/wp-content/uploads/killroy-lille-billed-fra-sølvkatten.png"));
+			imageView.SetImageResource (Resource.Drawable.dish01 + (dish.Number - 1));
 
 			descriptionView.Text = dish.Description;
 			descriptionView.TextSize = textSizeMed;
