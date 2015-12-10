@@ -127,14 +127,14 @@ namespace Ordersystem.Droid.Utilities
 					reader.Read ();
 
 					if (!reader.IsDBNull (reader.GetOrdinal ("StartDate")) &&
-					    !reader.IsDBNull (reader.GetOrdinal ("EndDate")) &&
 					    !reader.IsDBNull (reader.GetOrdinal ("Diet")) &&
 					    !reader.IsDBNull (reader.GetOrdinal ("Days")))
 					{
 						count = reader.GetInt32 (reader.GetOrdinal ("Days"));
 						Diet = reader.GetString (reader.GetOrdinal ("Diet"));
 						StartDate = reader.GetDateTime (reader.GetOrdinal ("StartDate"));
-						EndDate = reader.GetDateTime (reader.GetOrdinal ("EndDate"));
+						EndDate = StartDate.AddDays (-14);
+						StartDate = StartDate.AddMonths (-1);
 					}
 					else
 					{
