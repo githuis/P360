@@ -111,31 +111,31 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\dish01.jpg" />
+    <AndroidResource Include="Resources\drawable-hdpi\dish1.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\dish02.JPG" />
+    <AndroidResource Include="Resources\drawable-hdpi\dish2.JPG" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\dish03.jpg" />
+    <AndroidResource Include="Resources\drawable-hdpi\dish3.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\dish04.jpg" />
+    <AndroidResource Include="Resources\drawable-hdpi\dish4.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\dish05.JPG" />
+    <AndroidResource Include="Resources\drawable-hdpi\dish5.JPG" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\dish06.jpg" />
+    <AndroidResource Include="Resources\drawable-hdpi\dish6.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\dish07.jpg" />
+    <AndroidResource Include="Resources\drawable-hdpi\dish7.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\dish08.jpg" />
+    <AndroidResource Include="Resources\drawable-hdpi\dish8.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\dish09.jpg" />
+    <AndroidResource Include="Resources\drawable-hdpi\dish9.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\dish10.jpg" />
@@ -204,31 +204,31 @@
     <AndroidResource Include="Resources\drawable-hdpi\dish31.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\dish01.jpg" />
+    <AndroidResource Include="Resources\drawable-mdpi\dish1.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\dish02.JPG" />
+    <AndroidResource Include="Resources\drawable-mdpi\dish2.JPG" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\dish03.jpg" />
+    <AndroidResource Include="Resources\drawable-mdpi\dish3.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\dish04.jpg" />
+    <AndroidResource Include="Resources\drawable-mdpi\dish4.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\dish05.JPG" />
+    <AndroidResource Include="Resources\drawable-mdpi\dish5.JPG" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\dish06.jpg" />
+    <AndroidResource Include="Resources\drawable-mdpi\dish6.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\dish07.jpg" />
+    <AndroidResource Include="Resources\drawable-mdpi\dish7.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\dish08.jpg" />
+    <AndroidResource Include="Resources\drawable-mdpi\dish8.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\dish09.jpg" />
+    <AndroidResource Include="Resources\drawable-mdpi\dish9.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-mdpi\dish10.jpg" />
@@ -297,31 +297,31 @@
     <AndroidResource Include="Resources\drawable-mdpi\dish31.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\dish01.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\dish1.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\dish02.JPG" />
+    <AndroidResource Include="Resources\drawable-xhdpi\dish2.JPG" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\dish03.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\dish3.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\dish04.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\dish4.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\dish05.JPG" />
+    <AndroidResource Include="Resources\drawable-xhdpi\dish5.JPG" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\dish06.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\dish6.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\dish07.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\dish7.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\dish08.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\dish8.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\dish09.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\dish9.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xhdpi\dish10.jpg" />
@@ -387,31 +387,31 @@
     <AndroidResource Include="Resources\drawable-xhdpi\dish30.JPG" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\dish01.jpg" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\dish1.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\dish02.JPG" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\dish2.JPG" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\dish03.jpg" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\dish3.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\dish04.jpg" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\dish4.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\dish05.JPG" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\dish5.JPG" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\dish06.jpg" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\dish6.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\dish07.jpg" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\dish7.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\dish08.jpg" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\dish8.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\dish09.jpg" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\dish9.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\dish10.jpg" />
@@ -480,31 +480,31 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\dish31.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\dish01.jpg" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\dish1.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\dish02.JPG" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\dish2.JPG" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\dish03.jpg" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\dish3.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\dish04.jpg" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\dish4.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\dish05.JPG" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\dish5.JPG" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\dish06.jpg" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\dish6.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\dish07.jpg" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\dish7.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\dish08.jpg" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\dish8.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\dish09.jpg" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\dish9.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\dish10.jpg" />
