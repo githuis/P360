@@ -141,6 +141,11 @@ namespace Ordersystem.Droid.Utilities
 						throw new NullReferenceException ("Database contains null values.");
 					}
 
+					if (count < 28 || count > 31)
+					{
+						throw new ArgumentOutOfRangeException ("Invalid amount of days in orderlist.");
+					}
+
 					DayMenus.Add (ReadDayMenu (reader));
 					for (int i = 2; i <= count; i++)
 					{
@@ -148,6 +153,10 @@ namespace Ordersystem.Droid.Utilities
 						DayMenus.Add (ReadDayMenu (reader));
 					}
 
+					if (IllegalDates (DayMenus))
+					{
+						throw new ArgumentException ("Duplicate dates detected.");
+					}
 				}
 				else
 				{
@@ -193,6 +202,27 @@ namespace Ordersystem.Droid.Utilities
 			}
 
 			return new DayMenu (Dishes [0], Dishes [1], Dishes [2], Date);
+		}
+
+		private bool IllegalDates(List<DayMenu> dayMenus)
+		{
+			List<DayMenu> dayMenusClone = dayMenus.ToList ();
+
+			foreach (var day in dayMenus)
+			{
+				foreach (var dayClone in dayMenusClone)
+				{
+					if (day.Date == dayClone.Date
+						&& day.Dish1 != dayClone.Dish1
+						&& day.Dish2 != dayClone.Dish2
+						&& day.SideDish != dayClone.SideDish)
+					{
+						return true;
+					}
+				}
+			}
+
+			return false;
 		}
 
 		private List<Tuple<Dish,Dish>> GetDishesFromOrder(Order order)
