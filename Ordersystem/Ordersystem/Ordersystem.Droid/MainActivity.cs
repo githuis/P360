@@ -16,7 +16,7 @@ namespace Ordersystem.Droid
 	public class MainActivity : Activity
 	{
 		//Made a communicationManager object
-		CommunicationManager cm = new CommunicationManager();
+		LocalManager lm = new LocalManager();
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -37,7 +37,7 @@ namespace Ordersystem.Droid
 		{
 			button.Click += delegate
 			{
-			    if(cm.ValidSocialSecurityNumber(editText.Text))
+				if(lm.IsValidSocialSecurityNumber(editText.Text))
 				{
 					SetContentView (Resource.Layout.Main_Window);
 					//CreateMainWindow ();

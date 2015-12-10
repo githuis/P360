@@ -11,7 +11,7 @@ using Ordersystem.Utilities;
 
 namespace Ordersystem.Functions
 {
-    public class CommunicationManager
+    public class LocalManager
     {
         /*public CommunicationManager()
         {

@@ -9,7 +9,7 @@ using Ordersystem.Enums;
 
 namespace Ordersystem.Utilities
 {
-    public class McsSqlConnection
+    public class MCSManager
     {
 		private const string ConnectionString = "server=eu-cdbr-azure-north-d.cloudapp.net;port=3306;user id=ba3af1f8d328b9;pwd=650e758f;database=P360;allowuservariables=True;";
 
