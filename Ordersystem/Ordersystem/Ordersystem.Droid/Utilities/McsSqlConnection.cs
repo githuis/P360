@@ -19,17 +19,16 @@ namespace Ordersystem.Utilities
 			{
 				connection.Open ();
 
-				string orderQuery = "INSERT INTO orders (CustomerPersonNumber)" +
+				string Query = "INSERT INTO orders (CustomerPersonNumber)" +
 				                    "VALUES (" + personNumber + ")";
 
-				MySqlCommand orderCommand = new MySqlCommand (orderQuery, connection);
-				orderCommand.ExecuteNonQuery ();
+				MySqlCommand command = new MySqlCommand (Query, connection);
+				command.ExecuteNonQuery ();
 
 				List<Tuple<Dish,Dish>> dishes = GetDishesFromOrder (order);
 
 				foreach (Tuple<Dish,Dish> dishTuple in dishes)
 				{
-					string Query;
 					if (dishTuple.Item2 != null) {
 						Query = "INSERT INTO orderdays (DishKey, SideDishKey, OrderKey) " +
 						"SELECT d1.DishKey, d2.DishKey, o.OrderKey " +
@@ -39,10 +38,10 @@ namespace Ordersystem.Utilities
 						"WHERE d1.Name = '" + dishTuple.Item1.Name + "' " +
 						"AND d1.Description = '" + dishTuple.Item1.Description + "' " +
 						"AND d2.Name = '" + dishTuple.Item2.Name + "' " +
-						"AND d2.Description = '" + dishTuple.Item1.Description + "' " +
+						"AND d2.Description = '" + dishTuple.Item2.Description + "' " +
 						"AND o.CustomerPersonNumber = " + personNumber;
 					} else {
-						Query = "INSERT INTO orderdays (DishKey, OrderKey) " +
+						Query ="INSERT INTO orderdays (DishKey, OrderKey) " +
 						"SELECT d1.DishKey, o.OrderKey " +
 						"FROM dishes d1 " +
 						"JOIN orders o " +
@@ -50,12 +49,12 @@ namespace Ordersystem.Utilities
 						"AND d1.Description = '" + dishTuple.Item1.Description + "' " +
 						"AND o.CustomerPersonNumber = " + personNumber;
 					}
-
-					MySqlCommand command = new MySqlCommand (Query, connection);
+					command.CommandText = Query;
 					command.ExecuteNonQuery ();
 				}
 
 				connection.Close ();
+				order.Sent = true;
 			}
 		}
 
