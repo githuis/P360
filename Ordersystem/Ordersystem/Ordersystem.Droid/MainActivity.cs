@@ -82,6 +82,7 @@ namespace Ordersystem.Droid
 				v.SetTextSize (Android.Util.ComplexUnitType.Px, 32);
 				row.SetBackgroundColor(layoutHandler.RowBackgroundColor);
 				row.SetMinimumHeight (layoutHandler.GetMinimumHeight ());
+				layoutHandler.ClearRowText (row, DateTime.Now); //  FIX DATE
 
 				row.Click += (object sender, EventArgs e) => {
 					layoutHandler.ResizeTableRow(rows, (TableRow) sender, (TableLayout)FindViewById (Resource.Id.tableLayout1));
@@ -147,6 +148,19 @@ namespace Ordersystem.Droid
 
 			//Checks  the users login info
 			LogIn(button,editText,errorMsg);
+		}
+
+		private void InitializeOrderButton ()
+		{
+			Button button = FindViewById<Button> (Resource.Id.sendOrderButton);
+			button.SetMinimumHeight (layoutHandler.GetMediumHeight());
+
+			button.Click += (object sender, EventArgs e) => {
+				//Call the sending of the order here.
+				communicationManager.IsOrderValid();
+				communicationManager.SendOrder();
+
+			};
 		}
 	}
 }

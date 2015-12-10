@@ -27,6 +27,7 @@ namespace Ordersystem.Droid
 		private DayMenu testMenu;
 		private int infoRowId;
 		private Point displaySize;
+		private DateTime testDate;
 
 		//10px per container per side. 50px for the arrow.
 		private int paddingTotal = 8 * 10;
@@ -48,6 +49,7 @@ namespace Ordersystem.Droid
 				new Dish ("Kartofler m. Sovs", "Kartofler med brun sovs og millionbøf"),
 				new Dish ("Rød grød med fløde", "Rød grød med fløde til."),
 				new Dish ("Jordbær grød m. mælk", "Jordbærgrød"));
+			testDate = DateTime.Now;
 
 			infoRowId = int.MaxValue;
 		}
@@ -99,6 +101,10 @@ namespace Ordersystem.Droid
 		public int GetMinimumHeight()
 		{
 			return minRowHeight;
+		}
+		public int GetMediumHeight()
+		{
+			return mediumRowHeight;
 		}
 
 		public void SetDisplaySize(Point size)
@@ -183,6 +189,7 @@ namespace Ordersystem.Droid
 					int index = table.IndexOfChild(row);
 					index /= 2;
 					Dish.SelectedDishes [index] = dish;
+					UpdateRowText(row, testDate, dish); // FIX DATE!!
 				};
 			} 
 			else 
@@ -230,6 +237,7 @@ namespace Ordersystem.Droid
 				Dish.SelectedDishes[index] = null;
 				Dish.SelectedSideDishes[index] = null;
 				UpdateDayMenuColors(table, row);
+				ClearRowText(row, testDate); // FIX DATE!
 			};
 
 			return linearLayout;
@@ -247,9 +255,40 @@ namespace Ordersystem.Droid
 			}
 		}
 
+		private void UpdateRowText(TableRow row, DateTime date, Dish dish)
+		{
+			string s = "xdag d. ";
+			s = date.ToShortDateString ();
+
+			if(dish != null)
+			{
+				s += " - ";
+				s += dish.Name;
+			}
+			GetTextView (row, 0).Text = s;
+		}
+
+		public void ClearRowText(TableRow row, DateTime date)
+		{
+			GetTextView (row, 0).Text = "xdag d. " + date.ToShortDateString ();
+		}
+
+		private TextView GetTextView(TableRow row, int index)
+		{
+			var tv = row.GetChildAt (index);
+			if(tv is TextView)
+			{
+				TextView textView = (TextView)tv;
+				return textView;
+			}
+			throw new InvalidCastException ("Row does not contain a TextView at " + index.ToString());
+		}
+
 		private void UpdateDayMenuColors(TableLayout table, TableRow row)
 		{
-			int id = table.IndexOfChild (row), index;
+			TableRow oldrow = row;
+			oldrow.SetBackgroundColor (RowBackgroundColor);
+			int id = table.IndexOfChild (oldrow), index;
 			id++;
 			id /= 2;
 			index = (infoRowId - 1) / 2;
@@ -283,16 +322,33 @@ namespace Ordersystem.Droid
 				ColorDish ((LinearLayout)row.GetChildAt (3));
 			//If dish 1 is selected for row, color it
 			if (CompareDish (Dish.SelectedDishes [index], lin1))
+			{
 				ColorDish ((LinearLayout)row.GetChildAt (1));
+				ColorRow (oldrow);
+			}
 			//otherwise, if dish 2 is selected for row, color it.
 			else if (CompareDish (Dish.SelectedDishes [index], lin2))
+			{
 				ColorDish ((LinearLayout)row.GetChildAt (2));
+				ColorRow (oldrow);
+			}
 			else if (Dish.SelectedDishes [id] == null)
 			{
+				CleanRow (oldrow);
 				RemoveAllColors (row);
 				ColorDish (lin4);
 			}
 			
+		}
+
+		private void ColorRow(TableRow row)
+		{
+			row.SetBackgroundColor (RowCompletedColor);
+		}
+
+		private void CleanRow(TableRow row)
+		{
+			row.SetBackgroundColor (RowBackgroundColor);
 		}
 
 		private void RemoveAllColors(TableRow row)
@@ -301,6 +357,7 @@ namespace Ordersystem.Droid
 			row.GetChildAt(2).SetBackgroundColor(RowBackgroundColor);
 			row.GetChildAt(3).SetBackgroundColor(RowBackgroundColor);	
 			row.GetChildAt(4).SetBackgroundColor(RowBackgroundColor);
+
 		}
 
 		private void ColorDish(LinearLayout lin)

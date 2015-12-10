@@ -803,5 +803,10 @@
             android:layout_weight="1"
             android:background="#B6B6B6"
             android:padding="2dip" />
+        <Button
+            android:id="@+id/sendOrderButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send Bestilling" />
     </TableLayout>
 </ScrollView>

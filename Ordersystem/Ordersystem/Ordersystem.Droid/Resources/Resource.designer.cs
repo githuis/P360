@@ -493,6 +493,9 @@ namespace Ordersystem.Droid
 			// aapt resource value: 0x7f070004
 			public const int scrollView1 = 2131165188;
 			
+			// aapt resource value: 0x7f070089
+			public const int sendOrderButton = 2131165321;
+			
 			// aapt resource value: 0x7f070005
 			public const int tableLayout1 = 2131165189;
 			
@@ -545,6 +548,9 @@ namespace Ordersystem.Droid
 			
 			// aapt resource value: 0x7f040000
 			public const int hello = 2130968576;
+			
+			// aapt resource value: 0x7f040002
+			public const int send_bestillin = 2130968578;
 			
 			static String()
 			{
