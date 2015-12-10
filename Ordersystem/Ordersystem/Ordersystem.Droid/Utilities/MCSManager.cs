@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using Ordersystem.Model;
 using Ordersystem.Enums;
+using Ordersystem.Droid.Utilities;
 
+[assembly: Xamarin.Forms.Dependency(typeof(MCSManager))]
 namespace Ordersystem.Droid.Utilities
 {
-    public class MCSManager
+    public class MCSManager : IMCSManager
     {
 		private const string ConnectionString = "server=eu-cdbr-azure-north-d.cloudapp.net;port=3306;user id=ba3af1f8d328b9;pwd=650e758f;database=P360;allowuservariables=True;";
 
@@ -79,7 +81,7 @@ namespace Ordersystem.Droid.Utilities
 					{
 						customer = new Customer (reader.GetInt32(reader.GetOrdinal("PersonNumber")).ToString("D10"), 
 												 reader.GetString(reader.GetOrdinal("Name")), 
-												 reader.GetString(reader.GetOrdinal("Diet")));
+												 ParseDietFromString(reader.GetString(reader.GetOrdinal("Diet"))));
 					}
 					else
 					{
@@ -153,7 +155,7 @@ namespace Ordersystem.Droid.Utilities
 				}
 
 				connection.Close();
-				orderlist = new Orderlist (DayMenus, StartDate, EndDate, Diet);
+				orderlist = new Orderlist (DayMenus, StartDate, EndDate, ParseDietFromString(Diet));
 				return orderlist;
 			}
 		}
@@ -212,6 +214,25 @@ namespace Ordersystem.Droid.Utilities
 			}
 
 			return dishes;
+		}
+
+		private Diet ParseDietFromString(string diet)
+		{
+			switch(diet)
+			{
+			case "v-full":
+				return Diet.Full;
+			case "v-lowFat":
+				return Diet.LowFat;
+			case "v-energyDense":
+				return Diet.EnergyDense;
+			case "v-softFoodsWPotatoes":
+				return Diet.SoftFoodsWPotatoes;
+			case "v-softFoodsWMash":
+				return Diet.SoftFoodsWMash;
+			default:
+				throw new ArgumentException ("Invalid diet type");
+			}
 		}
     }
 }
