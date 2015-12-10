@@ -203,9 +203,11 @@ namespace Ordersystem.Droid
 
             titleView.TextSize = textSizeLarge;
 
+			imageView.SetAdjustViewBounds(true);
             imageView.SetImageURI(path);
             imageView.SetScaleType(ImageView.ScaleType.CenterInside);
-
+			imageView.SetMaxWidth (linearLayout.MinimumWidth);
+			imageView.SetMaxHeight (maxRowHeight);
 
             descriptionView.Text = dish.Description;
 			descriptionView.TextSize = textSizeMed;
