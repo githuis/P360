@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 using Ordersystem.Model;
 using Ordersystem.Enums;
 
-namespace Ordersystem.Utilities
+namespace Ordersystem.Droid.Utilities
 {
     public class MCSManager
     {
