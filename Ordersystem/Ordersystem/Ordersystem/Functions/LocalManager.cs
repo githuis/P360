@@ -21,6 +21,12 @@ namespace Ordersystem.Functions
         private Customer _customer;
         private Orderlist _orderlist;
         private LocalDatabase _localDatabase;
+		private IMCSManager _mcsManager;
+
+		public LocalManager()
+		{
+			_mcsManager = Xamarin.Forms.DependencyService.Get<IMCSManager> ();
+		}
 
         /// <summary>
         /// Checks whether the social security is valid
@@ -105,5 +111,13 @@ namespace Ordersystem.Functions
         {
             return _customer.Order.DayMenuSelections.All(selection => selection.Choice != DayMenuChoice.NoChoice);
         }
+
+		public void FillInvalidOrder()
+		{
+			foreach (DayMenuSelection selection in _customer.Order.DayMenuSelections.Where (selection => selection.Choice == DayMenuChoice.NoChoice))
+			{
+				selection.Choice = DayMenuChoice.Dish1;
+			}
+		}
     }
 }
