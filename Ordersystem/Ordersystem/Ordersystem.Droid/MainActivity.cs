@@ -57,6 +57,7 @@ namespace Ordersystem.Droid
 			InitializeRows ();
 			InitializeTutorial ();
 			InitializeHeader ();
+			InitializeOrderButton ();
 			Dish.SelectedDishes = new Dish[33];
 			Dish.SelectedSideDishes = new Dish[33];
 		}
@@ -157,10 +158,27 @@ namespace Ordersystem.Droid
 
 			button.Click += (object sender, EventArgs e) => {
 				//Call the sending of the order here.
+				SendOrderClick(sender, e);
+			};
+		}
+
+		private void SendOrderClick(object sender, EventArgs e)
+		{
+			Android.App.AlertDialog.Builder builder = new AlertDialog.Builder (this);
+			AlertDialog alertDialog = builder.Create ();
+			alertDialog.SetTitle ("Send bestilling?");
+			alertDialog.SetMessage ("Der er nogle dage, hvor der ikke er valgt mad. Send alligevel?");
+
+			alertDialog.SetButton ("Send alligevel", (s, ev) => {
 				communicationManager.IsOrderValid();
 				communicationManager.SendOrder();
+			});
 
-			};
+			alertDialog.SetButton2 ("Gå tilbage", (s, ev) => {
+				
+			});
+
+			alertDialog.Show ();
 		}
 	}
 }

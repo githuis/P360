@@ -257,7 +257,7 @@ namespace Ordersystem.Droid
 
 		private void UpdateRowText(TableRow row, DateTime date, Dish dish)
 		{
-			string s = "xdag d. ";
+			string s = DayOfWeekToDanish (date.DayOfWeek) + " d. ";
 			s = date.ToShortDateString ();
 
 			if(dish != null)
@@ -270,7 +270,31 @@ namespace Ordersystem.Droid
 
 		public void ClearRowText(TableRow row, DateTime date)
 		{
-			GetTextView (row, 0).Text = "xdag d. " + date.ToShortDateString ();
+			GetTextView (row, 0).Text = DayOfWeekToDanish (date.DayOfWeek) + " d. " + date.ToShortDateString ();
+		}
+
+		private string DayOfWeekToDanish(DayOfWeek dow)
+		{
+			switch(dow)
+			{
+			case DayOfWeek.Monday:
+				return "Mandag";
+			case DayOfWeek.Tuesday:
+				return "Tirsdag";
+			case DayOfWeek.Wednesday:
+				return "Onsdag";
+			case DayOfWeek.Thursday:
+				return "Torsdag";
+			case DayOfWeek.Friday:
+				return "Fredag";
+			case DayOfWeek.Saturday:
+				return "Lørdag";
+			case DayOfWeek.Sunday:
+				return "Søndag";
+			default:
+				return "Mandag.. eller noget";
+
+			}
 		}
 
 		private TextView GetTextView(TableRow row, int index)
