@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 
 using Ordersystem.Model;
 
@@ -10,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Graphics;
+using System.IO;
 
 namespace Ordersystem.Droid
 {
@@ -43,9 +45,9 @@ namespace Ordersystem.Droid
 		{
 			this.activity = activity;
 
-            Dish dish1 = new Dish("Blomkål", "Smager godt");
-            Dish dish2 = new Dish("Thor", "Jensen");
-            Dish dish3 = new Dish("Random navn", "Random desc");
+            Dish dish1 = new Dish("Blomkål", "Smager godt", "http://www.madbanditten.dk/wp-content/uploads/2011/06/billede-3421.jpg");
+            Dish dish2 = new Dish("Thor", "Jensen", "https://kinaliv.files.wordpress.com/2013/04/dsc03650.jpg");
+            Dish dish3 = new Dish("Random navn", "Random desc", "http://www.maduniverset.dk/images/spinatpie.JPG");
             dish1.Number = 1;
 			dish2.Number = 2;
 			dish3.Number = 3;
@@ -152,6 +154,36 @@ namespace Ordersystem.Droid
 			return row.Height == maxRowHeight;
 		}
 
+		/*async void downloadAsync(string url, int dishIndex)
+		{
+			var webClient = new WebClient();
+			byte[] imageBytes = null;
+
+			try{
+				imageBytes = await webClient.DownloadDataTaskAsync(url);
+			}
+			catch(Exception){
+
+			}
+
+			//Saving bitmap locally
+			string documentsPath = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal);	
+			string localFilename = "dish" + dishIndex + ".jpg";
+			string localPath = System.IO.Path.Combine (documentsPath, localFilename);
+
+			//Save the Image using writeAsync
+			FileStream fs = new FileStream (localPath, FileMode.OpenOrCreate);
+			await fs.WriteAsync (imageBytes, 0, imageBytes.Length);
+			Console.WriteLine("Saving image in local path: "+localPath);
+
+			//Close file connection
+			fs.Close ();
+
+			BitmapFactory.Options options = new BitmapFactory.Options ();
+			options.InJustDecodeBounds = true;
+			await BitmapFactory.DecodeFileAsync (localPath, options);
+
+		}*/
 
 		private LinearLayout LinearBuilder (TableLayout table, TableRow row, Dish dish,bool isSideDish)
 		{
@@ -164,18 +196,25 @@ namespace Ordersystem.Droid
 			TextView titleView = new TextView (activity);
 			ImageView imageView = new ImageView (activity);
 			TextView descriptionView = new TextView (activity);
+            Android.Net.Uri path = Android.Net.Uri.Parse("android.resource://com.P360.Ordersystem/drawable/dish" + dish.Number.ToString());
+            //Android.Net.Uri path = Android.Net.Uri.Parse("http://www.tastyburger.com/wp-content/themes/tastyBurger/images/home/img-large-burger.jpg");
 
-			titleView.Text = dish.Name;
-			titleView.TextSize = textSizeLarge;
+            titleView.Text = dish.Name;
 
-			imageView.SetImageResource (Resource.Drawable.dish01 + (dish.Number - 1));
+            titleView.TextSize = textSizeLarge;
 
-			descriptionView.Text = dish.Description;
+            imageView.SetImageURI(path);
+            imageView.SetScaleType(ImageView.ScaleType.CenterInside);
+
+
+            descriptionView.Text = dish.Description;
 			descriptionView.TextSize = textSizeMed;
 
 			linearLayout.AddView (titleView);
 			linearLayout.AddView (imageView);
 			linearLayout.AddView (descriptionView);
+            linearLayout.SetMinimumWidth(80);
+            linearLayout.SetMinimumHeight(60);
 
 
 			if (!isSideDish) {
