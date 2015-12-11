@@ -37,7 +37,8 @@ namespace Ordersystem.Droid
 			{
 				if(editText.Text == "") // START DEBUG ONLY -- MUST BE REMOVED BEFORE SHIPPING -- CRITICAL
 				{
-					sessionCustomer = lm.GetCustomer(editText.Text);
+					lm.GetCustomerFromDB(editText.Text);
+					lm.GetOrderlistFromDB(sessionCustomer.Diet);
 					SetContentView (Resource.Layout.Main_Window);
 					CreateMainWindow ();
 				} // END DEBUG ONLY
