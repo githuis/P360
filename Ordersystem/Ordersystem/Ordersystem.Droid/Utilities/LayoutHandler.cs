@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
 
 using Ordersystem.Model;
 
@@ -11,8 +10,6 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Graphics;
-using Android.Graphics.Drawables;
-using System.IO;
 
 namespace Ordersystem.Droid
 {
@@ -30,12 +27,12 @@ namespace Ordersystem.Droid
 		private DayMenu testMenu;
 		private int infoRowId;
 		private Point displaySize;
-        private List<Drawable> dishImageList;
-        private DateTime testDate;
+		private DateTime testDate;
 
 		//10px per container per side. 50px for the arrow.
 		private int paddingTotal = 8 * 10;
 		private int arrowSize = 50;
+
 
 		//The Colors to be used throughout the whole UI.
 		public Color RowBackgroundColor = Color.ParseColor("#F9F9F9");
@@ -48,26 +45,13 @@ namespace Ordersystem.Droid
 		{
 			this.activity = activity;
 
-            Dish dish1 = new Dish("Blomkål", "Smager godt", "http://www.madbanditten.dk/wp-content/uploads/2011/06/billede-3421.jpg");
-            Dish dish2 = new Dish("Thor", "Jensen", "https://kinaliv.files.wordpress.com/2013/04/dsc03650.jpg");
-            Dish dish3 = new Dish("Random navn", "Random desc", "http://www.maduniverset.dk/images/spinatpie.JPG");
-            dish1.Number = 1;
-			dish2.Number = 2;
-			dish3.Number = 3;
-            testMenu = new DayMenu(dish1, dish2, dish3);
-            testDate = DateTime.Now;
+			testMenu = new DayMenu (
+				new Dish ("Kartofler m. Sovs", "Kartofler med brun sovs og millionbøf"),
+				new Dish ("Rød grød med fløde", "Rød grød med fløde til."),
+				new Dish ("Jordbær grød m. mælk", "Jordbærgrød"));
+			testDate = DateTime.Now;
 
-            //Initialize dishImagelist
-            List<Drawable> temp = new List<Drawable>();
-            Drawable drawable = new ColorDrawable(Color.DeepPink);
-            for (int i = 0; i < 31; i++)
-            {
-                temp.Add(drawable);
-            }
-            dishImageList = temp;
-
-
-            infoRowId = int.MaxValue;
+			infoRowId = int.MaxValue;
 		}
 
 		public void CreateDayMenuDisplay(DayMenu dayMenu, TableRow row, TableLayout parent)
@@ -93,14 +77,14 @@ namespace Ordersystem.Droid
 		{
 			bool open;
 			open = IsOpen (rowToChange);
-			System.Console.WriteLine (open.ToString ());
+			Console.WriteLine (open.ToString ());
 			try 
 			{
 				parent.RemoveViewAt (infoRowId);	
 			} 
 			catch (Exception e) 
 			{
-				System.Console.WriteLine (e.Message);
+				Console.WriteLine (e.Message);
 			}
 
 			foreach (TableRow row in rows)
@@ -173,39 +157,6 @@ namespace Ordersystem.Droid
 			return row.Height == mediumRowHeight;
 		}
 
-		async void downloadImage(string url, string fileName, int dishIndex)
-		{
-			var webClient = new WebClient();
-			byte[] imageBytes = null;
-
-			try{
-				imageBytes = await webClient.DownloadDataTaskAsync(url);
-			}
-			catch(Exception){
-
-			}
-
-            string localPath = "android.resource://com.P360.Ordersystem/drawable/" + fileName;
-            dishImageList[dishIndex - 1] = new BitmapDrawable(BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length));
-
-            //Saving bitmap locally
-            /*string documentsPath = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal);
-			string localFilename = "dish" + dishIndex + ".jpg";
-            string localPath = "android.resource://com.P360.Ordersystem/drawable/" + fileName;
-
-            //Save the Image using writeAsync
-            FileStream fs = new FileStream (localPath, FileMode.OpenOrCreate);
-			await fs.WriteAsync (imageBytes, 0, imageBytes.Length);
-			System.Console.WriteLine("Saving image in local path: "+localPath);
-
-			//Close file connection
-			fs.Close ();*/
-
-			BitmapFactory.Options options = new BitmapFactory.Options ();
-			options.InJustDecodeBounds = true;
-			await BitmapFactory.DecodeFileAsync (localPath, options);
-
-		}
 
 		private LinearLayout LinearBuilder (TableLayout table, TableRow row, Dish dish,bool isSideDish)
 		{
@@ -218,27 +169,18 @@ namespace Ordersystem.Droid
 			TextView titleView = new TextView (activity);
 			ImageView imageView = new ImageView (activity);
 			TextView descriptionView = new TextView (activity);
-            downloadImage(dish.ImageUrl, "dish" + dish.Number, dish.Number);
-            Android.Net.Uri path = Android.Net.Uri.Parse("android.resource://com.P360.Ordersystem/drawable/dish" + dish.Number.ToString());
-			//Android.Net.Uri path = Android.Net.Uri.Parse(Android.OS.Environment.DirectoryDcim + "/mad/dish01.jpg");
-            //Android.Net.Uri path = Android.Net.Uri.Parse("http://www.tastyburger.com/wp-content/themes/tastyBurger/images/home/img-large-burger.jpg");
 
-            titleView.Text = dish.Name;
+			titleView.Text = dish.Name;
+			titleView.TextSize = textSizeLarge;
 
-            titleView.TextSize = textSizeLarge;
+			imageView.SetImageURI (Android.Net.Uri.Parse("http://www.kesanacats.dk/wp-content/uploads/killroy-lille-billed-fra-sølvkatten.png"));
 
-            imageView.SetImageDrawable(dishImageList[dish.Number - 1]);
-            imageView.SetScaleType(ImageView.ScaleType.CenterInside);
-
-
-            descriptionView.Text = dish.Description;
+			descriptionView.Text = dish.Description;
 			descriptionView.TextSize = textSizeMed;
 
 			linearLayout.AddView (titleView);
 			linearLayout.AddView (imageView);
 			linearLayout.AddView (descriptionView);
-            linearLayout.SetMinimumWidth(80);
-            linearLayout.SetMinimumHeight(60);
 
 
 			if (!isSideDish) 

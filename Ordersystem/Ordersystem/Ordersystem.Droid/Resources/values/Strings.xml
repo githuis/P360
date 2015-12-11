@@ -2,4 +2,5 @@
 <resources>
 	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">Ordersystem.Droid</string>
+	<string name="send_bestillin">Send Bestilling</string>
 </resources>

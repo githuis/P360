@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using System.Threading.Tasks;
-using Ordersystem.Enums;
 using SQLite;
 using Ordersystem.Model;
 using Ordersystem.Utilities;
@@ -29,8 +28,9 @@ namespace Ordersystem.Functions
         public bool ValidSocialSecurityNumber(string socialSecurityNumber)
         {
             bool length, day, month, isNumbers;
+            char[] numChar = new char[10];
 
-            isNumbers = IsStringDigitsOnly(socialSecurityNumber);
+            isNumbers = IsDigitsOnly(socialSecurityNumber);
 
             length = socialSecurityNumber.Length == 10; //Check if it is exactly 10 numbers long
 
@@ -38,25 +38,32 @@ namespace Ordersystem.Functions
             if (!length)
                 return false;
 
-            day = IsNumberBetween(socialSecurityNumber.Substring(0, 2), 01, 31); //Check the first two numbers to be a valid day. The day must be 1 - 31.
-            month = IsNumberBetween(socialSecurityNumber.Substring(2, 2), 01, 12); //Check the 2nd and 3rd numbers to be a valid month. The month should be 1 - 12.
+            numChar = socialSecurityNumber.ToCharArray();
 
-            return day && month && isNumbers;
+            day = IsBetween(socialSecurityNumber.Substring(0, 2), 01, 31); //Check the first two numbers to be a valid day. The day must be 1 - 31.
+            month = IsBetween(socialSecurityNumber.Substring(2, 2), 01, 12); //Check the 2nd and 3rd numbers to be a valid month. The month should be 1 - 12.
+
+            return length && day && month && isNumbers;
         }
 
-        private bool IsNumberBetween(string num, int min, int max)
+        private bool IsBetween(string num, int min, int max)
         {
             int number;
             if (int.TryParse(num, out number))
-            {
                 return (number >= min && number <= max);
-            }
-            return false;
+            else
+                return false;
         }
 
-        private bool IsStringDigitsOnly(string str)
+        private bool IsDigitsOnly(string str)
         {
-            return str.ToCharArray().All(c => c >= '0' && c <= '9');
+            foreach (char c in str)
+            {
+                if (c < '0' || c > '9')
+                    return false;
+            }
+
+            return true;
         }
 
         public Customer RequestUserData()
@@ -113,7 +120,7 @@ namespace Ordersystem.Functions
 
         public bool IsOrderValid()
         {
-            return _customer.Order.DayMenuSelections.All(selection => selection.Choice != DayMenuChoice.NoChoice);
+            throw new NotImplementedException();
         }
 
         public void SendOrder()
