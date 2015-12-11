@@ -4,6 +4,7 @@ using Ordersystem.Exceptions;
 using Xamarin.Forms;
 using SQLite;
 using Ordersystem.Model;
+using System.IO;
 
 namespace Ordersystem.Utilities
 {
@@ -12,13 +13,17 @@ namespace Ordersystem.Utilities
     /// </summary>
     public class LocalDatabase
     {
+        private string _datapath;
         private SQLiteConnection _database;
+        private StreamWriter _writer;
 
         /// <summary>
         /// Gets the connection and creates the table.
         /// </summary>
         public LocalDatabase(string filename)
         {
+            _datapath = DependencyService.Get<IDataPath>().GetPath();
+            _writer = new StreamWriter(_datapath + "local.dat");
             _database = DependencyService.Get<ISQLite>().GetConnection(filename);
             _database.CreateTable<Session>();
         }
