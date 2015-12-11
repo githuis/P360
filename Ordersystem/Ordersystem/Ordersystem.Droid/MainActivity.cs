@@ -1,7 +1,6 @@
 ﻿using System;
 using Ordersystem.Functions;
 using System.Collections.Generic;
-using Ordersystem.Model;
 
 using Android.App;
 using Android.Content;
@@ -9,39 +8,38 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using Android.Graphics;
 
 namespace Ordersystem.Droid
 {
-	// OLD = [Activity (Label = "Ordersystem", MainLauncher = true, Icon = "@drawable/icon")]
-	//Test too see if this forces landscape mode in the main screen.
-	[Activity (Label = "Ordersystem", MainLauncher = true, Icon = "@drawable/icon", ScreenOrientation = Android.Content.PM.ScreenOrientation.Landscape,Theme = "@android:style/Theme.Holo.Light.NoActionBar")]
+	[Activity (Label = "Ordersystem.Droid", MainLauncher = true, Icon = "@drawable/icon")]
 	public class MainActivity : Activity
 	{
-		CommunicationManager communicationManager;
-		LayoutHandler layoutHandler;
-		List<TableRow> rows;
+		//Made a communicationManager object
+		CommunicationManager cm = new CommunicationManager();
 
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
-			InitializeLogInScreen ();
+			// Set our view to the Log_In
+			SetContentView (Resource.Layout.Log_In);
+
+			//Finding the different widgets ID, so i can use them
+			Button button = FindViewById<Button> (Resource.Id.myButton);
+			EditText editText = FindViewById<EditText> (Resource.Id.editText1);
+			TextView errorMsg = FindViewById<TextView> (Resource.Id.errorMsg); 
+
+			LogIn(button,editText,errorMsg);
 		}
 
 		public void LogIn(Button button,EditText editText, TextView errorMsg)
 		{
 			button.Click += delegate 
 			{
-				if(editText.Text == "") // START DEBUG ONLY -- MUST BE REMOVED BEFORE SHIPPING -- CRITICAL
+				if(cm.ValidSocialSecurityNumber(editText.Text))
 				{
 					SetContentView (Resource.Layout.Main_Window);
-					CreateMainWindow ();
-				} // END DEBUG ONLY
-				else if(communicationManager.ValidSocialSecurityNumber(editText.Text))
-				{
-					SetContentView (Resource.Layout.Main_Window);
-					CreateMainWindow ();
+					//CreateMainWindow ();
 				}
 				else
 				{
@@ -49,136 +47,52 @@ namespace Ordersystem.Droid
 				}
 			};
 		}
-			
+
+
+		 //A try at making the row system, where all the rows already are made, and you need to set them to visable or invisable. And change the buttons and text to them hard code style
+		 //Its shit.
 		public void CreateMainWindow()
 		{
-			
-			AddRowsToList ((TableLayout)FindViewById (Resource.Id.tableLayout1));
-			InitializeRows ();
-			InitializeTutorial ();
-			InitializeHeader ();
-			InitializeOrderButton ();
-			Dish.SelectedDishes = new Dish[33];
-			Dish.SelectedSideDishes = new Dish[33];
-		}
+			//TableLayout Table1 = FindViewById<TableLayout> (Resource.Id.table);
+			int i;
 
-		private void AddRowsToList(TableLayout table)
-		{
-			for (int i = 0; i < table.ChildCount; i++) 
-			{
-				View view = table.GetChildAt(i);
-				if (view is TableRow) 
-				{
-					TableRow row = (TableRow)view;
-					rows.Add (row);
-				}
-			}
-		}
+			TableRow tablerow1 = FindViewById<TableRow> (Resource.Id.row1);
+			TableRow tablerow2 = FindViewById<TableRow> (Resource.Id.row2);
+			TableRow tablerow3 = FindViewById<TableRow> (Resource.Id.row3);
+			TableRow tablerow4 = FindViewById<TableRow> (Resource.Id.row4);
+			TableRow tablerow5 = FindViewById<TableRow> (Resource.Id.row5);
+			TableRow tablerow6 = FindViewById<TableRow> (Resource.Id.row6);
+			TableRow tablerow7 = FindViewById<TableRow> (Resource.Id.row7);
+			TableRow tablerow8 = FindViewById<TableRow> (Resource.Id.row8);
+			TableRow tablerow9 = FindViewById<TableRow> (Resource.Id.row9);
+			TableRow tablerow10 = FindViewById<TableRow> (Resource.Id.row10);
+			TableRow tablerow11 = FindViewById<TableRow> (Resource.Id.row11);
+			TableRow tablerow12 = FindViewById<TableRow> (Resource.Id.row12);
+			TableRow tablerow13 = FindViewById<TableRow> (Resource.Id.row13);
+			TableRow tablerow14 = FindViewById<TableRow> (Resource.Id.row14);
+			TableRow tablerow15 = FindViewById<TableRow> (Resource.Id.row15);
+			TableRow tablerow16 = FindViewById<TableRow> (Resource.Id.row16);
+			TableRow tablerow17 = FindViewById<TableRow> (Resource.Id.row17);
+			TableRow tablerow18 = FindViewById<TableRow> (Resource.Id.row18);
+			TableRow tablerow19 = FindViewById<TableRow> (Resource.Id.row19);
+			TableRow tablerow20 = FindViewById<TableRow> (Resource.Id.row20);
+			TableRow tablerow21 = FindViewById<TableRow> (Resource.Id.row21);
+			TableRow tablerow22 = FindViewById<TableRow> (Resource.Id.row22);
+			TableRow tablerow23 = FindViewById<TableRow> (Resource.Id.row23);
+			TableRow tablerow24 = FindViewById<TableRow> (Resource.Id.row24);
+			TableRow tablerow25 = FindViewById<TableRow> (Resource.Id.row25);
+			TableRow tablerow26 = FindViewById<TableRow> (Resource.Id.row26);
+			TableRow tablerow27 = FindViewById<TableRow> (Resource.Id.row27);
+			TableRow tablerow28 = FindViewById<TableRow> (Resource.Id.row28);
+			TableRow tablerow29 = FindViewById<TableRow> (Resource.Id.row29);
+			TableRow tablerow30 = FindViewById<TableRow> (Resource.Id.row30);
+			TableRow tablerow31 = FindViewById<TableRow> (Resource.Id.row31);
 
-		private void InitializeRows()
-		{
-			foreach (var row in rows)
-			{
-				TextView v = (TextView) row.GetChildAt(0);
-				v.SetTextSize (Android.Util.ComplexUnitType.Px, 32);
-				row.SetBackgroundColor(layoutHandler.RowBackgroundColor);
-				row.SetMinimumHeight (layoutHandler.GetMinimumHeight ());
-				layoutHandler.ClearRowText (row, DateTime.Now); //  FIX DATE
 
-				row.Click += (object sender, EventArgs e) => {
-					layoutHandler.ResizeTableRow(rows, (TableRow) sender, (TableLayout)FindViewById (Resource.Id.tableLayout1));
-				};
-			}
-		}
-
-		private void InitializeTutorial()
-		{
-			FindViewById (Resource.Id.tutorialPane).SetBackgroundColor (layoutHandler.TutorialColor);
-			(FindViewById (Resource.Id.tutorialTitle) as TextView).SetTextColor (layoutHandler.TutorialText);
-			(FindViewById (Resource.Id.tutorialText) as TextView).SetTextColor (layoutHandler.TutorialText);
-			ImageView btn = (ImageView) FindViewById (Resource.Id.tutorialExit);
-			btn.SetImageResource(Resource.Drawable.Delete);
-			btn.Click += (object sender, EventArgs e) => {
-				TableLayout tl = (TableLayout) FindViewById(Resource.Id.tableLayout1);
-				//tl.RemoveView(FindViewById(Resource.Id.tutorialPane));
-				FindViewById(Resource.Id.tutorialPane).Visibility = ViewStates.Gone;
-			};
-
-		}
-
-		private void InitializeHeader()
-		{
-			LinearLayout header = (LinearLayout)FindViewById (Resource.Id.header);
-			Button btn = (Button)FindViewById (Resource.Id.headerLogOut);
-			TextView headerUserName = (TextView)FindViewById (Resource.Id.headerUserName);
-
-			header.SetBackgroundColor (layoutHandler.HeaderColor);
-			header.SetMinimumHeight (layoutHandler.GetMinimumHeight ());
-
-			//headerUserName = Model.Customer.name;
-			//Mangler logUd knap.
-			//btn.SetImageResource (Resource.Drawable.Delete);
-			btn.Click += (object sender, EventArgs e) => {
-				SetContentView(Resource.Layout.Log_In);
-				InitializeLogInScreen();
-			};
-				
-		}
-
-		private void InitializeLogInScreen()
-		{
-			// Set our view to the Log_In
-			SetContentView (Resource.Layout.Log_In);
-
-			//Finding the different widgets ID, to use in the LogIn method a few lines below.
-			Button button = FindViewById<Button> (Resource.Id.loginButton);
-			EditText editText = FindViewById<EditText> (Resource.Id.loginInputBar);
-			TextView errorMsg = FindViewById<TextView> (Resource.Id.loginErrorMessageText); 
-
-			//Initialize managers
-			communicationManager = new CommunicationManager();
-			layoutHandler = new LayoutHandler(this);
-
-			//Initialize list for TableRows.
-			rows = new List<TableRow>();
-
-			//Set screensize
-			Point p = new Point(0,0);
-			WindowManager.DefaultDisplay.GetSize(p);
-			layoutHandler.SetDisplaySize (p);
-
-			//Checks  the users login info
-			LogIn(button,editText,errorMsg);
-		}
-
-		private void InitializeOrderButton ()
-		{
-			Button button = FindViewById<Button> (Resource.Id.sendOrderButton);
-			button.SetMinimumHeight (layoutHandler.GetMediumHeight());
-
-			button.Click += (object sender, EventArgs e) => {
-				//Call the sending of the order here.
-				SendOrderClick(sender, e);
-			};
-		}
-
-		private void SendOrderClick(object sender, EventArgs e)
-		{
-			Android.App.AlertDialog.Builder builder = new AlertDialog.Builder (this);
-			AlertDialog alertDialog = builder.Create ();
-			alertDialog.SetTitle ("Send bestilling?");
-			alertDialog.SetMessage ("Der er nogle dage, hvor der ikke er valgt mad. Send alligevel?");
-
-			alertDialog.SetButton ("Send alligevel", (s, ev) => {
-				communicationManager.IsOrderValid();
-				communicationManager.SendOrder();
-			});
-
-			alertDialog.SetButton2 ("Gå tilbage", (s, ev) => {
-				
-			});
-
-			alertDialog.Show ();
+			TextView table_text1 = FindViewById<TextView> (Resource.Id.row_name1);
+			Button table_button1 = FindViewById<Button> (Resource.Id.row_button1);
+			tablerow1.Visibility = ViewStates.Visible;
+			table_text1.Text = "test";	
 		}
 	}
 }
