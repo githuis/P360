@@ -95,6 +95,18 @@ namespace Ordersystem.Droid
 			tablerow1.Visibility = ViewStates.Visible;
 			table_text1.Text = "test";	
 		}
+
+		protected override void OnPause ()
+		{
+			InactivityHandler.Start (lm);
+			base.OnPause ();
+		}
+
+		protected override void OnResume ()
+		{
+			InactivityHandler.Stop ();
+			base.OnResume ();
+		}
 	}
 }
 
