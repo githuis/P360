@@ -21,7 +21,8 @@ namespace Ordersystem.Droid
 		LocalManager lm;
 		LayoutHandler layoutHandler;
 		List<TableRow> rows;
-		Customer sesssionCustomer;
+		Customer sessionCustomer { get { return lm.Customer; } }
+		Orderlist sessionOrderlist { get { return lm.Orderlist; } }
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -36,13 +37,14 @@ namespace Ordersystem.Droid
 			{
 				if(editText.Text == "") // START DEBUG ONLY -- MUST BE REMOVED BEFORE SHIPPING -- CRITICAL
 				{
-					sesssionCustomer = lm.GetCustomer(editText.Text);
+					sessionCustomer = lm.GetCustomer(editText.Text);
 					SetContentView (Resource.Layout.Main_Window);
 					CreateMainWindow ();
 				} // END DEBUG ONLY
 				else if(lm.IsValidSocialSecurityNumber(editText.Text))
 				{
-					sesssionCustomer = lm.GetCustomer(editText.Text);
+					lm.GetCustomerFromDB(editText.Text);
+					lm.GetOrderlistFromDB(sessionCustomer.Diet);
 					SetContentView (Resource.Layout.Main_Window);
 					CreateMainWindow ();
 				}

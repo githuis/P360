@@ -100,8 +100,10 @@ namespace Ordersystem.Droid.Utilities
             }
         }
 
-		public Orderlist GetOrderlistByDiet(string diet)
+		public Orderlist GetOrderlistByDiet(Diet diet)
 		{
+			string dietString = ParseStringFromDiet (diet);
+
 			using (MySqlConnection connection = new MySqlConnection(ConnectionString))
 			{
 				connection.Open();
@@ -112,7 +114,7 @@ namespace Ordersystem.Droid.Utilities
 				               "JOIN dishes d1 ON d1.DishKey=dm.Dish1 " +
 				               "JOIN dishes d2 ON d2.DishKey=dm.Dish2 " +
 				               "JOIN dishes sd ON sd.DishKey=dm.SideDish " +
-				               "WHERE ol.Diet = '" + diet + "'";
+				               "WHERE ol.Diet = '" + dietString + "'";
 
 				MySqlCommand Command = new MySqlCommand(query, connection);
 				MySqlDataReader reader = Command.ExecuteReader();
@@ -261,6 +263,25 @@ namespace Ordersystem.Droid.Utilities
 				return Diet.SoftFoodsWPotatoes;
 			case "v-softFoodsWMash":
 				return Diet.SoftFoodsWMash;
+			default:
+				throw new ArgumentException ("Invalid diet type");
+			}
+		}
+
+		private string ParseStringFromDiet(Diet diet)
+		{
+			switch(diet)
+			{
+			case Diet.Full:
+				return "v-full";
+			case Diet.LowFat:
+				return"v-lowFat" ;
+			case Diet.EnergyDense:
+				return "v-energyDense";
+			case Diet.SoftFoodsWPotatoes:
+				return "v-softFoodsWPotatoes";
+			case Diet.SoftFoodsWMash:
+				return "v-softFoodsWMash";
 			default:
 				throw new ArgumentException ("Invalid diet type");
 			}

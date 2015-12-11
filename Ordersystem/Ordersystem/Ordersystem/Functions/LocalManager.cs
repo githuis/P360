@@ -57,9 +57,17 @@ namespace Ordersystem.Functions
 			_mcsManager.SendOrder (_customer.Order, _customer.PersonNumber);
 		}
 
-		public Customer GetCustomer (string personNumber)
+		public void GetCustomerFromDB (string personNumber)
 		{
-			return _mcsManager.GetCustomerByPersonNumber (personNumber);
+			_customer = _mcsManager.GetCustomerByPersonNumber (personNumber);
+		}
+
+		public Customer Customer {get{return _customer;}}
+		public Orderlist Orderlist {get{return _orderlist;}}
+
+		public void GetOrderlistFromDB (Diet diet)
+		{
+			_orderlist = _mcsManager.GetOrderlistByDiet (diet);
 		}
 
         private bool IsNumberBetween(string num, int min, int max)
