@@ -6,6 +6,7 @@ using Ordersystem.Enums;
 
 namespace Ordersystem.Model
 {
+    [XmlType]
     public class Order
     {
 

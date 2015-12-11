@@ -5,6 +5,7 @@ using Ordersystem.Enums;
 using System.Xml.Serialization;
 namespace Ordersystem.Model
 {
+    [XmlType]
     public class Orderlist
     {
         /// <summary>

@@ -1,5 +1,5 @@
 ﻿using Ordersystem.Model;
-using SQLite;
+using System.Xml.Serialization;
 
 namespace Ordersystem.Utilities
 {
@@ -7,12 +7,13 @@ namespace Ordersystem.Utilities
     /// Concatination of the information in the database.
     /// Includes primary key property.
     /// </summary>
+    [XmlRoot]
     public class Session
     {
         /// <summary>
         /// Empty constructor, should only be used by SQLite.
         /// </summary>
-        public Session()
+        public Session() : base()
         {
             
         }
@@ -27,15 +28,8 @@ namespace Ordersystem.Utilities
         {
             PersonNumber = personNumber;
             Order = order;
-            SerializedOrder = _orderSerializer.Serialize(Order);
             Orderlist = orderlist;
-            SerializedOrderlist = _orderlistSerializer.Serialize(Orderlist);
         }
-        /// <summary>
-        /// The primary key ID needed to navigate the database.
-        /// </summary>
-        [PrimaryKey]
-        public int ID { get; set; }
 
         /// <summary>
         /// The personNumber of the customer whom the order belongs to.
@@ -46,46 +40,13 @@ namespace Ordersystem.Utilities
         /// <summary>
         /// The serialized Order in the database.
         /// </summary>
-        //[MaxLength(9001)]
-        //[Column(nameof(Order))]
-        public string SerializedOrder { get; set; }
+        public Order Order { get; set; }
 
         /// <summary>
         /// The serialized Orderlist in the database.
         /// </summary>
-        //[MaxLength(9001)]
-        //[Column(nameof(Orderlist))]
-        public string SerializedOrderlist { get; set; }
+        public Orderlist Orderlist { get; set; }
 
-        /// <summary>
-        /// The serialized Order in the database.
-        /// </summary>
-        [Ignore]
-        public Order Order
-        {
-            get
-            {
-                if (Order == null) Order = _orderSerializer.Deserialize(SerializedOrder);
-                return Order;
-            }
-            private set { Order = value; }
-        }
-
-        /// <summary>
-        /// The serialized Orderlist in the database.
-        /// </summary>
-        [Ignore]
-        public Orderlist Orderlist
-        {
-            get
-            {
-                if (Orderlist == null) Orderlist = _orderlistSerializer.Deserialize(SerializedOrderlist);
-                return Orderlist;
-            }
-            private set { Orderlist = value; }
-        }
-
-        private static XmlStringSerializer<Order> _orderSerializer = new XmlStringSerializer<Order>();
-        private static XmlStringSerializer<Orderlist> _orderlistSerializer = new XmlStringSerializer<Orderlist>();
+        public static XmlStringSerializer<Session> Serializer = new XmlStringSerializer<Session>();
     }
 }

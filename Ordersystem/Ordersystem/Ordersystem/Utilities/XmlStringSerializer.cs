@@ -8,7 +8,7 @@ using System.IO;
 
 namespace Ordersystem.Utilities
 {
-    class XmlStringSerializer<T>
+    public class XmlStringSerializer<T>
     {
         public XmlStringSerializer()
         {
@@ -21,7 +21,7 @@ namespace Ordersystem.Utilities
         {
             var writer = new StringWriter();
             _serializer.Serialize(writer, client);
-            return writer.ToString();
+            return writer.ToString().Replace('\n',' ');
         }
 
         public T Deserialize(string client)

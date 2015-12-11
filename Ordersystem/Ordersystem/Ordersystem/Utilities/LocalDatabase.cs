@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using Ordersystem.Exceptions;
 using Xamarin.Forms;
-using SQLite;
 using Ordersystem.Model;
 using System.IO;
 
@@ -13,19 +13,16 @@ namespace Ordersystem.Utilities
     /// </summary>
     public class LocalDatabase
     {
-        private string _datapath;
-        private SQLiteConnection _database;
-        private StreamWriter _writer;
+        public string Filename { get; set; }
+        private ILocalFile _database;
+        private List<Session> _sessions;
 
         /// <summary>
         /// Gets the connection and creates the table.
         /// </summary>
         public LocalDatabase(string filename)
         {
-            _datapath = DependencyService.Get<IDataPath>().GetPath();
-            _writer = new StreamWriter(_datapath + "local.dat");
-            _database = DependencyService.Get<ISQLite>().GetConnection(filename);
-            _database.CreateTable<Session>();
+            Open(filename);
         }
 
         /* Predicate methods */
@@ -36,7 +33,7 @@ namespace Ordersystem.Utilities
         /// <returns>The Order if found, else it returns null.</returns>
         public Order GetOrder(Func<Session, bool> predicate)
         {
-            return _database.Table<Session>().FirstOrDefault(predicate).Order;
+            return _sessions.FirstOrDefault(predicate).Order;
         }
 
         /// <summary>
@@ -46,7 +43,7 @@ namespace Ordersystem.Utilities
         /// <returns>The Orderlist if found, else returns null.</returns>
         public Orderlist GetOrderlist(Func<Session, bool> predicate)
         {
-            return _database.Table<Session>().FirstOrDefault(predicate).Orderlist;
+            return _sessions.FirstOrDefault(predicate).Orderlist;
         }
 
         /// <summary>
@@ -56,12 +53,12 @@ namespace Ordersystem.Utilities
         /// <param name="predicate">The predicate used to delete the entry.</param>
         public void DeleteSession(Func<Session, bool> predicate)
         {
-            Session session = _database.Table<Session>().FirstOrDefault(predicate);
+            Session session = _sessions.FirstOrDefault(predicate);
             if (session == null)
             {
                 throw new ItemNotFoundException("item", "Saved session not found");
             }
-            _database.Delete<Session>(session.ID);
+            _sessions.Remove(session);
         }
 
         /* Regular methods */
@@ -72,7 +69,7 @@ namespace Ordersystem.Utilities
         /// <returns>The Order if found, else returns null.</returns>
         public Order GetOrder(string personNumber)
         {
-            return _database.Table<Session>().FirstOrDefault(x => x.PersonNumber == personNumber).Order;
+            return _sessions.FirstOrDefault(x => x.PersonNumber == personNumber).Order;
         }
 
         /// <summary>
@@ -82,7 +79,7 @@ namespace Ordersystem.Utilities
         /// <returns>The Orderlist if found, else returns null.</returns>
         public Orderlist GetOrderlist(string personNumber)
         {
-            return _database.Table<Session>().FirstOrDefault(x => x.PersonNumber == personNumber).Orderlist;
+            return _sessions.FirstOrDefault(x => x.PersonNumber == personNumber).Orderlist;
         }
 
         /// <summary>
@@ -92,12 +89,12 @@ namespace Ordersystem.Utilities
         /// <param name="personNumber">The personNumber used to find the entry.</param>
         public void DeleteSession(string personNumber)
         {
-            Session session = _database.Table<Session>().FirstOrDefault(x => x.PersonNumber == personNumber);
+            Session session = _sessions.FirstOrDefault(x => x.PersonNumber == personNumber);
             if (session == null)
             {
                 throw new ItemNotFoundException("item", "Saved session not found");
             }
-            _database.Delete<Session>(session.ID);
+            _sessions.Remove(session);
         }
 
         /* Other methods */
@@ -108,7 +105,7 @@ namespace Ordersystem.Utilities
         /// <param name="customer">The Customer, whose personNumber is used as reference in the database.</param>
         public void SaveSession(Orderlist orderlist, Customer customer)
         {
-            _database.Insert(new Session(customer.PersonNumber, customer.Order, orderlist));
+            _sessions.Add(new Session(customer.PersonNumber, customer.Order, orderlist));
         }
 
         /// <summary>
@@ -116,7 +113,30 @@ namespace Ordersystem.Utilities
         /// </summary>
         public void ClearDatabase()
         {
-            _database.DeleteAll<Session>();
+            _sessions.Clear();
+        }
+
+        /// <summary>
+        /// Opens the database with the given filename.
+        /// Is called automatically at database creation.
+        /// </summary>
+        /// <param name="filename"></param>
+        public void Open(string filename)
+        {
+            Filename = filename;
+            _database = DependencyService.Get<ILocalFile>();
+            _database.UseFilePath(Filename);
+            List<string> serializedSessions = _database.ReadFile();
+            _sessions = serializedSessions.Select(client => Session.Serializer.Deserialize(client)).ToList();
+        }
+
+        /// <summary>
+        /// Saves and overwrites the currently opened database file.
+        /// </summary>
+        public void Close()
+        {
+            List<string> serializedSessions = _sessions.Select(client => Session.Serializer.Serialize(client)).ToList();
+            _database.WriteSeveralLinesToFile(serializedSessions, false);
         }
     }
 }

@@ -54,8 +54,6 @@ namespace Ordersystem.Droid
 		public void CreateMainWindow()
 		{
 			//TableLayout Table1 = FindViewById<TableLayout> (Resource.Id.table);
-			int i;
-
 			TableRow tablerow1 = FindViewById<TableRow> (Resource.Id.row1);
 			TableRow tablerow2 = FindViewById<TableRow> (Resource.Id.row2);
 			TableRow tablerow3 = FindViewById<TableRow> (Resource.Id.row3);

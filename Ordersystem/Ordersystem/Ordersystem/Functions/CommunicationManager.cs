@@ -5,7 +5,6 @@ using System.Text;
 using System.Xml.Serialization;
 using System.Threading.Tasks;
 using Ordersystem.Enums;
-using SQLite;
 using Ordersystem.Model;
 using Ordersystem.Utilities;
 
@@ -13,10 +12,10 @@ namespace Ordersystem.Functions
 {
     public class CommunicationManager
     {
-        /*public CommunicationManager()
+        public CommunicationManager()
         {
             _localDatabase = new LocalDatabase("LocalDatabase");
-        }*/
+        }
 
         private Customer _customer;
         private Orderlist _orderlist;
@@ -68,7 +67,7 @@ namespace Ordersystem.Functions
         /// Gets the session matching the Customer from the database and resumes it.
         /// If no such session is found, creates a new session, and fetches required data from Master Cater System.
         /// </summary>
-        /*public void GetSession()
+        public void GetSession()
         {
             Order order = _localDatabase.GetOrder(x => x.PersonNumber == _customer.PersonNumber);
             if (order != null)
@@ -91,7 +90,7 @@ namespace Ordersystem.Functions
         {
             _customer.Order = order;
             _orderlist = _localDatabase.GetOrderlist(x => x.PersonNumber == _customer.PersonNumber);
-        }*/
+        }
 
         private Orderlist RequestOrderlist()
         {
@@ -101,14 +100,14 @@ namespace Ordersystem.Functions
         /// <summary>
         /// Stores the current session in the database.
         /// </summary>
-        /*public void StoreSession()
+        public void StoreSession()
         {
-            _localDatabase.SaveOrder(_orderlist, _customer);
-        }*/
+            _localDatabase.SaveSession(_orderlist, _customer);
+        }
 
         public void CloseSession()
         {
-            throw new NotImplementedException();
+            _localDatabase.Close();
         }
 
         public bool IsOrderValid()
