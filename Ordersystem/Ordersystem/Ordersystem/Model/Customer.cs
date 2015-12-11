@@ -25,7 +25,7 @@ namespace Ordersystem.Model
 
             PersonNumber = personNumber;
             Name = name;
-            Order = new Order();
+			Order = new Order ();
             Diet = diet;
         }
         

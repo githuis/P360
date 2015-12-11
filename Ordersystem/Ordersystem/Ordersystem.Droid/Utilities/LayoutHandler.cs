@@ -22,6 +22,7 @@ namespace Ordersystem.Droid
 		private int maxRowHeight = 200;
 		private int textSizeLarge = 20;
 		private int textSizeMed = 15;
+		private int dishNameMaxLength = 12; //To not disturb row titles
 
 		//'Globals' for inside LayoutHandler
 		private Activity activity;
@@ -30,6 +31,7 @@ namespace Ordersystem.Droid
 		private Point displaySize;
 		private DateTime testDate;
 		private Customer customer;
+		private Orderlist orderlist;
 
 		//10px per container per side. 50px for the arrow.
 		private int paddingTotal = 8 * 10;
@@ -39,14 +41,14 @@ namespace Ordersystem.Droid
 		//The Colors to be used throughout the whole UI.
 		public Color RowBackgroundColor = Color.ParseColor("#F9F9F9");
 		public Color RowCompletedColor = Color.ParseColor("#75EA94");
-		public Color HeaderColor = Color.ParseColor("#417378"); // Skal vælges rigtigt
+		public Color RowErrorColor = Color.ParseColor("#E03A3A");
+		public Color HeaderColor = Color.ParseColor("#417378");
 		public Color TutorialColor = Color.ParseColor("#F2F3EB");
 		public Color TutorialText = Color.ParseColor("#212121");
 
-		public LayoutHandler (Activity activity, Customer customer)
+		public LayoutHandler (Activity activity)
 		{
 			this.activity = activity;
-			this.customer = customer;
 
 			testMenu = new DayMenu (
 				new Dish ("Kartofler m. Sovs", "Kartofler med brun sovs og millionbøf", ""),
@@ -58,6 +60,12 @@ namespace Ordersystem.Droid
 			infoRowId = int.MaxValue;
 		}
 
+		public void SetCustomerAndList(Customer customer, Orderlist orderlist)
+		{
+			this.customer = customer;
+			this.orderlist = orderlist;
+		}
+
 		public void CreateDayMenuDisplay(DayMenu dayMenu, TableRow row, TableLayout parent)
 		{
 			int childId = parent.IndexOfChild (row);
@@ -65,9 +73,9 @@ namespace Ordersystem.Droid
 			TableRow newRow = new TableRow (activity);
 			newRow.AddView (new TextView (activity) { Text = "" }, 0);
 
-			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish1,false), 1);
-			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish2,false), 2);
-			newRow.AddView (LinearBuilder (parent, row, dayMenu.SideDish,true), 3);
+			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish1, DayMenuChoice.Dish1), 1);
+			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish2, DayMenuChoice.Dish2), 2);
+			newRow.AddView (LinearBuilder (parent, row, dayMenu.SideDish, true), 3);
 			newRow.AddView(LinearNoFood(parent,row), 4);
 
 
@@ -116,17 +124,16 @@ namespace Ordersystem.Droid
 			displaySize = size;
 		}
 
-		private void OpenRow(TableLayout table, TableRow row)
+		public void SetRowErrorColor(TableRow row)
 		{
-			row.SetMinimumHeight (mediumRowHeight);
-			ChangeArrowTo(row, Resource.Drawable.ExpandArrow);
-			CreateDayMenuDisplay(testMenu, row, table);
-			UpdateDayMenuColors (table, row);
+			row.SetBackgroundColor (RowErrorColor);
 		}
 
-		private void CloseRow(TableLayout table, TableRow row)
+		public void CloseRow(TableLayout table, TableRow row)
 		{
 			row.SetMinimumHeight (minRowHeight);
+
+			Console.WriteLine (table.IndexOfChild (row));
 
 			//Sub-menu's first child (0) is a linearlayout, others are TextView. If is submenu, remove row.
 			var child = row.GetChildAt(0);
@@ -136,6 +143,20 @@ namespace Ordersystem.Droid
 				ChangeArrowTo (row, Resource.Drawable.Forward);
 			infoRowId = int.MaxValue;
 
+		}
+
+		public void ForceCloseInfoRow(TableLayout layout)
+		{
+			if(infoRowId != int.MaxValue)
+				layout.RemoveViewAt (infoRowId);
+		}
+
+		private void OpenRow(TableLayout table, TableRow row)
+		{
+			row.SetMinimumHeight (mediumRowHeight);
+			ChangeArrowTo(row, Resource.Drawable.ExpandArrow);
+			CreateDayMenuDisplay(customer.Order.DayMenuSelections[table.IndexOfChild (row)/2].DayMenu, row, table);
+			UpdateDayMenuColors (table, row);
 		}
 
 		/// <summary>
@@ -156,7 +177,7 @@ namespace Ordersystem.Droid
 			}
 		}
 
-		private bool IsOpen(TableRow row)
+		public bool IsOpen(TableRow row)
 		{
 			return row.Height == mediumRowHeight;
 		}
@@ -186,6 +207,11 @@ namespace Ordersystem.Droid
 			linearLayout.AddView (imageView);
 			linearLayout.AddView (descriptionView);
 
+			int index = table.IndexOfChild(row);
+			index /= 2;
+			if(customer.Order.DayMenuSelections[index].Choice == DayMenuChoice.NoChoice)
+				ClearRowText (row, customer.Order.DayMenuSelections [index].Date);
+
 
 			/*if (!isSideDish) 
 			{
@@ -211,9 +237,43 @@ namespace Ordersystem.Droid
 			}*/
 
 			linearLayout.Click += (object sender, EventArgs e) => {
+				customer.Order.DayMenuSelections[index].Choice = choice;
+				UpdateRowText(row, customer.Order.DayMenuSelections[index].Date, dish);
+				UpdateDayMenuColors(table, row);
+			};
+
+			return linearLayout;
+		}
+
+		//overload for sidedishes
+		private LinearLayout LinearBuilder (TableLayout table, TableRow row, Dish dish, bool sideDish)
+		{
+			LinearLayout linearLayout = new LinearLayout (activity);
+			linearLayout.Orientation = Orientation.Vertical;
+			linearLayout.SetMinimumWidth ( (displaySize.X / 4) - (paddingTotal / 2));
+			linearLayout.SetPadding (10, 10, 5, 10);
+			linearLayout.SetBackgroundColor (RowBackgroundColor);
+
+			TextView titleView = new TextView (activity);
+			ImageView imageView = new ImageView (activity);
+			TextView descriptionView = new TextView (activity);
+
+			titleView.Text = dish.Name;
+			titleView.TextSize = textSizeLarge;
+
+			imageView.SetImageURI (Android.Net.Uri.Parse("http://www.kesanacats.dk/wp-content/uploads/killroy-lille-billed-fra-sølvkatten.png"));
+
+			descriptionView.Text = dish.Description;
+			descriptionView.TextSize = textSizeMed;
+
+			linearLayout.AddView (titleView);
+			linearLayout.AddView (imageView);
+			linearLayout.AddView (descriptionView);
+
+			linearLayout.Click += (object sender, EventArgs e) => {
 				int index = table.IndexOfChild(row);
 				index /= 2;
-				customer.Order.DayMenuSelections[index].Choice = choice;
+				customer.Order.DayMenuSelections[index].SideDish = !customer.Order.DayMenuSelections[index].SideDish;
 
 				UpdateDayMenuColors(table, row);
 			};
@@ -243,36 +303,29 @@ namespace Ordersystem.Droid
 			linearLayout.Click += (object sender, EventArgs e) => {
 				int index = table.IndexOfChild(row);
 				index /= 2;
-				Dish.SelectedDishes[index] = null;
-				Dish.SelectedSideDishes[index] = null;
+				customer.Order.DayMenuSelections[index].Choice = DayMenuChoice.NoDish;
 				UpdateDayMenuColors(table, row);
-				ClearRowText(row, testDate); // FIX DATE!
+				ClearRowText(row, orderlist.DayMenus[index].Date);
 			};
 
 			return linearLayout;
 		}
 
-		public void SelectSideDish(int index, Dish dish)
-		{
-			//unselect side dish
-			if (Dish.SelectedSideDishes [index] != null)
-				Dish.SelectedSideDishes [index] = null;
-			//Select sidedish if and only if there is a main dish selected.
-			else if (Dish.SelectedDishes[index] != null)
-			{
-				Dish.SelectedSideDishes [index] = dish;
-			}
-		}
-
 		private void UpdateRowText(TableRow row, DateTime date, Dish dish)
 		{
-			string s = DayOfWeekToDanish (date.DayOfWeek) + " d. ";
-			s = date.ToShortDateString ();
+			string s = DayOfWeekToDanish (date.DayOfWeek) + " d.";
+			s += date.ToShortDateString ();
 
 			if(dish != null)
 			{
-				s += " - ";
-				s += dish.Name;
+				s += ": ";
+
+				if (dish.Name.Length > dishNameMaxLength)
+				{
+					s += dish.Name.Substring (0, dishNameMaxLength);
+					s += "...";
+				} else
+					s += dish.Name;
 			}
 			GetTextView (row, 0).Text = s;
 		}
@@ -351,25 +404,31 @@ namespace Ordersystem.Droid
 
 			RemoveAllColors (row);
 			//If sidedish is selected for row, color it
-			if (CompareDish (Dish.SelectedSideDishes [index], lin3))
+			if (customer.Order.DayMenuSelections[index].SideDish)
 				ColorDish ((LinearLayout)row.GetChildAt (3));
 			//If dish 1 is selected for row, color it
-			if (CompareDish (Dish.SelectedDishes [index], lin1))
+			if (customer.Order.DayMenuSelections[index].Choice == DayMenuChoice.Dish1)
 			{
 				ColorDish ((LinearLayout)row.GetChildAt (1));
 				ColorRow (oldrow);
 			}
 			//otherwise, if dish 2 is selected for row, color it.
-			else if (CompareDish (Dish.SelectedDishes [index], lin2))
+			else if (customer.Order.DayMenuSelections[index].Choice == DayMenuChoice.Dish2)
 			{
 				ColorDish ((LinearLayout)row.GetChildAt (2));
 				ColorRow (oldrow);
 			}
-			else if (Dish.SelectedDishes [id] == null)
+			else if (customer.Order.DayMenuSelections[index].Choice == DayMenuChoice.NoDish)
 			{
 				CleanRow (oldrow);
 				RemoveAllColors (row);
+				ColorRow (oldrow);
 				ColorDish (lin4);
+			}
+			else if (customer.Order.DayMenuSelections[index].Choice == DayMenuChoice.NoChoice)
+			{
+				CleanRow (oldrow);
+				RemoveAllColors (row);
 			}
 			
 		}
@@ -395,7 +454,6 @@ namespace Ordersystem.Droid
 
 		private void ColorDish(LinearLayout lin)
 		{
-			Console.WriteLine ("Werks");
 			lin.SetBackgroundColor(RowCompletedColor);
 		}
 
@@ -403,6 +461,5 @@ namespace Ordersystem.Droid
 		{
 			return !(dish == null) && dish.Name == ((TextView)lin.GetChildAt (0)).Text;
 		}
-
 	}
 }

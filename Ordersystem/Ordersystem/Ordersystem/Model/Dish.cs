@@ -17,9 +17,10 @@ namespace Ordersystem.Model
                 throw new ArgumentNullException("name", "No name found.");
             }
 
-            if (String.IsNullOrWhiteSpace(description))
+			if (String.IsNullOrEmpty(description))
             {
-                throw new ArgumentNullException("description", "No description found.");
+				
+				throw new ArgumentNullException("description", "No description found at dish named: " + name);
             }
 
             if (imageSource == null)

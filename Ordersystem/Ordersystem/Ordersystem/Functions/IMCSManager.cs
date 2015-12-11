@@ -9,7 +9,7 @@ namespace Ordersystem.Functions
 
 		Customer GetCustomerByPersonNumber (string personNumber);
 
-		Orderlist GetOrderlistByDiet (string diet);
+		Orderlist GetOrderlistByDiet (Ordersystem.Enums.Diet diet);
 	}
 }
 
