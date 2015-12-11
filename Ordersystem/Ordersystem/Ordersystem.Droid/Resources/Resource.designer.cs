@@ -1493,11 +1493,12 @@ namespace Ordersystem.Droid
 			// aapt resource value: 0x7f040001
 			public const int abc_fade_out = 2130968577;
 			
-			// aapt resource value: 0x7f040002
-			public const int abc_grow_fade_in_from_bottom = 2130968578;
+			// aapt resource value: 0x7f050000
+			public const int theme_custom_background = 2131034112;
 			
-			// aapt resource value: 0x7f040003
-			public const int abc_popup_enter = 2130968579;
+			// aapt resource value: 0x7f050001
+			public const int theme_devicedefault_background = 2131034113;
+
 			
 			// aapt resource value: 0x7f040004
 			public const int abc_popup_exit = 2130968580;
@@ -1650,14 +1651,11 @@ namespace Ordersystem.Droid
 			// aapt resource value: 0x7f0100bb
 			public const int alertDialogCenterButtons = 2130772155;
 			
-			// aapt resource value: 0x7f0100b9
-			public const int alertDialogStyle = 2130772153;
+			// aapt resource value: 0x7f020024
+			public const int SendOrder = 2130837540;
 			
-			// aapt resource value: 0x7f0100bc
-			public const int alertDialogTheme = 2130772156;
-			
-			// aapt resource value: 0x7f01003f
-			public const int arrowHeadLength = 2130772031;
+			// aapt resource value: 0x7f020025
+			public const int Untitled = 2130837541;
 			
 			// aapt resource value: 0x7f010040
 			public const int arrowShaftLength = 2130772032;
@@ -2395,11 +2393,8 @@ namespace Ordersystem.Droid
 		public partial class Boolean
 		{
 			
-			// aapt resource value: 0x7f090002
-			public const int abc_action_bar_embed_tabs = 2131296258;
-			
-			// aapt resource value: 0x7f090000
-			public const int abc_action_bar_embed_tabs_pre_jb = 2131296256;
+			// aapt resource value: 0x7f060000
+			public const int Theme_Custom = 2131099648;
 			
 			// aapt resource value: 0x7f090003
 			public const int abc_action_bar_expanded_action_views_exclusive = 2131296259;
