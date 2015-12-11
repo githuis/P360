@@ -76,7 +76,7 @@ namespace Ordersystem.Functions
 
 		public void LogOut()
 		{
-			StoreSession ();
+			if (!_customer.Order.Sent) StoreSession ();
 			_localDatabase.Close ();
 
 			_customer = null;
