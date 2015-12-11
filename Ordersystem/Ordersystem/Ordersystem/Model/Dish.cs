@@ -1,4 +1,4 @@
-﻿using Xamarin.Forms;
+using Xamarin.Forms;
 
 namespace Ordersystem.Model
 {
@@ -38,5 +38,6 @@ namespace Ordersystem.Model
         public string ImageUrl { get; set; }
 
         public static Dish[] SelectedDishes;
+        public static Dish[] SelectedSideDishes;
     }
 }

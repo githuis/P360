@@ -25,8 +25,8 @@
         android:id="@+id/loginButton"
         android:layout_width="432.0dp"
         android:layout_height="81.5dp"
-        android:text="Log Ind"
-        android:gravity="center" />
+        android:gravity="center"
+        android:text="Log ind" />
     <TextView
         android:text="Ugyldigt CPR-nummer, se om det er rigtigt, og prøv igen"
         android:layout_width="match_parent"
