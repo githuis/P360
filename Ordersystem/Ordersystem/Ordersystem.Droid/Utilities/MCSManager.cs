@@ -7,6 +7,7 @@ using MySql.Data.MySqlClient;
 using Ordersystem.Model;
 using Ordersystem.Enums;
 using Ordersystem.Droid.Utilities;
+using Ordersystem.Functions;
 
 [assembly: Xamarin.Forms.Dependency(typeof(MCSManager))]
 namespace Ordersystem.Droid.Utilities
