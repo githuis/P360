@@ -2,11 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ordersystem.Enums;
-
+using System.Xml.Serialization;
 namespace Ordersystem.Model
 {
+    [XmlType]
     public class Orderlist
     {
+        /// <summary>
+        /// Default constructor for serialization.
+        /// </summary>
+        public Orderlist()
+        {
+
+        }
+
         /// <summary>
         /// The Orderlist recieved from the Master Cater System.
         /// </summary>
@@ -30,6 +39,7 @@ namespace Ordersystem.Model
         /// <summary>
         /// The list containing all the DayMenus.
         /// </summary>
+        [XmlIgnore]
         public List<DayMenu> DayMenus { get; private set; }
 
 		public bool Active { get { return DateTime.Today >= StartDate && DateTime.Today <= EndDate; } }

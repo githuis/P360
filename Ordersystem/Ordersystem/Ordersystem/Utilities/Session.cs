@@ -1,5 +1,5 @@
 ﻿using Ordersystem.Model;
-using SQLite;
+using System.Xml.Serialization;
 
 namespace Ordersystem.Utilities
 {
@@ -7,23 +7,24 @@ namespace Ordersystem.Utilities
     /// Concatination of the information in the database.
     /// Includes primary key property.
     /// </summary>
-    public class SQLItem
+    [XmlRoot]
+    public class Session
     {
         /// <summary>
-        /// Empty constructor, needed for SQLite.
+        /// Empty constructor, should only be used by SQLite.
         /// </summary>
-        public SQLItem()
+        public Session() : base()
         {
             
         }
 
         /// <summary>
-        /// Creates SQLItem with all relevant information.
+        /// Creates a storable Session with all relevant information.
         /// </summary>
         /// <param name="personNumber">The personNumber of the customer whom the order belongs to.</param>
         /// <param name="order">The Order in the database.</param>
         /// <param name="orderlist">The Orderlist relevant to the database.</param>
-        public SQLItem(int personNumber, Order order, Orderlist orderlist)
+        public Session(string personNumber, Order order, Orderlist orderlist)
         {
             PersonNumber = personNumber;
             Order = order;
@@ -33,22 +34,19 @@ namespace Ordersystem.Utilities
         /// <summary>
         /// The personNumber of the customer whom the order belongs to.
         /// </summary>
-        public int PersonNumber { get; private set; }
+        //[MaxLength(10)]
+        public string PersonNumber { get; set; }
 
         /// <summary>
-        /// The Order in the database.
+        /// The serialized Order in the database.
         /// </summary>
-        public Order Order { get; private set; }
+        public Order Order { get; set; }
 
         /// <summary>
-        /// The Orderlist relevant to the database.
+        /// The serialized Orderlist in the database.
         /// </summary>
-        public Orderlist Orderlist { get; private set; }
+        public Orderlist Orderlist { get; set; }
 
-        /// <summary>
-        /// The primary key ID needed to navigate the database.
-        /// </summary>
-        [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
+        public static XmlStringSerializer<Session> Serializer = new XmlStringSerializer<Session>();
     }
 }

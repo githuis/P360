@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Serialization;
 using Ordersystem.Enums;
 
 namespace Ordersystem.Model
 {
+    [XmlType]
     public class Order
     {
+
         /// <summary>
         /// An order for Master Cater System.
         /// </summary>

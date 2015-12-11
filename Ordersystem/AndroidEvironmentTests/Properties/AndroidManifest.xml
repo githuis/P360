@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="AndroidEnvironmentTests.AndroidEnvironmentTests" android:versionCode="1" android:versionName="1.0">
-	<uses-sdk android:targetSdkVersion="17" />
+	<uses-sdk android:targetSdkVersion="17" android:minSdkVersion="17" />
 	<application android:label="AndroidEnvironmentTests" android:debuggable="true"></application>
 </manifest>

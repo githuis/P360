@@ -37,9 +37,10 @@
     <Compile Include="Model\DayMenu.cs" />
     <Compile Include="Model\DayMenuSelection.cs" />
     <Compile Include="Model\Dish.cs" />
-    <Compile Include="Utilities\ISQLite.cs" />
+    <Compile Include="Utilities\ILocalFile.cs" />
     <Compile Include="Utilities\LocalDatabase.cs" />
-    <Compile Include="Utilities\SQLItem.cs" />
+    <Compile Include="Utilities\Session.cs" />
+    <Compile Include="Utilities\XmlStringSerializer.cs" />
     <None Include="app.config" />
     <None Include="Guidelines\CodeGuideline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
