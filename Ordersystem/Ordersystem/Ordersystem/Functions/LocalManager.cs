@@ -104,7 +104,7 @@ namespace Ordersystem.Functions
         /// </summary>
         public void StoreSession()
         {
-            _localDatabase.SaveOrder(_orderlist, _customer);
+            _localDatabase.SaveSession(_orderlist, _customer);
         }
 
         public void CloseSession()

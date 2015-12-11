@@ -66,7 +66,7 @@ namespace Ordersystem.Utilities
         /// </summary>
         /// <param name="personNumber">The personNumber used to fetch the Order.</param>
         /// <returns>The Order if found, else returns null.</returns>
-        public Order GetOrder(int personNumber)
+        public Order GetOrder(string personNumber)
         {
             return _sessions.FirstOrDefault(x => x.PersonNumber == personNumber).Order;
         }
@@ -76,7 +76,7 @@ namespace Ordersystem.Utilities
         /// </summary>
         /// <param name="personNumber">The personNumber used to fetch the Orderlist.</param>
         /// <returns>The Orderlist if found, else returns null.</returns>
-        public Orderlist GetOrderlist(int personNumber)
+        public Orderlist GetOrderlist(string personNumber)
         {
             return _sessions.FirstOrDefault(x => x.PersonNumber == personNumber).Orderlist;
         }
