@@ -32,6 +32,8 @@ namespace Ordersystem.Model
         /// </summary>
         public List<DayMenu> DayMenus { get; private set; }
 
+		public bool Active { get { return DateTime.Today >= StartDate && DateTime.Today <= EndDate; } }
+
         /// <summary>
         /// The starting date of the Orderlist.
         /// </summary>
