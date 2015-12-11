@@ -44,11 +44,11 @@ namespace Ordersystem.Droid
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f060000
-			public const int theme_custom_background = 2131099648;
+			// aapt resource value: 0x7f050000
+			public const int theme_custom_background = 2131034112;
 			
-			// aapt resource value: 0x7f060001
-			public const int theme_devicedefault_background = 2131099649;
+			// aapt resource value: 0x7f050001
+			public const int theme_devicedefault_background = 2131034113;
 			
 			static Color()
 			{
@@ -172,13 +172,10 @@ namespace Ordersystem.Droid
 			public const int LogIn = 2130837539;
 			
 			// aapt resource value: 0x7f020024
-			public const int monoandroidsplash = 2130837540;
+			public const int SendOrder = 2130837540;
 			
 			// aapt resource value: 0x7f020025
-			public const int SendOrder = 2130837541;
-			
-			// aapt resource value: 0x7f020026
-			public const int Untitled = 2130837542;
+			public const int Untitled = 2130837541;
 			
 			static Drawable()
 			{
@@ -664,11 +661,8 @@ namespace Ordersystem.Droid
 		public partial class Style
 		{
 			
-			// aapt resource value: 0x7f050000
-			public const int Mono_Android_Theme_Splash = 2131034112;
-			
-			// aapt resource value: 0x7f050001
-			public const int Theme_Custom = 2131034113;
+			// aapt resource value: 0x7f060000
+			public const int Theme_Custom = 2131099648;
 			
 			static Style()
 			{
