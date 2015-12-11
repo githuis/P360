@@ -9,6 +9,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Ordersystem.Utilities;
 using Android.Graphics;
 
 namespace Ordersystem.Droid
@@ -17,7 +18,7 @@ namespace Ordersystem.Droid
 	[Activity (Label = "Ordersystem", MainLauncher = true, Icon = "@drawable/icon", ScreenOrientation = Android.Content.PM.ScreenOrientation.Landscape,Theme = "@android:style/Theme.Holo.Light.NoActionBar")]
 	public class MainActivity : Activity
 	{
-		CommunicationManager communicationManager;
+		LocalManager lm = new LocalManager();
 		LayoutHandler layoutHandler;
 		List<TableRow> rows;
 
@@ -30,14 +31,14 @@ namespace Ordersystem.Droid
 
 		public void LogIn(Button button,EditText editText, TextView errorMsg)
 		{
-			button.Click += delegate 
+			button.Click += delegate
 			{
 				if(editText.Text == "") // START DEBUG ONLY -- MUST BE REMOVED BEFORE SHIPPING -- CRITICAL
 				{
 					SetContentView (Resource.Layout.Main_Window);
 					CreateMainWindow ();
 				} // END DEBUG ONLY
-				else if(communicationManager.ValidSocialSecurityNumber(editText.Text))
+				else if(lm.ValidSocialSecurityNumber(editText.Text))
 				{
 					SetContentView (Resource.Layout.Main_Window);
 					CreateMainWindow ();

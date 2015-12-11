@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Ordersystem.Enums;
 
 namespace Ordersystem.Model
