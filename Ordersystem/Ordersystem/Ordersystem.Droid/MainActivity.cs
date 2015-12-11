@@ -13,8 +13,7 @@ using Android.Graphics;
 
 namespace Ordersystem.Droid
 {
-	// OLD = [Activity (Label = "Ordersystem", MainLauncher = true, Icon = "@drawable/icon")]
-	//Test too see if this forces landscape mode in the main screen.
+	// OLD, keep for backup [Activity (Label = "Ordersystem", MainLauncher = true, Icon = "@drawable/icon")]
 	[Activity (Label = "Ordersystem", MainLauncher = true, Icon = "@drawable/icon", ScreenOrientation = Android.Content.PM.ScreenOrientation.Landscape,Theme = "@android:style/Theme.Holo.Light.NoActionBar")]
 	public class MainActivity : Activity
 	{
