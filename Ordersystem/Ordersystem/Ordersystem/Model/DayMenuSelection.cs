@@ -23,8 +23,13 @@ namespace Ordersystem.Model
         /// <param name="dayMenu">The DayMenu this is a selection from.</param>
         /// <param name="choice">The choice of dish.</param>
         /// <param name="sideDish">Whether to save a side dish or not.</param>
-        public DayMenuSelection(DayMenu dayMenu, DayMenuChoice choice, bool sideDish)
+        public DayMenuSelection(DayMenu dayMenu, DayMenuChoice choice, bool sideDish = false)
         {
+            if (dayMenu == null)
+            {
+                throw new ArgumentNullException("dayMenu", "dayMenu is null.");
+            }
+
             DayMenu = dayMenu;
             Choice = choice;
             SideDish = sideDish;

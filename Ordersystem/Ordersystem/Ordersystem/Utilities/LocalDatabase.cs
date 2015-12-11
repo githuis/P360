@@ -16,7 +16,6 @@ namespace Ordersystem.Utilities
         public string Filename { get; set; }
         private ILocalFile _database;
         private List<Session> _sessions;
-
         /// <summary>
         /// Gets the connection and creates the table.
         /// </summary>
@@ -67,7 +66,7 @@ namespace Ordersystem.Utilities
         /// </summary>
         /// <param name="personNumber">The personNumber used to fetch the Order.</param>
         /// <returns>The Order if found, else returns null.</returns>
-        public Order GetOrder(string personNumber)
+        public Order GetOrder(int personNumber)
         {
             return _sessions.FirstOrDefault(x => x.PersonNumber == personNumber).Order;
         }
@@ -77,7 +76,7 @@ namespace Ordersystem.Utilities
         /// </summary>
         /// <param name="personNumber">The personNumber used to fetch the Orderlist.</param>
         /// <returns>The Orderlist if found, else returns null.</returns>
-        public Orderlist GetOrderlist(string personNumber)
+        public Orderlist GetOrderlist(int personNumber)
         {
             return _sessions.FirstOrDefault(x => x.PersonNumber == personNumber).Orderlist;
         }
