@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Ordersystem.Model
 {
@@ -29,7 +29,8 @@ namespace Ordersystem.Model
 
             Name = name;
             Description = description;
-            ImageSource = imageSource;
+            ImageUrl = imageSource;
+            //Image = new Image { Source = imageSource };
         }
 
         /// <summary>
@@ -45,6 +46,12 @@ namespace Ordersystem.Model
         /// <summary>
         /// An image of the dish.
         /// </summary>
-        public string ImageSource { get; private set; }
+
+        public int Number { get; set; }
+
+        public string ImageUrl { get; set; }
+
+        public static Dish[] SelectedDishes;
+        public static Dish[] SelectedSideDishes;
     }
 }
