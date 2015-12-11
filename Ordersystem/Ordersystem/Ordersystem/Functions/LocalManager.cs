@@ -50,6 +50,11 @@ namespace Ordersystem.Functions
             return day && month && isNumbers;
         }
 
+		public void SendOrder ()
+		{
+			_mcsManager.SendOrder (_customer.Order, _customer.PersonNumber);
+		}
+
         private bool IsNumberBetween(string num, int min, int max)
         {
             int number;

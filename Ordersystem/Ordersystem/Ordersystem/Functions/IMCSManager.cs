@@ -1,7 +1,7 @@
 ﻿using System;
 using Ordersystem.Model;
 
-namespace Ordersystem
+namespace Ordersystem.Functions
 {
 	public interface IMCSManager
 	{

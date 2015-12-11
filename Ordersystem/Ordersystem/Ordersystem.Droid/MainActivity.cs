@@ -18,13 +18,16 @@ namespace Ordersystem.Droid
 	[Activity (Label = "Ordersystem", MainLauncher = true, Icon = "@drawable/icon", ScreenOrientation = Android.Content.PM.ScreenOrientation.Landscape,Theme = "@android:style/Theme.Holo.Light.NoActionBar")]
 	public class MainActivity : Activity
 	{
-		LocalManager lm = new LocalManager();
+		LocalManager lm;
 		LayoutHandler layoutHandler;
 		List<TableRow> rows;
 
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
+			Xamarin.Forms.Forms.Init (this, bundle);
+
+			lm = new LocalManager();
 
 			InitializeLogInScreen ();
 		}
@@ -38,7 +41,7 @@ namespace Ordersystem.Droid
 					SetContentView (Resource.Layout.Main_Window);
 					CreateMainWindow ();
 				} // END DEBUG ONLY
-				else if(lm.ValidSocialSecurityNumber(editText.Text))
+				else if(lm.IsValidSocialSecurityNumber(editText.Text))
 				{
 					SetContentView (Resource.Layout.Main_Window);
 					CreateMainWindow ();
@@ -136,7 +139,6 @@ namespace Ordersystem.Droid
 			TextView errorMsg = FindViewById<TextView> (Resource.Id.loginErrorMessageText); 
 
 			//Initialize managers
-			communicationManager = new CommunicationManager();
 			layoutHandler = new LayoutHandler(this);
 
 			//Initialize list for TableRows.
@@ -164,21 +166,21 @@ namespace Ordersystem.Droid
 
 		private void SendOrderClick(object sender, EventArgs e)
 		{
-			Android.App.AlertDialog.Builder builder = new AlertDialog.Builder (this);
+			/*Android.App.AlertDialog.Builder builder = new AlertDialog.Builder (this);
 			AlertDialog alertDialog = builder.Create ();
 			alertDialog.SetTitle ("Send bestilling?");
 			alertDialog.SetMessage ("Der er nogle dage, hvor der ikke er valgt mad. Send alligevel?");
 
 			alertDialog.SetButton ("Send alligevel", (s, ev) => {
-				communicationManager.IsOrderValid();
-				communicationManager.SendOrder();
+				lm.IsOrderValid();
+				lm.SendOrder();
 			});
 
 			alertDialog.SetButton2 ("Gå tilbage", (s, ev) => {
 				
 			});
 
-			alertDialog.Show ();
+			alertDialog.Show ();*/
 		}
 	}
 }
