@@ -16,6 +16,11 @@ namespace Ordersystem.Model
         /// <param name="diet">The diet of the Orderlist.</param>
         public Orderlist(List<DayMenu> dayMenus, DateTime startDate, DateTime endDate, Diet diet)
         {
+            if (dayMenus == null)
+            {
+                throw new ArgumentNullException("dayMenus", "List of dayMenu is null.");
+            }
+
             DayMenus = dayMenus;
             StartDate = startDate;
             EndDate = endDate;
@@ -26,6 +31,8 @@ namespace Ordersystem.Model
         /// The list containing all the DayMenus.
         /// </summary>
         public List<DayMenu> DayMenus { get; private set; }
+
+		public bool Active { get { return DateTime.Today >= StartDate && DateTime.Today <= EndDate; } }
 
         /// <summary>
         /// The starting date of the Orderlist.
@@ -48,6 +55,11 @@ namespace Ordersystem.Model
         /// <param name="dayMenu">The DayMenu to be added.</param>
         public void AddDayMenu(DayMenu dayMenu)
         {
+            if (dayMenu == null)
+            {
+                throw new ArgumentNullException("dayMenu", "dayMenu is null.");
+            }
+
             DayMenus.Add(dayMenu);
         }
 

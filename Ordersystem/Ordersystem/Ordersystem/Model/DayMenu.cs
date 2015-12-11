@@ -13,6 +13,21 @@ namespace Ordersystem.Model
         /// <param name="date">The date of the menu.</param>
         public DayMenu(Dish dish1, Dish dish2, Dish sideDish, DateTime date)
         {
+            if (dish1 == null)
+            {
+                throw new ArgumentNullException("dish1", "Dish 1 is null.");
+            }
+
+            if (dish2 == null)
+            {
+                throw new ArgumentNullException("dish2", "Dish 2 is null.");
+            }
+
+            if (sideDish == null)
+            {
+                throw new ArgumentNullException("sideDish", "Side dish is null.");
+            }
+
             Dish1 = dish1;
             Dish2 = dish2;
             SideDish = sideDish;
