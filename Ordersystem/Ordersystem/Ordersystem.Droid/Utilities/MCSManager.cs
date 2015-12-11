@@ -109,12 +109,84 @@ namespace Ordersystem.Droid.Utilities
 				connection.Open();
 
 				string query = "SELECT * FROM orderlists_daymenus oldm " +
+					"JOIN orderlists ol ON ol.OrderlistKey=oldm.orderlistKey " +
+					"JOIN daymenus dm ON dm.DayMenuKey=oldm.DayMenuKey " +
+					"JOIN dishes d1 ON d1.DishKey=dm.Dish1 " +
+					"JOIN dishes d2 ON d2.DishKey=dm.Dish2 " +
+					"JOIN dishes sd ON sd.DishKey=dm.SideDish " +
+					"WHERE ol.Diet = '" + dietString + "'";
+
+				MySqlCommand Command = new MySqlCommand(query, connection);
+				MySqlDataReader reader = Command.ExecuteReader();
+
+				Orderlist orderlist;
+				DateTime StartDate, EndDate;
+				string Diet;
+				int count;
+				List<DayMenu> DayMenus = new List<DayMenu>();
+
+				if (reader.HasRows)
+				{
+					reader.Read ();
+
+					if (!reader.IsDBNull (reader.GetOrdinal ("StartDate")) &&
+						!reader.IsDBNull (reader.GetOrdinal ("Diet")) &&
+						!reader.IsDBNull (reader.GetOrdinal ("Days")))
+					{
+						count = reader.GetInt32 (reader.GetOrdinal ("Days"));
+						Diet = reader.GetString (reader.GetOrdinal ("Diet"));
+						StartDate = reader.GetDateTime (reader.GetOrdinal ("StartDate"));
+						EndDate = reader.GetDateTime (reader.GetOrdinal ("EndDate"));
+					}
+					else
+					{
+						throw new NullReferenceException ("Database contains null values.");
+					}
+
+					if (count < 28 || count > 31)
+					{
+						throw new ArgumentOutOfRangeException ("Invalid amount of days in orderlist.");
+					}
+
+					DayMenus.Add (ReadDayMenu (reader));
+					for (int i = 2; i <= count; i++)
+					{
+						reader.Read ();
+						DayMenus.Add (ReadDayMenu (reader));
+					}
+
+					if (IllegalDates (DayMenus))
+					{
+						throw new ArgumentException ("Duplicate dates detected.");
+					}
+				}
+				else
+				{
+					throw new ArgumentException ("No Ordelist for the given Diet found.");
+				}
+
+				connection.Close();
+				orderlist = new Orderlist (DayMenus, StartDate, EndDate, ParseDietFromString(Diet));
+				return orderlist;
+			}
+		}
+
+		public Orderlist GetOrderlistByDietAndEndDate(Diet diet, DateTime endDate)
+		{
+			string dietString = ParseStringFromDiet (diet);
+
+			using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+			{
+				connection.Open();
+
+				string query = "SELECT * FROM orderlists_daymenus oldm " +
 				               "JOIN orderlists ol ON ol.OrderlistKey=oldm.orderlistKey " +
 				               "JOIN daymenus dm ON dm.DayMenuKey=oldm.DayMenuKey " +
 				               "JOIN dishes d1 ON d1.DishKey=dm.Dish1 " +
 				               "JOIN dishes d2 ON d2.DishKey=dm.Dish2 " +
 				               "JOIN dishes sd ON sd.DishKey=dm.SideDish " +
-				               "WHERE ol.Diet = '" + dietString + "'";
+				               "WHERE ol.Diet = '" + dietString + "'" +
+				               "AND ol.EndDate = '" + endDate.ToString ("dd-MM-yyyy") + "'";
 
 				MySqlCommand Command = new MySqlCommand(query, connection);
 				MySqlDataReader reader = Command.ExecuteReader();
@@ -136,8 +208,7 @@ namespace Ordersystem.Droid.Utilities
 						count = reader.GetInt32 (reader.GetOrdinal ("Days"));
 						Diet = reader.GetString (reader.GetOrdinal ("Diet"));
 						StartDate = reader.GetDateTime (reader.GetOrdinal ("StartDate"));
-						EndDate = StartDate.AddDays (-14);
-						StartDate = StartDate.AddMonths (-1);
+						EndDate = reader.GetDateTime (reader.GetOrdinal ("EndDate"));
 					}
 					else
 					{

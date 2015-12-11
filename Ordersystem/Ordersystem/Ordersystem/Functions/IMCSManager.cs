@@ -1,5 +1,6 @@
 ﻿using System;
 using Ordersystem.Model;
+using Ordersystem.Enums;
 
 namespace Ordersystem.Functions
 {
@@ -9,7 +10,7 @@ namespace Ordersystem.Functions
 
 		Customer GetCustomerByPersonNumber (string personNumber);
 
-		Orderlist GetOrderlistByDiet (string diet);
+		Orderlist GetOrderlistByDiet (Diet diet);
 	}
 }
 

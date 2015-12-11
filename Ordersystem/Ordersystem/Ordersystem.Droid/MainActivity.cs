@@ -37,15 +37,12 @@ namespace Ordersystem.Droid
 			{
 				if(editText.Text == "") // START DEBUG ONLY -- MUST BE REMOVED BEFORE SHIPPING -- CRITICAL
 				{
-					lm.GetCustomerFromDB(editText.Text);
-					lm.GetOrderlistFromDB(sessionCustomer.Diet);
 					SetContentView (Resource.Layout.Main_Window);
 					CreateMainWindow ();
 				} // END DEBUG ONLY
 				else if(lm.IsValidSocialSecurityNumber(editText.Text))
 				{
-					lm.GetCustomerFromDB(editText.Text);
-					lm.GetOrderlistFromDB(sessionCustomer.Diet);
+					lm.LogIn(editText.Text);
 					SetContentView (Resource.Layout.Main_Window);
 					CreateMainWindow ();
 				}

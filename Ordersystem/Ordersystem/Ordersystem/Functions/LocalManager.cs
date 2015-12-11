@@ -57,6 +57,13 @@ namespace Ordersystem.Functions
 			_mcsManager.SendOrder (_customer.Order, _customer.PersonNumber);
 		}
 
+		public void LogIn (string personNumber)
+		{
+			GetCustomerFromDB (personNumber);
+			GetOrderlistFromDB (_customer.Diet);
+
+		}
+
 		public void GetCustomerFromDB (string personNumber)
 		{
 			_customer = _mcsManager.GetCustomerByPersonNumber (personNumber);
