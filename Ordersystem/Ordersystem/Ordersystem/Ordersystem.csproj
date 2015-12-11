@@ -34,18 +34,19 @@
   <ItemGroup>
     <Compile Include="Exceptions\ItemNotFoundException.cs" />
     <Compile Include="Functions\CommunicationManager.cs" />
-    <Compile Include="Model\Customer.cs" />
-    <Compile Include="Model\DayMenu.cs" />
     <Compile Include="Utilities\ISQLite.cs" />
     <Compile Include="Utilities\LocalDatabase.cs" />
     <Compile Include="Utilities\SQLItem.cs" />
     <None Include="Guidelines\CodeGuideline.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="packages.config" />
+    <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\DayMenu.cs" />
+    <Compile Include="Model\DayMenuSelection.cs" />
+    <Compile Include="Model\Dish.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Orderlist.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model\Serving.cs" />
-    <None Include="packages.config" />
-    <Compile Include="Model\Dish.cs" />
+    <Compile Include="Enums\Enumerations.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -63,4 +64,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.0.0.6484\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.0.0.6484\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
+  <ItemGroup>
+    <Folder Include="Model\" />
+    <Folder Include="Enums\" />
+  </ItemGroup>
 </Project>

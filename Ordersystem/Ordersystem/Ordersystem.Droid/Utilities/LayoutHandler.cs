@@ -46,10 +46,11 @@ namespace Ordersystem.Droid
 			this.activity = activity;
 
 			testMenu = new DayMenu (
-				new Dish ("Kartofler m. Sovs", "Kartofler med brun sovs og millionbøf"),
-				new Dish ("Rød grød med fløde", "Rød grød med fløde til."),
-				new Dish ("Jordbær grød m. mælk", "Jordbærgrød"));
-			testDate = DateTime.Now;
+				new Dish ("Kartofler m. Sovs", "Kartofler med brun sovs og millionbøf", ""),
+				new Dish ("Rød grød med fløde", "Rød grød med fløde til.", ""),
+				new Dish ("Jordbær grød m. mælk", "Jordbærgrød", ""),
+				DateTime.Today);
+			testDate = DateTime.Today;
 
 			infoRowId = int.MaxValue;
 		}

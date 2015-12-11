@@ -104,7 +104,7 @@ namespace Ordersystem.Utilities
         /// <param name="customer">The Customer, whose personNumber is used as reference in the database.</param>
         public void SaveOrder(Orderlist orderlist, Customer customer)
         {
-            _database.Insert(new SQLItem(customer.PersonNumber, customer.Order, orderlist));
+            //_database.Insert(new SQLItem(customer.PersonNumber, customer.Order, orderlist));
         }
 
         /// <summary>
