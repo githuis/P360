@@ -69,7 +69,7 @@ namespace Ordersystem.Functions
         /// Gets the session matching the Customer from the database and resumes it.
         /// If no such session is found, creates a new session, and fetches required data from Master Cater System.
         /// </summary>
-        public void GetSession()
+        /*public void GetSession()
         {
             Order order = _localDatabase.GetOrder(x => x.PersonNumber == _customer.PersonNumber);
             if (order != null)
@@ -80,7 +80,7 @@ namespace Ordersystem.Functions
             {
                 NewSession();
             }
-        }
+        }*/
 
         private void NewSession()
         {
@@ -88,11 +88,11 @@ namespace Ordersystem.Functions
             //_orderlist = "Insert Orderlist Method Here";
         }
 
-        private void ResumeSession(Order order)
+       /* private void ResumeSession(Order order)
         {
             _customer.Order = order;
             _orderlist = _localDatabase.GetOrderlist(x => x.PersonNumber == _customer.PersonNumber);
-        }
+        }*/
 
         /// <summary>
         /// Stores the current session in the database.
