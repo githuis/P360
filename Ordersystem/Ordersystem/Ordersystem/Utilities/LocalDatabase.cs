@@ -24,6 +24,11 @@ namespace Ordersystem.Utilities
             Open(filename);
         }
 
+		public void CleanOldSessions()
+		{
+			_sessions.RemoveAll (x => x.Orderlist.EndDate < DateTime.Today || x.Order.Sent);
+		}
+
         /* Predicate methods */
         /// <summary>
         /// Gets the first Order from the database matching the predicate.

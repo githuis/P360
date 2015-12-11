@@ -11,6 +11,8 @@ namespace Ordersystem.Functions
 		Customer GetCustomerByPersonNumber (string personNumber);
 
 		Orderlist GetOrderlistByDiet (Diet diet);
+
+		Orderlist GetOrderlistByEndDateAndDiet (DateTime date, Diet diet);
 	}
 }
 

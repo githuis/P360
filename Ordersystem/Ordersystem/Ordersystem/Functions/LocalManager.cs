@@ -26,7 +26,7 @@ namespace Ordersystem.Functions
 		public LocalManager()
 		{
 			_mcsManager = Xamarin.Forms.DependencyService.Get<IMCSManager> ();
-
+			_localDatabase = new LocalDatabase ("LocalDatabase");
 		}
 
 
@@ -60,8 +60,27 @@ namespace Ordersystem.Functions
 		public void LogIn (string personNumber)
 		{
 			GetCustomerFromDB (personNumber);
-			GetOrderlistFromDB (_customer.Diet);
 
+			_localDatabase.CleanOldSessions ();
+			_customer.Order = _localDatabase.GetOrder (_customer.PersonNumber);
+
+			if (_customer.Order == null)
+			{
+				NewSession ();
+			}
+			else
+			{
+				ResumeSession ();
+			}
+		}
+
+		public void LogOut()
+		{
+			StoreSession ();
+			_localDatabase.Close ();
+
+			_customer = null;
+			_orderlist = null;
 		}
 
 		public void GetCustomerFromDB (string personNumber)
@@ -71,11 +90,6 @@ namespace Ordersystem.Functions
 
 		public Customer Customer {get{return _customer;}}
 		public Orderlist Orderlist {get{return _orderlist;}}
-
-		public void GetOrderlistFromDB (Diet diet)
-		{
-			_orderlist = _mcsManager.GetOrderlistByDiet (diet);
-		}
 
         private bool IsNumberBetween(string num, int min, int max)
         {
@@ -92,34 +106,27 @@ namespace Ordersystem.Functions
             return str.ToCharArray().All(c => c >= '0' && c <= '9');
         }
 
-        /// <summary>
-        /// Gets the session matching the Customer from the database and resumes it.
-        /// If no such session is found, creates a new session, and fetches required data from Master Cater System.
-        /// </summary>
-        /*public void GetSession()
-        {
-            Order order = _localDatabase.GetOrder(x => x.PersonNumber == _customer.PersonNumber);
-            if (order != null)
-            {
-                ResumeSession(order);
-            }
-            else
-            {
-                NewSession();
-            }
-        }*/
-
         private void NewSession()
         {
             _customer.Order = new Order();
-            //_orderlist = "Insert Orderlist Method Here";
+			_orderlist = _mcsManager.GetOrderlistByDiet (_customer.Diet);
+
+			foreach (DayMenu menu in _orderlist.DayMenus)
+			{
+				_customer.Order.AddDayMenuSelection (menu);
+			}
         }
 
-       /* private void ResumeSession(Order order)
+        private void ResumeSession()
         {
-            _customer.Order = order;
-            _orderlist = _localDatabase.GetOrderlist(x => x.PersonNumber == _customer.PersonNumber);
-        }*/
+			_orderlist = _localDatabase.GetOrderlist (_customer.PersonNumber);
+			_orderlist = _mcsManager.GetOrderlistByEndDateAndDiet(_orderlist.EndDate, _orderlist.Diet);
+
+			foreach (DayMenu menu in _orderlist.DayMenus)
+			{
+				_customer.Order.DayMenuSelections.First (s => s.Date == menu.Date).DayMenu = menu;
+			}
+        }
 
         /// <summary>
         /// Stores the current session in the database.
@@ -127,11 +134,6 @@ namespace Ordersystem.Functions
         public void StoreSession()
         {
             _localDatabase.SaveSession(_orderlist, _customer);
-        }
-
-        public void CloseSession()
-        {
-            throw new NotImplementedException();
         }
 
         public bool IsOrderValid()
