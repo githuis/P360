@@ -1,812 +1,819 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:minWidth="25px"
-    android:minHeight="25px"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/scrollView1">
-    <TableLayout
+    android:id="@+id/containter"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+        <Button
+            android:id="@+id/headerLogOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="Log Ud" />
+        <TextView
+            android:id="@+id/headerUserName"
+            android:text="Jens Jensen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical" />
+    </LinearLayout>
+    <ScrollView
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:stretchColumns="1"
-        android:id="@+id/tableLayout1"
-        android:animateLayoutChanges="true">
-        <LinearLayout
-            android:id="@+id/header"
+        android:id="@+id/scrollView1">
+        <TableLayout
+            android:minWidth="25px"
+            android:minHeight="25px"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_vertical">
-            <ImageView
-                android:id="@+id/headerLogOut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right" />
-            <TextView
-                android:id="@+id/headerUserName"
-                android:text="Jens Jensen"
-                android:layout_width="wrap_content"
+            android:stretchColumns="1"
+            android:id="@+id/tableLayout1"
+            android:animateLayoutChanges="true">
+            <LinearLayout
+                android:id="@+id/tutorialPane"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="40dp"
-                android:layout_gravity="center_vertical"
-                android:gravity="center_vertical" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/tutorialPane"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView
-                android:id="@+id/tutorialExit"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/tutorialExit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right" />
+                <TextView
+                    android:id="@+id/tutorialTitle"
+                    android:text="For at vælge en ret:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="35dp"
+                    android:layout_marginTop="24.0dp" />
+                <TextView
+                    android:id="@+id/tutorialText"
+                    android:text="-Tryk på en dato\n-Vælg ønsket ret"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12.0dp"
+                    android:textSize="24dp"
+                    android:layout_marginBottom="22.0dp" />
+            </LinearLayout>
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row1"
+                android:layout_width="wrap_content">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day1"
+                    android:id="@+id/row_name1"
+                    android:layout_marginRight="0.0dp" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView1" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row2">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day2"
+                    android:id="@+id/row_name2" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout2" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView2" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row3">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day3"
+                    android:id="@+id/row_name3"
+                    android:layout_width="444.0dp" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout3" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView31" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row4">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day4"
+                    android:id="@+id/row_name4" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout4" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView30" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row5">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day5"
+                    android:id="@+id/row_name5" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout5" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView29" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row6">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day6"
+                    android:id="@+id/row_name6" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout6" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView28" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row7">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day7"
+                    android:id="@+id/row_name7" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout7" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView27" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row8">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day8"
+                    android:id="@+id/row_name8" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout8" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView26" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row9">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day9"
+                    android:id="@+id/row_name9" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout9" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView25" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row10">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day10"
+                    android:id="@+id/row_name10" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout10" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView24" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row11">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day11"
+                    android:id="@+id/row_name11" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout11" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView23" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row12">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day12"
+                    android:id="@+id/row_name12" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout12" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView22" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row13">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day13"
+                    android:id="@+id/row_name13" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout13" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView21" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row14">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day14"
+                    android:id="@+id/row_name14" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout14" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView20" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row15">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day15"
+                    android:id="@+id/row_name15" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout15" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView19" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row16">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day16"
+                    android:id="@+id/row_name16" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout16" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView18" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row17">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day17"
+                    android:id="@+id/row_name17" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout17" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView17" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row18">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day18"
+                    android:id="@+id/row_name18" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout18" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView16" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row19">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day19"
+                    android:id="@+id/row_name19" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout19" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView15" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row20">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day20"
+                    android:id="@+id/row_name20" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout20" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView14" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row21">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day21"
+                    android:id="@+id/row_name21" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout21" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView13" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row22">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day22"
+                    android:id="@+id/row_name22" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout22" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView12" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row23">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day23"
+                    android:id="@+id/row_name23" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout23" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView11" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row24">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day24"
+                    android:id="@+id/row_name24" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout24" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView10" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row25">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day25"
+                    android:id="@+id/row_name25" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout25" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView9" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row26">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day26"
+                    android:id="@+id/row_name26" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout26" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView8" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row27">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day27"
+                    android:id="@+id/row_name27" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout27" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView7" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row28">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day28"
+                    android:id="@+id/row_name28" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout28" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView6" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row29">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day29"
+                    android:id="@+id/row_name29" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout29" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView5" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row30">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day30"
+                    android:id="@+id/row_name30" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout30" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView4" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <TableRow
+                android:visibility="visible"
+                android:id="@+id/row31">
+                <TextView
+                    android:layout_column="1"
+                    android:text="day31"
+                    android:id="@+id/row_name31" />
+                <GridLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="2"
+                    android:id="@+id/gridLayout31" />
+                <ImageView
+                    android:src="@drawable/forward"
+                    android:layout_column="5"
+                    android:id="@+id/imageView3" />
+            </TableRow>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_weight="1"
+                android:background="#B6B6B6"
+                android:padding="2dip" />
+            <Button
+                android:id="@+id/sendOrderButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right" />
-            <TextView
-                android:id="@+id/tutorialTitle"
-                android:text="For at vælge en ret:"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="35dp"
-                android:layout_marginTop="24.0dp" />
-            <TextView
-                android:id="@+id/tutorialText"
-                android:text="-Tryk på en dato\n-Vælg ønsket ret"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12.0dp"
-                android:textSize="24dp"
-                android:layout_marginBottom="22.0dp" />
-        </LinearLayout>
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row1"
-            android:layout_width="wrap_content">
-            <TextView
-                android:layout_column="1"
-                android:text="day1"
-                android:id="@+id/row_name1"
-                android:layout_marginRight="0.0dp" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView1" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row2">
-            <TextView
-                android:layout_column="1"
-                android:text="day2"
-                android:id="@+id/row_name2" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout2" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView2" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row3">
-            <TextView
-                android:layout_column="1"
-                android:text="day3"
-                android:id="@+id/row_name3"
-                android:layout_width="444.0dp" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout3" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView31" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row4">
-            <TextView
-                android:layout_column="1"
-                android:text="day4"
-                android:id="@+id/row_name4" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout4" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView30" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row5">
-            <TextView
-                android:layout_column="1"
-                android:text="day5"
-                android:id="@+id/row_name5" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout5" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView29" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row6">
-            <TextView
-                android:layout_column="1"
-                android:text="day6"
-                android:id="@+id/row_name6" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout6" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView28" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row7">
-            <TextView
-                android:layout_column="1"
-                android:text="day7"
-                android:id="@+id/row_name7" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout7" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView27" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row8">
-            <TextView
-                android:layout_column="1"
-                android:text="day8"
-                android:id="@+id/row_name8" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout8" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView26" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row9">
-            <TextView
-                android:layout_column="1"
-                android:text="day9"
-                android:id="@+id/row_name9" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout9" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView25" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row10">
-            <TextView
-                android:layout_column="1"
-                android:text="day10"
-                android:id="@+id/row_name10" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout10" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView24" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row11">
-            <TextView
-                android:layout_column="1"
-                android:text="day11"
-                android:id="@+id/row_name11" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout11" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView23" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row12">
-            <TextView
-                android:layout_column="1"
-                android:text="day12"
-                android:id="@+id/row_name12" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout12" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView22" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row13">
-            <TextView
-                android:layout_column="1"
-                android:text="day13"
-                android:id="@+id/row_name13" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout13" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView21" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row14">
-            <TextView
-                android:layout_column="1"
-                android:text="day14"
-                android:id="@+id/row_name14" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout14" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView20" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row15">
-            <TextView
-                android:layout_column="1"
-                android:text="day15"
-                android:id="@+id/row_name15" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout15" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView19" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row16">
-            <TextView
-                android:layout_column="1"
-                android:text="day16"
-                android:id="@+id/row_name16" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout16" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView18" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row17">
-            <TextView
-                android:layout_column="1"
-                android:text="day17"
-                android:id="@+id/row_name17" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout17" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView17" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row18">
-            <TextView
-                android:layout_column="1"
-                android:text="day18"
-                android:id="@+id/row_name18" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout18" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView16" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row19">
-            <TextView
-                android:layout_column="1"
-                android:text="day19"
-                android:id="@+id/row_name19" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout19" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView15" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row20">
-            <TextView
-                android:layout_column="1"
-                android:text="day20"
-                android:id="@+id/row_name20" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout20" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView14" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row21">
-            <TextView
-                android:layout_column="1"
-                android:text="day21"
-                android:id="@+id/row_name21" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout21" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView13" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row22">
-            <TextView
-                android:layout_column="1"
-                android:text="day22"
-                android:id="@+id/row_name22" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout22" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView12" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row23">
-            <TextView
-                android:layout_column="1"
-                android:text="day23"
-                android:id="@+id/row_name23" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout23" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView11" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row24">
-            <TextView
-                android:layout_column="1"
-                android:text="day24"
-                android:id="@+id/row_name24" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout24" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView10" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row25">
-            <TextView
-                android:layout_column="1"
-                android:text="day25"
-                android:id="@+id/row_name25" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout25" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView9" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row26">
-            <TextView
-                android:layout_column="1"
-                android:text="day26"
-                android:id="@+id/row_name26" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout26" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView8" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row27">
-            <TextView
-                android:layout_column="1"
-                android:text="day27"
-                android:id="@+id/row_name27" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout27" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView7" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row28">
-            <TextView
-                android:layout_column="1"
-                android:text="day28"
-                android:id="@+id/row_name28" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout28" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView6" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row29">
-            <TextView
-                android:layout_column="1"
-                android:text="day29"
-                android:id="@+id/row_name29" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout29" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView5" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row30">
-            <TextView
-                android:layout_column="1"
-                android:text="day30"
-                android:id="@+id/row_name30" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout30" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView4" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <TableRow
-            android:visibility="visible"
-            android:id="@+id/row31">
-            <TextView
-                android:layout_column="1"
-                android:text="day31"
-                android:id="@+id/row_name31" />
-            <GridLayout
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_column="2"
-                android:id="@+id/gridLayout31" />
-            <ImageView
-                android:src="@drawable/forward"
-                android:layout_column="5"
-                android:id="@+id/imageView3" />
-        </TableRow>
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="2dip"
-            android:layout_weight="1"
-            android:background="#B6B6B6"
-            android:padding="2dip" />
-        <Button
-            android:id="@+id/sendOrderButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Send Bestilling" />
-    </TableLayout>
-</ScrollView>
+                android:text="Send Bestilling" />
+        </TableLayout>
+    </ScrollView>
+</LinearLayout>

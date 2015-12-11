@@ -109,7 +109,7 @@ namespace Ordersystem.Droid
 		private void InitializeHeader()
 		{
 			LinearLayout header = (LinearLayout)FindViewById (Resource.Id.header);
-			ImageView btn = (ImageView)FindViewById (Resource.Id.headerLogOut);
+			Button btn = (Button)FindViewById (Resource.Id.headerLogOut);
 			TextView headerUserName = (TextView)FindViewById (Resource.Id.headerUserName);
 
 			header.SetBackgroundColor (layoutHandler.HeaderColor);
@@ -117,7 +117,7 @@ namespace Ordersystem.Droid
 
 			//headerUserName = Model.Customer.name;
 			//Mangler logUd knap.
-			btn.SetImageResource (Resource.Drawable.Delete);
+			//btn.SetImageResource (Resource.Drawable.Delete);
 			btn.Click += (object sender, EventArgs e) => {
 				SetContentView(Resource.Layout.Log_In);
 				InitializeLogInScreen();
