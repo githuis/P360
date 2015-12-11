@@ -6,11 +6,13 @@ using System.Text;
 using Ordersystem.iOS.Utilities;
 using Ordersystem.Utilities;
 
+[assembly: Xamarin.Forms.Dependency(typeof(SQLite_iOS))]
 namespace Ordersystem.iOS.Utilities
 {
-    
     public class SQLite_iOS : ISQLite 
     {
+        public SQLite_iOS() { }
+
         public SQLite.SQLiteConnection GetConnection(string filename)
         {
             string sqliteFilename = filename + ".db3";

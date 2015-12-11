@@ -1,20 +1,35 @@
-﻿using System.Collections.Generic;
+﻿using Xamarin.Forms;
 
 namespace Ordersystem.Model
 {
     public class Dish
     {
-        public Dish(string name, string description)
+        /// <summary>
+        /// A dish.
+        /// </summary>
+        /// <param name="name">The name of the dish.</param>
+        /// <param name="description">A description of the dish.</param>
+        /// <param name="imageSource">The source path for the image.</param>
+        public Dish(string name, string description, string imageSource)
         {
             Name = name;
             Description = description;
+            Image = new Image { Source = imageSource };
         }
 
+        /// <summary>
+        /// The name of the dish.
+        /// </summary>
         public string Name { get; private set; }
-        public string Description { get; private set; }
-        //public Image image { get; set; }
-        // TODO: Find ud af hvordan vi inkluderer billedet.
 
-        // TODO: Integrer med databaser.
+        /// <summary>
+        /// A description of the dish.
+        /// </summary>
+        public string Description { get; private set; }
+
+        /// <summary>
+        /// An image of the dish.
+        /// </summary>
+        public Image Image { get; private set; }
     }
 }
