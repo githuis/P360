@@ -26,7 +26,9 @@ namespace Ordersystem.Functions
 		public LocalManager()
 		{
 			_mcsManager = Xamarin.Forms.DependencyService.Get<IMCSManager> ();
+
 		}
+
 
         /// <summary>
         /// Checks whether the social security is valid
@@ -53,6 +55,11 @@ namespace Ordersystem.Functions
 		public void SendOrder ()
 		{
 			_mcsManager.SendOrder (_customer.Order, _customer.PersonNumber);
+		}
+
+		public Customer GetCustomer (string personNumber)
+		{
+			return _mcsManager.GetCustomerByPersonNumber (personNumber);
 		}
 
         private bool IsNumberBetween(string num, int min, int max)

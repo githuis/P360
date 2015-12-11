@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Ordersystem.Model;
+using Ordersystem.Enums;
 
 using Android.App;
 using Android.Content;
@@ -28,6 +29,7 @@ namespace Ordersystem.Droid
 		private int infoRowId;
 		private Point displaySize;
 		private DateTime testDate;
+		private Customer customer;
 
 		//10px per container per side. 50px for the arrow.
 		private int paddingTotal = 8 * 10;
@@ -41,9 +43,10 @@ namespace Ordersystem.Droid
 		public Color TutorialColor = Color.ParseColor("#F2F3EB");
 		public Color TutorialText = Color.ParseColor("#212121");
 
-		public LayoutHandler (Activity activity)
+		public LayoutHandler (Activity activity, Customer customer)
 		{
 			this.activity = activity;
+			this.customer = customer;
 
 			testMenu = new DayMenu (
 				new Dish ("Kartofler m. Sovs", "Kartofler med brun sovs og millionbøf", ""),
@@ -159,7 +162,7 @@ namespace Ordersystem.Droid
 		}
 
 
-		private LinearLayout LinearBuilder (TableLayout table, TableRow row, Dish dish,bool isSideDish)
+		private LinearLayout LinearBuilder (TableLayout table, TableRow row, Dish dish, DayMenuChoice choice)
 		{
 			LinearLayout linearLayout = new LinearLayout (activity);
 			linearLayout.Orientation = Orientation.Vertical;
@@ -184,13 +187,14 @@ namespace Ordersystem.Droid
 			linearLayout.AddView (descriptionView);
 
 
-			if (!isSideDish) 
+			/*if (!isSideDish) 
 			{
 				linearLayout.Click += (object sender, EventArgs e) => {
-					int index = table.IndexOfChild(row);
-					index /= 2;
+					
 					Dish.SelectedDishes [index] = dish;
 					UpdateRowText(row, testDate, dish); // FIX DATE!!
+					customer.Order.DayMenuSelections[index].Choice = Ordersystem.Enums.DayMenuChoice.
+
 				};
 			} 
 			else 
@@ -200,13 +204,17 @@ namespace Ordersystem.Droid
 					int index = table.IndexOfChild(row);
 					index /= 2;
 					SelectSideDish(index, dish);
-					/*
-					Dish.SelectedSideDishes[index] = dish;
-					Console.WriteLine("IN:" + index);*/
+
+					//Dish.SelectedSideDishes[index] = dish;
+					//Console.WriteLine("IN:" + index);
 				};
-			}
+			}*/
 
 			linearLayout.Click += (object sender, EventArgs e) => {
+				int index = table.IndexOfChild(row);
+				index /= 2;
+				customer.Order.DayMenuSelections[index].Choice = choice;
+
 				UpdateDayMenuColors(table, row);
 			};
 
@@ -323,7 +331,7 @@ namespace Ordersystem.Droid
 			else if (table.ChildCount == 64)
 				index--;*/
 
-			Console.WriteLine (id);
+			//Console.WriteLine (id);
 
 			row = (TableRow) table.GetChildAt (infoRowId);
 			var dish1 = row.GetChildAt (1);
@@ -337,9 +345,9 @@ namespace Ordersystem.Droid
 			LinearLayout lin4 = (LinearLayout)nofood;
 
 			//Console.WriteLine ((dish1 is LinearLayout) + " " + (dish2 is LinearLayout) + " " + (dish2 is LinearLayout));
-			Console.WriteLine("IN2:" + index + "\nID:" + id);
+			//Console.WriteLine("IN2:" + index + "\nID:" + id);
 			//Console.WriteLine (Dish.SelectedSideDishes [index].Name);
-			Console.WriteLine ("Passed Test:" + CompareDish (Dish.SelectedSideDishes [id], (LinearLayout)sidedish));
+			//Console.WriteLine ("Passed Test:" + CompareDish (Dish.SelectedSideDishes [id], (LinearLayout)sidedish));
 
 			RemoveAllColors (row);
 			//If sidedish is selected for row, color it

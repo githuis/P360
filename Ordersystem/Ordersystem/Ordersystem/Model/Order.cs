@@ -13,16 +13,17 @@ namespace Ordersystem.Model
         /// <summary>
         /// An order for Master Cater System.
         /// </summary>
-        public Order()
+		public Order(int daysInMonth)
         {
-            DayMenuSelections = new List<DayMenuSelection>();
+			DayMenuSelections = DayMenuSelection [daysInMonth];
             Sent = false;
         }
 
         /// <summary>
         /// A list of the selections in this order.
         /// </summary>
-        public List<DayMenuSelection> DayMenuSelections { get; private set; }
+		public DayMenuSelection[]  DayMenuSelections { get; private set; }
+        //public List<DayMenuSelection> DayMenuSelections { get; private set; }
 
         /// <summary>
         /// Whether the order has already been sent.
@@ -42,9 +43,10 @@ namespace Ordersystem.Model
                 throw new ArgumentNullException("dayMenu", "dayMenu is null.");
             }
 
-            DayMenuSelections.Add(new DayMenuSelection(dayMenu, choice, sideDish));
+            //DayMenuSelections.Add(new DayMenuSelection(dayMenu, choice, sideDish));
+			DayMenuSelections[dayMenu.Date.Day] = new DayMenuSelection(dayMenu, choice, sideDish); //Add selection at day in month
 
-            DayMenuSelections.Sort((x, y) => x.Date.CompareTo(y.Date));
+            //DayMenuSelections.Sort((x, y) => x.Date.CompareTo(y.Date));
         }
 
         /// <summary>
