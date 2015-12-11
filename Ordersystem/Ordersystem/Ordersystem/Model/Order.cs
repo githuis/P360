@@ -34,6 +34,11 @@ namespace Ordersystem.Model
         /// <param name="sideDish">Whether a side dish is included. False by default.</param>
         public void AddDayMenuSelection(DayMenu dayMenu, DayMenuChoice choice, bool sideDish = false)
         {
+            if (dayMenu == null)
+            {
+                throw new ArgumentNullException("dayMenu", "dayMenu is null.");
+            }
+
             DayMenuSelections.Add(new DayMenuSelection(dayMenu, choice, sideDish));
 
             DayMenuSelections.Sort((x, y) => x.Date.CompareTo(y.Date));
@@ -45,11 +50,14 @@ namespace Ordersystem.Model
         /// <param name="dayMenu">The DayMenu of the selection to be changed.</param>
         /// <param name="dishChoice">The choice to change the selection to.</param>
         /// <param name="sideDishChoice">Whether a side dish is to be included. False by default.</param>
-        public void ChangeDayMenuSelection(DayMenu dayMenu, DayMenuChoice dishChoice, bool sideDishChoice = false)
+        public void ChangeDayMenuSelection(DayMenu dayMenu, DayMenuChoice dishChoice, bool sideDishChoice)
         {
             DayMenuSelection dayMenuSelection = DayMenuSelections.FirstOrDefault(dms => dms.DayMenu == dayMenu);
 
-            if (dayMenuSelection == null) throw new NullReferenceException("No selection for given dayMenu found.");
+            if (dayMenuSelection == null)
+            {
+                throw new NullReferenceException("No selection for given dayMenu found.");
+            }
 
             dayMenuSelection.Choice = dishChoice;
             dayMenuSelection.SideDish = sideDishChoice;
