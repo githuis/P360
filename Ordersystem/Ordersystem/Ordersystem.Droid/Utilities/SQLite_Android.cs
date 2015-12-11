@@ -1,15 +1,11 @@
 using System.IO;
 using Ordersystem.Utilities;
 using SQLite;
-using Ordersystem.Droid.Utilities;
 
-[assembly: Xamarin.Forms.Dependency(typeof(SQLite_Android))]
 namespace Ordersystem.Droid.Utilities
 {
-    public class SQLite_Android : ISQLite
+    class SQLite_Android : ISQLite
     {
-        public SQLite_Android() {}
-
         public SQLiteConnection GetConnection(string filename)
         {
             string sqliteFilename = filename + ".db3";

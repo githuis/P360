@@ -2,27 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal">
     <TextView
-        android:id="@+id/titelText"
+        android:id="@+id/loginTitleText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Bestil Mad, din fucking so" />
+        android:layout_height="62.0dp"
+        android:text="Bestil Mad"
+        android:textSize="33dp"
+        android:gravity="center"
+        android:layout_marginBottom="15.0dp"
+        android:layout_marginTop="130.5dp" />
     <EditText
         android:inputType="number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText1" />
+        android:layout_width="440.5dp"
+        android:layout_height="57.5dp"
+        android:id="@+id/loginInputBar"
+        android:hint="Indtast dit CPR-nummer her."
+        android:gravity="center"
+        android:layout_marginBottom="16.5dp" />
     <Button
-        android:id="@+id/myButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="sup motherfucker" />
+        android:id="@+id/loginButton"
+        android:layout_width="432.0dp"
+        android:layout_height="81.5dp"
+        android:gravity="center"
+        android:text="Log ind" />
     <TextView
-        android:text="Ikke gyldigt personnummer, se om det er rigtigt, og prøv igen"
+        android:text="Ugyldigt CPR-nummer, se om det er rigtigt, og prøv igen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/errorMsg"
+        android:id="@+id/loginErrorMessageText"
         android:visibility="invisible"
-        android:textColor="#ffd50000" />
+        android:textColor="#ffd50000"
+        android:gravity="center" />
 </LinearLayout>

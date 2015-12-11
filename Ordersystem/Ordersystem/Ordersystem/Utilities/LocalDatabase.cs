@@ -12,7 +12,7 @@ namespace Ordersystem.Utilities
     /// </summary>
     public class LocalDatabase
     {
-        private SQLiteConnection _database;
+        private readonly SQLiteConnection _database;
 
         /// <summary>
         /// Gets the connection and creates the table.
@@ -65,7 +65,7 @@ namespace Ordersystem.Utilities
         /// </summary>
         /// <param name="personNumber">The personNumber used to fetch the Order.</param>
         /// <returns>The Order if found, else returns null.</returns>
-        public Order GetOrder(string personNumber)
+        public Order GetOrder(int personNumber)
         {
             return _database.Table<SQLItem>().FirstOrDefault(x => x.PersonNumber == personNumber).Order;
         }
@@ -75,7 +75,7 @@ namespace Ordersystem.Utilities
         /// </summary>
         /// <param name="personNumber">The personNumber used to fetch the Orderlist.</param>
         /// <returns>The Orderlist if found, else returns null.</returns>
-        public Orderlist GetOrderlist(string personNumber)
+        public Orderlist GetOrderlist(int personNumber)
         {
             return _database.Table<SQLItem>().FirstOrDefault(x => x.PersonNumber == personNumber).Orderlist;
         }
@@ -85,7 +85,7 @@ namespace Ordersystem.Utilities
         /// Throws an ItemNotFoundException if an entry is not found.
         /// </summary>
         /// <param name="personNumber">The personNumber used to find the entry.</param>
-        public void DeleteOrder(string personNumber)
+        public void DeleteOrder(int personNumber)
         {
             SQLItem item = _database.Table<SQLItem>().FirstOrDefault(x => x.PersonNumber == personNumber);
             if (item == null)
