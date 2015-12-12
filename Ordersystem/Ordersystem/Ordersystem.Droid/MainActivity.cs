@@ -39,8 +39,6 @@ namespace Ordersystem.Droid
 				if(localManager.IsValidSocialSecurityNumber(editText.Text))
 				{
 					localManager.LogIn(editText.Text);
-					daysInMonth = sessionOrderlist.DayMenus.Count;
-					sessionCustomer.Order.SetSelectionLength(daysInMonth, sessionOrderlist);
 					layoutHandler.SetCustomerAndList(sessionCustomer, sessionOrderlist);
 
 					SetContentView (Resource.Layout.Main_Window);

@@ -62,7 +62,7 @@ namespace Ordersystem.Functions
 			GetCustomerFromDB (personNumber);
 
 			_localDatabase.CleanOldSessions ();
-			_customer.Order = _localDatabase.GetOrder (_customer.PersonNumber);
+			var order = _localDatabase.GetOrder (_customer.PersonNumber);
 
 			if (_customer.Order == null)
 			{
@@ -70,7 +70,7 @@ namespace Ordersystem.Functions
 			}
 			else
 			{
-				ResumeSession ();
+				ResumeSession (order);
 			}
 		}
 
@@ -118,14 +118,20 @@ namespace Ordersystem.Functions
 			}
         }
 
-        private void ResumeSession()
+		private void ResumeSession(Order order)
         {
 			_orderlist = _localDatabase.GetOrderlist (_customer.PersonNumber);
 			_orderlist = _mcsManager.GetOrderlistByDiet (_orderlist.Diet, _orderlist.EndDate);
+			_customer.Order.SetSelectionLength (DateTime.DaysInMonth (_orderlist.DayMenus [0].Date.Year, _orderlist.DayMenus [0].Date.Month), _orderlist);
+
+			foreach (DayMenuSelection selection in order)
+			{
+				_customer.Order.ChangeDayMenuSelection (selection.Date, selection.Choice, selection.SideDish);
+			}
 
 			foreach (DayMenu menu in _orderlist.DayMenus)
 			{
-				_customer.Order.DayMenuSelections.First (s => s.Date == menu.Date).DayMenu = menu;
+				_customer.Order.DayMenuSelections [menu.Date.Day - 1].DayMenu = menu;
 			}
         }
 
