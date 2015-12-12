@@ -53,7 +53,7 @@ namespace Ordersystem.Model
             }
 
             //DayMenuSelections.Add(new DayMenuSelection(dayMenu, choice, sideDish));
-			DayMenuSelections[dayMenu.Date.Day] = new DayMenuSelection(dayMenu, choice, sideDish); //Add selection at day in month
+			DayMenuSelections[dayMenu.Date.Day-1] = new DayMenuSelection(dayMenu, choice, sideDish); //Add selection at day in month
 
             //DayMenuSelections.Sort((x, y) => x.Date.CompareTo(y.Date));
         }

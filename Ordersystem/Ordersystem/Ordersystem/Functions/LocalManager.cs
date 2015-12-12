@@ -124,7 +124,7 @@ namespace Ordersystem.Functions
 			_orderlist = _mcsManager.GetOrderlistByDiet (_orderlist.Diet, _orderlist.EndDate);
 			_customer.Order.SetSelectionLength (DateTime.DaysInMonth (_orderlist.DayMenus [0].Date.Year, _orderlist.DayMenus [0].Date.Month), _orderlist);
 
-			foreach (DayMenuSelection selection in order)
+			foreach (DayMenuSelection selection in order.DayMenuSelections)
 			{
 				_customer.Order.ChangeDayMenuSelection (selection.Date, selection.Choice, selection.SideDish);
 			}

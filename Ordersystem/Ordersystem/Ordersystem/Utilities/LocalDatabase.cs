@@ -26,7 +26,13 @@ namespace Ordersystem.Utilities
 
 		public void CleanOldSessions()
 		{
-			_sessions.RemoveAll (x => x.Orderlist.EndDate < DateTime.Today || x.Order.Sent);
+            foreach(var session in _sessions.ToList())
+            {
+                if (session.Orderlist.EndDate < DateTime.Today || session.Order.Sent)
+                {
+                    _sessions.Remove(session);
+                }
+            }
 		}
 
         /* Predicate methods */
