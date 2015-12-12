@@ -110,6 +110,7 @@ namespace Ordersystem.Functions
         {
             _customer.Order = new Order();
 			_orderlist = _mcsManager.GetOrderlistByDiet (_customer.Diet);
+			_customer.Order.SetSelectionLength (DateTime.DaysInMonth (_orderlist.DayMenus [0].Date.Year, _orderlist.DayMenus [0].Date.Month), _orderlist);
 
 			foreach (DayMenu menu in _orderlist.DayMenus)
 			{
