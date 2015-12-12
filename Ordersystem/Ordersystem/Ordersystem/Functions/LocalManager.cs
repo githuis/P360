@@ -64,7 +64,7 @@ namespace Ordersystem.Functions
 			_localDatabase.CleanOldSessions ();
 			var order = _localDatabase.GetOrder (_customer.PersonNumber);
 
-			if (_customer.Order == null)
+			if (order == null)
 			{
 				NewSession ();
 			}
