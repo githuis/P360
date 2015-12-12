@@ -109,7 +109,7 @@ namespace Ordersystem.Functions
         private void NewSession()
         {
             _customer.Order = new Order();
-			_orderlist = _mcsManager.GetOrderlistByDiet (_customer.Diet);
+			_orderlist = _mcsManager.GetOrderlistFromDB (_customer.Diet);
 
 			foreach (DayMenu menu in _orderlist.DayMenus)
 			{
@@ -120,7 +120,7 @@ namespace Ordersystem.Functions
         private void ResumeSession()
         {
 			_orderlist = _localDatabase.GetOrderlist (_customer.PersonNumber);
-			_orderlist = _mcsManager.GetOrderlistByEndDateAndDiet(_orderlist.EndDate, _orderlist.Diet);
+			_orderlist = _mcsManager.GetOrderlistFromDB (_orderlist.Diet, _orderlist.EndDate);
 
 			foreach (DayMenu menu in _orderlist.DayMenus)
 			{
