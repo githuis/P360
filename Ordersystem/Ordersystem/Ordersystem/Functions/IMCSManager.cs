@@ -10,7 +10,7 @@ namespace Ordersystem.Functions
 
 		Customer GetCustomerByPersonNumber (string personNumber);
 
-		Orderlist GetOrderlistFromDB (Diet diet, DateTime endDate = null);
+		Orderlist GetOrderlistByDiet (Diet diet, Nullable<DateTime> endDate = null);
 	}
 }
 

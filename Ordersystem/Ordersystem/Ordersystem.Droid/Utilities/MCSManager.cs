@@ -100,7 +100,7 @@ namespace Ordersystem.Droid.Utilities
             }
         }
 
-		public Orderlist GetOrderlistFromDB(Diet diet, DateTime endDate = null)
+		public Orderlist GetOrderlistByDiet(Diet diet, Nullable<DateTime> endDate = null)
 		{
 			string dietString = ParseStringFromDiet (diet);
 
@@ -115,9 +115,9 @@ namespace Ordersystem.Droid.Utilities
 					"JOIN dishes d2 ON d2.DishKey=dm.Dish2 " +
 					"JOIN dishes sd ON sd.DishKey=dm.SideDish " +
 					"WHERE ol.Diet = '" + dietString + "' " +
-					endDate = null ? "AND ol.EndDate > '" + DateTime.Today.ToString("dd-MM-yyyy") + "' " +
+					endDate == null ? "AND ol.EndDate > '" + DateTime.Today.ToString("dd-MM-yyyy") + "' " +
 					"AND ol.EndDate < '" + DateTime.Today.AddMonths(1).ToString("dd-MM-yyyy") + "' " :
-					"AND ol.EndDate = '" + endDate.ToString ("dd-MM-yyyy") + "'";
+					"AND ol.EndDate = '" + endDate.Value.ToString ("dd-MM-yyyy") + "'";
 
 				MySqlCommand Command = new MySqlCommand(query, connection);
 				MySqlDataReader reader = Command.ExecuteReader();

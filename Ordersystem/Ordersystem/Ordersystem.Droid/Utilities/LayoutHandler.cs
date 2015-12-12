@@ -65,9 +65,9 @@ namespace Ordersystem.Droid
 			TableRow newRow = new TableRow (activity);
 			newRow.AddView (new TextView (activity) { Text = "" }, 0);
 
-			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish1,false), 1);
-			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish2,false), 2);
-			newRow.AddView (LinearBuilder (parent, row, dayMenu.SideDish,true), 3);
+			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish1, DayMenuChoice.Dish1), 1);
+			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish2, DayMenuChoice.Dish2), 2);
+			//newRow.AddView (LinearBuilder (parent, row, dayMenu.SideDish, true), 3);
 			newRow.AddView(LinearNoFood(parent,row), 4);
 
 

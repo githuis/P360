@@ -40,7 +40,7 @@ namespace Ordersystem.Model
         /// The DayMenu this is a selection from.
         /// </summary>
         [XmlIgnore]
-        public DayMenu DayMenu {get; private set;}
+        public DayMenu DayMenu {get; set;}
 
         /// <summary>
         /// The choice of dish.

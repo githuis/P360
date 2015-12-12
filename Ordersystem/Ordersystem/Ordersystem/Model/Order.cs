@@ -13,9 +13,8 @@ namespace Ordersystem.Model
         /// <summary>
         /// An order for Master Cater System.
         /// </summary>
-		public Order(int daysInMonth)
+		public Order()
         {
-			DayMenuSelections = DayMenuSelection [daysInMonth];
             Sent = false;
         }
 
@@ -36,7 +35,7 @@ namespace Ordersystem.Model
         /// <param name="dayMenu">The menu chosen from.</param>
         /// <param name="choice">The choice of dish.</param>
         /// <param name="sideDish">Whether a side dish is included. False by default.</param>
-        public void AddDayMenuSelection(DayMenu dayMenu, DayMenuChoice choice, bool sideDish = false)
+		public void AddDayMenuSelection(DayMenu dayMenu, DayMenuChoice choice = DayMenuChoice.NoChoice, bool sideDish = false)
         {
             if (dayMenu == null)
             {
@@ -66,8 +65,6 @@ namespace Ordersystem.Model
 
             dayMenuSelection.Choice = dishChoice;
             dayMenuSelection.SideDish = sideDishChoice;
-
-            DayMenuSelections.Sort((x, y) => x.Date.CompareTo(y.Date));
         }
     }
 }

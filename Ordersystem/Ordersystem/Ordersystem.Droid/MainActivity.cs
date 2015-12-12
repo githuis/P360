@@ -139,7 +139,7 @@ namespace Ordersystem.Droid
 			TextView errorMsg = FindViewById<TextView> (Resource.Id.loginErrorMessageText); 
 
 			//Initialize managers
-			layoutHandler = new LayoutHandler(this);
+			layoutHandler = new LayoutHandler(this, sessionCustomer);
 			lm = new LocalManager();
 
 			//Initialize list for TableRows.

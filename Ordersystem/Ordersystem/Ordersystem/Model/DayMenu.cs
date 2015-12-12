@@ -60,6 +60,6 @@ namespace Ordersystem.Model
         /// <summary>
         /// The date of the menu.
         /// </summary>
-        public DateTime Date { get; private set; }
+        public DateTime Date { get; set; }
     }
 }
