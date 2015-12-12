@@ -13,9 +13,10 @@ namespace Ordersystem.Model
         /// <summary>
         /// An order for Master Cater System.
         /// </summary>
-		public Order()
+	public Order()
         {
-            Sent = false;
+		//DayMenuSelections = DayMenuSelection [daysInMonth];
+            	Sent = false;
         }
 
         /// <summary>
@@ -23,6 +24,15 @@ namespace Ordersystem.Model
         /// </summary>
 		public DayMenuSelection[]  DayMenuSelections { get; private set; }
         //public List<DayMenuSelection> DayMenuSelections { get; private set; }
+
+		public void SetSelectionLength(int daysInMonth, Orderlist orderlist)
+		{
+			DayMenuSelections = new DayMenuSelection[daysInMonth];
+			for (int i = 0; i < daysInMonth; i++) 
+			{
+				DayMenuSelections [i] = new DayMenuSelection (orderlist.DayMenus[i], DayMenuChoice.NoChoice, false);
+			}
+		}
 
         /// <summary>
         /// Whether the order has already been sent.
@@ -65,6 +75,8 @@ namespace Ordersystem.Model
 
             dayMenuSelection.Choice = dishChoice;
             dayMenuSelection.SideDish = sideDishChoice;
+
+            //DayMenuSelections.Sort((x, y) => x.Date.CompareTo(y.Date));
         }
     }
 }

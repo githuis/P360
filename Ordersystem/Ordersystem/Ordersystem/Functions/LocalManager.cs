@@ -148,5 +148,25 @@ namespace Ordersystem.Functions
 				selection.Choice = DayMenuChoice.Dish1;
 			}
 		}
+
+		//Er dupliceate code, ligger i mcsmanager
+		private string ParseStringFromDiet(Diet diet)
+		{
+			switch(diet)
+			{
+			case Diet.Full:
+				return "v-full";
+			case Diet.LowFat:
+				return"v-lowFat" ;
+			case Diet.EnergyDense:
+				return "v-energyDense";
+			case Diet.SoftFoodsWPotatoes:
+				return "v-softFoodsWPotatoes";
+			case Diet.SoftFoodsWMash:
+				return "v-softFoodsWMash";
+			default:
+				throw new ArgumentException ("Invalid diet type");
+			}
+		}
     }
 }

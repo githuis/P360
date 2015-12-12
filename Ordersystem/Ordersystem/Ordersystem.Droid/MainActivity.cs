@@ -18,11 +18,12 @@ namespace Ordersystem.Droid
 	[Activity (Label = "Ordersystem", MainLauncher = true, Icon = "@drawable/icon", ScreenOrientation = Android.Content.PM.ScreenOrientation.Landscape,Theme = "@android:style/Theme.Holo.Light.NoActionBar")]
 	public class MainActivity : Activity
 	{
-		LocalManager lm;
+		LocalManager localManager;
 		LayoutHandler layoutHandler;
 		List<TableRow> rows;
-		Customer sessionCustomer { get { return lm.Customer; } }
-		Orderlist sessionOrderlist { get { return lm.Orderlist; } }
+		Customer sessionCustomer { get { return localManager.Customer; } }
+		Orderlist sessionOrderlist { get { return localManager.Orderlist; } }
+		private int daysInMonth = 0;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -34,15 +35,14 @@ namespace Ordersystem.Droid
 		public void LogIn(Button button,EditText editText, TextView errorMsg)
 		{
 			button.Click += delegate
-			{
-				if(editText.Text == "") // START DEBUG ONLY -- MUST BE REMOVED BEFORE SHIPPING -- CRITICAL
-				{
-					SetContentView (Resource.Layout.Main_Window);
-					CreateMainWindow ();
-				} // END DEBUG ONLY
-				else if(lm.IsValidSocialSecurityNumber(editText.Text))
+			{		
+				if(localManager.IsValidSocialSecurityNumber(editText.Text))
 				{
 					lm.LogIn(editText.Text);
+					daysInMonth = sessionOrderlist.DayMenus.Count;
+					sessionCustomer.Order.SetSelectionLength(daysInMonth, sessionOrderlist);
+					layoutHandler.SetCustomerAndList(sessionCustomer, sessionOrderlist);
+
 					SetContentView (Resource.Layout.Main_Window);
 					CreateMainWindow ();
 				}
@@ -55,9 +55,9 @@ namespace Ordersystem.Droid
 			
 		public void CreateMainWindow()
 		{
-			
 			AddRowsToList ((TableLayout)FindViewById (Resource.Id.tableLayout1));
 			InitializeRows ();
+
 			InitializeTutorial ();
 			InitializeHeader ();
 			InitializeOrderButton ();
@@ -80,13 +80,19 @@ namespace Ordersystem.Droid
 
 		private void InitializeRows()
 		{
+			TableLayout tableLyout = (TableLayout) FindViewById(Resource.Id.tableLayout1);
+			int index;
+
 			foreach (var row in rows)
 			{
 				TextView v = (TextView) row.GetChildAt(0);
-				v.SetTextSize (Android.Util.ComplexUnitType.Px, 32);
+				v.SetTextSize (Android.Util.ComplexUnitType.Px, 24);
+				index = tableLyout.IndexOfChild (row) / 2;
 				row.SetBackgroundColor(layoutHandler.RowBackgroundColor);
 				row.SetMinimumHeight (layoutHandler.GetMinimumHeight ());
-				layoutHandler.ClearRowText (row, DateTime.Now); //  FIX DATE
+				layoutHandler.ClearRowText (row, sessionCustomer.Order.DayMenuSelections[index].Date);
+				if (index > daysInMonth)
+					row.Visibility = ViewStates.Gone;
 
 				row.Click += (object sender, EventArgs e) => {
 					layoutHandler.ResizeTableRow(rows, (TableRow) sender, (TableLayout)FindViewById (Resource.Id.tableLayout1));
@@ -118,7 +124,7 @@ namespace Ordersystem.Droid
 			header.SetBackgroundColor (layoutHandler.HeaderColor);
 			header.SetMinimumHeight (layoutHandler.GetMinimumHeight ());
 
-			//headerUserName = Model.Customer.name;
+			headerUserName.Text = sessionCustomer.Name;
 			//Mangler logUd knap.
 			//btn.SetImageResource (Resource.Drawable.Delete);
 			btn.Click += (object sender, EventArgs e) => {
@@ -139,8 +145,8 @@ namespace Ordersystem.Droid
 			TextView errorMsg = FindViewById<TextView> (Resource.Id.loginErrorMessageText); 
 
 			//Initialize managers
-			layoutHandler = new LayoutHandler(this, sessionCustomer);
-			lm = new LocalManager();
+			layoutHandler = new LayoutHandler(this);
+			localManager = new LocalManager();
 
 			//Initialize list for TableRows.
 			rows = new List<TableRow>();
@@ -161,27 +167,60 @@ namespace Ordersystem.Droid
 
 			button.Click += (object sender, EventArgs e) => {
 				//Call the sending of the order here.
-				SendOrderClick(sender, e);
+				CloseAllRows();
+				CheckAllChoicesFilled(sender, e);
+
 			};
 		}
 
 		private void SendOrderClick(object sender, EventArgs e)
 		{
-			/*Android.App.AlertDialog.Builder builder = new AlertDialog.Builder (this);
+			Android.App.AlertDialog.Builder builder = new AlertDialog.Builder (this);
 			AlertDialog alertDialog = builder.Create ();
 			alertDialog.SetTitle ("Send bestilling?");
-			alertDialog.SetMessage ("Der er nogle dage, hvor der ikke er valgt mad. Send alligevel?");
+			alertDialog.SetMessage ("Der er nogle dage, hvor der ikke er valgt mad. Send alligevel?\nSå udfylder Aalborg madservice for dig.");
 
 			alertDialog.SetButton ("Send alligevel", (s, ev) => {
-				lm.IsOrderValid();
-				lm.SendOrder();
+				localManager.FillInvalidOrder();
+				localManager.SendOrder();
 			});
 
 			alertDialog.SetButton2 ("Gå tilbage", (s, ev) => {
-				
+				ErrorRowsOnReturn();
+				//TableLayout tableLayout = (TableLayout) FindViewById(Resource.Id.tableLayout1);
+
 			});
 
-			alertDialog.Show ();*/
+			alertDialog.Show ();
+		}
+
+		private void CheckAllChoicesFilled(object sender, EventArgs e)
+		{
+			if (!localManager.IsOrderValid ())
+				SendOrderClick (sender, e);
+			else
+				localManager.SendOrder ();
+		}
+
+		private void ErrorRowsOnReturn()
+		{
+			TableLayout tableLayout = (TableLayout) FindViewById(Resource.Id.tableLayout1);
+			int index;
+
+			foreach (var row in rows)
+			{
+				if(layoutHandler.IsOpen(row))
+					layoutHandler.CloseRow (tableLayout, row);
+				index = tableLayout.IndexOfChild (row) / 2;
+				if (sessionCustomer.Order.DayMenuSelections [index].Choice == Ordersystem.Enums.DayMenuChoice.NoChoice)
+					layoutHandler.SetRowErrorColor (row);
+			}
+		}
+
+		private void CloseAllRows()
+		{
+			TableLayout tableLayout = (TableLayout) FindViewById(Resource.Id.tableLayout1);
+			layoutHandler.ForceCloseInfoRow (tableLayout);
 		}
 	}
 }
