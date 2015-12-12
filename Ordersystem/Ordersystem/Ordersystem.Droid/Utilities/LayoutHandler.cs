@@ -11,193 +11,254 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Graphics;
+using System.Net;
+using Android.Graphics.Drawables;
 
 namespace Ordersystem.Droid
 {
-	public class LayoutHandler
-	{
-		//Numbers describing the looks of the main scren interface
-		private int minRowHeight = 100;
-		private int mediumRowHeight = 150;
-		private int maxRowHeight = 200;
-		private int textSizeLarge = 20;
-		private int textSizeMed = 15;
-		private int dishNameMaxLength = 12; //To not disturb row titles
+    public class LayoutHandler
+    {
+        //Numbers describing the looks of the main scren interface
+        private int minRowHeight = 100;
+        private int mediumRowHeight = 150;
+        private int maxRowHeight = 200;
+        private int textSizeLarge = 20;
+        private int textSizeMed = 15;
+        private int dishNameMaxLength = 12; //To not disturb row titles
 
-		//'Globals' for inside LayoutHandler
-		private Activity activity;
-		private DayMenu testMenu;
-		private int infoRowId;
-		private Point displaySize;
-		private DateTime testDate;
-		private Customer customer;
-		private Orderlist orderlist;
+        //'Globals' for inside LayoutHandler
+        private Activity activity;
+        private DayMenu testMenu;
+        private int infoRowId;
+        private Point displaySize;
+        private DateTime testDate;
+        private Customer customer;
+        private Orderlist orderlist;
+        private List<Drawable> dishImages;
 
-		//10px per container per side. 50px for the arrow.
-		private int paddingTotal = 8 * 10;
-		private int arrowSize = 50;
-
-
-		//The Colors to be used throughout the whole UI.
-		public Color RowBackgroundColor = Color.ParseColor("#F9F9F9");
-		public Color RowCompletedColor = Color.ParseColor("#75EA94");
-		public Color RowErrorColor = Color.ParseColor("#E03A3A");
-		public Color HeaderColor = Color.ParseColor("#417378");
-		public Color TutorialColor = Color.ParseColor("#F2F3EB");
-		public Color TutorialText = Color.ParseColor("#212121");
-
-		public LayoutHandler (Activity activity)
-		{
-			this.activity = activity;
-
-			testMenu = new DayMenu (
-				new Dish ("Kartofler m. Sovs", "Kartofler med brun sovs og millionbøf", ""),
-				new Dish ("Rød grød med fløde", "Rød grød med fløde til.", ""),
-				new Dish ("Jordbær grød m. mælk", "Jordbærgrød", ""),
-				DateTime.Today);
-			testDate = DateTime.Today;
-
-			infoRowId = int.MaxValue;
-		}
-
-		public void SetCustomerAndList(Customer customer, Orderlist orderlist)
-		{
-			this.customer = customer;
-			this.orderlist = orderlist;
-		}
-
-		public void CreateDayMenuDisplay(DayMenu dayMenu, TableRow row, TableLayout parent)
-		{
-			int childId = parent.IndexOfChild (row);
-
-			TableRow newRow = new TableRow (activity);
-			newRow.AddView (new TextView (activity) { Text = "" }, 0);
-
-			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish1, DayMenuChoice.Dish1), 1);
-			newRow.AddView (LinearBuilder (parent, row, dayMenu.Dish2, DayMenuChoice.Dish2), 2);
-			newRow.AddView (LinearBuilder (parent, row, dayMenu.SideDish, true), 3);
-			newRow.AddView(LinearNoFood(parent,row), 4);
-
-			newRow.SetBackgroundColor(RowBackgroundColor);
-			newRow.SetMinimumHeight (maxRowHeight);
-			parent.AddView(newRow, childId+1);
-			infoRowId = (childId + 1);
-		}
-
-		public void ResizeTableRow(List<TableRow> rows, TableRow rowToChange, TableLayout parent)
-		{
-			bool open;
-			open = IsOpen (rowToChange);
-			Console.WriteLine (open.ToString ());
-			try 
-			{
-				parent.RemoveViewAt (infoRowId);	
-			} 
-			catch (Exception e) 
-			{
-				Console.WriteLine (e.Message);
-			}
-
-			foreach (TableRow row in rows)
-			{
-				CloseRow (parent, row);
-			}
-			if (open)
-				CloseRow (parent, rowToChange);
-			else
-				OpenRow (parent, rowToChange);
-
-		}
-
-		public int GetMinimumHeight()
-		{
-			return minRowHeight;
-		}
-		public int GetMediumHeight()
-		{
-			return mediumRowHeight;
-		}
-
-		public void SetDisplaySize(Point size)
-		{
-			displaySize = size;
-		}
-
-		public void SetRowErrorColor(TableRow row)
-		{
-			row.SetBackgroundColor (RowErrorColor);
-		}
-
-		public void CloseRow(TableLayout table, TableRow row)
-		{
-			row.SetMinimumHeight (minRowHeight);
-
-			Console.WriteLine (table.IndexOfChild (row));
-
-			//Sub-menu's first child (0) is a linearlayout, others are TextView. If is submenu, remove row.
-			var child = row.GetChildAt(0);
-			if (child is LinearLayout)
-				table.RemoveViewAt (table.IndexOfChild(row) +1);
-			else
-				ChangeArrowTo (row, Resource.Drawable.Forward);
-			infoRowId = int.MaxValue;
-
-		}
-
-		public void ForceCloseInfoRow(TableLayout layout)
-		{
-			if(infoRowId != int.MaxValue)
-				layout.RemoveViewAt (infoRowId);
-		}
-
-		private void OpenRow(TableLayout table, TableRow row)
-		{
-			row.SetMinimumHeight (mediumRowHeight);
-			ChangeArrowTo(row, Resource.Drawable.ExpandArrow);
-			CreateDayMenuDisplay(customer.Order.DayMenuSelections[table.IndexOfChild (row)/2].DayMenu, row, table);
-			UpdateDayMenuColors (table, row);
-		}
-
-		/// <summary>
-		/// Gets the image-view component of the row, and sets the arrow the specified arrow.
-		/// Call with Resource.Drawable.'Specific'Arrow
-		/// </summary>
-		/// <param name="row">Row.</param>
-		/// <param name="arrow">Arrow.</param>
-		private void ChangeArrowTo(TableRow row, int arrow)
-		{
-			for (int i = 0; i < row.ChildCount; i++) {
-				var child = row.GetChildAt (i);
-				if (child is ImageView) {
-					ImageView iv = (ImageView)child;
-					iv.SetImageResource (arrow);
-					break;
-				}
-			}
-		}
-
-		public bool IsOpen(TableRow row)
-		{
-			return row.Height == mediumRowHeight;
-		}
+        //10px per container per side. 50px for the arrow.
+        private int paddingTotal = 8 * 10;
+        private int arrowSize = 50;
 
 
-		private LinearLayout LinearBuilder (TableLayout table, TableRow row, Dish dish, DayMenuChoice choice)
-		{
-			LinearLayout linearLayout = new LinearLayout (activity);
-			linearLayout.Orientation = Orientation.Vertical;
-			linearLayout.SetMinimumWidth ( (displaySize.X / 4) - (paddingTotal / 2));
-			linearLayout.SetPadding (10, 10, 10, 10);
-			linearLayout.SetBackgroundColor (RowBackgroundColor);
+        //The Colors to be used throughout the whole UI.
+        public Color RowBackgroundColor = Color.ParseColor("#F9F9F9");
+        public Color RowCompletedColor = Color.ParseColor("#75EA94");
+        public Color RowErrorColor = Color.ParseColor("#E03A3A");
+        public Color HeaderColor = Color.ParseColor("#417378");
+        public Color TutorialColor = Color.ParseColor("#F2F3EB");
+        public Color TutorialText = Color.ParseColor("#212121");
 
-			TextView titleView = new TextView (activity);
-			ImageView imageView = new ImageView (activity);
-			TextView descriptionView = new TextView (activity);
+        public LayoutHandler(Activity activity)
+        {
+            this.activity = activity;
 
-			titleView.Text = dish.Name;
-			titleView.TextSize = textSizeLarge;
+            testMenu = new DayMenu(
+                new Dish("Kartofler m. Sovs", "Kartofler med brun sovs og millionbøf", ""),
+                new Dish("Rød grød med fløde", "Rød grød med fløde til.", ""),
+                new Dish("Jordbær grød m. mælk", "Jordbærgrød", ""),
+                DateTime.Today);
+            testDate = DateTime.Today;
 
-			imageView.SetImageURI (Android.Net.Uri.Parse("http://www.kesanacats.dk/wp-content/uploads/killroy-lille-billed-fra-sølvkatten.png"));
+            //Initialize dishImages with transparent ColorDrawables
+            List<Drawable> temp = new List<Drawable>();
+            Drawable drawable = new ColorDrawable(Color.Transparent);
+            for (int i = 0; i < 31; i++)
+            {
+                temp.Add(drawable);
+            }
+            dishImages = temp;
+
+            infoRowId = int.MaxValue;
+        }
+
+        public void SetCustomerAndList(Customer customer, Orderlist orderlist)
+        {
+            this.customer = customer;
+            this.orderlist = orderlist;
+
+            //Start downloading images asyncrone
+            int count = 1;
+            foreach (DayMenu dayMenu in orderlist.DayMenus)
+            {
+                if (dayMenu.Dish1.ImageSource != "")
+                    downloadDrawableFromUrlAsync(dayMenu.Dish1.ImageSource, "dish" + count, count);
+                if (dayMenu.Dish2.ImageSource != "")
+                    downloadDrawableFromUrlAsync(dayMenu.Dish2.ImageSource, "dish" + (count + 1), count + 1);
+                if (dayMenu.SideDish.ImageSource != "")
+                    downloadDrawableFromUrlAsync(dayMenu.SideDish.ImageSource, "dish" + (count + 2), count + 2);
+                count += 3;
+            }
+        }
+
+        public void CreateDayMenuDisplay(DayMenu dayMenu, TableRow row, TableLayout parent)
+        {
+            int childId = parent.IndexOfChild(row);
+
+            TableRow newRow = new TableRow(activity);
+            newRow.AddView(new TextView(activity) { Text = "" }, 0);
+
+            newRow.AddView(LinearBuilder(parent, row, dayMenu.Dish1, DayMenuChoice.Dish1), 1);
+            newRow.AddView(LinearBuilder(parent, row, dayMenu.Dish2, DayMenuChoice.Dish2), 2);
+            newRow.AddView(LinearBuilder(parent, row, dayMenu.SideDish, true), 3);
+            newRow.AddView(LinearNoFood(parent, row), 4);
+
+            newRow.SetBackgroundColor(RowBackgroundColor);
+            newRow.SetMinimumHeight(maxRowHeight);
+            parent.AddView(newRow, childId + 1);
+            infoRowId = (childId + 1);
+        }
+
+        public void ResizeTableRow(List<TableRow> rows, TableRow rowToChange, TableLayout parent)
+        {
+            bool open;
+            open = IsOpen(rowToChange);
+            Console.WriteLine(open.ToString());
+            try
+            {
+                parent.RemoveViewAt(infoRowId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            foreach (TableRow row in rows)
+            {
+                CloseRow(parent, row);
+            }
+            if (open)
+                CloseRow(parent, rowToChange);
+            else
+                OpenRow(parent, rowToChange);
+
+        }
+
+        public int GetMinimumHeight()
+        {
+            return minRowHeight;
+        }
+        public int GetMediumHeight()
+        {
+            return mediumRowHeight;
+        }
+
+        public void SetDisplaySize(Point size)
+        {
+            displaySize = size;
+        }
+
+        public void SetRowErrorColor(TableRow row)
+        {
+            row.SetBackgroundColor(RowErrorColor);
+        }
+
+        public void CloseRow(TableLayout table, TableRow row)
+        {
+            row.SetMinimumHeight(minRowHeight);
+
+            Console.WriteLine(table.IndexOfChild(row));
+
+            //Sub-menu's first child (0) is a linearlayout, others are TextView. If is submenu, remove row.
+            var child = row.GetChildAt(0);
+            if (child is LinearLayout)
+                table.RemoveViewAt(table.IndexOfChild(row) + 1);
+            else
+                ChangeArrowTo(row, Resource.Drawable.Forward);
+            infoRowId = int.MaxValue;
+
+        }
+
+        public void ForceCloseInfoRow(TableLayout layout)
+        {
+            if (infoRowId != int.MaxValue)
+                layout.RemoveViewAt(infoRowId);
+        }
+
+        private void OpenRow(TableLayout table, TableRow row)
+        {
+            row.SetMinimumHeight(mediumRowHeight);
+            ChangeArrowTo(row, Resource.Drawable.ExpandArrow);
+            CreateDayMenuDisplay(customer.Order.DayMenuSelections[table.IndexOfChild(row) / 2].DayMenu, row, table);
+            UpdateDayMenuColors(table, row);
+        }
+
+        /// <summary>
+        /// Gets the image-view component of the row, and sets the arrow the specified arrow.
+        /// Call with Resource.Drawable.'Specific'Arrow
+        /// </summary>
+        /// <param name="row">Row.</param>
+        /// <param name="arrow">Arrow.</param>
+        private void ChangeArrowTo(TableRow row, int arrow)
+        {
+            for (int i = 0; i < row.ChildCount; i++) {
+                var child = row.GetChildAt(i);
+                if (child is ImageView) {
+                    ImageView iv = (ImageView)child;
+                    iv.SetImageResource(arrow);
+                    break;
+                }
+            }
+        }
+
+        public bool IsOpen(TableRow row)
+        {
+            return row.Height == mediumRowHeight;
+        }
+
+        async void downloadDrawableFromUrlAsync(string url, string fileName, int dishIndex)
+        {
+            var webClient = new WebClient();
+            byte[] imageBytes = null;
+
+            try
+            {
+                imageBytes = await webClient.DownloadDataTaskAsync(url);
+            }
+            catch (Exception)
+            {
+
+            }
+
+            string localPath = "android.resource://com.P360.Ordersystem/drawable/" + fileName;
+            dishImages[dishIndex - 1] = new BitmapDrawable(BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length));
+
+
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.InJustDecodeBounds = true;
+            await BitmapFactory.DecodeFileAsync(localPath, options);
+
+        }
+
+        private LinearLayout LinearBuilder(TableLayout table, TableRow row, Dish dish, DayMenuChoice choice)
+        {
+            LinearLayout linearLayout = new LinearLayout(activity);
+            linearLayout.Orientation = Orientation.Vertical;
+            linearLayout.SetMinimumWidth((displaySize.X / 4) - (paddingTotal / 2));
+            linearLayout.SetPadding(10, 10, 10, 10);
+            linearLayout.SetBackgroundColor(RowBackgroundColor);
+
+            TextView titleView = new TextView(activity);
+            ImageView imageView = new ImageView(activity);
+            TextView descriptionView = new TextView(activity);
+
+            titleView.Text = dish.Name;
+            titleView.TextSize = textSizeLarge;
+
+            imageView.SetAdjustViewBounds(true);
+            imageView.SetMaxHeight(maxRowHeight);
+            imageView.SetMaxWidth(linearLayout.MinimumWidth);
+            int dayMenuIndex = orderlist.DayMenus.FindIndex(x => x.Dish1 == dish || x.Dish2 == dish || x.SideDish == dish);
+            int imageIndex = 0;
+
+            if (orderlist.DayMenus[dayMenuIndex].Dish1 == dish)
+                imageIndex = dayMenuIndex * 3;
+            if (orderlist.DayMenus[dayMenuIndex].Dish2 == dish)
+                imageIndex = (dayMenuIndex * 3) + 1;
+            if (orderlist.DayMenus[dayMenuIndex].SideDish == dish)
+                imageIndex = (dayMenuIndex * 3) + 2;
+
+            imageView.SetImageDrawable(dishImages[imageIndex]);
 
 			descriptionView.Text = dish.Description;
 			descriptionView.TextSize = textSizeMed;
@@ -260,9 +321,22 @@ namespace Ordersystem.Droid
 			titleView.Text = dish.Name;
 			titleView.TextSize = textSizeLarge;
 
-			imageView.SetImageURI (Android.Net.Uri.Parse("http://www.kesanacats.dk/wp-content/uploads/killroy-lille-billed-fra-sølvkatten.png"));
+            imageView.SetAdjustViewBounds(true);
+            imageView.SetMaxHeight(maxRowHeight);
+            imageView.SetMaxWidth(linearLayout.MinimumWidth);
+            int dayMenuIndex = orderlist.DayMenus.FindIndex(x => x.Dish1 == dish || x.Dish2 == dish || x.SideDish == dish);
+            int imageIndex = 0;
 
-			descriptionView.Text = dish.Description;
+            if (orderlist.DayMenus[dayMenuIndex].Dish1 == dish)
+                imageIndex = dayMenuIndex * 3;
+            if (orderlist.DayMenus[dayMenuIndex].Dish2 == dish)
+                imageIndex = (dayMenuIndex * 3) + 1;
+            if (orderlist.DayMenus[dayMenuIndex].SideDish == dish)
+                imageIndex = (dayMenuIndex * 3) + 2;
+
+            imageView.SetImageDrawable(dishImages[imageIndex]);
+
+            descriptionView.Text = dish.Description;
 			descriptionView.TextSize = textSizeMed;
 
 			linearLayout.AddView (titleView);
