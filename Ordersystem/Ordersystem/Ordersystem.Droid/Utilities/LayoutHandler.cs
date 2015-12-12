@@ -63,7 +63,7 @@ namespace Ordersystem.Droid
             //Initialize dishImages with transparent ColorDrawables
             List<Drawable> temp = new List<Drawable>();
             Drawable drawable = new ColorDrawable(Color.Transparent);
-            for (int i = 0; i < 31; i++)
+            for (int i = 0; i < 93; i++)
             {
                 temp.Add(drawable);
             }
@@ -215,18 +215,18 @@ namespace Ordersystem.Droid
             {
                 imageBytes = await webClient.DownloadDataTaskAsync(url);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                throw e;
             }
 
-            string localPath = "android.resource://com.P360.Ordersystem/drawable/" + fileName;
+            //string localPath = "android.resource://com.P360.Ordersystem/drawable/" + fileName;
             dishImages[dishIndex - 1] = new BitmapDrawable(BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length));
 
 
-            BitmapFactory.Options options = new BitmapFactory.Options();
+            /*BitmapFactory.Options options = new BitmapFactory.Options();
             options.InJustDecodeBounds = true;
-            await BitmapFactory.DecodeFileAsync(localPath, options);
+            await BitmapFactory.DecodeFileAsync(localPath, options);*/
 
         }
 
@@ -369,7 +369,7 @@ namespace Ordersystem.Droid
 				});
 
 			ImageView retimg = new ImageView (activity);
-			retimg.SetImageURI (Android.Net.Uri.Parse("https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png"));
+			//retimg.SetImageURI (Android.Net.Uri.Parse("https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png"));
 
 			linearLayout.AddView (retimg);
 
