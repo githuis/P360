@@ -115,7 +115,7 @@ namespace Ordersystem.Droid.Utilities
 					"JOIN dishes d2 ON d2.DishKey=dm.Dish2 " +
 					"JOIN dishes sd ON sd.DishKey=dm.SideDish " +
 					"WHERE ol.Diet = '" + dietString + "' " +
-					"AND ol.EndDate = '" + endDate.ToString ("dd-MM-yyyy") + "'";
+					"AND ol.EndDate = '" + endDate.ToString ("yyyy-MM-dd") + "'";
 
 				MySqlCommand Command = new MySqlCommand(query, connection);
 				MySqlDataReader reader = Command.ExecuteReader();
@@ -187,8 +187,8 @@ namespace Ordersystem.Droid.Utilities
 				               "JOIN dishes d2 ON d2.DishKey=dm.Dish2 " +
 				               "JOIN dishes sd ON sd.DishKey=dm.SideDish " +
 				               "WHERE ol.Diet = '" + dietString + "' " +
-				               "AND ol.EndDate > '" + DateTime.Today.ToString ("dd-MM-yyyy") + "' " +
-				               "AND ol.EndDate < '" + DateTime.Today.AddMonths (1).ToString ("dd-MM-yyyy") + "'";
+				               "AND ol.EndDate > '" + DateTime.Today.ToString ("yyyy-MM-dd") + "' " +
+				               "AND ol.EndDate < '" + DateTime.Today.AddMonths (1).ToString ("yyyy-MM-dd") + "'";
 
 				MySqlCommand Command = new MySqlCommand(query, connection);
 				MySqlDataReader reader = Command.ExecuteReader();
