@@ -23,7 +23,7 @@ namespace Ordersystem.Model
         /// <param name="dayMenu">The DayMenu this is a selection from.</param>
         /// <param name="choice">The choice of dish.</param>
         /// <param name="sideDish">Whether to save a side dish or not.</param>
-        public DayMenuSelection(DayMenu dayMenu, DayMenuChoice choice, bool sideDish = false)
+		public DayMenuSelection(DayMenu dayMenu, DayMenuChoice choice = DayMenuChoice.NoChoice, bool sideDish = false)
         {
             if (dayMenu == null)
             {
@@ -33,6 +33,7 @@ namespace Ordersystem.Model
             DayMenu = dayMenu;
             Choice = choice;
             SideDish = sideDish;
+			Date = DayMenu.Date;
         }
 
         /// <summary>
@@ -59,7 +60,7 @@ namespace Ordersystem.Model
         /// <summary>
         /// The date of the DayMenu.
         /// </summary>
-        public DateTime Date {get {return DayMenu.Date;} }
+		public DateTime Date { get; set; }
 
         /// <summary>
         /// Gets the dishes from the DayMenu.

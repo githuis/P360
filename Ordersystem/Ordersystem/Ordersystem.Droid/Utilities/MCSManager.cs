@@ -100,7 +100,7 @@ namespace Ordersystem.Droid.Utilities
             }
         }
 
-		public Orderlist GetOrderlistByDiet(Diet diet)
+		public Orderlist GetOrderlistFromDB(Diet diet, DateTime endDate = null)
 		{
 			string dietString = ParseStringFromDiet (diet);
 
@@ -109,12 +109,15 @@ namespace Ordersystem.Droid.Utilities
 				connection.Open();
 
 				string query = "SELECT * FROM orderlists_daymenus oldm " +
-				               "JOIN orderlists ol ON ol.OrderlistKey=oldm.orderlistKey " +
-				               "JOIN daymenus dm ON dm.DayMenuKey=oldm.DayMenuKey " +
-				               "JOIN dishes d1 ON d1.DishKey=dm.Dish1 " +
-				               "JOIN dishes d2 ON d2.DishKey=dm.Dish2 " +
-				               "JOIN dishes sd ON sd.DishKey=dm.SideDish " +
-				               "WHERE ol.Diet = '" + dietString + "'";
+					"JOIN orderlists ol ON ol.OrderlistKey=oldm.orderlistKey " +
+					"JOIN daymenus dm ON dm.DayMenuKey=oldm.DayMenuKey " +
+					"JOIN dishes d1 ON d1.DishKey=dm.Dish1 " +
+					"JOIN dishes d2 ON d2.DishKey=dm.Dish2 " +
+					"JOIN dishes sd ON sd.DishKey=dm.SideDish " +
+					"WHERE ol.Diet = '" + dietString + "' " +
+					endDate = null ? "AND ol.EndDate > '" + DateTime.Today.ToString("dd-MM-yyyy") + "' " +
+					"AND ol.EndDate < '" + DateTime.Today.AddMonths(1).ToString("dd-MM-yyyy") + "' " :
+					"AND ol.EndDate = '" + endDate.ToString ("dd-MM-yyyy") + "'";
 
 				MySqlCommand Command = new MySqlCommand(query, connection);
 				MySqlDataReader reader = Command.ExecuteReader();
@@ -130,14 +133,13 @@ namespace Ordersystem.Droid.Utilities
 					reader.Read ();
 
 					if (!reader.IsDBNull (reader.GetOrdinal ("StartDate")) &&
-					    !reader.IsDBNull (reader.GetOrdinal ("Diet")) &&
-					    !reader.IsDBNull (reader.GetOrdinal ("Days")))
+						!reader.IsDBNull (reader.GetOrdinal ("Diet")) &&
+						!reader.IsDBNull (reader.GetOrdinal ("Days")))
 					{
 						count = reader.GetInt32 (reader.GetOrdinal ("Days"));
 						Diet = reader.GetString (reader.GetOrdinal ("Diet"));
 						StartDate = reader.GetDateTime (reader.GetOrdinal ("StartDate"));
-						EndDate = StartDate.AddDays (-14);
-						StartDate = StartDate.AddMonths (-1);
+						EndDate = reader.GetDateTime (reader.GetOrdinal ("EndDate"));
 					}
 					else
 					{

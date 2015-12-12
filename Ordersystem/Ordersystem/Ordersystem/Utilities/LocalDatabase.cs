@@ -24,6 +24,11 @@ namespace Ordersystem.Utilities
             Open(filename);
         }
 
+		public void CleanOldSessions()
+		{
+			_sessions.RemoveAll (x => x.Orderlist.EndDate < DateTime.Today || x.Order.Sent);
+		}
+
         /* Predicate methods */
         /// <summary>
         /// Gets the first Order from the database matching the predicate.
@@ -104,7 +109,14 @@ namespace Ordersystem.Utilities
         /// <param name="customer">The Customer, whose personNumber is used as reference in the database.</param>
         public void SaveSession(Orderlist orderlist, Customer customer)
         {
-            _sessions.Add(new Session(customer.PersonNumber, customer.Order, orderlist));
+			try
+			{
+				DeleteSession(customer.PersonNumber);
+			}
+			catch (ItemNotFoundException)
+			{
+			}
+			_sessions.Add(new Session(customer.PersonNumber, customer.Order, orderlist));
         }
 
         /// <summary>
