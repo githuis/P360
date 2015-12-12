@@ -37,7 +37,11 @@ namespace Ordersystem.Utilities
         /// <returns>The Order if found, else it returns null.</returns>
         public Order GetOrder(Func<Session, bool> predicate)
         {
-            return _sessions.FirstOrDefault(predicate).Order;
+			var session = _sessions.FirstOrDefault(predicate);
+			if (session != null)
+				return session.Order;
+			else 
+				return null;
         }
 
         /// <summary>
@@ -73,7 +77,11 @@ namespace Ordersystem.Utilities
         /// <returns>The Order if found, else returns null.</returns>
         public Order GetOrder(string personNumber)
         {
-            return _sessions.FirstOrDefault(x => x.PersonNumber == personNumber).Order;
+			var session = _sessions.FirstOrDefault(x => x.PersonNumber == personNumber);
+			if (session != null)
+				return session.Order;
+			else
+				return null;
         }
 
         /// <summary>
