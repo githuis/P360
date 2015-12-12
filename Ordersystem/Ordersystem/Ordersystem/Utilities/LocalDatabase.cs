@@ -51,7 +51,11 @@ namespace Ordersystem.Utilities
         /// <returns>The Orderlist if found, else returns null.</returns>
         public Orderlist GetOrderlist(Func<Session, bool> predicate)
         {
-            return _sessions.FirstOrDefault(predicate).Orderlist;
+			var session = _sessions.FirstOrDefault(predicate);
+			if (session != null)
+				return session.Orderlist;
+			else 
+				return null;
         }
 
         /// <summary>
@@ -91,7 +95,11 @@ namespace Ordersystem.Utilities
         /// <returns>The Orderlist if found, else returns null.</returns>
         public Orderlist GetOrderlist(string personNumber)
         {
-            return _sessions.FirstOrDefault(x => x.PersonNumber == personNumber).Orderlist;
+			var session = _sessions.FirstOrDefault(x => x.PersonNumber == personNumber);
+			if (session != null)
+				return session.Orderlist;
+			else
+				return null;
         }
 
         /// <summary>
