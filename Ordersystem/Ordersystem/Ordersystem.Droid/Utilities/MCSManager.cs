@@ -95,6 +95,7 @@ namespace Ordersystem.Droid.Utilities
 				}
 				else
 				{
+					connection.Close ();
 					throw new ArgumentException ("No customer with that personnumber exists.");
 				}
             }
