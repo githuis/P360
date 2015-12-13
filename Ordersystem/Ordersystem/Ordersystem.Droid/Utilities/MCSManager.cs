@@ -164,12 +164,12 @@ namespace Ordersystem.Droid.Utilities
 				}
 				else
 				{
+					connection.Close ();
 					throw new ArgumentException ("No Ordelist for the given Diet found.");
 				}
 
 				connection.Close();
-				orderlist = new Orderlist (DayMenus, StartDate, EndDate, ParseDietFromString(Diet));
-				return orderlist;
+				return new Orderlist (DayMenus, StartDate, EndDate, ParseDietFromString(Diet));
 			}
 		}
 
@@ -237,12 +237,12 @@ namespace Ordersystem.Droid.Utilities
 				}
 				else
 				{
+					connection.Close ();
 					throw new ArgumentException ("No Ordelist for the given Diet found.");
 				}
 
 				connection.Close();
-				orderlist = new Orderlist (DayMenus, StartDate, EndDate, ParseDietFromString(Diet));
-				return orderlist;
+				return new Orderlist (DayMenus, StartDate, EndDate, ParseDietFromString(Diet));
 			}
 		}
 
