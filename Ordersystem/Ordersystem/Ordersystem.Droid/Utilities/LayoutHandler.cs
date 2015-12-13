@@ -28,10 +28,8 @@ namespace Ordersystem.Droid
 
         //'Globals' for inside LayoutHandler
         private Activity activity;
-        private DayMenu testMenu;
         private int infoRowId;
         private Point displaySize;
-        private DateTime testDate;
         private Customer customer;
         private Orderlist orderlist;
         private List<Drawable> dishImages;
@@ -52,23 +50,6 @@ namespace Ordersystem.Droid
         public LayoutHandler(Activity activity)
         {
             this.activity = activity;
-
-            testMenu = new DayMenu(
-                new Dish("Kartofler m. Sovs", "Kartofler med brun sovs og millionbøf", ""),
-                new Dish("Rød grød med fløde", "Rød grød med fløde til.", ""),
-                new Dish("Jordbær grød m. mælk", "Jordbærgrød", ""),
-                DateTime.Today);
-            testDate = DateTime.Today;
-
-            //Initialize dishImages with transparent ColorDrawables
-            List<Drawable> temp = new List<Drawable>();
-            Drawable drawable = new ColorDrawable(Color.Transparent);
-            for (int i = 0; i < 93; i++)
-            {
-                temp.Add(drawable);
-            }
-            dishImages = temp;
-
             infoRowId = int.MaxValue;
         }
 
@@ -77,16 +58,25 @@ namespace Ordersystem.Droid
             this.customer = customer;
             this.orderlist = orderlist;
 
+            //Initialize dishImages with transparent ColorDrawables
+            List<Drawable> temp = new List<Drawable>();
+            Drawable drawable = new ColorDrawable(Color.Transparent);
+            for (int i = 0; i < orderlist.DayMenus.Count * 3; i++)
+            {
+                temp.Add(drawable);
+            }
+            dishImages = temp;
+
             //Start downloading images asyncrone
             int count = 1;
             foreach (DayMenu dayMenu in orderlist.DayMenus)
             {
                 if (dayMenu.Dish1.ImageSource != "")
-                    downloadDrawableFromUrlAsync(dayMenu.Dish1.ImageSource, "dish" + count, count);
+                    downloadDrawableFromUrlAsync(dayMenu.Dish1.ImageSource, count);
                 if (dayMenu.Dish2.ImageSource != "")
-                    downloadDrawableFromUrlAsync(dayMenu.Dish2.ImageSource, "dish" + (count + 1), count + 1);
+                    downloadDrawableFromUrlAsync(dayMenu.Dish2.ImageSource, count + 1);
                 if (dayMenu.SideDish.ImageSource != "")
-                    downloadDrawableFromUrlAsync(dayMenu.SideDish.ImageSource, "dish" + (count + 2), count + 2);
+                    downloadDrawableFromUrlAsync(dayMenu.SideDish.ImageSource, count + 2);
                 count += 3;
             }
         }
@@ -206,7 +196,12 @@ namespace Ordersystem.Droid
             return row.Height == mediumRowHeight;
         }
 
-        async void downloadDrawableFromUrlAsync(string url, string fileName, int dishIndex)
+        /// <summary>
+        /// Downloads an images and stores it as a Drawable at the given dishindex - 1 in the global dishImages
+        /// </summary>
+        /// <param name="url">Url string of image to be downloaded</param>
+        /// <param name="dishIndex">The index where the drawable is stored in the global dishImages</param>
+        async void downloadDrawableFromUrlAsync(string url, int dishIndex)
         {
             var webClient = new WebClient();
             byte[] imageBytes = null;
@@ -219,14 +214,7 @@ namespace Ordersystem.Droid
             {
                 throw e;
             }
-
-            //string localPath = "android.resource://com.P360.Ordersystem/drawable/" + fileName;
             dishImages[dishIndex - 1] = new BitmapDrawable(BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length));
-
-
-            /*BitmapFactory.Options options = new BitmapFactory.Options();
-            options.InJustDecodeBounds = true;
-            await BitmapFactory.DecodeFileAsync(localPath, options);*/
 
         }
 
@@ -248,17 +236,7 @@ namespace Ordersystem.Droid
             imageView.SetAdjustViewBounds(true);
             imageView.SetMaxHeight(maxRowHeight);
             imageView.SetMaxWidth(linearLayout.MinimumWidth);
-            int dayMenuIndex = orderlist.DayMenus.FindIndex(x => x.Dish1 == dish || x.Dish2 == dish || x.SideDish == dish);
-            int imageIndex = 0;
-
-            if (orderlist.DayMenus[dayMenuIndex].Dish1 == dish)
-                imageIndex = dayMenuIndex * 3;
-            if (orderlist.DayMenus[dayMenuIndex].Dish2 == dish)
-                imageIndex = (dayMenuIndex * 3) + 1;
-            if (orderlist.DayMenus[dayMenuIndex].SideDish == dish)
-                imageIndex = (dayMenuIndex * 3) + 2;
-
-            imageView.SetImageDrawable(dishImages[imageIndex]);
+            imageView.SetImageDrawable(dishImages[GetDishIndexInOrderlist(dish)]);
 
 			descriptionView.Text = dish.Description;
 			descriptionView.TextSize = textSizeMed;
@@ -324,17 +302,7 @@ namespace Ordersystem.Droid
             imageView.SetAdjustViewBounds(true);
             imageView.SetMaxHeight(maxRowHeight);
             imageView.SetMaxWidth(linearLayout.MinimumWidth);
-            int dayMenuIndex = orderlist.DayMenus.FindIndex(x => x.Dish1 == dish || x.Dish2 == dish || x.SideDish == dish);
-            int imageIndex = 0;
-
-            if (orderlist.DayMenus[dayMenuIndex].Dish1 == dish)
-                imageIndex = dayMenuIndex * 3;
-            if (orderlist.DayMenus[dayMenuIndex].Dish2 == dish)
-                imageIndex = (dayMenuIndex * 3) + 1;
-            if (orderlist.DayMenus[dayMenuIndex].SideDish == dish)
-                imageIndex = (dayMenuIndex * 3) + 2;
-
-            imageView.SetImageDrawable(dishImages[imageIndex]);
+            imageView.SetImageDrawable(dishImages[GetDishIndexInOrderlist(dish)]);
 
             descriptionView.Text = dish.Description;
 			descriptionView.TextSize = textSizeMed;
@@ -534,5 +502,18 @@ namespace Ordersystem.Droid
 		{
 			return !(dish == null) && dish.Name == ((TextView)lin.GetChildAt (0)).Text;
 		}
+
+        private int GetDishIndexInOrderlist(Dish dish)
+        {
+            int dayMenuIndex = orderlist.DayMenus.FindIndex(x => x.Dish1 == dish || x.Dish2 == dish || x.SideDish == dish);
+            int imageIndex = 0;
+            if (orderlist.DayMenus[dayMenuIndex].Dish1 == dish)
+                imageIndex = dayMenuIndex * 3;
+            if (orderlist.DayMenus[dayMenuIndex].Dish2 == dish)
+                imageIndex = (dayMenuIndex * 3) + 1;
+            if (orderlist.DayMenus[dayMenuIndex].SideDish == dish)
+                imageIndex = (dayMenuIndex * 3) + 2;
+            return imageIndex;
+        }
 	}
 }
