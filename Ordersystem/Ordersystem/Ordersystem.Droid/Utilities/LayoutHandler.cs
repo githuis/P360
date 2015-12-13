@@ -11,8 +11,9 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Graphics;
-using System.Net;
 using Android.Graphics.Drawables;
+using System.Net;
+using System.IO;
 
 namespace Ordersystem.Droid
 {
@@ -33,6 +34,7 @@ namespace Ordersystem.Droid
         private Customer customer;
         private Orderlist orderlist;
         private List<Drawable> dishImages;
+        private Drawable dishImage;
 
         //10px per container per side. 50px for the arrow.
         private int paddingTotal = 8 * 10;
@@ -66,9 +68,10 @@ namespace Ordersystem.Droid
                 temp.Add(drawable);
             }
             dishImages = temp;
+            dishImage = new ColorDrawable(Color.Transparent);
 
             //Start downloading images asyncrone
-            int count = 1;
+            int count = 0;
             foreach (DayMenu dayMenu in orderlist.DayMenus)
             {
                 if (dayMenu.Dish1.ImageSource != "")
@@ -216,8 +219,13 @@ namespace Ordersystem.Droid
             {
                 throw e;
             }
-            dishImages[dishIndex - 1] = new BitmapDrawable(BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length));
 
+            string localPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + dishIndex;
+            FileStream fs = new FileStream(localPath, FileMode.OpenOrCreate);
+            await fs.WriteAsync(imageBytes, 0, imageBytes.Length);
+
+            //Close file connection
+            fs.Close();
         }
 
         private LinearLayout LinearBuilder(TableLayout table, TableRow row, Dish dish, DayMenuChoice choice)
@@ -238,7 +246,16 @@ namespace Ordersystem.Droid
             imageView.SetAdjustViewBounds(true);
             imageView.SetMaxHeight(maxRowHeight);
             imageView.SetMaxWidth(linearLayout.MinimumWidth);
-            imageView.SetImageDrawable(dishImages[GetDishIndexInOrderlist(dish)]);
+            int imageIndex = GetDishIndexInOrderlist(dish);
+            //Load image from path into dishImages
+            dishImages[imageIndex] = new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex));
+            imageView.SetImageDrawable(dishImages[imageIndex]);
+            dishImages[imageIndex] = new ColorDrawable(Color.Transparent);
+            /*BitmapFactory.Options options = new BitmapFactory.Options();
+            options.InJustDecodeBounds = true;
+            dishImage = new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex, options));
+            imageView.SetImageDrawable(dishImage);
+            dishImage = new ColorDrawable(Color.Transparent);*/
 
             descriptionView.Text = dish.Description;
             descriptionView.TextSize = textSizeMed;
@@ -251,30 +268,6 @@ namespace Ordersystem.Droid
             index /= 2;
             if (customer.Order.DayMenuSelections[index].Choice == DayMenuChoice.NoChoice)
                 ClearRowText(row, customer.Order.DayMenuSelections[index].Date);
-
-
-            /*if (!isSideDish) 
-			{
-				linearLayout.Click += (object sender, EventArgs e) => {
-					
-					Dish.SelectedDishes [index] = dish;
-					UpdateRowText(row, testDate, dish); // FIX DATE!!
-					customer.Order.DayMenuSelections[index].Choice = Ordersystem.Enums.DayMenuChoice.
-
-				};
-			} 
-			else 
-			{
-				linearLayout.Click += (object sender, EventArgs e) => {
-					
-					int index = table.IndexOfChild(row);
-					index /= 2;
-					SelectSideDish(index, dish);
-
-					//Dish.SelectedSideDishes[index] = dish;
-					//Console.WriteLine("IN:" + index);
-				};
-			}*/
 
             linearLayout.Click += (object sender, EventArgs e) =>
             {
@@ -305,7 +298,16 @@ namespace Ordersystem.Droid
             imageView.SetAdjustViewBounds(true);
             imageView.SetMaxHeight(maxRowHeight);
             imageView.SetMaxWidth(linearLayout.MinimumWidth);
-            imageView.SetImageDrawable(dishImages[GetDishIndexInOrderlist(dish)]);
+            int imageIndex = GetDishIndexInOrderlist(dish);
+            //Load image from path into dishImages
+            dishImages[imageIndex] = new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex));
+            imageView.SetImageDrawable(dishImages[imageIndex]);
+            dishImages[imageIndex] = new ColorDrawable(Color.Transparent);
+            /*BitmapFactory.Options options = new BitmapFactory.Options();
+            options.InJustDecodeBounds = false;
+            dishImage = new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex, options));
+            imageView.SetImageDrawable(dishImage);
+            dishImage = new ColorDrawable(Color.Transparent);*/
 
             descriptionView.Text = dish.Description;
             descriptionView.TextSize = textSizeMed;
