@@ -26,7 +26,7 @@ namespace Ordersystem.Droid.Utilities
 		/// </summary>
 		/// <param name="Strings">The lines to be written.</param>
 		/// <param name="append">If set to <c>true</c> append, otherwise overwrite.</param>
-        public void WriteSeveralLinesToFile(List<string> Strings, bool append)
+        public void WriteToFile(List<string> Strings, bool append)
         {
             using (var streamWriter = new StreamWriter(_filepath, append))
             {

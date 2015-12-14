@@ -169,7 +169,7 @@ namespace Ordersystem.Utilities
         public void Close()
         {
             List<string> serializedSessions = _sessions.Select(client => Session.Serializer.Serialize(client)).ToList();
-            _database.WriteSeveralLinesToFile(serializedSessions, false);
+            _database.WriteToFile(serializedSessions, false);
         }
     }
 }
