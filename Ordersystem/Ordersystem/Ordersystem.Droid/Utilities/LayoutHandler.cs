@@ -33,8 +33,6 @@ namespace Ordersystem.Droid
         private Point displaySize;
         private Customer customer;
         private Orderlist orderlist;
-        private List<Drawable> dishImages;
-        private Drawable dishImage;
 
         //10px per container per side. 50px for the arrow.
         private int paddingTotal = 8 * 10;
@@ -59,16 +57,6 @@ namespace Ordersystem.Droid
         {
             this.customer = customer;
             this.orderlist = orderlist;
-
-            //Initialize dishImages with transparent ColorDrawables
-            List<Drawable> temp = new List<Drawable>();
-            Drawable drawable = new ColorDrawable(Color.Transparent);
-            for (int i = 0; i < orderlist.DayMenus.Count * 3; i++)
-            {
-                temp.Add(drawable);
-            }
-            dishImages = temp;
-            dishImage = new ColorDrawable(Color.Transparent);
 
             //Start downloading images asyncrone
             int count = 0;
@@ -104,7 +92,6 @@ namespace Ordersystem.Droid
                 throw e;
             }
             
-
             newRow.SetBackgroundColor(RowBackgroundColor);
             newRow.SetMinimumHeight(maxRowHeight);
             parent.AddView(newRow, childId + 1);
@@ -260,14 +247,7 @@ namespace Ordersystem.Droid
             imageView.SetMaxWidth(linearLayout.MinimumWidth);
             int imageIndex = GetDishIndexInOrderlist(dish);
             //Load image from path into dishImages
-            //dishImages[imageIndex] = new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex));
             imageView.SetImageDrawable(new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex)));
-            //dishImages[imageIndex] = new ColorDrawable(Color.Transparent);
-            /*BitmapFactory.Options options = new BitmapFactory.Options();
-            options.InJustDecodeBounds = true;
-            dishImage = new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex, options));
-            imageView.SetImageDrawable(dishImage);
-            dishImage = new ColorDrawable(Color.Transparent);*/
 
             descriptionView.Text = dish.Description;
             descriptionView.TextSize = textSizeMed;
@@ -311,15 +291,7 @@ namespace Ordersystem.Droid
             imageView.SetMaxHeight(maxRowHeight);
             imageView.SetMaxWidth(linearLayout.MinimumWidth);
             int imageIndex = GetDishIndexInOrderlist(dish);
-            //Load image from path into dishImages
-            //dishImages[imageIndex] = new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex));
             imageView.SetImageDrawable(new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex)));
-            //dishImages[imageIndex] = new ColorDrawable(Color.Transparent);
-            /*BitmapFactory.Options options = new BitmapFactory.Options();
-            options.InJustDecodeBounds = false;
-            dishImage = new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex, options));
-            imageView.SetImageDrawable(dishImage);
-            dishImage = new ColorDrawable(Color.Transparent);*/
 
             descriptionView.Text = dish.Description;
             descriptionView.TextSize = textSizeMed;
