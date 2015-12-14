@@ -63,13 +63,15 @@ namespace Ordersystem.Droid
             foreach (DayMenu dayMenu in orderlist.DayMenus)
             {
                 if (dayMenu.Dish1.ImageSource != "")
-                    DownloadToStorageFromUrl(dayMenu.Dish1.ImageSource, count);
+                    DownloadToStorageFromUrl(dayMenu.Dish1.ImageSource, "dish" + count.ToString());
                 if (dayMenu.Dish2.ImageSource != "")
-                    DownloadToStorageFromUrl(dayMenu.Dish2.ImageSource, count + 1);
+                    DownloadToStorageFromUrl(dayMenu.Dish2.ImageSource, "dish" + (count + 1).ToString());
                 if (dayMenu.SideDish.ImageSource != "")
-                    DownloadToStorageFromUrl(dayMenu.SideDish.ImageSource, count + 2);
+                    DownloadToStorageFromUrl(dayMenu.SideDish.ImageSource, "dish" + (count + 2).ToString());
                 count += 3;
             }
+            //Download no food image
+            DownloadToStorageFromUrl("http://i.imgur.com/iFUQs5K.png", "nodish");
         }
 
         public void CreateDayMenuDisplay(DayMenu dayMenu, TableRow row, TableLayout parent)
@@ -205,7 +207,7 @@ namespace Ordersystem.Droid
         /// </summary>
         /// <param name="url">Url string of image to be downloaded</param>
         /// <param name="dishIndex">The index where the drawable is stored in the global dishImages</param>
-        async void DownloadToStorageFromUrl(string url, int dishIndex)
+        async void DownloadToStorageFromUrl(string url, string fileName)
         {
             var webClient = new WebClient();
             byte[] imageBytes = null;
@@ -219,7 +221,7 @@ namespace Ordersystem.Droid
                 throw e;
             }
 
-            string localPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + dishIndex;
+            string localPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/" + fileName;
             FileStream fs = new FileStream(localPath, FileMode.OpenOrCreate);
             await fs.WriteAsync(imageBytes, 0, imageBytes.Length);
 
@@ -243,8 +245,8 @@ namespace Ordersystem.Droid
             imageView.SetMaxHeight(maxRowHeight);
             imageView.SetMaxWidth(linearLayout.MinimumWidth);
             int imageIndex = GetDishIndexInOrderlist(dish);
-            //Load image from path into dishImages
-            imageView.SetImageDrawable(new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex)));
+            imageView.SetImageBitmap(GetScaledDrawableFromPath(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex,
+                maxRowHeight, linearLayout.MinimumWidth));
 
             linearLayout.AddView(titleView);
             linearLayout.AddView(imageView);
@@ -281,7 +283,8 @@ namespace Ordersystem.Droid
             imageView.SetMaxHeight(maxRowHeight);
             imageView.SetMaxWidth(linearLayout.MinimumWidth);
             int imageIndex = GetDishIndexInOrderlist(dish);
-            imageView.SetImageDrawable(new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex)));
+            imageView.SetImageBitmap(GetScaledDrawableFromPath(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex,
+                maxRowHeight, linearLayout.MinimumWidth));
 
             linearLayout.AddView(titleView);
             linearLayout.AddView(imageView);
@@ -337,7 +340,8 @@ namespace Ordersystem.Droid
             });
 
             ImageView retimg = new ImageView(activity);
-            //retimg.SetImageURI (Android.Net.Uri.Parse("https://upload.wikimedia.org/wikipedia/commons/d/d9/Test.png"));
+            retimg.SetImageBitmap(GetScaledDrawableFromPath(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/nodish",
+                maxRowHeight, linearLayout.MinimumWidth));
 
             linearLayout.AddView(retimg);
 
@@ -538,6 +542,42 @@ namespace Ordersystem.Droid
             if (orderlist.DayMenus[dayMenuIndex].SideDish == dish)
                 imageIndex = (dayMenuIndex * 3) + 2;
             return imageIndex;
+        }
+
+        //With many thanks to Xamarin https://developer.xamarin.com/recipes/android/resources/general/load_large_bitmaps_efficiently/
+        private Bitmap GetScaledDrawableFromPath(string path, int reqHeight, int reqWidth)
+        {
+            BitmapFactory.Options options = new BitmapFactory.Options
+            {
+                InJustDecodeBounds = true
+            };
+
+            // The result will be null because InJustDecodeBounds == true.
+            Bitmap bitmap = BitmapFactory.DecodeFile(path, options);
+
+            int imageHeight = options.OutHeight;
+            int imageWidth = options.OutWidth;
+
+            float height = options.OutHeight;
+            float width = options.OutWidth;
+            double inSampleSize = 1D;
+
+            if (height > reqHeight || width > reqWidth)
+            {
+                int halfHeight = (int)(height / 2);
+                int halfWidth = (int)(width / 2);
+
+                // Calculate a inSampleSize that is a power of 2 - the decoder will use a value that is a power of two anyway.
+                while ((halfHeight / inSampleSize) > reqHeight && (halfWidth / inSampleSize) > reqWidth)
+                {
+                    inSampleSize *= 2;
+                }
+            }
+            options.InSampleSize = (int)inSampleSize;
+            options.InJustDecodeBounds = false;
+            bitmap = BitmapFactory.DecodeFile(path, options);
+
+            return bitmap;
         }
     }
 }
