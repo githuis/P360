@@ -16,8 +16,14 @@ namespace Ordersystem.Droid.Utilities
     {
 		private const string ConnectionString = "server=eu-cdbr-azure-north-d.cloudapp.net;port=3306;user id=ba3af1f8d328b9;pwd=650e758f;database=P360;allowuservariables=True;";
 
+		/// <summary>
+		/// Sends an order to the database.
+		/// </summary>
+		/// <param name="order">The order to be send.</param>
+		/// <param name="personNumber">The personnumber of the customer sending the order.</param>
 		public void SendOrder(Order order, string personNumber)
 		{
+			//Initalize the connection.
 			using (MySqlConnection connection = new MySqlConnection (ConnectionString))
 			{
 				connection.Open ();
@@ -25,11 +31,13 @@ namespace Ordersystem.Droid.Utilities
 				string Query = "INSERT INTO orders (CustomerPersonNumber)" +
 				                    "VALUES (" + personNumber + ")";
 
+				//Execute query on database.
 				MySqlCommand command = new MySqlCommand (Query, connection);
 				command.ExecuteNonQuery ();
 
 				List<Tuple<Dish,Dish>> dishes = GetDishesFromOrder (order);
 
+				//Execute queries on database for each choice.
 				foreach (Tuple<Dish,Dish> dishTuple in dishes)
 				{
 					if (dishTuple.Item2 != null) {
@@ -55,25 +63,32 @@ namespace Ordersystem.Droid.Utilities
 					command.CommandText = Query;
 					command.ExecuteNonQuery ();
 				}
-
+					
 				connection.Close ();
 				order.Sent = true;
 			}
 		}
 
+		/// <summary>
+		/// Gets a customer from the database by a personnumber.
+		/// </summary>
+		/// <returns>The customer.</returns>
+		/// <param name="personNumber">The personnumber of the customer.</param>
 		public Customer GetCustomerByPersonNumber(string personNumber)
         {
+			//Initialize connection to database.
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 connection.Open();
 
 				string query = "SELECT * FROM customers WHERE customers.PersonNumber = " + personNumber;
 
+				//Execute query on database.
                 MySqlCommand Command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = Command.ExecuteReader();
 
+				//Parse output from database to usable types.
 				Customer customer;
-
 				if(reader.HasRows)
 				{
 					reader.Read();
@@ -86,11 +101,11 @@ namespace Ordersystem.Droid.Utilities
 					}
 					else
 					{
+						connection.Close ();
 						throw new NullReferenceException("Database contains null value.");
 					}
-
-					connection.Close();
-
+						
+					connection.Close ();
 					return customer;
 				}
 				else
@@ -101,10 +116,17 @@ namespace Ordersystem.Droid.Utilities
             }
         }
 
+		/// <summary>
+		/// Gets the next orderlist from the database based on a diet and end date.
+		/// </summary>
+		/// <returns>The orderlist.</returns>
+		/// <param name="diet">The diet of the orderlist.</param>
+		/// <param name="endDate">The end date og the orderlist.</param>
 		public Orderlist GetOrderlistByDiet(Diet diet, DateTime endDate)
 		{
 			string dietString = ParseStringFromDiet (diet);
 
+			//Initialize connection to database.
 			using (MySqlConnection connection = new MySqlConnection(ConnectionString))
 			{
 				connection.Open();
@@ -118,6 +140,7 @@ namespace Ordersystem.Droid.Utilities
 					"WHERE ol.Diet = '" + dietString + "' " +
 					"AND ol.EndDate = '" + endDate.ToString ("yyyy-MM-dd") + "'";
 
+				//Execute query on database.
 				MySqlCommand Command = new MySqlCommand(query, connection);
 				MySqlDataReader reader = Command.ExecuteReader();
 
@@ -127,6 +150,7 @@ namespace Ordersystem.Droid.Utilities
 				int count;
 				List<DayMenu> DayMenus = new List<DayMenu>();
 
+				//Parse output from database to usable types.
 				if (reader.HasRows)
 				{
 					reader.Read ();
@@ -142,23 +166,37 @@ namespace Ordersystem.Droid.Utilities
 					}
 					else
 					{
+						connection.Close ();
 						throw new NullReferenceException ("Database contains null values.");
 					}
 
+					//Errorcheck.
 					if (count < 28 || count > 31)
 					{
+						connection.Close ();
 						throw new ArgumentOutOfRangeException ("Invalid amount of days in orderlist.");
 					}
 
-					DayMenus.Add (ReadDayMenu (reader));
-					for (int i = 2; i <= count; i++)
+					//Read all daymenus from database output and make sure to close connection if there is an error.
+					try
 					{
-						reader.Read ();
 						DayMenus.Add (ReadDayMenu (reader));
+						for (int i = 2; i <= count; i++)
+						{
+							reader.Read ();
+							DayMenus.Add (ReadDayMenu (reader));
+						}
+					}
+					catch(NullReferenceException e) ´
+					{
+						connection.Close ();
+						throw;
 					}
 
+					//Errorcheck.
 					if (IllegalDates (DayMenus))
 					{
+						connection.Close ();
 						throw new ArgumentException ("Duplicate dates detected.");
 					}
 				}
@@ -173,10 +211,16 @@ namespace Ordersystem.Droid.Utilities
 			}
 		}
 
+		/// <summary>
+		/// Gets the next orderlist from the database based on the diet.
+		/// </summary>
+		/// <returns>The orderlist.</returns>
+		/// <param name="diet">The diet of the orderlist.</param>
 		public Orderlist GetOrderlistByDiet(Diet diet)
 		{
 			string dietString = ParseStringFromDiet (diet);
 
+			//Initialize database connection.
 			using (MySqlConnection connection = new MySqlConnection(ConnectionString))
 			{
 				connection.Open();
@@ -191,6 +235,7 @@ namespace Ordersystem.Droid.Utilities
 				               "AND ol.EndDate > '" + DateTime.Today.ToString ("yyyy-MM-dd") + "' " +
 				               "AND ol.EndDate < '" + DateTime.Today.AddMonths (1).ToString ("yyyy-MM-dd") + "'";
 
+				//Execute command on database.
 				MySqlCommand Command = new MySqlCommand(query, connection);
 				MySqlDataReader reader = Command.ExecuteReader();
 
@@ -200,6 +245,7 @@ namespace Ordersystem.Droid.Utilities
 				int count;
 				List<DayMenu> DayMenus = new List<DayMenu>();
 
+				//Parse output to usable types.
 				if (reader.HasRows)
 				{
 					reader.Read ();
@@ -215,23 +261,37 @@ namespace Ordersystem.Droid.Utilities
 					}
 					else
 					{
+						connection.Close ();
 						throw new NullReferenceException ("Database contains null values.");
 					}
 
+					//Errorcheck
 					if (count < 28 || count > 31)
 					{
+						connection.Close ();
 						throw new ArgumentOutOfRangeException ("Invalid amount of days in orderlist.");
 					}
 
-					DayMenus.Add (ReadDayMenu (reader));
-					for (int i = 2; i <= count; i++)
+					//Read all daymenus from database output and make sure to close connection if error is found.
+					try
 					{
-						reader.Read ();
 						DayMenus.Add (ReadDayMenu (reader));
+						for (int i = 2; i <= count; i++)
+						{
+							reader.Read ();
+							DayMenus.Add (ReadDayMenu (reader));
+						}
+					}
+					catch(NullReferenceException e)
+					{
+						connection.Close ();
+						throw;
 					}
 
+					//Errorcheck
 					if (IllegalDates (DayMenus))
 					{
+						connection.Close ();
 						throw new ArgumentException ("Duplicate dates detected.");
 					}
 				}
@@ -246,13 +306,16 @@ namespace Ordersystem.Droid.Utilities
 			}
 		}
 
+		//Reads a daymenu from from the database reader.
 		private DayMenu ReadDayMenu(MySqlDataReader reader)
 		{
+			//Find column indexes, ordinals, for daymenu keys.
 			List<int> KeyOrdinals = new List<int>();
 			KeyOrdinals.Add (reader.GetOrdinal ("SideDish") + 1);
 			KeyOrdinals.Add (reader.GetOrdinal ("SideDish") + 5);
 			KeyOrdinals.Add (reader.GetOrdinal ("SideDish") + 9);
 
+			//Find dishes from these ordinals.
 			List<Dish> Dishes = new List<Dish>();
 			foreach (int ordinal in KeyOrdinals)
 			{
@@ -268,6 +331,7 @@ namespace Ordersystem.Droid.Utilities
 				}
 			}
 
+			//Find the date.
 			DateTime Date;
 			if (!reader.IsDBNull (reader.GetOrdinal ("Date")))
 			{
@@ -281,6 +345,7 @@ namespace Ordersystem.Droid.Utilities
 			return new DayMenu (Dishes [0], Dishes [1], Dishes [2], Date);
 		}
 
+		//Check if there are duplicate dates in the daymenus.
 		private bool IllegalDates(List<DayMenu> dayMenus)
 		{
 			List<DayMenu> dayMenusClone = dayMenus.ToList ();
@@ -302,6 +367,7 @@ namespace Ordersystem.Droid.Utilities
 			return false;
 		}
 
+		//Fetches the dishes chosen from the current order.
 		private List<Tuple<Dish,Dish>> GetDishesFromOrder(Order order)
 		{
 			var dishes = new List<Tuple<Dish,Dish>> ();
