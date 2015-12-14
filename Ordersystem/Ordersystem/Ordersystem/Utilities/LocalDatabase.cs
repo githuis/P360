@@ -153,7 +153,7 @@ namespace Ordersystem.Utilities
         /// Opens the database with the given filename.
         /// Is called automatically at database creation.
         /// </summary>
-        /// <param name="filename"></param>
+        /// <param name="filename">The name of the file.</param>
         public void Open(string filename)
         {
             Filename = filename;

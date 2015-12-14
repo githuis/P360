@@ -9,6 +9,10 @@ namespace Ordersystem.Droid.Utilities
     {
         private string _filepath;
 
+		/// <summary>
+		/// Creates a path to the file wherein the database lies.
+		/// </summary>
+		/// <param name="filename">The name of the file.</param>
         public void UseFilePath(string filename)
         {
             string fileName = filename + ".txt";
@@ -17,15 +21,11 @@ namespace Ordersystem.Droid.Utilities
             if (!File.Exists(_filepath)) File.Create(_filepath);
         }
 
-        public void WriteSingleLineToFile(string String, bool append)
-        {
-            using (var streamWriter = new StreamWriter(_filepath, append))
-            {
-                streamWriter.WriteLine(String);
-                streamWriter.Close();
-            }
-        }
-
+		/// <summary>
+		/// Writes several lines to the file.
+		/// </summary>
+		/// <param name="Strings">The lines to be written.</param>
+		/// <param name="append">If set to <c>true</c> append, otherwise overwrite.</param>
         public void WriteSeveralLinesToFile(List<string> Strings, bool append)
         {
             using (var streamWriter = new StreamWriter(_filepath, append))
@@ -38,16 +38,10 @@ namespace Ordersystem.Droid.Utilities
             }
         }
 
-        public string ReadLineFromFile()
-        {
-            using (var streamReader = new StreamReader(_filepath))
-            {
-                string lineRead = streamReader.ReadLine();
-                streamReader.Close();
-                return lineRead;
-            }
-        }
-
+		/// <summary>
+		/// Reads the file.
+		/// </summary>
+		/// <returns>The lines from the file.</returns>
         public List<string> ReadFile()
         {
             List<string> fileLines = new List<string>();
@@ -62,11 +56,6 @@ namespace Ordersystem.Droid.Utilities
             }
 
             return fileLines;
-        }
-
-        public bool Exists()
-        {
-            return File.Exists(_filepath);
         }
     }
 }

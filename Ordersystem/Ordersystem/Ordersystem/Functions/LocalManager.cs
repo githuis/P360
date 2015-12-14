@@ -23,6 +23,9 @@ namespace Ordersystem.Functions
         private LocalDatabase _localDatabase;
 		private IMCSManager _mcsManager;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Ordersystem.Functions.LocalManager"/> class.
+		/// </summary>
 		public LocalManager()
 		{
 			_mcsManager = Xamarin.Forms.DependencyService.Get<IMCSManager> ();
@@ -52,11 +55,18 @@ namespace Ordersystem.Functions
             return day && month && isNumbers;
         }
 
+		/// <summary>
+		/// Sends the current sessions order to the database.
+		/// </summary>
 		public void SendOrder ()
 		{
 			_mcsManager.SendOrder (_customer.Order, _customer.PersonNumber);
 		}
 
+		/// <summary>
+		/// Logs in to the system with the given personnumber.
+		/// </summary>
+		/// <param name="personNumber">The given personnumber.</param>
 		public void LogIn (string personNumber)
 		{
 			GetCustomerFromDB (personNumber);
@@ -74,6 +84,9 @@ namespace Ordersystem.Functions
 			}
 		}
 
+		/// <summary>
+		/// Logs out from the system.
+		/// </summary>
 		public void LogOut()
 		{
 			if (!_customer.Order.Sent) StoreSession ();
@@ -83,14 +96,28 @@ namespace Ordersystem.Functions
 			_orderlist = null;
 		}
 
+		/// <summary>
+		/// Gets a customer from the database.
+		/// </summary>
+		/// <param name="personNumber">The personnumber of the customer to get.</param>
 		public void GetCustomerFromDB (string personNumber)
 		{
 			_customer = _mcsManager.GetCustomerByPersonNumber (personNumber);
 		}
 
+		/// <summary>
+		/// Gets the current customer.
+		/// </summary>
+		/// <value>The customer.</value>
 		public Customer Customer {get{return _customer;}}
+
+		/// <summary>
+		/// Gets the current orderlist.
+		/// </summary>
+		/// <value>The orderlist.</value>
 		public Orderlist Orderlist {get{return _orderlist;}}
 
+		//Checks a string is between two integer values.
         private bool IsNumberBetween(string num, int min, int max)
         {
             int number;
@@ -101,11 +128,13 @@ namespace Ordersystem.Functions
             return false;
         }
 
+		//Checks if a string is only numeric.
         private bool IsStringDigitsOnly(string str)
         {
             return str.ToCharArray().All(c => c >= '0' && c <= '9');
         }
 
+		//Creates a new session.
         private void NewSession()
         {
             _customer.Order = new Order();
@@ -118,6 +147,7 @@ namespace Ordersystem.Functions
 			}
         }
 
+		//Resume a session.
 		private void ResumeSession(Order order)
         {
 			_orderlist = _localDatabase.GetOrderlist (_customer.PersonNumber);
@@ -143,11 +173,18 @@ namespace Ordersystem.Functions
             _localDatabase.SaveSession(_orderlist, _customer);
         }
 
+		/// <summary>
+		/// Determines whether the current order is valid.
+		/// </summary>
+		/// <returns><c>true</c> if the order is valid; otherwise, <c>false</c>.</returns>
         public bool IsOrderValid()
         {
             return _customer.Order.DayMenuSelections.All(selection => selection.Choice != DayMenuChoice.NoChoice);
         }
 
+		/// <summary>
+		/// Fills an invalid order with default values.
+		/// </summary>
 		public void FillInvalidOrder()
 		{
 			foreach (DayMenuSelection selection in _customer.Order.DayMenuSelections.Where (selection => selection.Choice == DayMenuChoice.NoChoice))
@@ -156,7 +193,7 @@ namespace Ordersystem.Functions
 			}
 		}
 
-		//Er dupliceate code, ligger i mcsmanager
+		//Er duplicate code, ligger i mcsmanager
 		private string ParseStringFromDiet(Diet diet)
 		{
 			switch(diet)
