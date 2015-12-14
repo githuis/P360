@@ -187,7 +187,7 @@ namespace Ordersystem.Droid.Utilities
 							DayMenus.Add (ReadDayMenu (reader));
 						}
 					}
-					catch(NullReferenceException e) ´
+					catch(NullReferenceException e)
 					{
 						connection.Close ();
 						throw;
