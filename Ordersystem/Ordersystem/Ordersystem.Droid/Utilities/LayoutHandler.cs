@@ -91,10 +91,19 @@ namespace Ordersystem.Droid
             TableRow newRow = new TableRow(activity);
             newRow.AddView(new TextView(activity) { Text = "" }, 0);
 
-            newRow.AddView(LinearBuilder(parent, row, dayMenu.Dish1, DayMenuChoice.Dish1), 1);
-            newRow.AddView(LinearBuilder(parent, row, dayMenu.Dish2, DayMenuChoice.Dish2), 2);
-            newRow.AddView(LinearBuilder(parent, row, dayMenu.SideDish, true), 3);
-            newRow.AddView(LinearNoFood(parent, row), 4);
+            GC.Collect();
+            try
+            {
+                newRow.AddView(LinearBuilder(parent, row, dayMenu.Dish1, DayMenuChoice.Dish1), 1);
+                newRow.AddView(LinearBuilder(parent, row, dayMenu.Dish2, DayMenuChoice.Dish2), 2);
+                newRow.AddView(LinearBuilder(parent, row, dayMenu.SideDish, true), 3);
+                newRow.AddView(LinearNoFood(parent, row), 4);
+            }
+            catch(Java.Lang.OutOfMemoryError e)
+            {
+                throw e;
+            }
+            
 
             newRow.SetBackgroundColor(RowBackgroundColor);
             newRow.SetMinimumHeight(maxRowHeight);
@@ -155,7 +164,10 @@ namespace Ordersystem.Droid
             //Sub-menu's first child (0) is a linearlayout, others are TextView. If is submenu, remove row.
             var child = row.GetChildAt(0);
             if (child is LinearLayout)
+            {
                 table.RemoveViewAt(table.IndexOfChild(row) + 1);
+                row.RemoveAllViews();
+            }
             else
                 ChangeArrowTo(row, Resource.Drawable.Forward);
             infoRowId = int.MaxValue;
@@ -248,9 +260,9 @@ namespace Ordersystem.Droid
             imageView.SetMaxWidth(linearLayout.MinimumWidth);
             int imageIndex = GetDishIndexInOrderlist(dish);
             //Load image from path into dishImages
-            dishImages[imageIndex] = new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex));
-            imageView.SetImageDrawable(dishImages[imageIndex]);
-            dishImages[imageIndex] = new ColorDrawable(Color.Transparent);
+            //dishImages[imageIndex] = new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex));
+            imageView.SetImageDrawable(new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex)));
+            //dishImages[imageIndex] = new ColorDrawable(Color.Transparent);
             /*BitmapFactory.Options options = new BitmapFactory.Options();
             options.InJustDecodeBounds = true;
             dishImage = new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex, options));
@@ -300,9 +312,9 @@ namespace Ordersystem.Droid
             imageView.SetMaxWidth(linearLayout.MinimumWidth);
             int imageIndex = GetDishIndexInOrderlist(dish);
             //Load image from path into dishImages
-            dishImages[imageIndex] = new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex));
-            imageView.SetImageDrawable(dishImages[imageIndex]);
-            dishImages[imageIndex] = new ColorDrawable(Color.Transparent);
+            //dishImages[imageIndex] = new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex));
+            imageView.SetImageDrawable(new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex)));
+            //dishImages[imageIndex] = new ColorDrawable(Color.Transparent);
             /*BitmapFactory.Options options = new BitmapFactory.Options();
             options.InJustDecodeBounds = false;
             dishImage = new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex, options));
