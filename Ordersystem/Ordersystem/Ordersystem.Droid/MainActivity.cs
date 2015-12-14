@@ -38,12 +38,19 @@ namespace Ordersystem.Droid
 			{		
 				if(localManager.IsValidSocialSecurityNumber(editText.Text))
 				{
+					try
+					{
 					localManager.LogIn(editText.Text);
-                    daysInMonth = DateTime.DaysInMonth(sessionOrderlist.DayMenus[0].Date.Year, sessionOrderlist.DayMenus[0].Date.Month);
+					daysInMonth = DateTime.DaysInMonth(sessionOrderlist.DayMenus[0].Date.Year, sessionOrderlist.DayMenus[0].Date.Month);
 					layoutHandler.SetCustomerAndList(sessionCustomer, sessionOrderlist);
 
 					SetContentView (Resource.Layout.Main_Window);
 					CreateMainWindow ();
+					}
+					catch (NullReferenceException)
+					{
+						errorMsg.Visibility = ViewStates.Visible;
+					}
 				}
 				else
 				{
