@@ -230,17 +230,14 @@ namespace Ordersystem.Droid
         private LinearLayout LinearBuilder(TableLayout table, TableRow row, Dish dish, DayMenuChoice choice)
         {
             LinearLayout linearLayout = new LinearLayout(activity);
-            linearLayout.Orientation = Orientation.Vertical;
-            linearLayout.SetMinimumWidth((displaySize.X / 4) - (paddingTotal / 2));
-            linearLayout.SetPadding(10, 10, 10, 10);
-            linearLayout.SetBackgroundColor(RowBackgroundColor);
+			InitLinearLayout (linearLayout);
 
             TextView titleView = new TextView(activity);
             ImageView imageView = new ImageView(activity);
             TextView descriptionView = new TextView(activity);
 
-            titleView.Text = dish.Name;
-            titleView.TextSize = textSizeLarge;
+			SetDishTitle (dish, titleView);
+			SetDishDescription (dish, descriptionView);
 
             imageView.SetAdjustViewBounds(true);
             imageView.SetMaxHeight(maxRowHeight);
@@ -249,15 +246,11 @@ namespace Ordersystem.Droid
             //Load image from path into dishImages
             imageView.SetImageDrawable(new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex)));
 
-            descriptionView.Text = dish.Description;
-            descriptionView.TextSize = textSizeMed;
-
             linearLayout.AddView(titleView);
             linearLayout.AddView(imageView);
             linearLayout.AddView(descriptionView);
 
-            int index = table.IndexOfChild(row);
-            index /= 2;
+			int index = FindRowIndex (table, row);
             if (customer.Order.DayMenuSelections[index].Choice == DayMenuChoice.NoChoice)
                 ClearRowText(row, customer.Order.DayMenuSelections[index].Date);
 
@@ -275,17 +268,14 @@ namespace Ordersystem.Droid
         private LinearLayout LinearBuilder(TableLayout table, TableRow row, Dish dish, bool sideDish)
         {
             LinearLayout linearLayout = new LinearLayout(activity);
-            linearLayout.Orientation = Orientation.Vertical;
-            linearLayout.SetMinimumWidth((displaySize.X / 4) - (paddingTotal / 2));
-            linearLayout.SetPadding(10, 10, 5, 10);
-            linearLayout.SetBackgroundColor(RowBackgroundColor);
+			InitLinearLayout (linearLayout);
 
             TextView titleView = new TextView(activity);
             ImageView imageView = new ImageView(activity);
             TextView descriptionView = new TextView(activity);
 
-            titleView.Text = dish.Name;
-            titleView.TextSize = textSizeLarge;
+			SetDishTitle (dish, titleView);
+			SetDishDescription (dish, descriptionView);
 
             imageView.SetAdjustViewBounds(true);
             imageView.SetMaxHeight(maxRowHeight);
@@ -293,24 +283,44 @@ namespace Ordersystem.Droid
             int imageIndex = GetDishIndexInOrderlist(dish);
             imageView.SetImageDrawable(new BitmapDrawable(BitmapFactory.DecodeFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex)));
 
-            descriptionView.Text = dish.Description;
-            descriptionView.TextSize = textSizeMed;
-
             linearLayout.AddView(titleView);
             linearLayout.AddView(imageView);
             linearLayout.AddView(descriptionView);
 
             linearLayout.Click += (object sender, EventArgs e) =>
             {
-                int index = table.IndexOfChild(row);
-                index /= 2;
+				int index = FindRowIndex (table, row);
                 customer.Order.DayMenuSelections[index].SideDish = !customer.Order.DayMenuSelections[index].SideDish;
-
                 UpdateDayMenuColors(table, row);
             };
 
             return linearLayout;
         }
+
+		static int FindRowIndex (TableLayout table, TableRow row)
+		{
+			return (table.IndexOfChild (row) / 2);
+		}
+
+		void SetDishDescription (Dish dish, TextView descriptionView)
+		{
+			descriptionView.Text = dish.Description;
+			descriptionView.TextSize = textSizeMed;
+		}
+
+		void SetDishTitle (Dish dish, TextView titleView)
+		{
+			titleView.Text = dish.Name;
+			titleView.TextSize = textSizeLarge;
+		}
+
+		void InitLinearLayout (LinearLayout linearLayout)
+		{
+			linearLayout.Orientation = Orientation.Vertical;
+			linearLayout.SetMinimumWidth ((displaySize.X / 4) - (paddingTotal / 2));
+			linearLayout.SetPadding (10, 10, 10, 10);
+			linearLayout.SetBackgroundColor (RowBackgroundColor);
+		}
 
         private LinearLayout LinearNoFood(TableLayout table, TableRow row)
         {
@@ -333,8 +343,7 @@ namespace Ordersystem.Droid
 
             linearLayout.Click += (object sender, EventArgs e) =>
             {
-                int index = table.IndexOfChild(row);
-                index /= 2;
+				int index = FindRowIndex (table, row);
                 customer.Order.DayMenuSelections[index].Choice = DayMenuChoice.NoDish;
                 UpdateDayMenuColors(table, row);
                 ClearRowText(row, orderlist.DayMenus[index].Date);
