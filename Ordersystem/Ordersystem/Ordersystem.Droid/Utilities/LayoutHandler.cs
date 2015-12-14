@@ -63,11 +63,11 @@ namespace Ordersystem.Droid
             foreach (DayMenu dayMenu in orderlist.DayMenus)
             {
                 if (dayMenu.Dish1.ImageSource != "")
-                    downloadDrawableFromUrlAsync(dayMenu.Dish1.ImageSource, count);
+                    DownloadDrawableFromUrlAsync(dayMenu.Dish1.ImageSource, count);
                 if (dayMenu.Dish2.ImageSource != "")
-                    downloadDrawableFromUrlAsync(dayMenu.Dish2.ImageSource, count + 1);
+                    DownloadDrawableFromUrlAsync(dayMenu.Dish2.ImageSource, count + 1);
                 if (dayMenu.SideDish.ImageSource != "")
-                    downloadDrawableFromUrlAsync(dayMenu.SideDish.ImageSource, count + 2);
+                    DownloadDrawableFromUrlAsync(dayMenu.SideDish.ImageSource, count + 2);
                 count += 3;
             }
         }
@@ -205,7 +205,7 @@ namespace Ordersystem.Droid
         /// </summary>
         /// <param name="url">Url string of image to be downloaded</param>
         /// <param name="dishIndex">The index where the drawable is stored in the global dishImages</param>
-        async void downloadDrawableFromUrlAsync(string url, int dishIndex)
+        async void DownloadDrawableFromUrlAsync(string url, int dishIndex)
         {
             var webClient = new WebClient();
             byte[] imageBytes = null;
