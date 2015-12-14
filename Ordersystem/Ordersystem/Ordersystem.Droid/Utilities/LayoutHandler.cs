@@ -352,7 +352,7 @@ namespace Ordersystem.Droid
             return linearLayout;
         }
 
-        private void UpdateRowText(TableRow row, DateTime date, Dish dish)
+        public void UpdateRowText(TableRow row, DateTime date, Dish dish)
         {
             string s = DayOfWeekToDanish(date.DayOfWeek) + " d.";
             s += date.ToShortDateString();
@@ -412,7 +412,7 @@ namespace Ordersystem.Droid
             throw new InvalidCastException("Row does not contain a TextView at " + index.ToString());
         }
 
-        private void UpdateDayMenuColors(TableLayout table, TableRow row)
+		public void UpdateDayMenuColors(TableLayout table, TableRow row)
         {
             TableRow oldrow = row;
             oldrow.SetBackgroundColor(RowBackgroundColor);
@@ -474,6 +474,29 @@ namespace Ordersystem.Droid
             }
 
         }
+
+		public void InitializeRowColors(TableLayout table, TableRow row)
+		{
+			int index = FindRowIndex (table, row);
+			row.SetBackgroundColor(RowBackgroundColor);
+
+			//If dish 1 or dish 2 is selected for row, color it
+			if (customer.Order.DayMenuSelections[index].Choice == DayMenuChoice.Dish1 || customer.Order.DayMenuSelections[index].Choice == DayMenuChoice.Dish2)
+			{
+				ColorRow(row);
+			}
+			//otherwise, if no dish is selected for row, color it.
+			else if (customer.Order.DayMenuSelections[index].Choice == DayMenuChoice.NoDish)
+			{
+				CleanRow(row);
+				ColorRow(row);
+			}
+			else if (customer.Order.DayMenuSelections[index].Choice == DayMenuChoice.NoChoice)
+			{
+				CleanRow(row);
+			}
+		}
+
 
         private void ColorRow(TableRow row)
         {

@@ -89,7 +89,7 @@ namespace Ordersystem.Functions
 		/// </summary>
 		public void LogOut()
 		{
-			if (!_customer.Order.Sent) StoreSession ();
+			StoreSession ();
 			_localDatabase.Close ();
 
 			_customer = null;
@@ -163,6 +163,8 @@ namespace Ordersystem.Functions
 			{
 				_customer.Order.DayMenuSelections [menu.Date.Day - 1].DayMenu = menu;
 			}
+
+			_customer.Order.Sent = order.Sent;
         }
 
         /// <summary>

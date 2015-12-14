@@ -28,7 +28,7 @@ namespace Ordersystem.Utilities
 		{
             foreach(var session in _sessions.ToList())
             {
-                if (session.Orderlist.EndDate < DateTime.Today || session.Order.Sent)
+                if (session.Orderlist.EndDate < DateTime.Today)
                 {
                     _sessions.Remove(session);
                 }

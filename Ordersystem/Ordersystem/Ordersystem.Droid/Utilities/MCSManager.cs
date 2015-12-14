@@ -23,6 +23,8 @@ namespace Ordersystem.Droid.Utilities
 		/// <param name="personNumber">The personnumber of the customer sending the order.</param>
 		public void SendOrder(Order order, string personNumber)
 		{
+			if (order.Sent)
+				return;
 			//Initalize the connection.
 			using (MySqlConnection connection = new MySqlConnection (ConnectionString))
 			{
@@ -62,10 +64,10 @@ namespace Ordersystem.Droid.Utilities
 					}
 					command.CommandText = Query;
 					command.ExecuteNonQuery ();
+					order.Sent = true;
 				}
 					
 				connection.Close ();
-				order.Sent = true;
 			}
 		}
 

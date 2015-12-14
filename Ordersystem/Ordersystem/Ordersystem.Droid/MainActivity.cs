@@ -79,23 +79,36 @@ namespace Ordersystem.Droid
 
 		private void InitializeRows()
 		{
-			TableLayout tableLyout = (TableLayout) FindViewById(Resource.Id.tableLayout1);
+			TableLayout tableLayout = (TableLayout) FindViewById(Resource.Id.tableLayout1);
 			int index;
 
 			foreach (var row in rows)
 			{
 				TextView v = (TextView) row.GetChildAt(0);
 				v.SetTextSize (Android.Util.ComplexUnitType.Px, 24);
-				index = tableLyout.IndexOfChild (row) / 2;
+				index = tableLayout.IndexOfChild (row) / 2;
 				row.SetBackgroundColor(layoutHandler.RowBackgroundColor);
 				row.SetMinimumHeight (layoutHandler.GetMinimumHeight ());
 				layoutHandler.ClearRowText (row, sessionCustomer.Order.DayMenuSelections[index].Date);
 				if (index > daysInMonth)
 					row.Visibility = ViewStates.Gone;
-
+				
 				row.Click += (object sender, EventArgs e) => {
 					layoutHandler.ResizeTableRow(rows, (TableRow) sender, (TableLayout)FindViewById (Resource.Id.tableLayout1));
 				};
+			}
+
+			foreach (var row in rows) 
+			{
+				index = tableLayout.IndexOfChild (row) / 2;
+
+				layoutHandler.InitializeRowColors (tableLayout, row);
+
+				if (sessionCustomer.Order.DayMenuSelections [index].Choice == Ordersystem.Enums.DayMenuChoice.Dish1) {
+					layoutHandler.UpdateRowText (row, sessionCustomer.Order.DayMenuSelections [index].Date, sessionCustomer.Order.DayMenuSelections [index].DayMenu.Dish1);
+				} else if (sessionCustomer.Order.DayMenuSelections [index].Choice == Ordersystem.Enums.DayMenuChoice.Dish2) {
+					layoutHandler.UpdateRowText (row, sessionCustomer.Order.DayMenuSelections [index].Date, sessionCustomer.Order.DayMenuSelections [index].DayMenu.Dish2);
+				}
 			}
 		}
 
@@ -127,10 +140,10 @@ namespace Ordersystem.Droid
 			//Mangler logUd knap.
 			//btn.SetImageResource (Resource.Drawable.Delete);
 			btn.Click += (object sender, EventArgs e) => {
-				SetContentView(Resource.Layout.Log_In);
-				InitializeLogInScreen();
+				localManager.LogOut ();
+				SetContentView (Resource.Layout.Log_In);
+				InitializeLogInScreen ();
 			};
-				
 		}
 
 		private void InitializeLogInScreen()
@@ -164,12 +177,13 @@ namespace Ordersystem.Droid
 			Button button = FindViewById<Button> (Resource.Id.sendOrderButton);
 			button.SetMinimumHeight (layoutHandler.GetMediumHeight());
 
-			button.Click += (object sender, EventArgs e) => {
-				//Call the sending of the order here.
-				CloseAllRows();
-				CheckAllChoicesFilled(sender, e);
-
-			};
+			if (!sessionCustomer.Order.Sent) {
+				button.Click += (object sender, EventArgs e) => {
+					//Call the sending of the order here.
+					CloseAllRows ();
+					CheckAllChoicesFilled (sender, e);
+				};
+			}
 		}
 
 		private void SendOrderClick(object sender, EventArgs e)
@@ -182,6 +196,9 @@ namespace Ordersystem.Droid
 			alertDialog.SetButton ("Send alligevel", (s, ev) => {
 				localManager.FillInvalidOrder();
 				localManager.SendOrder();
+				localManager.LogOut();
+				SetContentView(Resource.Layout.Log_In);
+				InitializeLogInScreen();
 			});
 
 			alertDialog.SetButton2 ("Gå tilbage", (s, ev) => {
@@ -197,8 +214,13 @@ namespace Ordersystem.Droid
 		{
 			if (!localManager.IsOrderValid ())
 				SendOrderClick (sender, e);
-			else
+			else 
+			{
 				localManager.SendOrder ();
+				localManager.LogOut ();
+				SetContentView (Resource.Layout.Log_In);
+				InitializeLogInScreen ();
+			}
 		}
 
 		private void ErrorRowsOnReturn()
