@@ -158,7 +158,7 @@ namespace Ordersystem.Droid
 
 			//Initialize managers
 			layoutHandler = new LayoutHandler(this);
-			localManager = new LocalManager();
+			localManager = new LocalManager("LocalDatabase");
 
 			//Initialize list for TableRows.
 			rows = new List<TableRow>();

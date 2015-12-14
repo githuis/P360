@@ -26,10 +26,10 @@ namespace Ordersystem.Functions
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Ordersystem.Functions.LocalManager"/> class.
 		/// </summary>
-		public LocalManager()
+		public LocalManager(string filename)
 		{
 			_mcsManager = Xamarin.Forms.DependencyService.Get<IMCSManager> ();
-			_localDatabase = new LocalDatabase ("LocalDatabase");
+			_localDatabase = new LocalDatabase (filename);
 		}
 
 

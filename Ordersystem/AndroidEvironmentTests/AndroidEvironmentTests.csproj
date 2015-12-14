@@ -96,6 +96,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\LocalFile.cs" />
     <Compile Include="LocalDatabaseTests.cs" />
+    <Compile Include="LocalManagerTests.cs" />
+    <Compile Include="Utilities\MCSManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

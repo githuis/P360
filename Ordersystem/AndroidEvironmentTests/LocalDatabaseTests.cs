@@ -5,6 +5,7 @@ using Ordersystem.Model;
 using Ordersystem.Enums;
 using Ordersystem.Exceptions;
 using System.Collections.Generic;
+using System.IO;
 
 namespace AndroidEnvironmentTests
 {
@@ -21,6 +22,7 @@ namespace AndroidEnvironmentTests
         {
             _localDatabase = new LocalDatabase(filename);
             _localDatabase.ClearDatabase();
+			File.Delete(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), filename));
             _localDatabase.Close();
         }
 
