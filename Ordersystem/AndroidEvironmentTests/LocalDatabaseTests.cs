@@ -9,19 +9,17 @@ using System.Collections.Generic;
 namespace AndroidEnvironmentTests
 {
     [TestFixture]
-    public class TestsSample
+    public class LocalDatabaseTests
     {
-        private Customer _dummyCustomer;
-        private Orderlist _dummyOrderlist;
+		private readonly Customer _dummyCustomer = new Customer("1303951337", "Thomas Frandsen", Diet.Full);
+		private readonly Orderlist _dummyOrderlist = new Orderlist(new List<DayMenu>(), new DateTime(1995, 3, 13), new DateTime(), Diet.Full);
         private LocalDatabase _localDatabase;
-        private string filename = "localDatabase";
+        private const string filename = "localTestDatabase";
 
         [TestFixtureSetUp]
         public void TestFixtureSetUp()
         {
             _localDatabase = new LocalDatabase(filename);
-            _dummyCustomer = new Customer("1303951337", "Thomas Frandsen", Diet.Full);
-            _dummyOrderlist = new Orderlist(new List<DayMenu>(), new DateTime(1995, 3, 13), new DateTime(), Diet.Full);
             _localDatabase.ClearDatabase();
             _localDatabase.Close();
         }
