@@ -297,24 +297,24 @@ namespace Ordersystem.Droid
             return linearLayout;
         }
 
-		static int FindRowIndex (TableLayout table, TableRow row)
+		private int FindRowIndex (TableLayout table, TableRow row)
 		{
 			return (table.IndexOfChild (row) / 2);
 		}
 
-		void SetDishDescription (Dish dish, TextView descriptionView)
+		private void SetDishDescription (Dish dish, TextView descriptionView)
 		{
 			descriptionView.Text = dish.Description;
 			descriptionView.TextSize = textSizeMed;
 		}
 
-		void SetDishTitle (Dish dish, TextView titleView)
+		private void SetDishTitle (Dish dish, TextView titleView)
 		{
 			titleView.Text = dish.Name;
 			titleView.TextSize = textSizeLarge;
 		}
 
-		void InitLinearLayout (LinearLayout linearLayout)
+		private void InitLinearLayout (LinearLayout linearLayout)
 		{
 			linearLayout.Orientation = Orientation.Vertical;
 			linearLayout.SetMinimumWidth ((displaySize.X / 4) - (paddingTotal / 2));
