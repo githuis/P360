@@ -11,7 +11,7 @@ namespace Ordersystem.Utilities
     public class Session
     {
         /// <summary>
-        /// Empty constructor, should only be used by SQLite.
+        /// Empty constructor, should only be used for serialization.
         /// </summary>
         public Session() : base()
         {

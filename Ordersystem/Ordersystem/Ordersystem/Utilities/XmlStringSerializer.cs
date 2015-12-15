@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;*/
 using System.Xml.Serialization;
+using System;
 using System.IO;
 
 namespace Ordersystem.Utilities
@@ -29,19 +30,33 @@ namespace Ordersystem.Utilities
 		/// <param name="client">Client.</param>
         public string Serialize(T client)
         {
+            string serializedClient;
             var writer = new StringWriter();
             _serializer.Serialize(writer, client);
-            return writer.ToString().Replace('\n',' ');
+            serializedClient = writer.ToString().Replace('\n', ' ');
+            writer.Dispose();
+            return serializedClient;
         }
 
-		/// <summary>
-		/// Deserialize the specified client.
-		/// </summary>
-		/// <param name="client">Client.</param>
+        /// <summary>
+        /// Deserialize the specified client.
+        /// </summary>
+        /// <param name="client">Client.</param>
+        /// <exception cref="FormatException">Thrown when the format of the given client is invalid.</exception>
         public T Deserialize(string client)
         {
+            T deserializedClient = default(T);
             var reader = new StringReader(client);
-            return (T)_serializer.Deserialize(reader);
+            try
+            {
+                deserializedClient = (T)_serializer.Deserialize(reader);
+            }
+            catch (InvalidOperationException e)
+            {
+                throw new FormatException("The format of the given client is invalid", e);
+            }
+            reader.Dispose();
+            return deserializedClient;
         }
     }
 }

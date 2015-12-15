@@ -40,5 +40,13 @@ namespace Ordersystem.Droid.Utilities
         {
             return new List<string>(File.ReadAllLines(_filepath));
         }
+
+        /// <summary>
+        /// Removes all contents of the file.
+        /// </summary>
+        public void CleanFile()
+        {
+            File.Create(_filepath).Dispose();
+        }
     }
 }

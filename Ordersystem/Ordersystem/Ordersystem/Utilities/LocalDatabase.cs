@@ -166,7 +166,15 @@ namespace Ordersystem.Utilities
             _database = DependencyService.Get<ILocalFile>();
             _database.UseFilePath(Filename);
             List<string> serializedSessions = _database.ReadFile();
-            _sessions = serializedSessions.Select(client => Session.Serializer.Deserialize(client)).ToList();
+            try
+            {
+                _sessions = serializedSessions.Select(client => Session.Serializer.Deserialize(client)).ToList();
+            }
+            catch (FormatException)
+            {
+                _database.CleanFile();
+                Open(Filename);
+            }
         }
 
         /// <summary>
