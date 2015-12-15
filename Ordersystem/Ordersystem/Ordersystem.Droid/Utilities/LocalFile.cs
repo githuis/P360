@@ -20,21 +20,22 @@ namespace Ordersystem.Droid.Utilities
             string fileName = filename + ".txt";
             string documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             _filepath = Path.Combine(documentsPath, fileName);
+            if (!File.Exists(_filepath)) File.Create(_filepath).Dispose();
         }
 
-		/// <summary>
-		/// Writes several lines to the file.
-		/// </summary>
-		/// <param name="Strings">The lines to be written.</param>
+        /// <summary>
+        /// Writes several lines to the file.
+        /// </summary>
+        /// <param name="Strings">The lines to be written.</param>
         public void WriteToFile(List<string> strings)
         {
             File.WriteAllLines(_filepath, strings);
         }
 
-		/// <summary>
-		/// Reads the file.
-		/// </summary>
-		/// <returns>The lines from the file.</returns>
+        /// <summary>
+        /// Reads the file.
+        /// </summary>
+        /// <returns>The lines from the file.</returns>
         public List<string> ReadFile()
         {
             return new List<string>(File.ReadAllLines(_filepath));
