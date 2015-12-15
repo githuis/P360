@@ -7,7 +7,9 @@ namespace Ordersystem.Droid.Utilities
 {
     public class LocalFile : ILocalFile
     {
-        private string _filepath;
+        public bool FilePathIsSet { get { return _filepath != null; } }
+
+        private string _filepath = null;
 
         /// <summary>
         /// Creates a path to the file wherein the database lies.
@@ -18,24 +20,16 @@ namespace Ordersystem.Droid.Utilities
             string fileName = filename + ".txt";
             string documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             _filepath = Path.Combine(documentsPath, fileName);
-            if (!File.Exists(_filepath)) File.Create(_filepath);
+            if (!File.Exists(_filepath)) File.Create(_filepath).Dispose();
         }
 
         /// <summary>
         /// Writes several lines to the file.
         /// </summary>
         /// <param name="Strings">The lines to be written.</param>
-        /// <param name="append">If set to <c>true</c> append, otherwise overwrite.</param>
-        public void WriteToFile(List<string> Strings, bool append)
+        public void WriteToFile(List<string> strings)
         {
-            using (var streamWriter = new StreamWriter(_filepath, append))
-            {
-                foreach (string String in Strings)
-                {
-                    streamWriter.WriteLine(String);
-                }
-                streamWriter.Close();
-            }
+            File.WriteAllLines(_filepath, strings);
         }
 
         /// <summary>
@@ -44,18 +38,7 @@ namespace Ordersystem.Droid.Utilities
         /// <returns>The lines from the file.</returns>
         public List<string> ReadFile()
         {
-            List<string> fileLines = new List<string>();
-            using (var streamReader = new StreamReader(_filepath))
-            {
-                string line;
-                while ((line = streamReader.ReadLine()) != null)
-                {
-                    fileLines.Add(line);
-                }
-                streamReader.Close();
-            }
-
-            return fileLines;
+            return new List<string>(File.ReadAllLines(_filepath));
         }
     }
 }
