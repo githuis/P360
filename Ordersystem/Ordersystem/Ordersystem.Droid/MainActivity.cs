@@ -4,6 +4,8 @@ using Ordersystem.Functions;
 using System.Collections.Generic;
 using Ordersystem.Model;
 
+using MySql.Data.MySqlClient;
+
 using Android.App;
 using Android.Content;
 using Android.Runtime;
@@ -49,6 +51,8 @@ namespace Ordersystem.Droid
 
 						SetContentView (Resource.Layout.Main_Window);
 						CreateMainWindow ();
+						pikke();
+
 					}
 					catch (NullReferenceException)
 					{
@@ -58,6 +62,10 @@ namespace Ordersystem.Droid
 					{
 						errorMsg.Visibility = ViewStates.Visible;
 					}
+					catch (MySqlException)
+					{
+						layoutHandler.ShowError("Kan ikke oprette forbindelse. Tjek venligst internet-forbindelse.");
+					}
 				}
 				else
 				{
@@ -65,9 +73,16 @@ namespace Ordersystem.Droid
 				}
 			};
 		}
+
+		static void pikke ()
+		{
+			Console.Write ("PIIIIIIIIIIIIIIIIIIIIIIIIK");
+		}
 			
 		public void CreateMainWindow()
 		{
+			pikke ();
+
 			AddRowsToList ((TableLayout)FindViewById (Resource.Id.tableLayout1));
 			InitializeRows ();
 
@@ -76,6 +91,18 @@ namespace Ordersystem.Droid
 			InitializeOrderButton ();
 			Dish.SelectedDishes = new Dish[33];
 			Dish.SelectedSideDishes = new Dish[33];
+
+			if(sessionCustomer.Order.Sent)
+			{
+				layoutHandler.ShowCustom(this, "Allerede bestilt", "Der er allerede afsendt en bestilling for denne måned.");
+				Console.Write ("LOOOOOOOOOOOOOOOOOOOOORT");
+
+			}
+			else
+			{
+				layoutHandler.ShowCustom(this, "Hej", ":)");
+				Console.Write ("FUUUUUUUUUUUUCK");
+			}
 		}
 
 		private void AddRowsToList(TableLayout table)
@@ -212,26 +239,36 @@ namespace Ordersystem.Droid
 
 		private void SendOrderClick(object sender, EventArgs e)
 		{
-			Android.App.AlertDialog.Builder builder = new AlertDialog.Builder (this);
-			AlertDialog alertDialog = builder.Create ();
-			alertDialog.SetTitle ("Send bestilling?");
-			alertDialog.SetMessage ("Der er nogle dage, hvor der ikke er valgt mad. Send alligevel?\nSå udfylder Aalborg madservice for dig.");
-
-			alertDialog.SetButton ("Send alligevel", (s, ev) => {
-				localManager.FillInvalidOrder();
-				mcsManager.SendOrder(sessionCustomer.Order, sessionCustomer.PersonNumber);
-				localManager.LogOut();
-				SetContentView(Resource.Layout.Log_In);
-				InitializeLogInScreen();
+			AlertDialog dialog = layoutHandler.ShowCustom (this, "Send bestilling?", 
+				"Der er nogle dage, hvor der ikke er valgt mad. Send alligevel?\nSå udfylder Aalborg madservice for dig.");
+			
+			dialog.SetButton ("Send alligevel", (s, ev) => 
+			{
+				try 
+				{
+					localManager.FillInvalidOrder();
+					mcsManager.SendOrder(sessionCustomer.Order, sessionCustomer.PersonNumber);
+					localManager.LogOut();
+					SetContentView(Resource.Layout.Log_In);
+					InitializeLogInScreen();
+						layoutHandler.ShowSendOrderSuccess();
+				} 
+				catch (MySqlException)
+				{
+					layoutHandler.ShowError("Kan ikke oprette forbindelse. Tjek venligst internet-forbindelsen.");
+				}
+				catch(NullReferenceException ex)
+				{
+					layoutHandler.ShowError("Noget gik galt.\nFejlesked: " + ex.Message);
+				}
 			});
 
-			alertDialog.SetButton2 ("Gå tilbage", (s, ev) => {
+			dialog.SetButton2 ("Gå tilbage", (s, ev) =>
+			{
 				ErrorRowsOnReturn();
-				//TableLayout tableLayout = (TableLayout) FindViewById(Resource.Id.tableLayout1);
-
 			});
 
-			alertDialog.Show ();
+			dialog.Show ();
 		}
 
 		private void CheckAllChoicesFilled(object sender, EventArgs e)
@@ -244,7 +281,7 @@ namespace Ordersystem.Droid
 				localManager.LogOut ();
 				SetContentView (Resource.Layout.Log_In);
 				InitializeLogInScreen ();
-			}
+			}	
 		}
 
 		private void ErrorRowsOnReturn()

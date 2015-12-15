@@ -347,6 +347,7 @@ namespace Ordersystem.Droid
             {
 				int index = FindRowIndex (table, row);
                 customer.Order.DayMenuSelections[index].Choice = DayMenuChoice.NoDish;
+				customer.Order.DayMenuSelections[index].SideDish = false;
                 UpdateDayMenuColors(table, row);
                 ClearRowText(row, orderlist.DayMenus[index].Date);
             };
@@ -590,6 +591,32 @@ namespace Ordersystem.Droid
 			});
 
 			alertDialog.Show ();
+		}
+
+		public void ShowSendOrderSuccess()
+		{
+			AlertDialog.Builder builder = new AlertDialog.Builder (activity);
+			AlertDialog alertDialog = builder.Create ();
+			alertDialog.SetTitle ("Bestilling afsendt");
+			alertDialog.SetMessage ("Bestillingen er blevet afsendt.");
+
+			alertDialog.SetButton ("OK", (s, ev) => 
+			{
+			});
+
+			alertDialog.Show ();
+		}
+
+		public AlertDialog ShowCustom(Activity activity, string title, string message)
+		{
+			Android.App.AlertDialog.Builder builder = new AlertDialog.Builder (activity);
+			AlertDialog alertDialog = builder.Create ();
+			alertDialog.SetTitle (title);
+			alertDialog.SetMessage (message);
+
+
+
+			return alertDialog;
 		}
     }
 }
