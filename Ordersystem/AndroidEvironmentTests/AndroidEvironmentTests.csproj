@@ -91,19 +91,20 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\LocalFile.cs" />
-    <Compile Include="LocalDatabaseTests.cs" />
-    <Compile Include="LocalManagerTests.cs" />
     <Compile Include="Utilities\MCSManager.cs" />
-    <Compile Include="CustomerTests.cs" />
-    <Compile Include="DayMenuSelectionTests.cs" />
-    <Compile Include="DayMenuTests.cs" />
-    <Compile Include="DishTests.cs" />
-    <Compile Include="OrderlistTests.cs" />
-    <Compile Include="OrderTests.cs" />
+    <Compile Include="Unittests\CustomerTests.cs" />
+    <Compile Include="Unittests\DayMenuSelectionTests.cs" />
+    <Compile Include="Unittests\DayMenuTests.cs" />
+    <Compile Include="Unittests\DishTests.cs" />
+    <Compile Include="Unittests\MainActivity.cs" />
+    <Compile Include="Unittests\OrderlistTests.cs" />
+    <Compile Include="Unittests\OrderTests.cs" />
+    <Compile Include="Integrationtests\ModelIntegration.cs" />
+    <Compile Include="Integrationtests\LocalDatabaseTests.cs" />
+    <Compile Include="Integrationtests\LocalManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -140,4 +141,9 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Utilities\New Folder\" />
+    <Folder Include="Unittests\" />
+    <Folder Include="Integrationtests\" />
+  </ItemGroup>
 </Project>

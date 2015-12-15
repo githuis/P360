@@ -7,7 +7,7 @@ using Ordersystem.Exceptions;
 using System.Collections.Generic;
 using System.IO;
 
-namespace AndroidEnvironmentTests
+namespace AndroidEnvironmentTests.IntegrationTests
 {
     [TestFixture]
     public class LocalDatabaseTests

@@ -18,6 +18,8 @@ namespace Ordersystem.Functions
 		/// </summary>
 		/// <returns>The customer.</returns>
 		/// <param name="personNumber">The personnumber of the customer.</param>
+		/// <exception cref="Ordersystem.Exceptions.InvalidCustomerException">Throws this exception when customer is invalid.</exception>
+		/// <exception cref="Ordersystem.Exceptions.CustomerNotFoundException">Throws this exceoption when no customer was found.</exception>
 		Customer GetCustomerByPersonNumber (string personNumber);
 
 		/// <summary>
@@ -26,6 +28,8 @@ namespace Ordersystem.Functions
 		/// <returns>The orderlist.</returns>
 		/// <param name="diet">The diet of the orderlist.</param>
 		/// <param name="endDate">The end date og the orderlist.</param>
+		/// <exception cref="Ordersystem.Exceptions.InvalidOrderlistException">Throws this exception when orderlist is invalid.</exception>
+		/// <exception cref="Ordersystem.Exceptions.OrderlistNotFoundException">Thows this exception when no orderlist is found.</exception>
 		Orderlist GetOrderlistByDiet (Diet diet, DateTime endDate);
 
 		/// <summary>
@@ -33,6 +37,8 @@ namespace Ordersystem.Functions
 		/// </summary>
 		/// <returns>The orderlist.</returns>
 		/// <param name="diet">The diet of the orderlist.</param>
+		/// <exception cref="Ordersystem.Exceptions.InvalidOrderlistException">Throws this exception when orderlist is invalid.</exception>
+		/// <exception cref="Ordersystem.Exceptions.OrderlistNotFoundException">Thows this exception when no orderlist is found.</exception>
 		Orderlist GetOrderlistByDiet (Diet diet);
 	}
 }

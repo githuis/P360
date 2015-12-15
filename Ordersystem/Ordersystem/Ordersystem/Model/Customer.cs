@@ -11,6 +11,7 @@ namespace Ordersystem.Model
         /// <param name="personNumber">The social security number of the customer.</param>
         /// <param name="name">The name of the customer.</param>
         /// <param name="diet">The diet, the customer is getting.</param>
+		/// <exception cref="System.ArgumentNullException">Thrown when an argument is null.</exception>
         public Customer(string personNumber, string name, Diet diet)
         {
             if (String.IsNullOrWhiteSpace(personNumber))

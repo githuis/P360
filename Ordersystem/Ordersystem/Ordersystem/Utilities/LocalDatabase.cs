@@ -16,6 +16,7 @@ namespace Ordersystem.Utilities
         public string Filename { get; set; }
         private ILocalFile _database;
         private List<Session> _sessions;
+
         /// <summary>
         /// Gets the connection and creates the table.
         /// </summary>
@@ -24,6 +25,9 @@ namespace Ordersystem.Utilities
             Open(filename);
         }
 
+		/// <summary>
+		/// Cleans old sessions from the database.
+		/// </summary>
 		public void CleanOldSessions()
 		{
             foreach(var session in _sessions.ToList())
@@ -40,7 +44,7 @@ namespace Ordersystem.Utilities
         /// Gets the first Order from the database matching the predicate.
         /// </summary>
         /// <param name="predicate">The predicate used to fetch the Order.</param>
-        /// <returns>The Order if found, else it returns null.</returns>
+        /// <returns>The Order if found, else returns null.</returns>
         public Order GetOrder(Func<Session, bool> predicate)
         {
 			var session = _sessions.FirstOrDefault(predicate);
@@ -69,6 +73,7 @@ namespace Ordersystem.Utilities
         /// Throws an ItemNotFoundException if an entry is not found.
         /// </summary>
         /// <param name="predicate">The predicate used to delete the entry.</param>
+		/// <exception cref="Ordersystem.Exceptions.ItemNotFoundException">Thrown when session was not found in database.</exception>
         public void DeleteSession(Func<Session, bool> predicate)
         {
             Session session = _sessions.FirstOrDefault(predicate);
@@ -113,6 +118,7 @@ namespace Ordersystem.Utilities
         /// Throws an ItemNotFoundException if an entry is not found.
         /// </summary>
         /// <param name="personNumber">The personNumber used to find the entry.</param>
+		/// <exception cref="Ordersystem.Exceptions.ItemNotFoundException">Thrown when session was not found in database.</exception>
         public void DeleteSession(string personNumber)
         {
             Session session = _sessions.FirstOrDefault(x => x.PersonNumber == personNumber);

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using Ordersystem.Functions;
 using System.IO;
 
-namespace AndroidEvironmentTests
+namespace AndroidEvironmentTests.IntegrationTests
 {
 	[TestFixture]
 	public class LocalManagerTests

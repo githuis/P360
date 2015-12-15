@@ -4,7 +4,7 @@ using Android.OS;
 using Xamarin.Android.NUnitLite;
 using Xamarin.Forms;
 
-namespace AndroidEnvironmentTests
+namespace AndroidEnvironmentTests.Unittests
 {
     [Activity(Label = "AndroidEnvironmentTests", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : TestSuiteActivity

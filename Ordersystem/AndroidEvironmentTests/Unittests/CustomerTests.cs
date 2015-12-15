@@ -3,7 +3,7 @@ using Ordersystem.Enums;
 using Ordersystem.Model;
 using NUnit.Framework;
 
-namespace AndroidEnvironMentTests
+namespace AndroidEnvironMentTests.Unittests
 {
     [TestFixture]
     public class CustomerTests

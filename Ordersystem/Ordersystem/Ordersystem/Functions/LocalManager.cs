@@ -42,6 +42,7 @@ namespace Ordersystem.Functions
         /// Checks whether the social security is valid
         /// </summary>
         /// <param name="socialSecurityNumber"></param>
+		/// <returns><c>true</c> if the social security number; otherwise <c>false</c></returns>
         public bool IsValidSocialSecurityNumber(string socialSecurityNumber)
         {
             bool length, day, month, isNumbers;
@@ -64,6 +65,10 @@ namespace Ordersystem.Functions
 		/// Logs in to the system with the given personnumber.
 		/// </summary>
 		/// <param name="personNumber">The given personnumber.</param>
+		/// <exception cref="Ordersystem.Exceptions.InvalidCustomerException">Throws this exception when customer is invalid.</exception>
+		/// <exception cref="Ordersystem.Exceptions.CustomerNotFoundException">Throws this exceoption when no customer was found.</exception>
+		/// <exception cref="Ordersystem.Exceptions.InvalidOrderlistException">Throws this exception when orderlist is invalid.</exception>
+		/// <exception cref="Ordersystem.Exceptions.OrderlistNotFoundException">Thows this exception when no orderlist is found.</exception>
 		public void LogIn (string personNumber)
 		{
 			_customer = _mcsManager.GetCustomerByPersonNumber (personNumber);
@@ -105,8 +110,14 @@ namespace Ordersystem.Functions
 		/// <value>The orderlist.</value>
 		public Orderlist Orderlist { get { return _orderlist; } set { _orderlist = value; } }
 
-		//Checks a string is between two integer values.
-        public bool IsNumberBetween(string num, int min, int max)
+        /// <summary>
+        /// Determines whether the number is between the specified min and max.
+        /// </summary>
+        /// <returns><c>true</c> if the number is between the specified min and max; otherwise, <c>false</c>.</returns>
+        /// <param name="num">Number.</param>
+        /// <param name="min">Minimum.</param>
+        /// <param name="max">Maximum.</param>
+		public bool IsNumberBetween(string num, int min, int max)
         {
             int number;
             if (int.TryParse(num, out number))
@@ -116,7 +127,11 @@ namespace Ordersystem.Functions
             return false;
         }
 
-		//Checks if a string is only numeric.
+		/// <summary>
+		/// Determines whether the string is only digits.
+		/// </summary>
+		/// <returns><c>true</c> if the string is digits only; otherwise, <c>false</c>.</returns>
+		/// <param name="str">String.</param>
         public bool IsStringDigitsOnly(string str)
         {
             return str.ToCharArray().All(c => c >= '0' && c <= '9');

@@ -23,6 +23,7 @@ namespace Ordersystem.Model
         /// <param name="startDate">The starting date of the Orderlist.</param>
         /// <param name="endDate">The end date of the Orderlist.</param>
         /// <param name="diet">The diet of the Orderlist.</param>
+		/// <exception cref="System.ArgumentNullException">Thrown when an argument is null.</exception>
         public Orderlist(List<DayMenu> dayMenus, DateTime startDate, DateTime endDate, Diet diet)
         {
             if (dayMenus == null)
