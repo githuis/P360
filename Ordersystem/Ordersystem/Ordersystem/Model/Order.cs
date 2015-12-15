@@ -13,10 +13,9 @@ namespace Ordersystem.Model
         /// <summary>
         /// An order for Master Cater System.
         /// </summary>
-	public Order()
+		public Order()
         {
-		//DayMenuSelections = DayMenuSelection [daysInMonth];
-            	Sent = false;
+        	Sent = false;
         }
 
         /// <summary>
@@ -45,6 +44,7 @@ namespace Ordersystem.Model
         /// <param name="dayMenu">The menu chosen from.</param>
         /// <param name="choice">The choice of dish.</param>
         /// <param name="sideDish">Whether a side dish is included. False by default.</param>
+		/// <exception cref="System.ArgumentNullException">Thrown when dayMenu is null.</exception>
 		public void AddDayMenuSelection(DayMenu dayMenu, DayMenuChoice choice = DayMenuChoice.NoChoice, bool sideDish = false)
         {
             if (dayMenu == null)

@@ -23,6 +23,7 @@ namespace Ordersystem.Model
         /// <param name="dayMenu">The DayMenu this is a selection from.</param>
         /// <param name="choice">The choice of dish.</param>
         /// <param name="sideDish">Whether to save a side dish or not.</param>
+		/// <exception cref="System.ArgumentNullException">Thrown when an argument is null.</exception>
 		public DayMenuSelection(DayMenu dayMenu, DayMenuChoice choice = DayMenuChoice.NoChoice, bool sideDish = false)
         {
             if (dayMenu == null)
