@@ -3,7 +3,7 @@ using NUnit.Framework;
 using Ordersystem.Model;
 using Xamarin.Forms;
 
-namespace AndroidEnvironmentTests
+namespace AndroidEnvironmentTests.Unittests
 {
     [TestFixture]
     public class DishTests

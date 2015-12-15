@@ -3,7 +3,7 @@ using NUnit.Framework;
 using Ordersystem.Enums;
 using Ordersystem.Model;
 
-namespace AndroidEnvironmentTests
+namespace AndroidEnvironMentTests.Unittests
 {
     [TestFixture]
     public class DayMenuSelectionTests
