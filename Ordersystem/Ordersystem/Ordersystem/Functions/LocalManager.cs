@@ -109,16 +109,16 @@ namespace Ordersystem.Functions
 		/// Gets the current customer.
 		/// </summary>
 		/// <value>The customer.</value>
-		public Customer Customer {get{return _customer;}}
+		public Customer Customer { get { return _customer; } set { _customer = value; } }
 
 		/// <summary>
 		/// Gets the current orderlist.
 		/// </summary>
 		/// <value>The orderlist.</value>
-		public Orderlist Orderlist {get{return _orderlist;}}
+		public Orderlist Orderlist { get { return _orderlist; } set { _orderlist = value; } }
 
 		//Checks a string is between two integer values.
-        private bool IsNumberBetween(string num, int min, int max)
+        public bool IsNumberBetween(string num, int min, int max)
         {
             int number;
             if (int.TryParse(num, out number))
@@ -129,7 +129,7 @@ namespace Ordersystem.Functions
         }
 
 		//Checks if a string is only numeric.
-        private bool IsStringDigitsOnly(string str)
+        public bool IsStringDigitsOnly(string str)
         {
             return str.ToCharArray().All(c => c >= '0' && c <= '9');
         }
@@ -202,7 +202,7 @@ namespace Ordersystem.Functions
 			{
 			case Diet.Full:
 				return "v-full";
-			case Diet.LowFat:
+			case Diet.LowFat: 
 				return"v-lowFat" ;
 			case Diet.EnergyDense:
 				return "v-energyDense";
