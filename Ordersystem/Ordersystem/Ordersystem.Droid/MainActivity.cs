@@ -20,6 +20,7 @@ namespace Ordersystem.Droid
 	public class MainActivity : Activity
 	{
 		LocalManager localManager;
+		IMCSManager mcsManager;
 		LayoutHandler layoutHandler;
 		List<TableRow> rows;
 		Customer sessionCustomer { get { return localManager.Customer; } }
@@ -174,6 +175,7 @@ namespace Ordersystem.Droid
 				//Initialize managers
 				layoutHandler = new LayoutHandler(this);
 				localManager = new LocalManager("LocalDatabase");
+				mcsManager = localManager.MCSManager;
 
 				//Initialize list for TableRows.
 				rows = new List<TableRow>();
@@ -217,7 +219,7 @@ namespace Ordersystem.Droid
 
 			alertDialog.SetButton ("Send alligevel", (s, ev) => {
 				localManager.FillInvalidOrder();
-				localManager.SendOrder();
+				mcsManager.SendOrder(sessionCustomer.Order, sessionCustomer.PersonNumber);
 				localManager.LogOut();
 				SetContentView(Resource.Layout.Log_In);
 				InitializeLogInScreen();
@@ -238,7 +240,7 @@ namespace Ordersystem.Droid
 				SendOrderClick (sender, e);
 			else 
 			{
-				localManager.SendOrder ();
+				mcsManager.SendOrder (sessionCustomer.Order, sessionCustomer.PersonNumber);
 				localManager.LogOut ();
 				SetContentView (Resource.Layout.Log_In);
 				InitializeLogInScreen ();
