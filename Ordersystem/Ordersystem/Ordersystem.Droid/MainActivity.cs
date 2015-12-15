@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Ordersystem.Functions;
 using System.Collections.Generic;
 using Ordersystem.Model;
@@ -19,6 +20,7 @@ namespace Ordersystem.Droid
 	public class MainActivity : Activity
 	{
 		LocalManager localManager;
+		IMCSManager mcsManager;
 		LayoutHandler layoutHandler;
 		List<TableRow> rows;
 		Customer sessionCustomer { get { return localManager.Customer; } }
@@ -34,20 +36,25 @@ namespace Ordersystem.Droid
 
 		public void LogIn(Button button,EditText editText, TextView errorMsg)
 		{
-			button.Click += delegate
-			{		
+			button.Click += (sender, e) =>
+			{
 				if(localManager.IsValidSocialSecurityNumber(editText.Text))
 				{
 					try
 					{
-					localManager.LogIn(editText.Text);
-					daysInMonth = DateTime.DaysInMonth(sessionOrderlist.DayMenus[0].Date.Year, sessionOrderlist.DayMenus[0].Date.Month);
-					layoutHandler.SetCustomerAndList(sessionCustomer, sessionOrderlist);
+						errorMsg.Visibility = ViewStates.Invisible;
+						localManager.LogIn(editText.Text);
+						daysInMonth = DateTime.DaysInMonth(sessionOrderlist.DayMenus[0].Date.Year, sessionOrderlist.DayMenus[0].Date.Month);
+						layoutHandler.SetCustomerAndList(sessionCustomer, sessionOrderlist);
 
-					SetContentView (Resource.Layout.Main_Window);
-					CreateMainWindow ();
+						SetContentView (Resource.Layout.Main_Window);
+						CreateMainWindow ();
 					}
 					catch (NullReferenceException)
+					{
+						errorMsg.Visibility = ViewStates.Visible;
+					}
+					catch (ArgumentException)
 					{
 						errorMsg.Visibility = ViewStates.Visible;
 					}
@@ -163,20 +170,30 @@ namespace Ordersystem.Droid
 			EditText editText = FindViewById<EditText> (Resource.Id.loginInputBar);
 			TextView errorMsg = FindViewById<TextView> (Resource.Id.loginErrorMessageText); 
 
-			//Initialize managers
-			layoutHandler = new LayoutHandler(this);
-			localManager = new LocalManager("LocalDatabase");
+			try 
+			{
+				//Initialize managers
+				layoutHandler = new LayoutHandler(this);
+				localManager = new LocalManager("LocalDatabase");
+				mcsManager = localManager.MCSManager;
 
-			//Initialize list for TableRows.
-			rows = new List<TableRow>();
+				//Initialize list for TableRows.
+				rows = new List<TableRow>();
 
-			//Set screensize
-			Point p = new Point(0,0);
-			WindowManager.DefaultDisplay.GetSize(p);
-			layoutHandler.SetDisplaySize (p);
+				//Set screensize
+				Point p = new Point(0,0);
+				WindowManager.DefaultDisplay.GetSize(p);
+				layoutHandler.SetDisplaySize (p);
 
-			//Checks  the users login info
-			LogIn(button,editText,errorMsg);
+				//Checks  the users login info
+				LogIn(button,editText,errorMsg);
+			}
+			catch (IOException e)
+			{
+				layoutHandler.ShowError ("Der skete en fejl.\nFejlkode: " + e.Message);
+			}
+				
+
 		}
 
 		private void InitializeOrderButton ()
@@ -202,7 +219,7 @@ namespace Ordersystem.Droid
 
 			alertDialog.SetButton ("Send alligevel", (s, ev) => {
 				localManager.FillInvalidOrder();
-				localManager.SendOrder();
+				mcsManager.SendOrder(sessionCustomer.Order, sessionCustomer.PersonNumber);
 				localManager.LogOut();
 				SetContentView(Resource.Layout.Log_In);
 				InitializeLogInScreen();
@@ -223,7 +240,7 @@ namespace Ordersystem.Droid
 				SendOrderClick (sender, e);
 			else 
 			{
-				localManager.SendOrder ();
+				mcsManager.SendOrder (sessionCustomer.Order, sessionCustomer.PersonNumber);
 				localManager.LogOut ();
 				SetContentView (Resource.Layout.Log_In);
 				InitializeLogInScreen ();

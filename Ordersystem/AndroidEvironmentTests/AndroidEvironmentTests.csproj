@@ -98,6 +98,12 @@
     <Compile Include="LocalDatabaseTests.cs" />
     <Compile Include="LocalManagerTests.cs" />
     <Compile Include="Utilities\MCSManager.cs" />
+    <Compile Include="CustomerTests.cs" />
+    <Compile Include="DayMenuSelectionTests.cs" />
+    <Compile Include="DayMenuTests.cs" />
+    <Compile Include="DishTests.cs" />
+    <Compile Include="OrderlistTests.cs" />
+    <Compile Include="OrderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
