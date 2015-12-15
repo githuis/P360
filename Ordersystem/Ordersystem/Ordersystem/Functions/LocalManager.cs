@@ -32,6 +32,11 @@ namespace Ordersystem.Functions
 			_localDatabase = new LocalDatabase (filename);
 		}
 
+		/// <summary>
+		/// Gets the MCSManager.
+		/// </summary>
+		/// <value>The MCSManager.</value>
+		public IMCSManager MCSManager { get { return _mcsManager; } }
 
         /// <summary>
         /// Checks whether the social security is valid
@@ -56,20 +61,12 @@ namespace Ordersystem.Functions
         }
 
 		/// <summary>
-		/// Sends the current sessions order to the database.
-		/// </summary>
-		public void SendOrder ()
-		{
-			_mcsManager.SendOrder (_customer.Order, _customer.PersonNumber);
-		}
-
-		/// <summary>
 		/// Logs in to the system with the given personnumber.
 		/// </summary>
 		/// <param name="personNumber">The given personnumber.</param>
 		public void LogIn (string personNumber)
 		{
-			GetCustomerFromDB (personNumber);
+			_customer = _mcsManager.GetCustomerByPersonNumber (personNumber);
 
 			_localDatabase.CleanOldSessions ();
 			var order = _localDatabase.GetOrder (_customer.PersonNumber);
@@ -94,15 +91,6 @@ namespace Ordersystem.Functions
 
 			_customer = null;
 			_orderlist = null;
-		}
-
-		/// <summary>
-		/// Gets a customer from the database.
-		/// </summary>
-		/// <param name="personNumber">The personnumber of the customer to get.</param>
-		public void GetCustomerFromDB (string personNumber)
-		{
-			_customer = _mcsManager.GetCustomerByPersonNumber (personNumber);
 		}
 
 		/// <summary>
