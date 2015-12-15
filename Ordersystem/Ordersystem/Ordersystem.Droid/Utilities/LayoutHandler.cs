@@ -245,7 +245,7 @@ namespace Ordersystem.Droid
             imageView.SetMaxHeight(maxRowHeight);
             imageView.SetMaxWidth(linearLayout.MinimumWidth);
             int imageIndex = GetDishIndexInOrderlist(dish);
-            imageView.SetImageBitmap(GetScaledDrawableFromPath(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex,
+            imageView.SetImageBitmap(GetScaledBitmapFromPath(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex,
                 maxRowHeight, linearLayout.MinimumWidth));
 
             linearLayout.AddView(titleView);
@@ -283,7 +283,7 @@ namespace Ordersystem.Droid
             imageView.SetMaxHeight(maxRowHeight);
             imageView.SetMaxWidth(linearLayout.MinimumWidth);
             int imageIndex = GetDishIndexInOrderlist(dish);
-            imageView.SetImageBitmap(GetScaledDrawableFromPath(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex,
+            imageView.SetImageBitmap(GetScaledBitmapFromPath(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/dish" + imageIndex,
                 maxRowHeight, linearLayout.MinimumWidth));
 
             linearLayout.AddView(titleView);
@@ -340,7 +340,7 @@ namespace Ordersystem.Droid
             });
 
             ImageView retimg = new ImageView(activity);
-            retimg.SetImageBitmap(GetScaledDrawableFromPath(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/nodish",
+            retimg.SetImageBitmap(GetScaledBitmapFromPath(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/nodish",
                 maxRowHeight, linearLayout.MinimumWidth));
 
             linearLayout.AddView(retimg);
@@ -545,7 +545,7 @@ namespace Ordersystem.Droid
         }
 
         //With many thanks to Xamarin https://developer.xamarin.com/recipes/android/resources/general/load_large_bitmaps_efficiently/
-        private Bitmap GetScaledDrawableFromPath(string path, int reqHeight, int reqWidth)
+        private Bitmap GetScaledBitmapFromPath(string path, int reqHeight, int reqWidth)
         {
             BitmapFactory.Options options = new BitmapFactory.Options
             {
