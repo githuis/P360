@@ -91,7 +91,7 @@ namespace Ordersystem.Droid
             }
             catch(Java.Lang.OutOfMemoryError e)
             {
-                throw e;
+				ShowError (e.Message);
             }
             
             newRow.SetBackgroundColor(RowBackgroundColor);
@@ -104,14 +104,14 @@ namespace Ordersystem.Droid
         {
             bool open;
             open = IsOpen(rowToChange);
-            Console.WriteLine(open.ToString());
             try
             {
-                parent.RemoveViewAt(infoRowId);
+				if(infoRowId != int.MaxValue)
+                	parent.RemoveViewAt(infoRowId);
             }
             catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
+			{
+				ShowError (e.Message);
             }
 
             foreach (TableRow row in rows)
@@ -146,9 +146,7 @@ namespace Ordersystem.Droid
 
         public void CloseRow(TableLayout table, TableRow row)
         {
-            row.SetMinimumHeight(minRowHeight);
-
-            Console.WriteLine(table.IndexOfChild(row));
+			row.SetMinimumHeight (minRowHeight);
 
             //Sub-menu's first child (0) is a linearlayout, others are TextView. If is submenu, remove row.
             var child = row.GetChildAt(0);
@@ -579,5 +577,19 @@ namespace Ordersystem.Droid
 
             return bitmap;
         }
+
+		public void ShowError(string message)
+		{
+			AlertDialog.Builder builder = new AlertDialog.Builder (activity);
+			AlertDialog alertDialog = builder.Create ();
+			alertDialog.SetTitle ("Fejl opstod");
+			alertDialog.SetMessage (message);
+
+			alertDialog.SetButton ("OK", (s, ev) => 
+			{
+			});
+
+			alertDialog.Show ();
+		}
     }
 }
