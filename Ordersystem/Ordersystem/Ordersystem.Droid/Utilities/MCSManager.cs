@@ -76,6 +76,8 @@ namespace Ordersystem.Droid.Utilities
 		/// </summary>
 		/// <returns>The customer.</returns>
 		/// <param name="personNumber">The personnumber of the customer.</param>
+		/// <exception cref="Ordersystem.Exceptions.InvalidCustomerException">Throws this exception when customer is invalid.</exception>
+		/// <exception cref="Ordersystem.Exceptions.CustomerNotFoundException">Throws this exceoption when no customer was found.</exception>
 		public Customer GetCustomerByPersonNumber(string personNumber)
         {
 			//Initialize connection to database.
@@ -104,7 +106,7 @@ namespace Ordersystem.Droid.Utilities
 					else
 					{
 						connection.Close ();
-						throw new NullReferenceException("Database contains null value.");
+						throw new InvalidCustomerException ("Database contains null value.");
 					}
 						
 					connection.Close ();
@@ -113,7 +115,7 @@ namespace Ordersystem.Droid.Utilities
 				else
 				{
 					connection.Close ();
-					throw new ArgumentException ("No customer with that personnumber exists.");
+					throw new CustomerNotFoundException("No customer with that personnumber exists.");
 				}
             }
         }
@@ -124,6 +126,8 @@ namespace Ordersystem.Droid.Utilities
 		/// <returns>The orderlist.</returns>
 		/// <param name="diet">The diet of the orderlist.</param>
 		/// <param name="endDate">The end date og the orderlist.</param>
+		/// <exception cref="Ordersystem.Exceptions.InvalidOrderlistException">Throws this exception when orderlist is invalid.</exception>
+		/// <exception cref="Ordersystem.Exceptions.OrderlistNotFoundException">Thows this exception when no orderlist is found.</exception> 
 		public Orderlist GetOrderlistByDiet(Diet diet, DateTime endDate)
 		{
 			string dietString = ParseStringFromDiet (diet);
@@ -169,14 +173,14 @@ namespace Ordersystem.Droid.Utilities
 					else
 					{
 						connection.Close ();
-						throw new NullReferenceException ("Database contains null values.");
+						throw new InvalidOrderlistException ("Database contains null values.");
 					}
 
 					//Errorcheck.
 					if (count < 28 || count > 31)
 					{
 						connection.Close ();
-						throw new ArgumentOutOfRangeException ("Invalid amount of days in orderlist.");
+						throw new InvalidOrderlistException ("Invalid amount of days in orderlist.");
 					}
 
 					//Read all daymenus from database output and make sure to close connection if there is an error.
@@ -199,13 +203,13 @@ namespace Ordersystem.Droid.Utilities
 					if (IllegalDates (DayMenus))
 					{
 						connection.Close ();
-						throw new ArgumentException ("Duplicate dates detected.");
+						throw new InvalidOrderlistException ("Duplicate dates detected.");
 					}
 				}
 				else
 				{
 					connection.Close ();
-					throw new ArgumentException ("No Ordelist for the given Diet found.");
+					throw new OrderlistNotFoundException ("No Ordelist for the given Diet found.");
 				}
 
 				connection.Close();
@@ -218,6 +222,8 @@ namespace Ordersystem.Droid.Utilities
 		/// </summary>
 		/// <returns>The orderlist.</returns>
 		/// <param name="diet">The diet of the orderlist.</param>
+		/// <exception cref="Ordersystem.Exceptions.InvalidOrderlistException">Throws this exception when orderlist is invalid.</exception>
+		/// <exception cref="Ordersystem.Exceptions.OrderlistNotFoundException">Thows this exception when no orderlist is found.</exception> 
 		public Orderlist GetOrderlistByDiet(Diet diet)
 		{
 			string dietString = ParseStringFromDiet (diet);
@@ -264,14 +270,14 @@ namespace Ordersystem.Droid.Utilities
 					else
 					{
 						connection.Close ();
-						throw new NullReferenceException ("Database contains null values.");
+						throw new InvalidOrderlistException ("Database contains null values.");
 					}
 
 					//Errorcheck
 					if (count < 28 || count > 31)
 					{
 						connection.Close ();
-						throw new ArgumentOutOfRangeException ("Invalid amount of days in orderlist.");
+						throw new InvalidOrderlistException ("Invalid amount of days in orderlist.");
 					}
 
 					//Read all daymenus from database output and make sure to close connection if error is found.
@@ -284,7 +290,7 @@ namespace Ordersystem.Droid.Utilities
 							DayMenus.Add (ReadDayMenu (reader));
 						}
 					}
-					catch(NullReferenceException e)
+					catch(InvalidOrderlistException e)
 					{
 						connection.Close ();
 						throw;
@@ -294,13 +300,13 @@ namespace Ordersystem.Droid.Utilities
 					if (IllegalDates (DayMenus))
 					{
 						connection.Close ();
-						throw new ArgumentException ("Duplicate dates detected.");
+						throw new InvalidOrderlistException ("Duplicate dates detected.");
 					}
 				}
 				else
 				{
 					connection.Close ();
-					throw new ArgumentException ("No Ordelist for the given Diet found.");
+					throw new OrderlistNotFoundException ("No Ordelist for the given Diet found.");
 				}
 
 				connection.Close();
@@ -329,7 +335,7 @@ namespace Ordersystem.Droid.Utilities
 				}
 				else
 				{
-					throw new NullReferenceException ("Database contains illegal null values.");
+					throw new InvalidOrderlistException ("Database contains illegal null values.");
 				}
 			}
 
@@ -341,7 +347,7 @@ namespace Ordersystem.Droid.Utilities
 			}
 			else
 			{
-				throw new NullReferenceException ("Database contains illegal null values.");
+				throw new InvalidOrderlistException ("Database contains illegal null values.");
 			}
 
 			return new DayMenu (Dishes [0], Dishes [1], Dishes [2], Date);

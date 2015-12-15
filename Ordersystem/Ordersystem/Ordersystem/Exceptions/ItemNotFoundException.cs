@@ -3,23 +3,31 @@
 namespace Ordersystem.Exceptions
 {
     /// <summary>
-    /// Thrown when an item was not found in the SQLite database.
+    /// Thrown when an item was not found in the local database.
     /// </summary>
-    public class ItemNotFoundException : ArgumentNullException
+	public class ItemNotFoundException : NullReferenceException
     {
+		/// <summary>
+		/// Thrown when an item was not found in the local database.
+		/// </summary>
         public ItemNotFoundException()
         {
         }
 
-        public ItemNotFoundException(string paramName) : base(paramName)
+		/// <summary>
+		/// Thrown when an item was not found in the local database.
+		/// </summary>
+		/// <param name="message">Exception message.</param>
+		public ItemNotFoundException(string message) : base(Message)
         {
         }
 
+		/// <summary>
+		/// Thrown when an item was not found in the local database.
+		/// </summary>
+		/// <param name="message">Exception message.</param>
+		/// <param name="innerException">Inner exception.</param>
         public ItemNotFoundException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-
-        public ItemNotFoundException(string paramName, string message) : base(paramName, message)
         {
         }
     }

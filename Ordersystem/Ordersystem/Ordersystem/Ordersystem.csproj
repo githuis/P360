@@ -47,6 +47,10 @@
     <None Include="packages.config" />
     <Compile Include="Functions\LocalManager.cs" />
     <Compile Include="Functions\IMCSManager.cs" />
+    <Compile Include="Exceptions\InvalidOrderlistException.cs" />
+    <Compile Include="Exceptions\OrderlistNotFoundException.cs" />
+    <Compile Include="Exceptions\InvalidCustomerException.cs" />
+    <Compile Include="Exceptions\CustomerNotFoundException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SQLite-net">
