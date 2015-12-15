@@ -10,6 +10,7 @@ namespace Ordersystem.Model
         /// <param name="name">The name of the dish.</param>
         /// <param name="description">A description of the dish.</param>
         /// <param name="imageSource">The source path for the image.</param>
+		/// <exception cref="System.ArgumentNullException">Thrown when an argument is null.</exception>
         public Dish(string name, string description, string imageSource)
         {
             if (String.IsNullOrWhiteSpace(name))

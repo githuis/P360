@@ -19,6 +19,7 @@ namespace Ordersystem.Model
         /// <param name="dish2">The secondary dish.</param>
         /// <param name="sideDish">The side dish.</param>
         /// <param name="date">The date of the menu.</param>
+		/// <exception cref="System.ArgumentNullException">Thrown when an argument is null.</exception>
         public DayMenu(Dish dish1, Dish dish2, Dish sideDish, DateTime date)
         {
             if (dish1 == null)
