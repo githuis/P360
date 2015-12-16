@@ -208,16 +208,7 @@ namespace Ordersystem.Droid
         private async void DownloadToStorageFromUrlAsync(string url, string fileName)
         {
             var webClient = new WebClient();
-            byte[] imageBytes = null;
-
-            try
-            {
-                imageBytes = await webClient.DownloadDataTaskAsync(url);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            byte[] imageBytes = await webClient.DownloadDataTaskAsync(url);
 
             string localPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/" + fileName;
             FileStream fs = new FileStream(localPath, FileMode.OpenOrCreate);
