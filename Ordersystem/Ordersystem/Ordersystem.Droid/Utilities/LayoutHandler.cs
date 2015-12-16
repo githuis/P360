@@ -205,7 +205,7 @@ namespace Ordersystem.Droid
         /// </summary>
         /// <param name="url">Url string of image to be downloaded</param>
         /// <param name="dishIndex">The index where the drawable is stored in the global dishImages</param>
-        async void DownloadToStorageFromUrl(string url, string fileName)
+        private async void DownloadToStorageFromUrl(string url, string fileName)
         {
             var webClient = new WebClient();
             byte[] imageBytes = null;
