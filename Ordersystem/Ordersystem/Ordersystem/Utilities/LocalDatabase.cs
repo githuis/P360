@@ -79,7 +79,7 @@ namespace Ordersystem.Utilities
             Session session = _sessions.FirstOrDefault(predicate);
             if (session == null)
             {
-                throw new ItemNotFoundException("item", "Saved session not found");
+                throw new ItemNotFoundException("Saved session not found");
             }
             _sessions.Remove(session);
         }
@@ -124,7 +124,7 @@ namespace Ordersystem.Utilities
             Session session = _sessions.FirstOrDefault(x => x.PersonNumber == personNumber);
             if (session == null)
             {
-                throw new ItemNotFoundException("item", "Saved session not found");
+                throw new ItemNotFoundException("Saved session not found");
             }
             _sessions.Remove(session);
         }

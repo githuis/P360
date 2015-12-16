@@ -18,7 +18,7 @@ namespace Ordersystem.Exceptions
 		/// Thrown when an item was not found in the local database.
 		/// </summary>
 		/// <param name="message">Exception message.</param>
-		public ItemNotFoundException(string message) : base(Message)
+		public ItemNotFoundException(string message) : base(message)
         {
         }
 
