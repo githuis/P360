@@ -348,7 +348,7 @@ namespace Ordersystem.Droid
 
         public void UpdateRowText(TableRow row, DateTime date, Dish dish)
         {
-            string s = DayOfWeekToDanish(date.DayOfWeek) + " d.";
+            string s = DayOfWeekToDanish(date.DayOfWeek) + " d. ";
             s += date.ToShortDateString();
 
             if (dish != null)
