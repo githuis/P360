@@ -14,6 +14,7 @@ using Android.Widget;
 using Android.OS;
 using Ordersystem.Utilities;
 using Android.Graphics;
+using Android.Views.InputMethods;
 
 namespace Ordersystem.Droid
 {
@@ -46,13 +47,15 @@ namespace Ordersystem.Droid
 					{
 						errorMsg.Visibility = ViewStates.Invisible;
 						localManager.LogIn(editText.Text);
+
+						InputMethodManager inputManager = (InputMethodManager) this.GetSystemService(Context.InputMethodService);
+						inputManager.HideSoftInputFromWindow(this.CurrentFocus.WindowToken, HideSoftInputFlags.NotAlways);
+
 						daysInMonth = DateTime.DaysInMonth(sessionOrderlist.DayMenus[0].Date.Year, sessionOrderlist.DayMenus[0].Date.Month);
 						layoutHandler.SetCustomerAndList(sessionCustomer, sessionOrderlist);
 
 						SetContentView (Resource.Layout.Main_Window);
 						CreateMainWindow ();
-						pikke();
-
 					}
 					catch (NullReferenceException)
 					{
@@ -73,16 +76,9 @@ namespace Ordersystem.Droid
 				}
 			};
 		}
-
-		static void pikke ()
-		{
-			Console.Write ("PIIIIIIIIIIIIIIIIIIIIIIIIK");
-		}
 			
 		public void CreateMainWindow()
 		{
-			pikke ();
-
 			AddRowsToList ((TableLayout)FindViewById (Resource.Id.tableLayout1));
 			InitializeRows ();
 
