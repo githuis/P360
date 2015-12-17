@@ -8,12 +8,15 @@ using Ordersystem.Model;
 using Ordersystem.Enums;
 using Ordersystem.Droid.Utilities;
 using Ordersystem.Functions;
+using BCrypt.Net;
 
 [assembly: Xamarin.Forms.Dependency(typeof(MCSManager))]
 namespace Ordersystem.Droid.Utilities
 {
+
     public class MCSManager : IMCSManager
     {
+		private readonly string salt = "$2a$10$4/VAEZ3aRcan1gYAuxQ1me";
 		private const string ConnectionString = "server=eu-cdbr-azure-north-d.cloudapp.net;port=3306;user id=ba3af1f8d328b9;pwd=650e758f;database=P360;allowuservariables=True;";
 
 		/// <summary>
@@ -28,10 +31,13 @@ namespace Ordersystem.Droid.Utilities
 			//Initalize the connection.
 			using (MySqlConnection connection = new MySqlConnection (ConnectionString))
 			{
+				var pass = BCrypt.Net.BCrypt.HashPassword (personNumber, salt);
+				var intPass = pass.GetHashCode ();
+
 				connection.Open ();
 
 				string Query = "INSERT INTO orders (CustomerPersonNumber)" +
-				                    "VALUES (" + personNumber + ")";
+				                    "VALUES (" + intPass + ")";
 
 				//Execute query on database.
 				MySqlCommand command = new MySqlCommand (Query, connection);
@@ -83,9 +89,12 @@ namespace Ordersystem.Droid.Utilities
 			//Initialize connection to database.
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
+				var pass = BCrypt.Net.BCrypt.HashPassword (personNumber, salt);
+				var intPass = pass.GetHashCode ();
+
                 connection.Open();
 
-				string query = "SELECT * FROM customers WHERE customers.PersonNumber = " + personNumber;
+				string query = "SELECT * FROM customers WHERE customers.PersonNumber = " + intPass;
 
 				//Execute query on database.
                 MySqlCommand Command = new MySqlCommand(query, connection);
@@ -99,7 +108,7 @@ namespace Ordersystem.Droid.Utilities
 
 					if(!reader.IsDBNull(reader.GetOrdinal("Name")) && !reader.IsDBNull(reader.GetOrdinal("Diet")))
 					{
-						customer = new Customer (reader.GetInt32(reader.GetOrdinal("PersonNumber")).ToString("D10"), 
+						customer = new Customer (personNumber, 
 												 reader.GetString(reader.GetOrdinal("Name")), 
 												 ParseDietFromString(reader.GetString(reader.GetOrdinal("Diet"))));
 					}
