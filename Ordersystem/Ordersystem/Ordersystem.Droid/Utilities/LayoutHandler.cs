@@ -63,15 +63,15 @@ namespace Ordersystem.Droid
             foreach (DayMenu dayMenu in orderlist.DayMenus)
             {
                 if (dayMenu.Dish1.ImageSource != "")
-                    DownloadToStorageFromUrl(dayMenu.Dish1.ImageSource, "dish" + count.ToString());
+                    DownloadToStorageFromUrlAsync(dayMenu.Dish1.ImageSource, "dish" + count.ToString());
                 if (dayMenu.Dish2.ImageSource != "")
-                    DownloadToStorageFromUrl(dayMenu.Dish2.ImageSource, "dish" + (count + 1).ToString());
+                    DownloadToStorageFromUrlAsync(dayMenu.Dish2.ImageSource, "dish" + (count + 1).ToString());
                 if (dayMenu.SideDish.ImageSource != "")
-                    DownloadToStorageFromUrl(dayMenu.SideDish.ImageSource, "dish" + (count + 2).ToString());
+                    DownloadToStorageFromUrlAsync(dayMenu.SideDish.ImageSource, "dish" + (count + 2).ToString());
                 count += 3;
             }
             //Download no food image
-            DownloadToStorageFromUrl("http://i.imgur.com/iFUQs5K.png", "nodish");
+            DownloadToStorageFromUrlAsync("http://i.imgur.com/iFUQs5K.png", "nodish");
         }
 
         public void CreateDayMenuDisplay(DayMenu dayMenu, TableRow row, TableLayout parent)
