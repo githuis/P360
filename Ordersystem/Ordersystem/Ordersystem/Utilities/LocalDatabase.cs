@@ -172,7 +172,7 @@ namespace Ordersystem.Utilities
             }
             catch (FormatException)
             {
-                _database.CleanFile();
+                _database.WriteToFile(new List<string>());
                 Open(Filename);
             }
         }

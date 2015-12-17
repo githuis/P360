@@ -29,11 +29,6 @@ namespace Ordersystem
 		/// </summary>
 		/// <returns>The lines from the file.</returns>
 		List<string> ReadFile();
-
-        /// <summary>
-        /// Removes all contents of the file.
-        /// </summary>
-        void CleanFile();
     }
 }
 
