@@ -28,11 +28,12 @@ namespace Ordersystem.Droid.Utilities
 		{
 			if (order.Sent)
 				return;
+			
 			//Initalize the connection.
 			using (MySqlConnection connection = new MySqlConnection (ConnectionString))
 			{
 				var pass = BCrypt.Net.BCrypt.HashPassword (personNumber, salt);
-				var intPass = pass.GetHashCode ();
+				uint intPass = (uint)pass.GetHashCode ();
 
 				connection.Open ();
 
@@ -90,7 +91,7 @@ namespace Ordersystem.Droid.Utilities
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
 				var pass = BCrypt.Net.BCrypt.HashPassword (personNumber, salt);
-				var intPass = pass.GetHashCode ();
+				uint intPass = (uint)pass.GetHashCode ();
 
                 connection.Open();
 
