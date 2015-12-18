@@ -91,13 +91,10 @@ namespace Ordersystem.Droid
 			if(sessionCustomer.Order.Sent)
 			{
 				layoutHandler.ShowCustom(this, "Allerede bestilt", "Der er allerede afsendt en bestilling for denne måned.");
-				Console.Write ("LOOOOOOOOOOOOOOOOOOOOORT");
 
 			}
 			else
 			{
-				layoutHandler.ShowCustom(this, "Hej", ":)");
-				Console.Write ("FUUUUUUUUUUUUCK");
 			}
 		}
 
@@ -269,15 +266,26 @@ namespace Ordersystem.Droid
 
 		private void CheckAllChoicesFilled(object sender, EventArgs e)
 		{
-			if (!sessionCustomer.Order.Valid)
-				SendOrderClick (sender, e);
-			else 
+			try 
 			{
-				mcsManager.SendOrder (sessionCustomer.Order, sessionCustomer.PersonNumber);
-				localManager.LogOut ();
-				SetContentView (Resource.Layout.Log_In);
-				InitializeLogInScreen ();
-			}	
+				if (!sessionCustomer.Order.Valid)
+					SendOrderClick (sender, e);
+				else 
+				{
+					mcsManager.SendOrder (sessionCustomer.Order, sessionCustomer.PersonNumber);
+					localManager.LogOut ();
+					SetContentView (Resource.Layout.Log_In);
+					InitializeLogInScreen ();
+				}
+			} 
+			catch (MySqlException)
+			{
+				layoutHandler.ShowError("Kan ikke oprette forbindelse. Tjek venligst internet-forbindelsen.");
+			}
+			catch(NullReferenceException ex)
+			{
+				layoutHandler.ShowError("Noget gik galt.\nFejlesked: " + ex.Message);
+			}
 		}
 
 		private void ErrorRowsOnReturn()
