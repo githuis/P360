@@ -179,15 +179,6 @@ namespace Ordersystem.Functions
         }
 
 		/// <summary>
-		/// Determines whether the current order is valid.
-		/// </summary>
-		/// <returns><c>true</c> if the order is valid; otherwise, <c>false</c>.</returns>
-        public bool IsOrderValid()
-        {
-            return _customer.Order.DayMenuSelections.All(selection => selection.Choice != DayMenuChoice.NoChoice);
-        }
-
-		/// <summary>
 		/// Fills an invalid order with default values.
 		/// </summary>
 		public void FillInvalidOrder()

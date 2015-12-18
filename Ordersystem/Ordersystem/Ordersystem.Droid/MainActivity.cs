@@ -269,7 +269,7 @@ namespace Ordersystem.Droid
 
 		private void CheckAllChoicesFilled(object sender, EventArgs e)
 		{
-			if (!localManager.IsOrderValid ())
+			if (!sessionCustomer.Order.Valid)
 				SendOrderClick (sender, e);
 			else 
 			{

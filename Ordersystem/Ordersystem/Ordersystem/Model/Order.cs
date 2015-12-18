@@ -38,6 +38,12 @@ namespace Ordersystem.Model
         /// </summary>
         public bool Sent { get; set; }
 
+		/// <summary>
+		/// Determines whether the order is valid.
+		/// </summary>
+		/// <returns><c>true</c> if the order is valid; otherwise, <c>false</c>.</returns>
+		public bool Valid { get { return DayMenuSelections.All(selection => selection.Choice != DayMenuChoice.NoChoice); } }
+
         /// <summary>
         /// Add a selection of a DayMenu to the order.
         /// </summary>
