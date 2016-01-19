@@ -121,27 +121,30 @@ namespace Ordersystem.Droid
 				TextView v = (TextView) row.GetChildAt(0);
 				v.SetTextSize (Android.Util.ComplexUnitType.Px, 24);
 				index = tableLayout.IndexOfChild (row) / 2;
-				row.SetBackgroundColor(layoutHandler.RowBackgroundColor);
-				row.SetMinimumHeight (layoutHandler.GetMinimumHeight ());
-				layoutHandler.ClearRowText (row, sessionCustomer.Order.DayMenuSelections[index].Date);
-				if (index > daysInMonth)
+				if (index > daysInMonth - 1) {
 					row.Visibility = ViewStates.Gone;
-				
-				row.Click += (object sender, EventArgs e) => {
-					layoutHandler.ResizeTableRow(rows, (TableRow) sender, (TableLayout)FindViewById (Resource.Id.tableLayout1));
-				};
+				} else {
+					row.SetBackgroundColor (layoutHandler.RowBackgroundColor);
+					row.SetMinimumHeight (layoutHandler.GetMinimumHeight ());
+					layoutHandler.ClearRowText (row, sessionCustomer.Order.DayMenuSelections [index].Date);
+			
+					row.Click += (object sender, EventArgs e) => {
+						layoutHandler.ResizeTableRow (rows, (TableRow)sender, (TableLayout)FindViewById (Resource.Id.tableLayout1));
+					};
+				}
 			}
 
 			foreach (var row in rows) 
 			{
 				index = tableLayout.IndexOfChild (row) / 2;
+				if (!(index > daysInMonth - 1)) {
+					layoutHandler.InitializeRowColors (tableLayout, row);
 
-				layoutHandler.InitializeRowColors (tableLayout, row);
-
-				if (sessionCustomer.Order.DayMenuSelections [index].Choice == Ordersystem.Enums.DayMenuChoice.Dish1) {
-					layoutHandler.UpdateRowText (row, sessionCustomer.Order.DayMenuSelections [index].Date, sessionCustomer.Order.DayMenuSelections [index].DayMenu.Dish1);
-				} else if (sessionCustomer.Order.DayMenuSelections [index].Choice == Ordersystem.Enums.DayMenuChoice.Dish2) {
-					layoutHandler.UpdateRowText (row, sessionCustomer.Order.DayMenuSelections [index].Date, sessionCustomer.Order.DayMenuSelections [index].DayMenu.Dish2);
+					if (sessionCustomer.Order.DayMenuSelections [index].Choice == Ordersystem.Enums.DayMenuChoice.Dish1) {
+						layoutHandler.UpdateRowText (row, sessionCustomer.Order.DayMenuSelections [index].Date, sessionCustomer.Order.DayMenuSelections [index].DayMenu.Dish1);
+					} else if (sessionCustomer.Order.DayMenuSelections [index].Choice == Ordersystem.Enums.DayMenuChoice.Dish2) {
+						layoutHandler.UpdateRowText (row, sessionCustomer.Order.DayMenuSelections [index].Date, sessionCustomer.Order.DayMenuSelections [index].DayMenu.Dish2);
+					}
 				}
 			}
 		}
