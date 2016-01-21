@@ -215,8 +215,6 @@ namespace Ordersystem.Droid
 			{
 				layoutHandler.ShowError ("Der skete en fejl.\nFejlkode: " + e.Message);
 			}
-				
-
 		}
 
 		private void InitializeOrderButton ()
@@ -297,12 +295,16 @@ namespace Ordersystem.Droid
 			int index;
 
 			foreach (var row in rows)
-			{
-				if(layoutHandler.IsOpen(row))
-					layoutHandler.CloseRow (tableLayout, row);
+			{	
 				index = tableLayout.IndexOfChild (row) / 2;
-				if (sessionCustomer.Order.DayMenuSelections [index].Choice == Ordersystem.Enums.DayMenuChoice.NoChoice)
-					layoutHandler.SetRowErrorColor (row);
+				if (!(index > daysInMonth - 1)) 
+				{
+					if (layoutHandler.IsOpen (row))
+						layoutHandler.CloseRow (tableLayout, row);
+					index = tableLayout.IndexOfChild (row) / 2;
+					if (sessionCustomer.Order.DayMenuSelections [index].Choice == Ordersystem.Enums.DayMenuChoice.NoChoice)
+						layoutHandler.SetRowErrorColor (row);
+				}
 			}
 		}
 
