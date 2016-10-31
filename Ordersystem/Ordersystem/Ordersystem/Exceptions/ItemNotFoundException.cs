@@ -3,7 +3,7 @@
 namespace Ordersystem.Exceptions
 {
     /// <summary>
-    /// Thrown when an item was not found in the SQLite database.
+    ///     Thrown when an item was not found in the SQLite database.
     /// </summary>
     public class ItemNotFoundException : ArgumentNullException
     {

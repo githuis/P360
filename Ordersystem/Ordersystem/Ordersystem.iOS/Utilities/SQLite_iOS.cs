@@ -1,21 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Runtime.CompilerServices;
-using System.Text;
-using Ordersystem.iOS.Utilities;
 using Ordersystem.Utilities;
 
 namespace Ordersystem.iOS.Utilities
 {
-    
-    public class SQLite_iOS : ISQLite 
+    public class SQLite_iOS : ISQLite
     {
         public SQLite.SQLiteConnection GetConnection(string filename)
         {
-            string sqliteFilename = filename + ".db3";
-            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // Documents folder
-            string libraryPath = Path.Combine(documentsPath, "..", "Library"); // Library folder
+            var sqliteFilename = filename + ".db3";
+            var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // Documents folder
+            var libraryPath = Path.Combine(documentsPath, "..", "Library"); // Library folder
             var path = Path.Combine(libraryPath, sqliteFilename);
             // Create the connection
             var conn = new SQLite.SQLiteConnection(path);

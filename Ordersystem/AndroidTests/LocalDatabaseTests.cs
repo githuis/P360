@@ -1,7 +1,5 @@
 ﻿using System;
-using NUnit.Framework;
 using Ordersystem.Utilities;
-
 
 namespace AndroidTests
 {

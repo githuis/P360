@@ -13,7 +13,7 @@ namespace Ordersystem.Model
             Diet = diet;
         }
 
-        public List<DayMenu> DayMenus { get; private set; }
+        public List<DayMenu> DayMenus { get; }
         public DateTime StartDate { get; private set; }
         public DateTime EndDate { get; private set; }
         public Diet Diet { get; private set; }
