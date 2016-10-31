@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Ordersystem.Model
+﻿namespace Ordersystem.Model
 {
     public class Dish
     {
@@ -12,9 +10,9 @@ namespace Ordersystem.Model
 
         public string Name { get; private set; }
         public string Description { get; private set; }
-        //public Image image { get; set; }
-        // TODO: Find ud af hvordan vi inkluderer billedet.
 
         // TODO: Integrer med databaser.
+        // TODO: Find ud af hvordan vi inkluderer billedet.
+        //public Image image { get; set; }
     }
 }

@@ -1,9 +1,7 @@
-﻿using SQLite;
-
-namespace Ordersystem.Utilities
+﻿namespace Ordersystem.Utilities
 {
     /// <summary>
-    /// The interface for the SQLite.
+    ///     The interface for the SQLite.
     /// </summary>
     public interface ISQLite
     {

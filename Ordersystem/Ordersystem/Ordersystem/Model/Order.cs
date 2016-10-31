@@ -10,7 +10,7 @@ namespace Ordersystem.Model
             Servings = new List<Serving>();
         }
 
-        public List<Serving> Servings { get; private set; }
+        public List<Serving> Servings { get; }
 
         public void AddServing(Dish dish)
         {
@@ -19,7 +19,7 @@ namespace Ordersystem.Model
 
         public void RemoveServing(Dish dish)
         {
-            Servings.Remove(Servings.First((serving) => serving.Dish == dish));
+            Servings.Remove(Servings.First(serving => serving.Dish == dish));
         }
     }
 }

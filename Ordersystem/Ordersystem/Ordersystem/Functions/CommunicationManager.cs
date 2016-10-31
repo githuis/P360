@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-using System.Threading.Tasks;
-using SQLite;
 using Ordersystem.Model;
 using Ordersystem.Utilities;
 
@@ -18,17 +12,17 @@ namespace Ordersystem.Functions
         }*/
 
         private Customer _customer;
-        private Orderlist _orderlist;
         private LocalDatabase _localDatabase;
+        private Orderlist _orderlist;
 
         /// <summary>
-        /// Checks whether the social security is valid
+        ///     Checks whether the social security is valid
         /// </summary>
         /// <param name="socialSecurityNumber"></param>
         public bool ValidSocialSecurityNumber(string socialSecurityNumber)
         {
             bool length, day, month, isNumbers;
-            char[] numChar = new char[10];
+            var numChar = new char[10];
 
             isNumbers = IsDigitsOnly(socialSecurityNumber);
 
@@ -40,8 +34,10 @@ namespace Ordersystem.Functions
 
             numChar = socialSecurityNumber.ToCharArray();
 
-            day = IsBetween(socialSecurityNumber.Substring(0, 2), 01, 31); //Check the first two numbers to be a valid day. The day must be 1 - 31.
-            month = IsBetween(socialSecurityNumber.Substring(2, 2), 01, 12); //Check the 2nd and 3rd numbers to be a valid month. The month should be 1 - 12.
+            day = IsBetween(socialSecurityNumber.Substring(0, 2), 01, 31);
+                //Check the first two numbers to be a valid day. The day must be 1 - 31.
+            month = IsBetween(socialSecurityNumber.Substring(2, 2), 01, 12);
+                //Check the 2nd and 3rd numbers to be a valid month. The month should be 1 - 12.
 
             return length && day && month && isNumbers;
         }
@@ -50,18 +46,15 @@ namespace Ordersystem.Functions
         {
             int number;
             if (int.TryParse(num, out number))
-                return (number >= min && number <= max);
-            else
-                return false;
+                return (number >= min) && (number <= max);
+            return false;
         }
 
         private bool IsDigitsOnly(string str)
         {
-            foreach (char c in str)
-            {
-                if (c < '0' || c > '9')
+            foreach (var c in str)
+                if ((c < '0') || (c > '9'))
                     return false;
-            }
 
             return true;
         }
@@ -72,8 +65,8 @@ namespace Ordersystem.Functions
         }
 
         /// <summary>
-        /// Gets the session matching the Customer from the database and resumes it.
-        /// If no such session is found, creates a new session, and fetches required data from Master Cater System.
+        ///     Gets the session matching the Customer from the database and resumes it.
+        ///     If no such session is found, creates a new session, and fetches required data from Master Cater System.
         /// </summary>
         /*public void GetSession()
         {
@@ -99,20 +92,18 @@ namespace Ordersystem.Functions
             _customer.Order = order;
             _orderlist = _localDatabase.GetOrderlist(x => x.PersonNumber == _customer.PersonNumber);
         }*/
-
         private Orderlist RequestOrderlist()
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Stores the current session in the database.
+        ///     Stores the current session in the database.
         /// </summary>
         /*public void StoreSession()
         {
             _localDatabase.SaveOrder(_orderlist, _customer);
         }*/
-
         public void CloseSession()
         {
             throw new NotImplementedException();
@@ -127,6 +118,5 @@ namespace Ordersystem.Functions
         {
             throw new NotImplementedException();
         }
-
     }
 }
